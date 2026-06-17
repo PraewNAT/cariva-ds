@@ -60,6 +60,13 @@ Shared API: `items: CrvTabItem[]`, controlled `value` + `onChange(value, event)`
 - DON'T use `CrvTabsFolder` on mobile, or nest two folder layers.
 - DON'T mix standard + pills on the same screen.
 
-## Needs review
+## Folder connector
 
-- Folder curved connector (Figma `vector`) is approximated with rounded-top + shadow; exact bezier connector not reproduced.
+- Figma `vector` (4725:18223) = curved foot on the bottom-right that merges the tab into the panel.
+- Implemented as a `::after` pseudo-element with a `radial-gradient` mask (concave quarter-circle, `radius/16`), filled with the tab background so it tracks default/hover colors.
+
+## Folder stacking
+
+- Inactive tabs: `z-index: 1`
+- Content panel (`getFolderContentSx`): `z-index: 2` — covers inactive tab edges/shadows below
+- Selected tab: `z-index: 3` — always on top; bottom shadow clipped with `clip-path`

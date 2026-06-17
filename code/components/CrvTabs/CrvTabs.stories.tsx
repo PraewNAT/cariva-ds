@@ -13,6 +13,7 @@ import { CrvTag } from '../CrvTag';
 import { CrvTabsStandard } from './CrvTabsStandard';
 import { CrvTabsPills } from './CrvTabsPills';
 import { CrvTabsFolder } from './CrvTabsFolder';
+import { getFolderContentSx } from './crvTabsStyles';
 import type { CrvTabItem, CrvTabValue } from './CrvTabs.types';
 
 const meta: Meta = {
@@ -133,12 +134,10 @@ export const Folder: Story = {
       <Box sx={{ backgroundColor: colors.bg.subtle, p: 3, borderRadius: 1 }}>
         <CrvTabsFolder items={items} value={value} onChange={setValue} />
         <Box
-          sx={{
-            backgroundColor: colors.onSurface.default,
-            p: 3,
-            borderRadius: '0 12px 12px 12px',
-            minHeight: 160,
-          }}
+          sx={[
+            getFolderContentSx(),
+            { p: 3, minHeight: 160 },
+          ]}
         >
           <Typography variant="body2" sx={{ color: colors.content.secondary }}>
             Content for: {value}
@@ -164,7 +163,7 @@ export const NestedLayers: Story = {
           value={outer}
           onChange={setOuter}
         />
-        <Box sx={{ backgroundColor: colors.onSurface.default, p: 2, borderRadius: '0 12px 12px 12px' }}>
+        <Box sx={[getFolderContentSx(), { p: 2 }]}>
           <CrvTabsStandard items={baseItems} value={inner} onChange={setInner} />
           <Panel value={`${outer} / ${inner}`} />
         </Box>
