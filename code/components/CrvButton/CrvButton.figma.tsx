@@ -1,11 +1,11 @@
 import figma from '@figma/code-connect';
 import { CrvButton } from './CrvButton';
 
-// Figma node: crv-button-standard component set
-// URL: https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=3646-28000
+// Figma node: crv-button-standard component set (Button section 3646:404)
+// URL: https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=3646-404
 figma.connect(
   CrvButton,
-  'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=3646-28000',
+  'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=3646-404',
   {
     props: {
       variant: figma.enum('variant', {

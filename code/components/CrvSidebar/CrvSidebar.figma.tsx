@@ -15,20 +15,25 @@ figma.connect(
   },
 );
 
-// crv-sidebar-menu (4735:102038) — open=true | open=false
+// crv-sidebar-menu (4735:102038) — type=expand|default × active=true|false
 figma.connect(
   CrvSidebarMenu,
   'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=4735-102038',
   {
     props: {
-      open: figma.enum('open', { true: true, false: false }),
+      type: figma.enum('type', { expand: 'expand', default: 'default' }),
+      active: figma.boolean('active'),
     },
-    example: (props) => (
-      <CrvSidebarMenu
-        label="Menu item"
-        open={props.open}
-        items={[{ label: 'Sub item', selected: true }, { label: 'Sub item' }, { label: 'Sub item' }]}
-      />
-    ),
+    example: (props) =>
+      props.type === 'default' ? (
+        <CrvSidebarMenu type="default" label="Menu item" active={props.active} />
+      ) : (
+        <CrvSidebarMenu
+          type="expand"
+          label="Menu item"
+          active={props.active}
+          items={[{ label: 'Sub item', selected: true }, { label: 'Sub item' }, { label: 'Sub item' }]}
+        />
+      ),
   },
 );

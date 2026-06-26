@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { colors } from '../../tokens';
 import { CrvButtonIcon } from './CrvButtonIcon';
 
 describe('CrvButtonIcon', () => {
@@ -63,5 +64,16 @@ describe('CrvButtonIcon', () => {
       </CrvButtonIcon>,
     );
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+  });
+
+  it('uses brand primary border token on outlined primary', () => {
+    render(
+      <CrvButtonIcon aria-label="t" variant="outlined" color="primary">
+        <span />
+      </CrvButtonIcon>,
+    );
+    expect(screen.getByRole('button', { name: 't' })).toHaveStyle({
+      borderColor: colors.brand.primary.border.default,
+    });
   });
 });

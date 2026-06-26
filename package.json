@@ -1,45 +1,24 @@
 {
-  "name": "cariva-ds",
-  "version": "0.1.0",
+  "name": "@agent/peer-bridge",
+  "version": "0.1.7",
   "private": true,
+  "type": "module",
   "scripts": {
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "start": "npx tsx src/index.ts",
+    "start:supervised": "npx tsx scripts/watchdog.ts",
+    "check-env": "npx tsx src/check-env.ts",
+    "probe": "npx tsx src/agent-probe.ts",
     "typecheck": "tsc --noEmit",
-    "test": "vitest",
-    "test:run": "vitest run",
-    "code-connect:dry-run": "bash scripts/code-connect.sh publish --dry-run",
-    "code-connect:publish": "bash scripts/code-connect.sh publish"
+    "peer:wizard": "node scripts/peer-wizard.mjs"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@fontsource/ibm-plex-sans-thai": "^5.2.8",
-    "@mui/icons-material": "^6.1.6",
-    "@mui/material": "^6.1.6",
-    "@mui/x-date-pickers": "^8.29.0",
-    "dayjs": "^1.11.21",
-    "framer-motion": "^12.40.0",
-    "motion": "^12.40.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@connectrpc/connect-node": "^1.6.1",
+    "@cursor/sdk": "^1.0.13",
+    "dotenv": "^16.4.7",
+    "tsx": "^4.19.3"
   },
   "devDependencies": {
-    "@figma/code-connect": "^1.3.3",
-    "@storybook/addon-essentials": "^8.4.2",
-    "@storybook/blocks": "^8.4.2",
-    "@storybook/react": "^8.4.2",
-    "@storybook/react-vite": "^8.4.2",
-    "@storybook/test": "^8.4.2",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.0.1",
-    "@vitejs/plugin-react": "^4.3.3",
-    "jsdom": "^25.0.1",
-    "storybook": "^8.4.2",
-    "vitest": "^2.1.8",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.10"
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2"
   }
 }

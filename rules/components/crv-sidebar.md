@@ -11,14 +11,30 @@
 
 > `crv-sidebar` เป็น COMPONENT ไม่ใช่ COMPONENT_SET — ไม่มี `state` หรือ property axis ที่ระดับ sidebar เอง การแสดง state (hover/selected) เกิดที่ `crv-menu-item` ด้านใน
 
-## crv-sidebar-menu Variants
+## crv-sidebar-menu Variants (4735:102038)
 
-| Property | Values |
-|---|---|
-| `open` | `true`, `false` |
+| Property | Values | Meaning |
+|---|---|---|
+| `type` | `expand`, `default` | Expandable group vs direct link |
+| `active` | `true`, `false` | expand: open / collapsed — default: current route / inactive |
 
-- `open=false` — แสดงแค่ parent menu item (collapsed)
-- `open=true` — แสดง parent menu item + sub-items พร้อม bar indicator (expanded)
+### type=expand
+
+- Parent row shows chevron (`closeRighticon=true`)
+- `active=true` — expanded: sub-items visible; parent icon/label stay `content/secondary` + `content/primary` (4735:102037)
+- `active=false` — collapsed: parent only; same neutral colors
+- Selected sub-item: bg `on-surface/action/selected`, label `brand/primary/content/default`, bar `brand/primary/on-surface/default`
+
+### type=default
+
+- No chevron (`closeRighticon=false`), no sub-items
+- `active=true` — current page: parent icon/label brand primary (no selected background)
+- `active=false` — inactive link
+- Click navigates (`onClick`) — does not expand
+
+## API
+
+Use `active` + `defaultActive` for both types. Legacy `open` / `selected` / `defaultOpen` still work as aliases.
 
 ## Anatomy
 
@@ -103,14 +119,23 @@ crv-sidebar (COMPONENT)
 | Padding left | 24px | `spacing/xl` |
 | Gap | 8px | `spacing/sm` |
 
+## crv-menu-item properties
+
+| Property | Values | Default |
+|---|---|---|
+| `variant` | `default`, `checkbox` | `default` |
+| `state` | `default`, `hover` | `default` |
+| `selected` | `true`, `false` | `false` |
+| `disabled` | `true`, `false` | `false` |
+
 ## crv-menu-item states (ใน sidebar context)
 
-| State | Background token | Label token | Icon token |
-|---|---|---|---|
-| default | `color/on-surface/default` | `color/content/primary` | `color/content/secondary` |
-| hover | `color/on-surface/action/hover` | `color/content/primary` | `color/content/secondary` |
-| selected | `color/on-surface/action/selected` | `color/content/primary` | `color/content/secondary` |
-| disabled | `color/on-surface/default` | `color/content/disabled` | `color/content/disabled` |
+| state × selected × disabled | Background token | Label token |
+|---|---|---|
+| default / selected=false / disabled=false | `color/on-surface/default` | `color/content/primary` |
+| hover / selected=false / disabled=false | `color/on-surface/action/hover` | `color/content/primary` |
+| default / selected=true / disabled=false | `color/on-surface/action/selected` | `color/content/primary` |
+| any / selected=any / disabled=true | `color/on-surface/default` | `color/content/disabled` |
 
 ### Border radius ของ crv-menu-item ใน sidebar
 
@@ -158,8 +183,8 @@ crv-sidebar (COMPONENT)
 
 ### Do
 
-- ใช้ `crv-sidebar-menu` สำหรับ menu item ที่มี sub-navigation
-- ใช้ `crv-menu-item` standalone สำหรับ item ที่ไม่มี sub-items
+- ใช้ `crv-sidebar-menu` `type=expand` สำหรับ menu ที่มี sub-navigation
+- ใช้ `crv-sidebar-menu` `type=default` สำหรับลิงก์ตรง (ไม่มี chevron) — อย่าใช้ `crv-menu-item` standalone ใน sidebar
 - ใช้ Header text เพื่อแบ่งกลุ่ม nav sections
 - ผูก `selected=true` กับ `crv-menu-item` ที่ active อยู่เท่านั้น
 

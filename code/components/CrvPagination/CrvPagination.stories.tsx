@@ -18,11 +18,12 @@ const meta: Meta<typeof CrvPagination> = {
     docs: {
       description: {
         component:
-          'Pagination component mapped from Figma Pagination section node 4230:424.',
+          'Pagination component mapped from Figma `crv-pagination-standard` (4230:1661). ' +
+          'Shows up to five consecutive page numbers in the strip — no ellipsis.',
       },
     },
     controls: {
-      include: ['count', 'page', 'size', 'disabled', 'showEllipsis'],
+      include: ['count', 'page', 'size', 'disabled'],
     },
   },
   argTypes: {
@@ -30,10 +31,7 @@ const meta: Meta<typeof CrvPagination> = {
     page: { control: { type: 'number', min: 1 } },
     size: { control: 'inline-radio', options: SIZES },
     disabled: { control: 'boolean' },
-    showEllipsis: { control: 'boolean' },
     defaultPage: { table: { disable: true } },
-    siblingCount: { table: { disable: true } },
-    boundaryCount: { table: { disable: true } },
     onChange: { table: { disable: true } },
     ref: { table: { disable: true } },
   },
@@ -42,7 +40,6 @@ const meta: Meta<typeof CrvPagination> = {
     page: 1,
     size: 'large',
     disabled: false,
-    showEllipsis: true,
   },
 };
 
@@ -56,7 +53,12 @@ export const Medium: Story = {
 };
 
 export const SelectedMiddle: Story = {
-  args: { page: 5 },
+  args: { count: 12, page: 6 },
+};
+
+export const ManyPagesNoEllipsis: Story = {
+  name: 'Many pages (no ellipsis)',
+  args: { count: 12, page: 2, size: 'medium' },
 };
 
 export const Disabled: Story = {
@@ -75,6 +77,7 @@ export const Interactive: Story = {
       />
     );
   },
+  args: { count: 12, page: 1 },
 };
 
 export const RowsPerPage: Story = {
@@ -112,7 +115,7 @@ export const AllStates: Story = {
         <Box key={size} sx={{ display: 'grid', gap: 1 }}>
           <Typography sx={{ fontSize: 12, color: '#64748b' }}>{size}</Typography>
           <CrvPagination count={10} page={1} size={size} />
-          <CrvPagination count={10} page={5} size={size} />
+          <CrvPagination count={12} page={6} size={size} />
           <CrvPagination count={10} page={10} size={size} />
           <CrvPagination count={10} page={1} size={size} disabled />
         </Box>

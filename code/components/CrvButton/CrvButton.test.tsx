@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { colors } from '../../tokens';
 import { CrvButton } from './CrvButton';
 
 describe('CrvButton', () => {
@@ -70,5 +71,12 @@ describe('CrvButton', () => {
     const ref = { current: null as HTMLButtonElement | null };
     render(<CrvButton ref={ref}>Go</CrvButton>);
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+  });
+
+  it('uses brand primary border token on outlined primary default state', () => {
+    render(<CrvButton variant="outlined" color="primary">Label</CrvButton>);
+    expect(screen.getByRole('button', { name: 'Label' })).toHaveStyle({
+      borderColor: colors.brand.primary.border.default,
+    });
   });
 });

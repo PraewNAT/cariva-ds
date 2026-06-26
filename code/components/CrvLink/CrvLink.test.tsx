@@ -43,6 +43,13 @@ describe('CrvLink', () => {
       render(<CrvLink href="#" disabled>Link</CrvLink>);
       expect(screen.getByRole('link', { name: 'Link' })).toHaveAttribute('tabindex', '-1');
     });
+
+    it('uses link disabled color token', () => {
+      render(<CrvLink href="#" disabled>Link</CrvLink>);
+      expect(screen.getByRole('link', { name: 'Link' })).toHaveStyle({
+        color: 'rgb(71, 85, 105)',
+      });
+    });
   });
 
   describe('icons', () => {

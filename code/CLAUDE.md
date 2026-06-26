@@ -4,7 +4,9 @@ This project uses the **Cariva Core Design System** built on MUI v9 + Next.js (A
 
 Read this file before writing any UI code.
 
-**Implementing from Figma?** Read `rules/figma-to-code-workflow.md` first — inspect the node, mirror structure, Storybook all variants, visual-verify, then sync rules. **Figma wins** when docs disagree.
+**Implementing from Figma?** Read `rules/figma-workflow.md` first — inspect the node, mirror structure, Storybook all variants, visual-verify, then sync rules. **Figma wins** when docs disagree.
+
+**Composed screens / pixel-perfect templates?** Also read `rules/pixel-perfect-ui.md` — DS-only defaults, prompt template, visual-verify loop, gap reporting.
 
 ---
 
@@ -13,6 +15,7 @@ Read this file before writing any UI code.
 - **UI Library**: MUI v9
 - **Theme**: `carivaTheme` from `@/theme` — always wrap app with `<ThemeProvider theme={carivaTheme}>`
 - **Tokens**: `@/ds/tokens` — colors, spacing, radius, typography values
+- **Token values**: `../tokens.json` (root) — source of truth สำหรับค่า hex จริงของทุก semantic token อัปเดตจาก Figma โดยตรง ใช้ verify ก่อนใช้ token ใดๆ
 - **Component types**: `@/ds/types` — TypeScript interfaces for all DS components
 - **Font**: IBM Plex Sans Thai — never use Inter or other fonts
 
@@ -44,7 +47,8 @@ sx={{ backgroundColor: colors.onSurface.default, padding: spacing.lg }}
 sx={{ backgroundColor: '#ffffff', padding: 16 }}
 ```
 
-Use **semantic tokens** only — never use `colors.accent.*` for status or `colors.brand.*` for decoration.
+Use **semantic tokens** for UI meaning (status, brand actions, surfaces).  
+**Exception:** decorative stat card backgrounds use `accent.*.A01` per `rules/patterns/stat-card-soft-accent.md`.
 
 ---
 
@@ -271,7 +275,8 @@ Cariva is designed for healthcare professionals — write as a peer, not a begin
 ## What NOT to Do
 
 - ❌ hardcode color hex หรือ px ใน sx หรือ style
-- ❌ ใช้ `colors.accent.*` สำหรับ status
+- ❌ ใช้ `colors.accent.*` สำหรับ **status** (tag, badge, alert) — ใช้ `colors.status.*`
+- ✅ พื้นการ์ด stat card = `accent.<hue>.A01` ตาม `rules/patterns/stat-card-soft-accent.md`
 - ❌ ใช้ placeholder แทน label
 - ❌ วาง primary button มากกว่า 1 ใน action group
 - ❌ ใช้ `color="error"` กับ action ที่ไม่ใช่ destructive

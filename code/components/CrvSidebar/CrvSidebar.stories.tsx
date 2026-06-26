@@ -11,7 +11,6 @@ import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { colors } from '../../tokens';
-import { CrvMenuItem } from '../CrvMenuItem';
 import { CrvSidebar } from './CrvSidebar';
 import { CrvSidebarMenu } from './CrvSidebarMenu';
 import { CrvSidebarSection } from './CrvSidebarSection';
@@ -26,7 +25,7 @@ const meta: Meta<typeof CrvSidebar> = {
         component:
           'Vertical primary-navigation panel. Maps to Figma `crv-sidebar` (4724:103532) with ' +
           '`crv-sidebar-menu` (4735:102038) expandable groups. 240px wide; `logo` + `children` ' +
-          '(content slot) compose `CrvSidebarSection`, `CrvSidebarMenu`, and `CrvMenuItem`.',
+          '(content slot) compose `CrvSidebarSection` and `CrvSidebarMenu` (`type=expand` or `type=default`).',
       },
     },
   },
@@ -49,23 +48,21 @@ export const Default: Story = {
       <Box sx={{ height: '100vh', display: 'flex', backgroundColor: colors.bg.page }}>
         <CrvSidebar logo={Logo} sx={{ borderRight: `1px solid ${colors.border.default}` }}>
           <CrvSidebarSection>
-            <CrvMenuItem
-              component="div"
-              leftIcon={<HomeOutlinedIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
-              rightIconVisible={false}
-              selected={active === 'home'}
+            <CrvSidebarMenu
+              type="default"
+              label="Home"
+              icon={<HomeOutlinedIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
+              active={active === 'home'}
               onClick={() => setActive('home')}
-              sx={{ borderRadius: '12px' }}
-            >
-              Home
-            </CrvMenuItem>
+            />
           </CrvSidebarSection>
 
           <CrvSidebarSection header="Workspace">
             <CrvSidebarMenu
+              type="expand"
               label="Dashboard"
               icon={<DashboardOutlinedIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
-              defaultOpen
+              defaultActive
               items={[
                 { label: 'Overview', selected: active === 'overview', onClick: () => setActive('overview') },
                 { label: 'Analytics', selected: active === 'analytics', onClick: () => setActive('analytics') },
@@ -73,6 +70,7 @@ export const Default: Story = {
               ]}
             />
             <CrvSidebarMenu
+              type="expand"
               label="People"
               icon={<PeopleOutlineIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
               items={[
@@ -80,39 +78,30 @@ export const Default: Story = {
                 { label: 'Teams', selected: active === 'teams', onClick: () => setActive('teams') },
               ]}
             />
-            <CrvMenuItem
-              component="div"
-              leftIcon={<DescriptionOutlinedIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
-              rightIconVisible={false}
-              selected={active === 'docs'}
+            <CrvSidebarMenu
+              type="default"
+              label="Documents"
+              icon={<DescriptionOutlinedIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
+              active={active === 'docs'}
               onClick={() => setActive('docs')}
-              sx={{ borderRadius: '12px' }}
-            >
-              Documents
-            </CrvMenuItem>
+            />
           </CrvSidebarSection>
 
           <CrvSidebarSection header="System">
-            <CrvMenuItem
-              component="div"
-              leftIcon={<SettingsOutlinedIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
-              rightIconVisible={false}
-              selected={active === 'settings'}
+            <CrvSidebarMenu
+              type="default"
+              label="Settings"
+              icon={<SettingsOutlinedIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
+              active={active === 'settings'}
               onClick={() => setActive('settings')}
-              sx={{ borderRadius: '12px' }}
-            >
-              Settings
-            </CrvMenuItem>
-            <CrvMenuItem
-              component="div"
-              leftIcon={<HelpOutlineIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
-              rightIconVisible={false}
-              selected={active === 'help'}
+            />
+            <CrvSidebarMenu
+              type="default"
+              label="Help"
+              icon={<HelpOutlineIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
+              active={active === 'help'}
               onClick={() => setActive('help')}
-              sx={{ borderRadius: '12px' }}
-            >
-              Help
-            </CrvMenuItem>
+            />
           </CrvSidebarSection>
         </CrvSidebar>
 
@@ -127,31 +116,61 @@ export const Default: Story = {
   },
 };
 
-/** Just the expandable menu group — open vs collapsed (Figma `open` variant). */
+/** Figma crv-sidebar-menu 4735:102038 — type=expand|default × active=true|false */
 export const MenuStates: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <Box sx={{ display: 'flex', gap: 4, p: 3, backgroundColor: colors.onSurface.default }}>
       <Box sx={{ width: 240 }}>
-        <Typography variant="caption" sx={{ mb: 1, display: 'block' }}>open=true</Typography>
+        <Typography variant="caption" sx={{ mb: 1, display: 'block' }}>
+          type=expand, active=true
+        </Typography>
         <CrvSidebarMenu
-          label="Dashboard"
+          type="expand"
+          label="Menu item"
           icon={<DashboardOutlinedIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
-          open
+          active
           items={[
-            { label: 'Overview', selected: true },
-            { label: 'Analytics' },
-            { label: 'Reports' },
+            { label: 'Sub item', selected: true },
+            { label: 'Sub item' },
+            { label: 'Sub item' },
           ]}
         />
       </Box>
       <Box sx={{ width: 240 }}>
-        <Typography variant="caption" sx={{ mb: 1, display: 'block' }}>open=false</Typography>
+        <Typography variant="caption" sx={{ mb: 1, display: 'block' }}>
+          type=expand, active=false
+        </Typography>
         <CrvSidebarMenu
-          label="Dashboard"
+          type="expand"
+          label="Menu item"
           icon={<DashboardOutlinedIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
-          open={false}
-          items={[{ label: 'Overview' }, { label: 'Analytics' }]}
+          active={false}
+          items={[{ label: 'Sub item' }, { label: 'Sub item' }]}
+        />
+      </Box>
+      <Box sx={{ width: 240 }}>
+        <Typography variant="caption" sx={{ mb: 1, display: 'block' }}>
+          type=default, active=false
+        </Typography>
+        <CrvSidebarMenu
+          type="default"
+          label="Menu item"
+          icon={<PeopleOutlineIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
+          active={false}
+          onClick={() => undefined}
+        />
+      </Box>
+      <Box sx={{ width: 240 }}>
+        <Typography variant="caption" sx={{ mb: 1, display: 'block' }}>
+          type=default, active=true
+        </Typography>
+        <CrvSidebarMenu
+          type="default"
+          label="Menu item"
+          icon={<PeopleOutlineIcon sx={{ fontSize: 20, color: colors.content.secondary }} />}
+          active
+          onClick={() => undefined}
         />
       </Box>
     </Box>

@@ -6,7 +6,9 @@
 
 - `CrvSidebar` — 240px container with `logo` slot + content slot (`children`).
 - `CrvSidebarSection` — optional grouping with a `header` label.
-- `CrvSidebarMenu` — expandable menu group (`open=true | open=false`) = parent `CrvMenuItem` + collapsible sub-items with a 2px bar indicator.
+- `CrvSidebarMenu` — Figma `crv-sidebar-menu` (4735:102038) with two `type` variants:
+  - **`type="expand"`** — chevron + collapsible sub-items; parent row stays `content/secondary` icon + `content/primary` label when open; selected sub-item uses `action/selected` bg + `brand/primary/content` label.
+  - **`type="default"`** — direct link; `active=true` tints parent icon + label brand primary.
 
 ## Layout (from Figma)
 
@@ -33,7 +35,9 @@
 
 ## Rules
 
-- DO use `CrvSidebarMenu` for items with sub-navigation; standalone `CrvMenuItem` (with `component="div"`, `borderRadius: 12px`) otherwise.
+- DO use `type="expand"` for items with sub-navigation; `type="default"` + `onClick` for direct links.
+- DO NOT use standalone `CrvMenuItem` for sidebar top-level nav — use `CrvSidebarMenu type="default"`.
+- DO hide sub-item icons unless explicitly passed — Figma sets `closeLefticon=false` on sub-rows (label only + bar).
 - DO render `CrvMenuItem` as `component="div"` inside the sidebar to avoid invalid `<li>` nesting.
 - DO keep menu-item radius as Foundation tokens (`radius/12`, `radius/8`), not Product `radius/interactive`.
 - DON'T change the 240px width without adjusting adjacent layout.

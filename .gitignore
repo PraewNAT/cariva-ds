@@ -7,3 +7,10 @@ coverage/
 .env
 .env.*
 !.env.example
+
+# local peer/tunnel runtime
+.cloudflared/
+.peer/
+.cursor/
+.peer-bridge.log
+.peer-bridge-health.json

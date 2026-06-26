@@ -1,6 +1,6 @@
 # Cariva Component Rules
 
-**Figma → React implementation:** follow `rules/figma-to-code-workflow.md` before coding any component.
+**Figma → React implementation:** follow `rules/figma-workflow.md` before coding any component.
 
 ## Audit Ignore List
 

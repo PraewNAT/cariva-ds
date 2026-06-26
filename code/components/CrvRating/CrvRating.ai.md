@@ -1,6 +1,6 @@
 > Source of truth: ../../../rules/components/crv-rating.md
 > Figma node: `<Rating>` component set, 4887:7022 (Rating page 4887:4952)
-> Workflow: ../../../rules/figma-to-code-workflow.md
+> Workflow: ../../../rules/figma-workflow.md
 
 # CrvRating
 
@@ -31,9 +31,9 @@ Star rating for satisfaction scores (1–5, half-star supported). Wraps MUI `Rat
 
 | Role | Token |
 |---|---|
-| Active star | `colors.accent.amber.A03` |
+| Active star | `colors.accent.amber.A04` |
 | Empty star | `colors.border.default` |
-| Hover star | `colors.accent.amber.A03` |
+| Hover star | `colors.accent.amber.A04` |
 | Read-only / disabled display | `colors.border.default` (`#cbd5e1`) |
 
 ## AI Implementation Rules

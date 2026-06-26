@@ -19,7 +19,7 @@ QA screen นี้ให้หน่อย
 
 - Read `plugins/cariva-design-system/CLAUDE.md`
 - Read `plugins/cariva-design-system/rules/design.md` — tone of voice และ brand principles
-- Read `plugins/cariva-design-system/rules/tokens.md`
+- Read `plugins/cariva-design-system/tokens.json`
 - Read `plugins/cariva-design-system/rules/accessibility-and-ai.md`
 - Inspect target screen/frame ใน Figma ก่อนเริ่ม
 

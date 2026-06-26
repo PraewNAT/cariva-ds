@@ -1,6 +1,6 @@
 > Source of truth: ../../../rules/components/crv-bottom-sheet.md
 > Figma node: `crv-bottom-sheet-header` 4485:31705 + `crv-bottom-sheet-content` 4485:31742 (Bottom Sheet section 4497:57350)
-> Workflow: ../../../rules/figma-to-code-workflow.md
+> Workflow: ../../../rules/figma-workflow.md
 
 # CrvBottomSheet
 
@@ -45,7 +45,7 @@ Mobile bottom sheet — a drawer that slides up from the bottom with rounded top
 | Content gap | `spacing.lg` (16px) |
 | Title | heading/small, `colors.content.primary`, semibold |
 | Footer divider | `colors.border.default` |
-| Header glow left / right | `colors.accent.cyan.A02` / `colors.accent.teal.A02` |
+| Header glow left / right | `colors.accent.cyan.A03` / `colors.accent.teal.A03` |
 | Backdrop | `color/overlay/backdrop` via `getOverlayBackdropSx()` — see `crv-overlay` (4722:90374) |
 
 ## AI Implementation Rules

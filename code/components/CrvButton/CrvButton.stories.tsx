@@ -26,7 +26,7 @@ const meta: Meta<typeof CrvButton> = {
     docs: {
       description: {
         component:
-          'Standard button — wraps MUI Button. Variants: contained / outlined / text × primary / error × small / medium / large.',
+          'Standard button — Figma `crv-button-standard` (3646:404). Variants: contained / outlined / text × primary / error × small / medium / large.',
       },
     },
   },
@@ -72,10 +72,7 @@ export const Default: Story = {
     variant: 'contained',
     color: 'primary',
     size: 'medium',
-    children: "Back",
-    startIcon: "arrow-back",
-    loading: true,
-    disabled: false
+    children: 'Label',
   },
 };
 
@@ -83,6 +80,38 @@ export const ContainedPrimary: Story = { args: { variant: 'contained', color: 'p
 export const ContainedError: Story = { args: { variant: 'contained', color: 'error' } };
 export const OutlinedPrimary: Story = { args: { variant: 'outlined', color: 'primary' } };
 export const OutlinedError: Story = { args: { variant: 'outlined', color: 'error' } };
+
+/** Figma outlined matrix — border stays on hover/pressed; disabled loses border. */
+export const OutlinedStates: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => {
+    const sizes = ['small', 'medium', 'large'] as const;
+    return (
+      <div style={{ display: 'grid', gap: 24 }}>
+        {(['primary', 'error'] as const).map((color) => (
+          <div key={color}>
+            <div style={{ fontSize: 12, color: '#64748b', marginBottom: 8 }}>
+              outlined / {color}
+            </div>
+            <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+              {sizes.map((size) => (
+                <CrvButton key={size} variant="outlined" color={color} size={size}>
+                  Label
+                </CrvButton>
+              ))}
+              {sizes.map((size) => (
+                <CrvButton key={`${size}-disabled`} variant="outlined" color={color} size={size} disabled>
+                  Label
+                </CrvButton>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  },
+};
+
 export const TextPrimary: Story = { args: { variant: 'text', color: 'primary' } };
 export const TextError: Story = { args: { variant: 'text', color: 'error' } };
 

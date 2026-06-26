@@ -13,8 +13,12 @@ Pagination controls for moving between pages, plus rows-per-page and jump-to-pag
 ## Variants
 
 - `size`: `large`, `medium`
-- `showEllipsis`: boolean
 - `disabled`: boolean
+
+## Page strip
+
+- Figma `crv-pagination-standard` (4230:1661) shows **five consecutive page numbers** in the strip.
+- No ellipsis (`…`) — use prev/next to reach pages outside the visible window.
 
 ## Figma Mapping
 

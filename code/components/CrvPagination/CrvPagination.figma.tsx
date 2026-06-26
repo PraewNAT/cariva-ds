@@ -16,14 +16,12 @@ figma.connect(
         large:  'large',
         medium: 'medium',
       }),
-      showEllipsis: figma.boolean('showEllipsis'),
     },
-    example: ({ size, showEllipsis }) => (
+    example: ({ size }) => (
       <CrvPagination
         count={10}
         page={1}
         size={size}
-        showEllipsis={showEllipsis}
       />
     ),
   },

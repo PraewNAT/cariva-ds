@@ -6,6 +6,7 @@ import { carivaTheme } from '../code/theme';
 
 const preview: Preview = {
   parameters: {
+    layout: 'padded',
     backgrounds: {
       // Default to white (card surface) so disabled buttons (slate/100 bg)
       // are clearly visible. Switch to 'app' in toolbar to preview on page shell.
@@ -23,9 +24,7 @@ const preview: Preview = {
     (Story) => (
       <ThemeProvider theme={carivaTheme}>
         <CssBaseline />
-        <div style={{ padding: 24 }}>
-          <Story />
-        </div>
+        <Story />
       </ThemeProvider>
     ),
   ],

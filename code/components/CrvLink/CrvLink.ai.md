@@ -1,5 +1,8 @@
 # CrvLink — AI Usage Guide
 
+> **Canonical rules:** `rules/components/crv-link.md`  
+> Figma: `crv-link` component set, node `4165:5267`
+
 ## Purpose
 
 `CrvLink` wraps MUI `Link` for navigation and low-emphasis actions. It is the hyperlink primitive of the Cariva Design System. It has a single style (no variant or color prop) and always renders with an underline.
@@ -29,20 +32,24 @@ All other MUI `Link` props (`href`, `target`, `rel`, `component`, `sx`, etc.) ar
 
 ## Ground Truth — Figma Token Table
 
-Figma source: `crv-link` component set, node `4165:5267`
+Synced with `rules/components/crv-link.md` → **Token usage → Color**.
 
-| State | Color token | Hex (light) |
-|---|---|---|
-| default | `color/content/link/default` | `#2563eb` (blue/600) |
-| hover | `color/content/link/hover` | `#1d4ed8` (blue/700) |
-| pressed | `color/content/link/pressed` | `#1e40af` (blue/800) |
-| disabled | `color/content/link/disabled` | `#475569` (slate/600) |
-
-| Size | Height | Padding V | Font |
+| State | Token path | Code (`colors.*`) | Hex (light) |
 |---|---|---|---|
-| `small` | 32px | 4px | 16/24/500 |
+| default | `color/content/link/default` | `content.link.default` | `#2563eb` |
+| hover | `color/content/link/hover` | `content.link.hover` | `#1d4ed8` |
+| pressed | `color/content/link/pressed` | `content.link.pressed` | `#1e40af` |
+| disabled | `color/content/link/disabled` | `content.link.disabled` | `#475569` |
+
+> **Disabled:** ใช้ `colors.content.link.disabled` เท่านั้น — **ห้าม** `colors.content.disabled` (generic disabled ≠ link disabled ใน Figma)
+
+| Size | Height (impl.) | Padding V | Font |
+|---|---|---|---|
+| `small` | 32px | 4px | 16/24/500 (`label/large`) |
 | `medium` | 40px | 8px | 16/24/500 |
 | `large` | 48px | 12px | 16/24/500 |
+
+> Rules doc lists small height 36px; implementation follows Figma measured bounding box (32px).
 
 - Background: transparent in all states
 - Underline: always present (`underline="always"`)

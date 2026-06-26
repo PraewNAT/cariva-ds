@@ -1,6 +1,6 @@
 > Source of truth: ../../../rules/components/crv-modal.md
 > Figma node: crv-modal, 4712:1805
-> Workflow: ../../../rules/figma-to-code-workflow.md
+> Workflow: ../../../rules/figma-workflow.md
 
 # CrvModal
 

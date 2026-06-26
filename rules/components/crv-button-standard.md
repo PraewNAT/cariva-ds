@@ -161,12 +161,17 @@ resetLabel.characters = 'Reset Password';
 ### Color — `outlined/primary`
 | Element | Token |
 |---|---|
-| Background | `color/on-surface/default` |
-| Border default | `color/border/default` |
-| Border hover | `color/border/strong` |
-| Border focused/pressed | `color/border/system` |
-| Border disabled | `color/border/disabled` |
-| Label + Icon | `color/brand/primary/content/default` |
+| Background default | transparent |
+| Background hover | `color/brand/primary/on-surface/subtle` (blue/50) |
+| Background pressed | `color/brand/primary/on-surface/muted` (blue/100) |
+| Background disabled | `color/on-surface/action/disabled` (slate/100) |
+| Border default | `color/brand/primary/border/default` (blue/300) |
+| Border hover | `color/brand/primary/border/default` (blue/300) — ยังคงอยู่ |
+| Border pressed | `color/brand/primary/border/default` (blue/300) — ยังคงอยู่ |
+| Border disabled | none |
+| Label + Icon default | `color/brand/primary/content/default` (blue/600) |
+| Label + Icon hover | `color/brand/primary/content/default` (blue/600) |
+| Label + Icon pressed | `color/brand/primary/content/default` (blue/600) |
 | Label + Icon disabled | `color/content/disabled` |
 
 ### Color — `outlined/error`
@@ -177,11 +182,11 @@ resetLabel.characters = 'Reset Password';
 | Background pressed | `color/status/error/on-surface/muted` (red/100) |
 | Background disabled | `color/on-surface/action/disabled` (slate/100) |
 | Border default | `color/border/error` (red/600) |
-| Border hover | none (ลบออกเมื่อ hover) |
-| Border pressed | none |
+| Border hover | `color/border/error` (red/600) — ยังคงอยู่ |
+| Border pressed | `color/border/error` (red/600) — ยังคงอยู่ |
 | Border disabled | none |
 | Label + Icon default | `color/status/error/content/default` (red/600) |
-| Label + Icon hover | `color/status/error/content/default` (red/600) |
+| Label + Icon hover | `color/status/error/content/strong` (red/700) |
 | Label + Icon pressed | `color/status/error/content/strong` (red/700) |
 | Label + Icon disabled | `color/content/disabled` |
 

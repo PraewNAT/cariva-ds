@@ -1,6 +1,6 @@
 > Source of truth: ../../../rules/components/crv-card.md
 > Figma node: Card 4536:123343 (crv-card-vertical 4657:31022, crv-card-horizontal 4570:20745, crv-card-small-horizontal 4570:20655)
-> Workflow: ../../../rules/figma-to-code-workflow.md
+> Workflow: ../../../rules/figma-workflow.md
 
 # CrvCard
 

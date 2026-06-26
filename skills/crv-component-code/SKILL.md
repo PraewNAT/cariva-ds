@@ -29,11 +29,12 @@ code crv-[name]
 
 1. `CLAUDE.md` — confirm stack + naming convention + wrapper rules
 2. `rules/core-rules.md` — prop mapping rules
-3. `rules/tokens.md` — token names ที่อนุญาต (ใช้ตรวจสอบทุก token ที่จะใส่ในโค้ด)
-4. `rules/typography.md` — typography tokens
-5. `rules/components/{name}.md` — spec ของ component ที่กำลังจะสร้าง
+3. `tokens.json` — usage rules และ grouping ของ token
+4. `tokens.json` — ค่า hex จริงของทุก token (semantic + foundation) ใช้ verify ว่า token มีอยู่จริงก่อนใส่ในโค้ด
+5. `code/tokens.ts` — typography, spacing, radius values
+6. `rules/components/{name}.md` — spec ของ component ที่กำลังจะสร้าง
 
-ถ้าไฟล์ใดในข้อ 1–5 หาไม่เจอ → ถาม user ก่อน ห้าม assume
+ถ้าไฟล์ใดในข้อ 1–6 หาไม่เจอ → ถาม user ก่อน ห้าม assume
 
 ---
 
@@ -162,7 +163,7 @@ export type { ComponentNameProps } from './ComponentName.types'
 ## Verification (ทำก่อนจบ task — ห้ามข้าม)
 
 1. ทุก variant ใน `rules/components/{name}.md` มี story ใน `.stories.tsx` ตรงกัน — list cross-check
-2. ทุก token ที่ใช้ในโค้ดมีอยู่จริงใน `rules/tokens.md`
+2. ทุก token ที่ใช้ในโค้ดมีอยู่จริงใน `tokens.json`
 3. ไม่มี hardcoded hex/px/rem ใน `.tsx`
 4. `.ai.md` ตรงกับ `rules/components/{name}.md` ทุกตัวอักษร (ห้าม drift)
 5. Component มี `"use client"` ที่บรรทัดแรก
@@ -186,7 +187,7 @@ export type { ComponentNameProps } from './ComponentName.types'
 หยุดและถาม user ก่อน ห้าม assume ถ้า:
 
 - `rules/components/{name}.md` ไม่มี → แนะนำให้ run skill `component-doc` ก่อน
-- Token ที่อ้างถึงใน .md ไม่มีใน `rules/tokens.md` → token drift, ต้อง sync ก่อน (skill `token-sync`)
+- Token ที่อ้างถึงใน .md ไม่มีใน `tokens.json` → token drift, ต้อง sync ก่อน (skill `token-sync`)
 - Figma variant ไม่ตรงกับ doc (เมื่อ MCP เปิด) → ต้อง audit ก่อน (skill `audit`)
 - Component นี้อยู่ในกลุ่ม custom (ai-bubble, ai-streaming, ai-suggest) → ไม่ wrap MUI, ต้องคุย pattern ก่อน
 
@@ -200,8 +201,8 @@ User: สร้าง code crv-button
 AI:
 1. อ่าน CLAUDE.md
 2. อ่าน rules/core-rules.md
-3. อ่าน rules/tokens.md
-4. อ่าน rules/typography.md
+3. อ่าน tokens.json
+4. อ่าน code/tokens.ts — typography section
 5. อ่าน rules/components/crv-button.md
 6. ★ Figma scan — dump ทุก combination จาก component set node
 7. ★ สร้าง ground truth table ครบทุก variant × color × state

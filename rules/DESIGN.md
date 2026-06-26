@@ -1,5 +1,24 @@
 # Design System: Cariva DS
 
+## 0. Product Context
+
+**Users:** Developers and designers on Cariva product teams. Secondary: new team members onboarding to the stack.
+
+**Purpose:** Single source of truth for UI components, tokens, and patterns across Cariva products. Success = developer goes from "never used it" to shipping a feature in under a day.
+
+**Personality:** Precise, friendly, grounded. Not corporate-stiff; not startup-casual.
+
+**Design Principles:**
+1. Show, don't describe — components are the hero
+2. Trust through precision — every spacing, color, token choice demonstrates care
+3. Thai-native, not adapted — copy reads naturally, not translated from English
+4. Clarity over cleverness — "getting started" should feel obvious
+5. Earn the trust — real quality builds confidence, not marketing claims
+
+**Anti-references:** Generic SaaS cream-and-purple landing pages, over-animated marketing sites, documentation that looks like academic papers.
+
+---
+
 ## 1. Visual Theme & Atmosphere
 
 Cariva DS is the design system for a multi-product healthcare platform. Its visual identity is best described as a **lab coat** — white, clean, and precise, but never cold or clinical to the point of feeling distant. The interface should feel like a skilled, approachable professional: structured enough to earn trust, and warm enough that people are comfortable spending hours inside it.
@@ -408,7 +427,20 @@ Key shifts:
 
 ---
 
-## 9. Agent Prompt Guide
+## 9. Product DS Guidelines
+
+Product DS คือ component ที่ extend จาก DS กลาง สำหรับ product นั้นๆ โดยเฉพาะ
+
+**Rules:**
+- ใช้ token จาก DS กลางเท่านั้น — ห้าม hardcode hex หรือ px
+- ถ้าต้องการสีใหม่ → ขอเพิ่มใน DS กลางก่อน ไม่สร้างเอง
+- Component ใหม่ต้อง wrap หรือ extend `Crv*` — ห้ามเขียนทับ MUI โดยตรง
+- Doc สั้นพอ — บอก extend อะไร + override อะไร + ใช้กับ product ไหน
+- ถ้า component ดีพอที่จะใช้ข้าม product → ส่งให้ DS owner พิจารณาดึงขึ้น DS กลาง
+
+---
+
+## 10. Agent Prompt Guide
 
 ### Quick Color Reference
 
