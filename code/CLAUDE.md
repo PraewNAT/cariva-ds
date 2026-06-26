@@ -280,4 +280,3 @@ Cariva is designed for healthcare professionals — write as a peer, not a begin
 - ❌ ใช้ font size ใน sx แทน MUI typography variant
 - ❌ ใช้ font family อื่นนอกจาก IBM Plex Sans Thai
 - ❌ ใช้ building blocks `crv-tab-item-*` โดยตรง
-- เทส123
