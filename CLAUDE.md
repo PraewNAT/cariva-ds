@@ -74,13 +74,6 @@
 | component-doc-update | อัปเดต doc เมื่อ component เปลี่ยน | `อัปเดต doc component [ชื่อ] node-id=[id]` |
 | doc-coverage | เช็ค coverage ของ DS ทั้งหมด | `เช็ค doc coverage` |
 
-**💻 Code**
-
-| ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
-|---|---|---|
-| crv-component-code | เขียนโค้ด core component | `implement component [ชื่อ]` |
-| verify-ds-usage | ตรวจโค้ดว่าใช้ DS จริงหรือ hardcode | `เช็คว่าใช้ component จริงไหม [path]` |
-| pr-checklist | รัน checklist ก่อน merge | `เช็ค PR นี้ก่อน merge` |
 
 ### UX/UI Designer
 อ่าน `skills/{skill}/SKILL.md` ก่อนทำงานทุกครั้ง
