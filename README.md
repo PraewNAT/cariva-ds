@@ -8,8 +8,18 @@ Design system สำหรับทีม Cariva — ประกอบด้ว
 
 ## เริ่มต้นใช้งาน
 
-```bash
-git clone https://github.com/PraewNAT/cariva-ds
+วาง prompt นี้ใน Claude Code เพื่อติดตั้ง:
+
+```
+ช่วยติดตั้ง Cariva Design System จาก repo นี้ให้หน่อย:
+https://github.com/PraewNAT/cariva-ds
+
+โดย:
+1. ถามฉันก่อนว่าอยากติดตั้งไว้ที่ path ไหน
+2. clone repo ไปไว้ที่ path นั้น
+3. รัน npm install
+4. เปิด Claude Code ในโฟลเดอร์นั้น
+5. อ่าน CLAUDE.md และบอกฉันว่าต้องทำอะไรต่อ
 ```
 
 เปิด Claude Code ในโฟลเดอร์ที่ clone มา — ระบบจะถาม role ให้เลือกอัตโนมัติ
