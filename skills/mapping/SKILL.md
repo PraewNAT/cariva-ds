@@ -31,6 +31,10 @@ Map:
 - States and variants to the existing Cariva pattern
 - Property names to current Cariva/MUI mapping rules where relevant
 
+## หมายเหตุ
+
+- Mapping ทำได้ทีละ frame เท่านั้น — ถ้าได้รับ section หรือ flow ทั้งหมด ให้ list frame ที่พบก่อน แล้วถามว่าจะเริ่ม map frame ไหนก่อน
+
 ## Rules
 
 - Do not use tokens from an old design system.
