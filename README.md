@@ -2,7 +2,7 @@
 
 Design system สำหรับทีม Cariva — ประกอบด้วย tokens, skills, และ rules สำหรับใช้งานร่วมกับ Claude Code
 
-📖 **Documentation:** [cariva-ds.vercel.app](https://cariva-ds.vercel.app/)
+[![Documentation](https://img.shields.io/badge/Documentation-cariva--ds.vercel.app-blue?style=for-the-badge)](https://cariva-ds.vercel.app/)
 
 ---
 
