@@ -16,26 +16,26 @@
 หลังจากได้รับคำตอบ ให้สรุปสิทธิ์และวิธีใช้งานให้ user ทราบทันที เช่น:
 
 **ถ้าเลือก 1 — Design System Owner:**
-> "สวัสดี Design System Owner — คุณใช้ skill ได้ทั้งหมด พิมพ์ชื่อ skill หรือถามได้เลย"
-> แล้วแสดง skill list ของ Design System Owner
+> "สวัสดี Design System Owner — คุณใช้ skill ได้ทั้งหมดและแก้ไขไฟล์ได้ พิมพ์ชื่อ skill หรือถามได้เลย"
+> แล้วแสดง skill list ทั้งหมด
 
 **ถ้าเลือก 2 — UX/UI Designer:**
-> ก่อนอื่น ให้ตรวจสอบว่ามีโฟลเดอร์ `PraewPortfolio` ในเครื่องแล้วหรือยัง:
-> - ถ้า **ยังไม่มี** → รัน `git clone https://github.com/PraewNAT/PraewPortfolio` (ทำครั้งเดียว)
-> - ถ้า **มีแล้ว** → รัน `git pull` ในโฟลเดอร์นั้น (ทำทุกวันก่อนเริ่มงาน)
-> จากนั้น: "สวัสดี UX/UI Designer — คุณใช้ skill ได้ดังนี้ [แสดง skill list] ถ้าต้องการ skill เพิ่มเติม ติดต่อ Design System Owner"
-> แล้วแสดง skill list ของ UX/UI Designer พร้อมตัวอย่างวิธีพิมพ์
+> ก่อนอื่น ให้ตรวจสอบว่ามีโฟลเดอร์ `cariva-ds` ในเครื่องแล้วหรือยัง:
+> - ถ้า **ยังไม่มี** → รัน `git clone https://github.com/PraewNAT/cariva-ds` (ทำครั้งเดียว)
+> - ถ้า **มีแล้ว** → รัน `git pull` ในโฟลเดอร์ `cariva-ds` (ทำทุกวันก่อนเริ่มงาน)
+> จากนั้น: "สวัสดี UX/UI Designer — คุณใช้ skill ได้ทั้งหมด แต่ไม่สามารถแก้ไขไฟล์ใดๆ ได้"
+> แล้วแสดง skill list ทั้งหมดพร้อมตัวอย่างวิธีพิมพ์
 
 แล้วปรับ behavior ตาม role:
 
-| role | ทำได้ |
-|---|---|
-| **Design System Owner** | แก้ `tokens.json`, `theme.ts`, `fonts.ts`, สร้าง Core component, ใช้ skill ทั้งหมดใน `skills/` |
-| **UX/UI Designer** | ใช้ token จาก DS กลาง, สร้าง Product component, ใช้ skill ที่กำหนดเท่านั้น — ห้ามแก้ไฟล์ token เอง |
+| role | ทำได้ | ห้าม |
+|---|---|---|
+| **Design System Owner** | ใช้ skill ทั้งหมด, แก้ไขไฟล์ใดก็ได้ | — |
+| **UX/UI Designer** | ใช้ skill ทั้งหมด, อ่านไฟล์ได้ | แก้ไข/สร้าง/ลบไฟล์ใดๆ ในโปรเจกต์ |
 
 **กฎสำคัญ:**
-- UX/UI Designer ห้ามขอเพิ่ม skill หรือเปลี่ยน permission เอง
-- การเพิ่ม skill ให้ UX/UI Designer ทำได้โดย **Design System Owner เท่านั้น** โดยแก้ `CLAUDE.md` นี้
+- UX/UI Designer ห้ามขอแก้ไขไฟล์หรือเปลี่ยน permission เอง
+- ถ้า UX/UI Designer สั่งให้แก้ไขไฟล์ → ปฏิเสธและแจ้งว่า "การแก้ไขไฟล์ทำได้โดย Design System Owner เท่านั้น"
 
 อ่านไฟล์เหล่านี้ก่อนทุก session:
 - `rules/DESIGN.md` — visual principles, token, typography
@@ -43,39 +43,8 @@
 
 ---
 
-## Skills ที่ใช้ได้
+## Skills ที่ใช้ได้ (ทุก role)
 
-### Design System Owner
-อ่าน `skills/{skill}/SKILL.md` ก่อนทำงานทุกครั้ง
-
-**🎨 Design System**
-
-| ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
-|---|---|---|
-| token-sync | sync token จาก tokens.json → tokens.ts | `sync tokens` |
-| audit | ตรวจ token binding และ naming ของ component หรือ screen | `audit [ชื่อ] node-id=[id]` |
-| fix-from-audit | แก้ปัญหาจาก audit result | `แก้จาก audit [node-id]` |
-| changelog | บันทึกการเปลี่ยนแปลง component หรือ token | `changelog` หรือ `อัปเดต changelog [ชื่อ]` |
-
-**📋 UI Flow & Review**
-
-| ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
-|---|---|---|
-| design-review | QA + UI Analysis screen ก่อน handoff dev | `QA screen [ชื่อ] node-id=[id]` |
-| handoff | สรุป dev spec พร้อมส่ง developer | `handoff [ชื่อ] node-id=[id]` |
-| mapping | map Figma component กับโค้ด | `mapping component [ชื่อ]` |
-| ux-writing | เช็ค copy, แนะนำ tone, rewrite | `เช็ค copy [node-id]` หรือ `แนะนำ tone` |
-
-**📝 Documentation**
-
-| ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
-|---|---|---|
-| component-doc | สร้าง doc สำหรับ core component | `สร้าง doc component [ชื่อ] node-id=[id]` |
-| component-doc-update | อัปเดต doc เมื่อ component เปลี่ยน | `อัปเดต doc component [ชื่อ] node-id=[id]` |
-| doc-coverage | เช็ค coverage ของ DS ทั้งหมด | `เช็ค doc coverage` |
-
-
-### UX/UI Designer
 อ่าน `skills/{skill}/SKILL.md` ก่อนทำงานทุกครั้ง
 
 **🎨 Design System**
@@ -99,7 +68,7 @@
 
 | ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
 |---|---|---|
-| component-doc | สร้าง doc สำหรับ product component | `สร้าง doc component [ชื่อ] node-id=[id]` |
+| component-doc | สร้าง doc สำหรับ component | `สร้าง doc component [ชื่อ] node-id=[id]` |
 | component-doc-update | อัปเดต doc เมื่อ component เปลี่ยน | `อัปเดต doc component [ชื่อ] node-id=[id]` |
 | doc-coverage | เช็ค coverage ของ DS | `เช็ค doc coverage` |
 
@@ -109,7 +78,6 @@
 
 - ห้าม hardcode hex หรือ px — ใช้ token จาก DS กลางเท่านั้น
 - ถ้าต้องการสีใหม่ → แจ้ง Design System Owner ก่อน อย่าสร้างเอง
-- Product component ต้อง extend `Crv*` — ห้ามเขียนทับ MUI โดยตรง
 - Figma wins — ถ้า doc ขัดกับ Figma ให้เชื่อ Figma
 
 ---

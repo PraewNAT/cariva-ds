@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cariva Design System — Docs</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --surface-2: #f0f0ee;
+  --border: rgba(0,0,0,0.08);
+  --border-mid: rgba(0,0,0,0.13);
+  --text-1: #111110;
+  --text-2: #6f6e6b;
+  --text-3: #a3a39f;
+  --accent: #1a56c4;
+  --accent-bg: #eef3fc;
+  --accent-border: #c3d4f5;
+  --success-bg: #edf7e6;
+  --success-text: #2e6b0e;
+  --warn-bg: #fdf4e3;
+  --warn-text: #8a5400;
+  --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111110;
+    --surface: #1c1c1a;
+    --surface-2: #242422;
+    --border: rgba(255,255,255,0.07);
+    --border-mid: rgba(255,255,255,0.13);
+    --text-1: #e8e8e4;
+    --text-2: #9a9994;
+    --text-3: #5c5c58;
+    --accent: #6ea3f5;
+    --accent-bg: #0d1e3a;
+    --accent-border: #1e3d7a;
+    --success-bg: #0e2206;
+    --success-text: #7bbf44;
+    --warn-bg: #1f1200;
+    --warn-text: #d48f30;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #111110;
+  --surface: #1c1c1a;
+  --surface-2: #242422;
+  --border: rgba(255,255,255,0.07);
+  --border-mid: rgba(255,255,255,0.13);
+  --text-1: #e8e8e4;
+  --text-2: #9a9994;
+  --text-3: #5c5c58;
+  --accent: #6ea3f5;
+  --accent-bg: #0d1e3a;
+  --accent-border: #1e3d7a;
+  --success-bg: #0e2206;
+  --success-text: #7bbf44;
+  --warn-bg: #1f1200;
+  --warn-text: #d48f30;
+}
+
+:root[data-theme="light"] {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --surface-2: #f0f0ee;
+  --border: rgba(0,0,0,0.08);
+  --border-mid: rgba(0,0,0,0.13);
+  --text-1: #111110;
+  --text-2: #6f6e6b;
+  --text-3: #a3a39f;
+  --accent: #1a56c4;
+  --accent-bg: #eef3fc;
+  --accent-border: #c3d4f5;
+  --success-bg: #edf7e6;
+  --success-text: #2e6b0e;
+  --warn-bg: #fdf4e3;
+  --warn-text: #8a5400;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text-1);
+  display: flex;
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* SIDEBAR */
+aside {
+  width: 240px;
+  min-height: 100vh;
+  position: fixed;
+  top: 0; left: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 36px 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-logo {
+  padding: 0 24px 28px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.sidebar-logo .wordmark {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-1);
+}
+.sidebar-logo .sub {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.nav-section { padding: 0 12px; margin-bottom: 4px; }
+.nav-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding: 8px 12px 4px;
+}
+.nav-link {
+  display: block;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-link:hover { background: var(--surface-2); color: var(--text-1); }
+.nav-link.active { background: var(--accent-bg); color: var(--accent); font-weight: 500; }
+
+/* MAIN */
+main {
+  margin-left: 240px;
+  flex: 1;
+  padding: 72px 64px 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main > * {
+  width: 100%;
+  max-width: 720px;
+}
+
+/* HERO */
+.hero {
+  margin-bottom: 80px;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  margin-bottom: 20px;
+  letter-spacing: 0.01em;
+}
+.hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  color: var(--text-1);
+}
+.hero h1 span { color: var(--accent); }
+.hero-desc {
+  font-size: 17px;
+  color: var(--text-2);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+.hero-stats {
+  display: flex;
+  gap: 32px;
+}
+.stat-item { text-align: left; }
+.stat-num { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; color: var(--text-1); }
+.stat-label { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+
+/* SECTION */
+.doc-section {
+  padding-bottom: 72px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 72px;
+}
+.doc-section:last-child { border-bottom: none; }
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 10px;
+}
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  color: var(--text-1);
+}
+.section-desc {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* PROMPT BOX */
+.prompt-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: 24px 0;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+}
+.prompt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.prompt-header-left { display: flex; align-items: center; gap: 8px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-mid); }
+.prompt-label { font-size: 12px; color: var(--text-3); font-family: var(--mono); }
+.copy-btn {
+  background: var(--surface);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-sm);
+  padding: 5px 14px;
+  font-size: 12px;
+  color: var(--text-2);
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: all 0.15s;
+}
+.copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+.prompt-body {
+  padding: 20px 20px;
+}
+.prompt-body pre {
+  font-size: 13px;
+  font-family: var(--mono);
+  color: var(--text-1);
+  white-space: pre-wrap;
+  line-height: 1.8;
+}
+
+/* TIP */
+.tip {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin: 20px 0;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+.tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+/* ROLE CARDS */
+.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0; }
+.role-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 22px;
+  position: relative;
+  overflow: hidden;
+}
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.role-card.owner::before { background: linear-gradient(90deg, #1a56c4, #6ea3f5); }
+.role-card.designer::before { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+.role-card-num {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+.role-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+.role-card p { font-size: 13px; color: var(--text-2); margin-bottom: 12px; }
+.role-card ul { list-style: none; font-size: 13px; color: var(--text-2); }
+.role-card ul li {
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.role-card ul li::before {
+  content: '';
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--text-3);
+  flex-shrink: 0;
+}
+
+/* CAT LABEL */
+.cat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 36px 0 16px;
+}
+.cat-icon {
+  width: 28px; height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+.cat-title { font-size: 13px; font-weight: 600; color: var(--text-2); letter-spacing: -0.01em; }
+
+/* SKILL CARDS */
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  margin-bottom: 10px;
+  transition: border-color 0.15s;
+}
+.skill-card:hover { border-color: var(--border-mid); }
+.skill-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.skill-name {
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--mono);
+  letter-spacing: -0.01em;
+  color: var(--text-1);
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.badge.all { background: var(--success-bg); color: var(--success-text); }
+.badge.ds { background: var(--warn-bg); color: var(--warn-text); }
+
+.skill-desc { font-size: 13px; color: var(--text-2); line-height: 1.65; margin-bottom: 14px; }
+.cmd-group { display: flex; flex-wrap: wrap; gap: 6px; }
+.cmd {
+  display: inline-block;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 5px 12px;
+  font-size: 12px;
+  font-family: var(--mono);
+  color: var(--text-1);
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.cmd:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+
+/* FAQ */
+.faq-list { margin-top: 8px; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-item:first-child { border-top: 1px solid var(--border); }
+.faq-q {
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-1);
+  padding: 18px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-chevron {
+  color: var(--text-3);
+  font-size: 18px;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.faq-a {
+  font-size: 13.5px;
+  color: var(--text-2);
+  line-height: 1.75;
+  padding-bottom: 20px;
+  display: none;
+}
+.faq-a.open { display: block; }
+.faq-a table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.faq-a th { text-align: left; padding: 9px 14px; background: var(--surface-2); font-weight: 600; font-size: 12px; color: var(--text-2); }
+.faq-a td { padding: 9px 14px; border-top: 1px solid var(--border); }
+.faq-a ol { padding-left: 18px; line-height: 2.1; }
+.faq-a code { font-family: var(--mono); font-size: 12px; background: var(--surface-2); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border); }
+
+/* CHANGELOG */
+.cl-timeline { margin-top: 24px; }
+.cl-entry {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 36px;
+  position: relative;
+}
+.cl-left { width: 100px; flex-shrink: 0; text-align: right; }
+.cl-version { font-size: 13px; font-weight: 700; font-family: var(--mono); color: var(--text-1); }
+.cl-date { font-size: 11px; color: var(--text-3); margin-top: 3px; }
+.cl-line {
+  width: 1px;
+  background: var(--border-mid);
+  flex-shrink: 0;
+  position: relative;
+}
+.cl-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.cl-right { flex: 1; padding-top: 2px; }
+.cl-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.cl-right ul { list-style: none; font-size: 13px; color: var(--text-2); line-height: 1.9; }
+.cl-right ul li::before { content: '→ '; color: var(--text-3); }
+
+/* QUICK REF */
+.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 20px;
+}
+.ref-table thead { background: var(--surface-2); }
+.ref-table th {
+  text-align: left;
+  padding: 11px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  border-bottom: 1px solid var(--border);
+}
+.ref-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.ref-table tr:last-child td { border-bottom: none; }
+.ref-table tr:hover td { background: var(--surface-2); }
+.ref-table code {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-1);
+}
+
+/* THEME TOGGLE */
+.theme-toggle-wrap {
+  margin-top: auto;
+  padding: 20px 24px 8px;
+  border-top: 1px solid var(--border);
+}
+.theme-btns {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.theme-btn {
+  flex: 1;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 7px 0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 1;
+}
+.theme-btn:hover { border-color: var(--border-mid); }
+.theme-btn.active { border-color: var(--accent); background: var(--accent-bg); }
+
+/* FOOTER */
+footer {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside>
+  <div class="sidebar-logo">
+    <div class="wordmark">Cariva DS</div>
+    <div class="sub">Documentation</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Overview</div>
+    <a class="nav-link active" href="#start">Getting started</a>
+    <a class="nav-link" href="#roles">Role system</a>
+  </div>
+
+  <div class="nav-section" style="margin-top:8px">
+    <div class="nav-label">Skills</div>
+    <a class="nav-link" href="#skills-ds">Design system</a>
+    <a class="nav-link" href="#skills-doc">Documentation</a>
+    <a class="nav-link" href="#skills-ui">UI flow & review</a>
+  </div>
+
+  <div class="nav-section" style="margin-top:8px">
+    <div class="nav-label">Reference</div>
+    <a class="nav-link" href="#faq">FAQ</a>
+    <a class="nav-link" href="#changelog">Changelog</a>
+    <a class="nav-link" href="#ref">Quick reference</a>
+  </div>
+
+  <div class="theme-toggle-wrap">
+    <div class="nav-label">Theme</div>
+    <div class="theme-btns">
+      <button class="theme-btn" data-theme="light" title="Light" onclick="setTheme('light')">☀️</button>
+      <button class="theme-btn" data-theme="dark" title="Dark" onclick="setTheme('dark')">🌙</button>
+      <button class="theme-btn active" data-theme="system" title="System" onclick="setTheme('system')">⚙️</button>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main>
+
+  <!-- HERO -->
+  <div class="hero" id="start">
+    <div class="hero-eyebrow">v1.0.0 — Initial release</div>
+    <h1>Cariva <span>Design System</span></h1>
+    <p class="hero-desc">Skills และ role system สำหรับทีม design ผ่าน Claude Code — ออกแบบมาเพื่อ workflow ใน Figma โดยเฉพาะ</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">10</div>
+        <div class="stat-label">Skills</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Roles</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">17</div>
+        <div class="stat-label">Components</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Skills ใช้ได้ทุก DS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GETTING STARTED -->
+  <div class="doc-section">
+    <div class="section-label">Getting started</div>
+    <div class="section-title">ติดตั้ง Cariva DS</div>
+    <p class="section-desc">คัดลอก prompt นี้แล้ววางใน Claude Code — AI จะถามและดำเนินการให้ทั้งหมด ตั้งแต่เลือก path ไปจนถึงเปิดพร้อมใช้งาน</p>
+
+    <div class="prompt-wrap">
+      <div class="prompt-header">
+        <div class="prompt-header-left">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <span class="prompt-label" style="margin-left:4px">Claude Code — install prompt</span>
+        </div>
+        <button class="copy-btn" onclick="copyBlock('install-prompt', this)">Copy prompt</button>
+      </div>
+      <div class="prompt-body">
+        <pre id="install-prompt">ช่วยติดตั้ง Cariva Design System จาก repo นี้ให้หน่อย:
+https://github.com/PraewNAT/cariva-ds
+
+โดย:
+1. ถามฉันก่อนว่าอยากติดตั้งไว้ที่ path ไหน
+2. clone repo ไปไว้ที่ path นั้น
+3. รัน npm install
+4. เปิด Claude Code ในโฟลเดอร์นั้น
+5. อ่าน CLAUDE.md และบอกฉันว่าต้องทำอะไรต่อ</pre>
+      </div>
+    </div>
+
+    <div class="tip">
+      <span class="tip-icon">💡</span>
+      หลังติดตั้งแล้ว เปิด Claude Code ในโฟลเดอร์ cariva-ds — ระบบจะถาม role ให้เลือกอัตโนมัติทุก session
+    </div>
+  </div>
+
+  <!-- ROLES -->
+  <div class="doc-section" id="roles">
+    <div class="section-label">Role system</div>
+    <div class="section-title">เลือก role ก่อนเริ่มงาน</div>
+    <p class="section-desc">เมื่อเปิด Claude Code ในโฟลเดอร์ cariva-ds ระบบจะถาม role ให้เลือกเสมอ — ทั้งสอง role ใช้ skill ได้เหมือนกันทั้งหมด ต่างกันแค่สิทธิ์แก้ไขไฟล์</p>
+
+    <div class="role-grid">
+      <div class="role-card owner">
+        <div class="role-card-num">Role 1</div>
+        <h3>Design System Owner</h3>
+        <p>ใช้ skill ได้ทั้งหมดและแก้ไขไฟล์ได้ทุกอย่าง</p>
+        <ul>
+          <li>แก้ tokens.json, theme.ts, fonts.ts</li>
+          <li>สร้างและแก้ไข Core component</li>
+          <li>อัปเดต CLAUDE.md และ permission</li>
+          <li>push ขึ้น GitHub ได้</li>
+        </ul>
+      </div>
+      <div class="role-card designer">
+        <div class="role-card-num">Role 2</div>
+        <h3>UX/UI Designer</h3>
+        <p>ใช้ skill ได้ทั้งหมด แต่อ่านไฟล์อย่างเดียว</p>
+        <ul>
+          <li>รัน skill ทุกอันได้เต็มที่</li>
+          <li>ส่งไฟล์ .md ให้ Owner review</li>
+          <li>ไม่สามารถแก้ไข/สร้าง/ลบไฟล์</li>
+          <li>git pull cariva-ds ก่อนเริ่มงานทุกวัน</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip">
+      <span class="tip-icon">🔒</span>
+      UX/UI Designer ห้ามขอแก้ไขไฟล์หรือเปลี่ยน permission เอง — ถ้าสั่ง AI จะปฏิเสธและแจ้งให้ติดต่อ Design System Owner
+    </div>
+  </div>
+
+  <!-- SKILLS - DS -->
+  <div class="doc-section" id="skills-ds">
+    <div class="section-label">Skills</div>
+    <div class="section-title">Design system</div>
+    <p class="section-desc">Skills สำหรับตรวจสอบ DS — ต้องใช้ Cariva Core DS จึงจะทำงานได้ครบถ้วน</p>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">audit</span><span class="badge ds">Cariva DS</span></div>
+      <p class="skill-desc">ตรวจ token binding และ naming convention ของ component หรือ screen — รายงานก่อน แล้วบอกว่าจะแก้เป็นอะไร ถามยืนยันก่อนแก้ทุกครั้ง</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">audit [ชื่อ] node-id=[id]</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">fix-from-audit</span><span class="badge ds">Cariva DS</span></div>
+      <p class="skill-desc">แก้ปัญหาที่พบจาก audit result — ใช้ต่อจาก audit เท่านั้น</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">แก้จาก audit [node-id]</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">changelog</span><span class="badge all">✅ ทุก DS</span></div>
+      <p class="skill-desc">บันทึกการเปลี่ยนแปลง component หรือ token พร้อม semantic version (major / minor / patch) — เพิ่ม entry ด้านบนสุดของ CHANGELOG.md อัตโนมัติ</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">changelog</span>
+        <span class="cmd" onclick="copyCmd(this)">อัปเดต changelog [ชื่อ]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS - DOC -->
+  <div class="doc-section" id="skills-doc">
+    <div class="section-title">Documentation</div>
+    <p class="section-desc">Skills สำหรับสร้างและดูแล doc ของ component — ต้องใช้ Cariva Core DS</p>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">component-doc</span><span class="badge ds">Cariva DS</span></div>
+      <p class="skill-desc">สร้าง doc ครบสำหรับ component — variants, states, tokens, anatomy, layout behavior, Do/Don't — บันทึกเป็น .md และสร้าง doc frame ใน Figma ด้วย Documentation Card template</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">สร้าง doc component [ชื่อ] node-id=[id]</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">component-doc-update</span><span class="badge ds">Cariva DS</span></div>
+      <p class="skill-desc">อัปเดต doc เมื่อ component เปลี่ยน — compare กับ Figma แล้วแก้เฉพาะ section ที่เปลี่ยน ไม่ rewrite ทั้งไฟล์</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">อัปเดต doc component [ชื่อ] node-id=[id]</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">doc-coverage</span><span class="badge ds">Cariva DS</span></div>
+      <p class="skill-desc">เช็คว่า component ไหนใน DS ยังไม่มี doc และ coverage โดยรวมเป็นเท่าไหร่</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">เช็ค doc coverage</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS - UI -->
+  <div class="doc-section" id="skills-ui">
+    <div class="section-title">UI flow & review</div>
+    <p class="section-desc">Skills สำหรับ review และ handoff งาน — ใช้ได้กับทุก DS ไม่ขึ้นกับ Cariva</p>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">design-review</span><span class="badge all">✅ ทุก DS</span></div>
+      <p class="skill-desc">QA + UI Analysis ก่อน handoff — ดึง frame list อัตโนมัติ (pre-flight) แล้วตรวจ state ที่ขาด, edge case, error recovery, accessibility, DS integration, copy ครบทุก frame ใน flow</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">QA screen [ชื่อ] node-id=[id]</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">handoff</span><span class="badge all">✅ ทุก DS</span></div>
+      <p class="skill-desc">สรุป output 2 ชุดแยกกัน: Dev spec (component, token, state, interaction, accessibility) และ QA checklist (checkbox พร้อม tick) — ถามก่อน export เป็น PDF ทุกครั้ง</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">handoff [ชื่อ] node-id=[id]</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">mapping</span><span class="badge all">✅ ทุก DS</span></div>
+      <p class="skill-desc">map Figma component กับโค้ด — ทีละ frame เท่านั้น ถ้าได้ section จะ list frame ทั้งหมดก่อน แล้วถามว่าจะเริ่ม map frame ไหนก่อน</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">mapping component [ชื่อ]</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">ux-writing</span><span class="badge all">✅ ทุก DS</span></div>
+      <p class="skill-desc">3 mode: เช็ค grammar/copy (report แบบ 🔴🟡🟢), แนะนำ tone 3 แบบ พร้อมตัวอย่าง 5 ประโยคต่อ tone ทั้งอังกฤษและแปลไทย, rewrite ตาม tone ที่เลือก</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">เช็ค copy [node-id]</span>
+        <span class="cmd" onclick="copyCmd(this)">แนะนำ tone</span>
+        <span class="cmd" onclick="copyCmd(this)">rewrite copy</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="doc-section" id="faq">
+    <div class="section-label">Reference</div>
+    <div class="section-title">FAQ</div>
+    <p class="section-desc">คำถามที่เจอบ่อย</p>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">ทำไม token ไม่มาใน doc? <span class="faq-chevron">▾</span></button>
+        <div class="faq-a">Figma ส่ง token binding มาเฉพาะตอนที่ส่ง node-id ของ component เดี่ยวๆ เท่านั้น ถ้าส่ง section หรือ page จะได้แค่โครงสร้าง — ให้ copy node-id ของ component set โดยตรงแทน AI จะแจ้งและขอ node-id ใหม่อัตโนมัติ</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">design-review กับ handoff ต่างกันยังไง? <span class="faq-chevron">▾</span></button>
+        <div class="faq-a">
+          <table>
+            <tr><th></th><th>design-review</th><th>handoff</th></tr>
+            <tr><td>ใช้เมื่อ</td><td>ยังอยู่ในขั้นตอน QA</td><td>พร้อมส่งงานแล้ว</td></tr>
+            <tr><td>output</td><td>รายการปัญหา + ข้อเสนอแนะ</td><td>Dev spec + QA checklist แยก 2 ชุด</td></tr>
+            <tr><td>ส่งให้ใคร</td><td>designer / PM</td><td>developer + QA</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">skill ไหนใช้ได้โดยไม่ต้องมี Cariva DS? <span class="faq-chevron">▾</span></button>
+        <div class="faq-a">design-review, handoff, ux-writing, changelog, mapping — ใช้ได้กับทุก project ที่ไม่ได้ใช้ Cariva DS โดยไม่ต้อง config เพิ่ม</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">UX/UI Designer อยากเพิ่ม component ลงใน DS ต้องทำอะไรบ้าง? <span class="faq-chevron">▾</span></button>
+        <div class="faq-a">
+          <ol>
+            <li>สร้าง component ใน Figma ตาม convention <code>crvComponent/variantName</code></li>
+            <li>รัน <code>audit</code> เพื่อตรวจ token binding และ naming</li>
+            <li>รัน <code>component-doc</code> เพื่อสร้าง doc และไฟล์ .md</li>
+            <li>ส่งไฟล์ .md ให้ Design System Owner — Owner จะ review และ merge เข้า repo</li>
+          </ol>
+          <br>
+          หมายเหตุ: UX/UI Designer ไม่สามารถ push หรือแก้ไขไฟล์ใน repo ได้โดยตรง
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">ถ้า DS อัปเดต ต้องทำอะไร? <span class="faq-chevron">▾</span></button>
+        <div class="faq-a">เปิด Claude Code session ใหม่ — AI จะอ่าน tokens.json ล่าสุดอัตโนมัติ ไม่ต้องทำอะไรเพิ่ม</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHANGELOG -->
+  <div class="doc-section" id="changelog">
+    <div class="section-title">Changelog</div>
+    <p class="section-desc">อัปเดตทุกครั้งที่รัน skill <code style="font-family:var(--mono);font-size:12px;background:var(--surface-2);padding:2px 8px;border-radius:4px;border:1px solid var(--border)">changelog</code></p>
+
+    <div class="cl-timeline">
+      <div class="cl-entry">
+        <div class="cl-left">
+          <div class="cl-version">v1.0.0</div>
+          <div class="cl-date">2026-07-06</div>
+        </div>
+        <div class="cl-line"><div class="cl-dot"></div></div>
+        <div class="cl-right">
+          <span class="cl-tag">Initial release</span>
+          <ul>
+            <li>Initial release — component ครบ 17 รายการ</li>
+            <li>crvButton, crvButtonIcon, crvInput, crvCheckbox, crvSelect</li>
+            <li>crvTabs, crvTabsPills, crvTabsFolder, crvTagStandard</li>
+            <li>crvAvatar, crvBreadcrumb, crvPagination</li>
+            <li>crvSidebar, crvMenuItem, crvTableCell, crvTableHead, crvCard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REF -->
+  <div class="doc-section" id="ref">
+    <div class="section-title">Quick reference</div>
+    <p class="section-desc">คลิกที่คำสั่งเพื่อ copy ได้เลย</p>
+
+    <table class="ref-table">
+      <thead>
+        <tr><th>Skill</th><th>คำสั่ง</th><th>ทุก DS</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>audit</code></td><td><span class="cmd" onclick="copyCmd(this)">audit [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
+        <tr><td><code>fix-from-audit</code></td><td><span class="cmd" onclick="copyCmd(this)">แก้จาก audit [node-id]</span></td><td>❌</td></tr>
+        <tr><td><code>changelog</code></td><td><span class="cmd" onclick="copyCmd(this)">changelog</span></td><td>✅</td></tr>
+        <tr><td><code>design-review</code></td><td><span class="cmd" onclick="copyCmd(this)">QA screen [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
+        <tr><td><code>handoff</code></td><td><span class="cmd" onclick="copyCmd(this)">handoff [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
+        <tr><td><code>mapping</code></td><td><span class="cmd" onclick="copyCmd(this)">mapping component [ชื่อ]</span></td><td>✅</td></tr>
+        <tr><td><code>ux-writing</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค copy [node-id]</span></td><td>✅</td></tr>
+        <tr><td><code>component-doc</code></td><td><span class="cmd" onclick="copyCmd(this)">สร้าง doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
+        <tr><td><code>component-doc-update</code></td><td><span class="cmd" onclick="copyCmd(this)">อัปเดต doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
+        <tr><td><code>doc-coverage</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค doc coverage</span></td><td>❌</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <span>Cariva Design System — v1.0.0</span>
+    <span>2026-07-06</span>
+  </footer>
+
+</main>
+
+<script>
+function setTheme(theme) {
+  const root = document.documentElement;
+  root.removeAttribute('data-theme');
+  if (theme === 'light') root.setAttribute('data-theme', 'light');
+  if (theme === 'dark') root.setAttribute('data-theme', 'dark');
+  document.querySelectorAll('.theme-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme === theme);
+  });
+  localStorage.setItem('theme', theme);
+}
+
+// apply saved theme on load
+(function() {
+  const saved = localStorage.getItem('theme') || 'system';
+  setTheme(saved);
+})();
+
+function toggleFaq(btn) {
+  const a = btn.nextElementSibling;
+  const chevron = btn.querySelector('.faq-chevron');
+  a.classList.toggle('open');
+  chevron.style.transform = a.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+function copyCmd(el) {
+  navigator.clipboard.writeText(el.textContent.trim());
+  const orig = el.textContent;
+  el.textContent = '✓ copied';
+  el.style.color = 'var(--success-text)';
+  el.style.borderColor = 'var(--success-text)';
+  setTimeout(() => {
+    el.textContent = orig;
+    el.style.color = '';
+    el.style.borderColor = '';
+  }, 1200);
+}
+
+function copyBlock(id, btn) {
+  navigator.clipboard.writeText(document.getElementById(id).textContent);
+  btn.textContent = '✓ Copied!';
+  setTimeout(() => btn.textContent = 'Copy prompt', 1500);
+}
+
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = ['start','roles','skills-ds','skills-ui','skills-doc','faq','changelog','ref'];
+
+window.addEventListener('scroll', () => {
+  let current = sections[0];
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < 120) current = id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>

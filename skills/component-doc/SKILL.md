@@ -168,3 +168,13 @@ Before writing any documentation, verify ALL of the following. If any item is mi
 - If anything is unclear, write "Needs designer review" — do not guess.
 - Keep all token names exact — do not paraphrase or shorten.
 - One file per component: `rules/components/{component-name}.md`
+
+## Token ไม่มาจาก Figma
+
+ถ้า section Token usage ว่างหรือได้ค่า hardcode ทั้งหมด ให้แจ้ง user ทันทีว่า:
+
+> "ไม่พบ token binding จาก node นี้ — อาจเป็นเพราะ node เป็น section/page หรือ component ยังไม่ได้ bind token
+> กรุณาส่ง node-id ของ component เดี่ยวๆ แทน เช่น node-id ของ component set โดยตรง"
+
+- ไม่เดาค่า token จาก visual
+- ไม่เขียน section Token usage ถ้าไม่มีข้อมูลจริง — ให้ข้ามและ flag ว่า "Needs designer review: token binding ไม่พบ"
