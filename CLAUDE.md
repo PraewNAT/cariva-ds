@@ -53,7 +53,7 @@
 | ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
 |---|---|---|
 | token-sync | sync token จาก tokens.json → tokens.ts | `sync tokens` |
-| component-audit | เช็ค Figma component ว่าใช้ token ถูกไหม | `audit component [ชื่อ] node-id=[id]` |
+| audit | ตรวจ token binding และ naming ของ component หรือ screen | `audit [ชื่อ] node-id=[id]` |
 | fix-from-audit | แก้ปัญหาจาก audit result | `แก้จาก audit [node-id]` |
 | changelog | บันทึกการเปลี่ยนแปลง component หรือ token | `changelog` หรือ `อัปเดต changelog [ชื่อ]` |
 
@@ -82,7 +82,7 @@
 
 | ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
 |---|---|---|
-| component-audit | เช็ค Figma component ว่าใช้ token ถูกไหม | `audit component [ชื่อ] node-id=[id]` |
+| audit | ตรวจ token binding และ naming ของ component หรือ screen | `audit [ชื่อ] node-id=[id]` |
 | fix-from-audit | แก้ปัญหาจาก audit result | `แก้จาก audit [node-id]` |
 | changelog | บันทึกการเปลี่ยนแปลง component หรือ token | `changelog` หรือ `อัปเดต changelog [ชื่อ]` |
 

@@ -1,6 +1,6 @@
 ---
-name: cariva-ds-audit
-description: Audit a Cariva Core Design System Figma component or page for design-system integration only. Use when the user asks to audit, check, or review a component/page without fixing it.
+name: audit
+description: ตรวจ token binding และ naming convention ของ Figma component หรือ screen — ใช้เมื่อพูดว่า audit, เช็ค component, เช็ค screen
 ---
 
 # Audit Cariva Design System Integration
@@ -24,6 +24,8 @@ Audit only design-system integration. Do not fix anything unless the user asks l
 
 Check only:
 
+- **Naming convention** — ชื่อ component ตรง format `crv[Component]/[variantName]` (camelCase) ไหม
+  - ถ้าพบชื่อผิด → บอกว่าควรแก้เป็นอะไร แล้วถามยืนยันก่อนแก้
 - Uses component base / shared component correctly
 - Colors are bound to current semantic color tokens
 - Typography uses text styles / typography variables
