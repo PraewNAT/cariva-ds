@@ -592,9 +592,9 @@ footer {
 
   <div class="nav-section" style="margin-top:8px">
     <div class="nav-label">Reference</div>
-    <a class="nav-link" href="#faq">FAQ</a>
-    <a class="nav-link" href="#changelog">Changelog</a>
     <a class="nav-link" href="#ref">Quick reference</a>
+    <a class="nav-link" href="#changelog">Changelog</a>
+    <a class="nav-link" href="#faq">FAQ</a>
   </div>
 
   <div class="theme-toggle-wrap">
@@ -809,9 +809,59 @@ https://github.com/PraewNAT/cariva-ds
     </div>
   </div>
 
+  <!-- QUICK REF -->
+  <div class="doc-section" id="ref">
+    <div class="section-label">Reference</div>
+    <div class="section-title">Quick reference</div>
+    <p class="section-desc">คลิกที่คำสั่งเพื่อ copy ได้เลย</p>
+
+    <table class="ref-table">
+      <thead>
+        <tr><th>Skill</th><th>คำสั่ง</th><th>ทุก DS</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>audit</code></td><td><span class="cmd" onclick="copyCmd(this)">audit [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
+        <tr><td><code>fix-from-audit</code></td><td><span class="cmd" onclick="copyCmd(this)">แก้จาก audit [node-id]</span></td><td>❌</td></tr>
+        <tr><td><code>changelog</code></td><td><span class="cmd" onclick="copyCmd(this)">changelog</span></td><td>✅</td></tr>
+        <tr><td><code>design-review</code></td><td><span class="cmd" onclick="copyCmd(this)">QA screen [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
+        <tr><td><code>handoff</code></td><td><span class="cmd" onclick="copyCmd(this)">handoff [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
+        <tr><td><code>mapping</code></td><td><span class="cmd" onclick="copyCmd(this)">mapping component [ชื่อ]</span></td><td>✅</td></tr>
+        <tr><td><code>ux-writing</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค copy [node-id]</span></td><td>✅</td></tr>
+        <tr><td><code>component-doc</code></td><td><span class="cmd" onclick="copyCmd(this)">สร้าง doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
+        <tr><td><code>component-doc-update</code></td><td><span class="cmd" onclick="copyCmd(this)">อัปเดต doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
+        <tr><td><code>doc-coverage</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค doc coverage</span></td><td>❌</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CHANGELOG -->
+  <div class="doc-section" id="changelog">
+    <div class="section-title">Changelog</div>
+    <p class="section-desc">อัปเดตทุกครั้งที่รัน skill <code style="font-family:var(--mono);font-size:12px;background:var(--surface-2);padding:2px 8px;border-radius:4px;border:1px solid var(--border)">changelog</code></p>
+
+    <div class="cl-timeline">
+      <div class="cl-entry">
+        <div class="cl-left">
+          <div class="cl-version">v1.0.0</div>
+          <div class="cl-date">2026-07-06</div>
+        </div>
+        <div class="cl-line"><div class="cl-dot"></div></div>
+        <div class="cl-right">
+          <span class="cl-tag">Initial release</span>
+          <ul>
+            <li>Initial release — component ครบ 17 รายการ</li>
+            <li>crvButton, crvButtonIcon, crvInput, crvCheckbox, crvSelect</li>
+            <li>crvTabs, crvTabsPills, crvTabsFolder, crvTagStandard</li>
+            <li>crvAvatar, crvBreadcrumb, crvPagination</li>
+            <li>crvSidebar, crvMenuItem, crvTableCell, crvTableHead, crvCard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- FAQ -->
   <div class="doc-section" id="faq">
-    <div class="section-label">Reference</div>
     <div class="section-title">FAQ</div>
     <p class="section-desc">คำถามที่เจอบ่อย</p>
 
@@ -853,56 +903,6 @@ https://github.com/PraewNAT/cariva-ds
         <div class="faq-a">เปิด Claude Code session ใหม่ — AI จะอ่าน tokens.json ล่าสุดอัตโนมัติ ไม่ต้องทำอะไรเพิ่ม</div>
       </div>
     </div>
-  </div>
-
-  <!-- CHANGELOG -->
-  <div class="doc-section" id="changelog">
-    <div class="section-title">Changelog</div>
-    <p class="section-desc">อัปเดตทุกครั้งที่รัน skill <code style="font-family:var(--mono);font-size:12px;background:var(--surface-2);padding:2px 8px;border-radius:4px;border:1px solid var(--border)">changelog</code></p>
-
-    <div class="cl-timeline">
-      <div class="cl-entry">
-        <div class="cl-left">
-          <div class="cl-version">v1.0.0</div>
-          <div class="cl-date">2026-07-06</div>
-        </div>
-        <div class="cl-line"><div class="cl-dot"></div></div>
-        <div class="cl-right">
-          <span class="cl-tag">Initial release</span>
-          <ul>
-            <li>Initial release — component ครบ 17 รายการ</li>
-            <li>crvButton, crvButtonIcon, crvInput, crvCheckbox, crvSelect</li>
-            <li>crvTabs, crvTabsPills, crvTabsFolder, crvTagStandard</li>
-            <li>crvAvatar, crvBreadcrumb, crvPagination</li>
-            <li>crvSidebar, crvMenuItem, crvTableCell, crvTableHead, crvCard</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- QUICK REF -->
-  <div class="doc-section" id="ref">
-    <div class="section-title">Quick reference</div>
-    <p class="section-desc">คลิกที่คำสั่งเพื่อ copy ได้เลย</p>
-
-    <table class="ref-table">
-      <thead>
-        <tr><th>Skill</th><th>คำสั่ง</th><th>ทุก DS</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>audit</code></td><td><span class="cmd" onclick="copyCmd(this)">audit [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
-        <tr><td><code>fix-from-audit</code></td><td><span class="cmd" onclick="copyCmd(this)">แก้จาก audit [node-id]</span></td><td>❌</td></tr>
-        <tr><td><code>changelog</code></td><td><span class="cmd" onclick="copyCmd(this)">changelog</span></td><td>✅</td></tr>
-        <tr><td><code>design-review</code></td><td><span class="cmd" onclick="copyCmd(this)">QA screen [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
-        <tr><td><code>handoff</code></td><td><span class="cmd" onclick="copyCmd(this)">handoff [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
-        <tr><td><code>mapping</code></td><td><span class="cmd" onclick="copyCmd(this)">mapping component [ชื่อ]</span></td><td>✅</td></tr>
-        <tr><td><code>ux-writing</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค copy [node-id]</span></td><td>✅</td></tr>
-        <tr><td><code>component-doc</code></td><td><span class="cmd" onclick="copyCmd(this)">สร้าง doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
-        <tr><td><code>component-doc-update</code></td><td><span class="cmd" onclick="copyCmd(this)">อัปเดต doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
-        <tr><td><code>doc-coverage</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค doc coverage</span></td><td>❌</td></tr>
-      </tbody>
-    </table>
   </div>
 
   <footer>
