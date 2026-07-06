@@ -8,7 +8,7 @@
 👋 สวัสดี — กรุณาเลือก role ของคุณ:
 
   1. Design System Owner
-  2. UX/UI Designer
+  2. Product Designer
 
 พิมพ์ 1 หรือ 2
 ```
@@ -19,11 +19,11 @@
 > "สวัสดี Design System Owner — คุณใช้ skill ได้ทั้งหมดและแก้ไขไฟล์ได้ พิมพ์ชื่อ skill หรือถามได้เลย"
 > แล้วแสดง skill list ทั้งหมด
 
-**ถ้าเลือก 2 — UX/UI Designer:**
+**ถ้าเลือก 2 — Product Designer:**
 > ก่อนอื่น ให้ตรวจสอบว่ามีโฟลเดอร์ `cariva-ds` ในเครื่องแล้วหรือยัง:
 > - ถ้า **ยังไม่มี** → รัน `git clone https://github.com/PraewNAT/cariva-ds` (ทำครั้งเดียว)
 > - ถ้า **มีแล้ว** → รัน `git pull` ในโฟลเดอร์ `cariva-ds` (ทำทุกวันก่อนเริ่มงาน)
-> จากนั้น: "สวัสดี UX/UI Designer — คุณใช้ skill ได้ทั้งหมด แต่ไม่สามารถแก้ไขไฟล์ใดๆ ได้"
+> จากนั้น: "สวัสดี Product Designer — คุณใช้ skill ได้ทั้งหมด แต่ไม่สามารถแก้ไขไฟล์ใดๆ ได้"
 > แล้วแสดง skill list ทั้งหมดพร้อมตัวอย่างวิธีพิมพ์
 
 แล้วปรับ behavior ตาม role:
@@ -31,11 +31,11 @@
 | role | ทำได้ | ห้าม |
 |---|---|---|
 | **Design System Owner** | ใช้ skill ทั้งหมด, แก้ไขไฟล์ใดก็ได้ | — |
-| **UX/UI Designer** | ใช้ skill ทั้งหมด, อ่านไฟล์ได้ | แก้ไข/สร้าง/ลบไฟล์ใดๆ ในโปรเจกต์ |
+| **Product Designer** | ใช้ skill ทั้งหมด, อ่านไฟล์ได้ | แก้ไข/สร้าง/ลบไฟล์ใดๆ ในโปรเจกต์ |
 
 **กฎสำคัญ:**
-- UX/UI Designer ห้ามขอแก้ไขไฟล์หรือเปลี่ยน permission เอง
-- ถ้า UX/UI Designer สั่งให้แก้ไขไฟล์ → ปฏิเสธและแจ้งว่า "การแก้ไขไฟล์ทำได้โดย Design System Owner เท่านั้น"
+- Product Designer ห้ามขอแก้ไขไฟล์หรือเปลี่ยน permission เอง
+- ถ้า Product Designer สั่งให้แก้ไขไฟล์ → ปฏิเสธและแจ้งว่า "การแก้ไขไฟล์ทำได้โดย Design System Owner เท่านั้น"
 
 อ่านไฟล์เหล่านี้ก่อนทุก session:
 - `rules/DESIGN.md` — visual principles, token, typography
