@@ -1,54 +1,34 @@
-# Agent Peer Bridge
+# Cariva Design System
 
-Connect Cursor / Claude / Codex agents on two machines (LAN, Tailscale, or Host-only Cloudflare tunnel).
+Design system สำหรับทีม Cariva — ประกอบด้วย tokens, skills, และ rules สำหรับใช้งานร่วมกับ Claude Code
 
-## แพ็กเล็ก — ส่งให้เครื่องอื่น (ไม่ต้องทั้ง Agent)
+📖 **Documentation:** [cariva-ds.vercel.app](https://cariva-ds.vercel.app/)
 
-**วิธี A — curl จาก Host (แนะนำ)**
+---
 
-Host รัน bridge แล้วสร้าง URL ให้ Guest:
-
-```bash
-make start
-make guest-url   # หรือจาก hub: make peer-url
-```
-
-Guest รัน curl ที่ได้ เช่น:
+## เริ่มต้นใช้งาน
 
 ```bash
-curl -fsSL http://100.x.x.x:3848/install.sh | bash
-# ติดตั้งในโฟลเดอร์ปัจจุบัน · PEER_INSTALL_DIR=… กำหนด path เองได้
+git clone https://github.com/PraewNAT/cariva-ds
 ```
 
-ถ้า Host ใช้ Cloudflare quick tunnel: Host เปิด `make tunnel-quick-foreground` ทิ้งไว้, Guest ยังใช้ curl เดียวเหมือนเดิมและไม่ต้องเปิด tunnel ฝั่ง Guest
+เปิด Claude Code ในโฟลเดอร์ที่ clone มา — ระบบจะถาม role ให้เลือกอัตโนมัติ
 
-**วิธี B — ส่ง zip**
+## โครงสร้าง
 
-```bash
-make peer-pack   # ได้ dist/agent-peer-bridge.zip
+```
+cariva-ds/
+├── skills/        # AI skills สำหรับ design workflow
+├── rules/         # Design principles และ guidelines
+├── tokens.json    # Semantic tokens (source of truth จาก Figma)
+├── CLAUDE.md      # Role system และ skill definitions
+├── CHANGELOG.md   # บันทึกการเปลี่ยนแปลง
+└── index.html     # Documentation website
 ```
 
-Guest: `make install` แล้วเลือก **`make setup-ui`** (web) หรือ **`make wizard`** (CLI)
+## Roles
 
-อ่านเต็ม: [SETUP-TH.md](SETUP-TH.md)
-
-## จาก Agent hub (เครื่องที่มี repo อยู่แล้ว)
-
-```bash
-make -C ../.. peer-install
-# วิธี A — web setup
-make -C ../.. peer-setup-ui
-# วิธี B — CLI wizard
-make -C ../.. peer-wizard
-make -C ../.. peer-start
-make -C ../.. peer-url    # curl URL ให้ Guest
-```
-
-**Docs:** [docs/agent-peer-bridge.html](../../docs/agent-peer-bridge.html)
-
-| Port | Purpose |
-|------|---------|
-| 3847 | Peer HTTP API |
-| 3848 | Web setup UI (`/setup`) |
-
-Shortcuts: `peer` · `peer-cowork "<goal>"` · `make peer-readiness`
+| Role | สิทธิ์ |
+|---|---|
+| **Design System Owner** | ใช้ skill ทั้งหมด + แก้ไขไฟล์ได้ |
+| **UX/UI Designer** | ใช้ skill ทั้งหมด + อ่านไฟล์อย่างเดียว |
