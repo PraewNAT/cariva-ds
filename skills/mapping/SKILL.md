@@ -18,6 +18,10 @@ Use when the user says:
 - Inspect the target Figma component/page before changing anything.
 - If using `use_figma`, load the `figma-use` skill first and pass `skillNames: "figma-use"`.
 
+## Required Reading
+
+ก่อน map ทุกครั้ง ให้อ่าน `rules/components/{ชื่อ component}.md` ถ้ามี — ใช้เป็น source of truth ของ property และ variant ที่ถูกต้อง
+
 ## Mapping Scope
 
 Map:
@@ -29,7 +33,7 @@ Map:
 - Effect styles
 - Component base / shared component when available
 - States and variants to the existing Cariva pattern
-- Property names to current Cariva/MUI mapping rules where relevant
+- **Property names** — ตรวจทุก property ว่าตรงกับ MUI prop naming ไหม (เช่น `variant`, `size`, `color`, `disabled`) ถ้าไม่ตรงให้เสนอชื่อที่ถูกต้องและถามยืนยันก่อนแก้
 
 ## หมายเหตุ
 
@@ -42,6 +46,7 @@ Map:
 - Do not create new tokens or components by default.
 - Do not invent unsupported MUI props.
 - If a component base is missing, or a needed variant/state is incomplete, tell the user what should be created before creating it.
+- ถ้า property name ไม่ตรงกับ MUI → เสนอชื่อที่ถูก แล้วถามยืนยันก่อนแก้ทุกครั้ง ห้ามแก้เองโดยไม่ถาม
 - Preserve visual intention unless the DS mapping requires a correction.
 
 ## Output
@@ -50,5 +55,6 @@ When reporting mapping work, include:
 
 - What was mapped
 - Which node/component was affected
+- Property names ที่ตรงกับ MUI แล้ว และที่ยังไม่ตรง (พร้อมเสนอชื่อที่ถูก)
 - Any missing base component, variant, state, token, or style
 - Any follow-up question before creating new system pieces
