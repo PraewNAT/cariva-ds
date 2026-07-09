@@ -715,17 +715,9 @@ https://github.com/PraewNAT/cariva-ds
 
     <div class="skill-card">
       <div class="skill-top"><span class="skill-name">audit</span><span class="badge ds">Cariva DS</span></div>
-      <p class="skill-desc">ตรวจ token binding และ naming convention ของ component หรือ screen — รายงานก่อน แล้วบอกว่าจะแก้เป็นอะไร ถามยืนยันก่อนแก้ทุกครั้ง</p>
+      <p class="skill-desc">ตรวจ token binding และ naming convention ของ component หรือ screen — รายงานปัญหาก่อน แล้วถามว่าอยากแก้ต่อไหม ถ้าใช่จะแก้ต่อเลยโดยไม่ต้อง inspect ซ้ำ</p>
       <div class="cmd-group">
         <span class="cmd" onclick="copyCmd(this)">audit [ชื่อ] node-id=[id]</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-top"><span class="skill-name">fix-from-audit</span><span class="badge ds">Cariva DS</span></div>
-      <p class="skill-desc">แก้ปัญหาที่พบจาก audit result — ใช้ต่อจาก audit เท่านั้น</p>
-      <div class="cmd-group">
-        <span class="cmd" onclick="copyCmd(this)">แก้จาก audit [node-id]</span>
       </div>
     </div>
 
@@ -821,7 +813,6 @@ https://github.com/PraewNAT/cariva-ds
       </thead>
       <tbody>
         <tr><td><code>audit</code></td><td><span class="cmd" onclick="copyCmd(this)">audit [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
-        <tr><td><code>fix-from-audit</code></td><td><span class="cmd" onclick="copyCmd(this)">แก้จาก audit [node-id]</span></td><td>❌</td></tr>
         <tr><td><code>changelog</code></td><td><span class="cmd" onclick="copyCmd(this)">changelog</span></td><td>✅</td></tr>
         <tr><td><code>design-review</code></td><td><span class="cmd" onclick="copyCmd(this)">QA screen [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
         <tr><td><code>handoff</code></td><td><span class="cmd" onclick="copyCmd(this)">handoff [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
