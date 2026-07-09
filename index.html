@@ -737,7 +737,7 @@ https://github.com/PraewNAT/cariva-ds
     <p class="section-desc">Skills สำหรับสร้างและดูแล doc ของ component — ต้องใช้ Cariva Core DS</p>
 
     <div class="skill-card">
-      <div class="skill-top"><span class="skill-name">component-doc</span><span class="badge ds">Cariva DS</span></div>
+      <div class="skill-top"><span class="skill-name">document</span><span class="badge ds">Cariva DS</span></div>
       <p class="skill-desc">สร้าง doc ครบสำหรับ component — variants, states, tokens, anatomy, layout behavior, Do/Don't — บันทึกเป็น .md และสร้าง doc frame ใน Figma ด้วย Documentation Card template</p>
       <div class="cmd-group">
         <span class="cmd" onclick="copyCmd(this)">สร้าง doc component [ชื่อ] node-id=[id]</span>
@@ -745,7 +745,7 @@ https://github.com/PraewNAT/cariva-ds
     </div>
 
     <div class="skill-card">
-      <div class="skill-top"><span class="skill-name">component-doc-update</span><span class="badge ds">Cariva DS</span></div>
+      <div class="skill-top"><span class="skill-name">document-update</span><span class="badge ds">Cariva DS</span></div>
       <p class="skill-desc">อัปเดต doc เมื่อ component เปลี่ยน — compare กับ Figma แล้วแก้เฉพาะ section ที่เปลี่ยน ไม่ rewrite ทั้งไฟล์</p>
       <div class="cmd-group">
         <span class="cmd" onclick="copyCmd(this)">อัปเดต doc component [ชื่อ] node-id=[id]</span>
@@ -819,8 +819,8 @@ https://github.com/PraewNAT/cariva-ds
         <tr><td><code>handoff</code></td><td><span class="cmd" onclick="copyCmd(this)">handoff [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
         <tr><td><code>map-fix</code></td><td><span class="cmd" onclick="copyCmd(this)">map [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
         <tr><td><code>ux-writing</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค copy [node-id]</span></td><td>✅</td></tr>
-        <tr><td><code>component-doc</code></td><td><span class="cmd" onclick="copyCmd(this)">สร้าง doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
-        <tr><td><code>component-doc-update</code></td><td><span class="cmd" onclick="copyCmd(this)">อัปเดต doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
+        <tr><td><code>document</code></td><td><span class="cmd" onclick="copyCmd(this)">สร้าง doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
+        <tr><td><code>document-update</code></td><td><span class="cmd" onclick="copyCmd(this)">อัปเดต doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
         <tr><td><code>doc-coverage</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค doc coverage</span></td><td>❌</td></tr>
       </tbody>
     </table>
@@ -883,7 +883,7 @@ https://github.com/PraewNAT/cariva-ds
           <ol>
             <li>สร้าง component ใน Figma ตาม convention <code>crvComponent/variantName</code></li>
             <li>รัน <code>audit</code> เพื่อตรวจ token binding และ naming</li>
-            <li>รัน <code>component-doc</code> เพื่อสร้าง doc และไฟล์ .md</li>
+            <li>รัน <code>document</code> เพื่อสร้าง doc และไฟล์ .md</li>
             <li>ส่งไฟล์ .md ให้ Design System Owner — Owner จะ review และ merge เข้า repo</li>
           </ol>
           <br>

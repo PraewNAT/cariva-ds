@@ -1,5 +1,5 @@
 ---
-name: cariva-component-doc-update
+name: document-update
 description: Update existing component documentation when a component has changed. Syncs rules/components/{name}.md and the Figma doc frame. Use when the user asks to update or re-doc a component.
 ---
 

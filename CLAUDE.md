@@ -67,8 +67,8 @@
 
 | ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
 |---|---|---|
-| component-doc | สร้าง doc สำหรับ component | `สร้าง doc component [ชื่อ] node-id=[id]` |
-| component-doc-update | อัปเดต doc เมื่อ component เปลี่ยน | `อัปเดต doc component [ชื่อ] node-id=[id]` |
+| document | สร้าง doc สำหรับ component | `สร้าง doc component [ชื่อ] node-id=[id]` |
+| document-update | อัปเดต doc เมื่อ component เปลี่ยน | `อัปเดต doc component [ชื่อ] node-id=[id]` |
 | doc-coverage | เช็ค coverage ของ DS | `เช็ค doc coverage` |
 
 ---

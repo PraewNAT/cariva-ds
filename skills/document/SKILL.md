@@ -1,6 +1,6 @@
 ---
-name: cariva-component-doc
-description: Generate full documentation for a Cariva Design System component. Creates a .md file under rules/components/ and a doc frame in Figma (Style - MUI page). Use when the user asks to document a component.
+name: document
+description: Generate full documentation for a Cariva Design System component. Creates a .md file under rules/components/ and a doc frame in Figma. Use when the user asks to document a component.
 ---
 
 # Component Documentation
