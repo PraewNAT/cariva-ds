@@ -61,7 +61,7 @@ Check only:
 ```
 
 หลังรายงานเสร็จ **ถามทันทีว่า:** "อยากให้แก้ปัญหาที่พบไหม?"
-- ถ้า **ใช่** → แก้ต่อเลยโดยใช้ข้อมูลจาก audit ที่เพิ่ง inspect ไป ไม่ต้อง inspect ซ้ำ ถามยืนยันก่อนแก้ทีละรายการ
+- ถ้า **ใช่** → โหลด skill `map-fix` ต่อเลย โดยส่งข้อมูลที่ inspect ไปแล้วให้ด้วย ไม่ต้อง inspect ซ้ำ
 - ถ้า **ไม่** → จบแค่ report
 
 If no issues are found, say the audit passed and mention any residual uncertainty. แล้วถามว่าอยากให้ทำอะไรต่อ
