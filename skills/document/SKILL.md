@@ -46,7 +46,7 @@ Before writing any documentation, verify ALL of the following. If any item is mi
 
 3. **Save to file**
    - Path: `rules/components/{component-name}.md`
-   - If the file already exists, **stop and switch to the `component-doc-update` skill** instead
+   - If the file already exists, **stop and switch to the `document-update` skill** instead
 
 4. **Create Figma doc frame โดยใช้ Documentation Card Template**
 
