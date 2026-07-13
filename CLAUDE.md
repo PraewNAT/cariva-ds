@@ -59,9 +59,9 @@
 | ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
 |---|---|---|
 | design-review | QA + UI Analysis screen ก่อน handoff dev | `QA screen [ชื่อ] node-id=[id]` |
-| handoff | สรุป dev spec พร้อมส่ง developer | `handoff [ชื่อ] node-id=[id]` |
 | map-fix | map Figma component เข้ากับ DS และแก้ให้ตรง | `map [ชื่อ] node-id=[id]` หรือ `แก้ [ชื่อ] node-id=[id]` |
 | ux-writing | เช็ค copy, แนะนำ tone, rewrite | `เช็ค copy [node-id]` หรือ `แนะนำ tone` |
+| localization-export | ดึงข้อความจาก Figma จัดหมวดหมู่ export/update เป็น Excel สำหรับทีม localization | `export ข้อความ [ชื่อ] node-id=[id]` หรือ `อัปเดต localization [ชื่อ] node-id=[id]` |
 
 **📝 Documentation**
 

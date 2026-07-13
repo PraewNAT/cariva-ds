@@ -775,14 +775,6 @@ https://github.com/PraewNAT/cariva-ds
     </div>
 
     <div class="skill-card">
-      <div class="skill-top"><span class="skill-name">handoff</span><span class="badge all">✅ ทุก DS</span></div>
-      <p class="skill-desc">สรุป output 2 ชุดแยกกัน: Dev spec (component, token, state, interaction, accessibility) และ QA checklist (checkbox พร้อม tick) — ถามก่อน export เป็น PDF ทุกครั้ง</p>
-      <div class="cmd-group">
-        <span class="cmd" onclick="copyCmd(this)">handoff [ชื่อ] node-id=[id]</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
       <div class="skill-top"><span class="skill-name">map-fix</span><span class="badge all">✅ ทุก DS</span></div>
       <p class="skill-desc">map Figma component เข้ากับ DS และแก้ให้ตรง — ใช้ได้ทั้งตอนเริ่มต้นและหลัง audit ทำทีละ frame ถามยืนยันก่อนแก้ทุกครั้ง</p>
       <div class="cmd-group">
@@ -798,6 +790,15 @@ https://github.com/PraewNAT/cariva-ds
         <span class="cmd" onclick="copyCmd(this)">เช็ค copy [node-id]</span>
         <span class="cmd" onclick="copyCmd(this)">แนะนำ tone</span>
         <span class="cmd" onclick="copyCmd(this)">rewrite copy</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">localization-export</span><span class="badge all">✅ ทุก DS</span></div>
+      <p class="skill-desc">ดึงข้อความทั้งหมดจาก Figma จัดหมวดหมู่ (CTA, Toast, Form Validation, Empty State, Navigation, Table/List Controls, Feature-specific) แล้ว export/update เป็น Excel สำหรับทีม localization</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">export ข้อความ [ชื่อ] node-id=[id]</span>
+        <span class="cmd" onclick="copyCmd(this)">อัปเดต localization [ชื่อ] node-id=[id]</span>
       </div>
     </div>
   </div>
@@ -816,9 +817,9 @@ https://github.com/PraewNAT/cariva-ds
         <tr><td><code>audit</code></td><td><span class="cmd" onclick="copyCmd(this)">audit [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
         <tr><td><code>changelog</code></td><td><span class="cmd" onclick="copyCmd(this)">changelog</span></td><td>✅</td></tr>
         <tr><td><code>design-review</code></td><td><span class="cmd" onclick="copyCmd(this)">QA screen [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
-        <tr><td><code>handoff</code></td><td><span class="cmd" onclick="copyCmd(this)">handoff [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
         <tr><td><code>map-fix</code></td><td><span class="cmd" onclick="copyCmd(this)">map [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
         <tr><td><code>ux-writing</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค copy [node-id]</span></td><td>✅</td></tr>
+        <tr><td><code>localization-export</code></td><td><span class="cmd" onclick="copyCmd(this)">export ข้อความ [ชื่อ] node-id=[id]</span></td><td>✅</td></tr>
         <tr><td><code>document</code></td><td><span class="cmd" onclick="copyCmd(this)">สร้าง doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
         <tr><td><code>document-update</code></td><td><span class="cmd" onclick="copyCmd(this)">อัปเดต doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
         <tr><td><code>doc-coverage</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค doc coverage</span></td><td>❌</td></tr>
@@ -863,19 +864,8 @@ https://github.com/PraewNAT/cariva-ds
         <div class="faq-a">Figma ส่ง token binding มาเฉพาะตอนที่ส่ง node-id ของ component เดี่ยวๆ เท่านั้น ถ้าส่ง section หรือ page จะได้แค่โครงสร้าง — ให้ copy node-id ของ component set โดยตรงแทน AI จะแจ้งและขอ node-id ใหม่อัตโนมัติ</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">design-review กับ handoff ต่างกันยังไง? <span class="faq-chevron">▾</span></button>
-        <div class="faq-a">
-          <table>
-            <tr><th></th><th>design-review</th><th>handoff</th></tr>
-            <tr><td>ใช้เมื่อ</td><td>ยังอยู่ในขั้นตอน QA</td><td>พร้อมส่งงานแล้ว</td></tr>
-            <tr><td>output</td><td>รายการปัญหา + ข้อเสนอแนะ</td><td>Dev spec + QA checklist แยก 2 ชุด</td></tr>
-            <tr><td>ส่งให้ใคร</td><td>designer / PM</td><td>developer + QA</td></tr>
-          </table>
-        </div>
-      </div>
-      <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">skill ไหนใช้ได้โดยไม่ต้องมี Cariva DS? <span class="faq-chevron">▾</span></button>
-        <div class="faq-a">design-review, handoff, ux-writing, changelog, mapping — ใช้ได้กับทุก project ที่ไม่ได้ใช้ Cariva DS โดยไม่ต้อง config เพิ่ม</div>
+        <div class="faq-a">design-review, ux-writing, changelog, mapping — ใช้ได้กับทุก project ที่ไม่ได้ใช้ Cariva DS โดยไม่ต้อง config เพิ่ม</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Product Designer อยากเพิ่ม component ลงใน DS ต้องทำอะไรบ้าง? <span class="faq-chevron">▾</span></button>
