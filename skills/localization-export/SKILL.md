@@ -1,6 +1,6 @@
 ---
 name: localization-export
-description: ดึงข้อความทั้งหมดจาก Figma screen/flow มาจัดหมวดหมู่และ export/update เป็น Excel สำหรับทีม localization — ใช้เมื่อพูดว่า export ข้อความ, ดึงข้อความไป localization, ทำ localization sheet, อัปเดต localization
+description: ดึงข้อความทั้งหมดจาก Figma screen/flow มาเช็คความพร้อมสำหรับแปลภาษา (i18n readiness) จัดหมวดหมู่ export/update เป็น Excel และแปลภาษาให้ด้วย AI (ต้องมีคนตรวจสอบก่อนใช้จริง) — ใช้เมื่อพูดว่า export ข้อความ, ดึงข้อความไป localization, ทำ localization sheet, อัปเดต localization, แปล localization
 ---
 
 # Localization Export
@@ -12,6 +12,8 @@ description: ดึงข้อความทั้งหมดจาก Figma 
 export ข้อความ [ชื่อ] node-id=[id]
 ทำ localization sheet
 อัปเดต localization [ชื่อ] node-id=[id]
+แปล localization ให้หน่อย
+แปลภาษาที่ยังไม่มีให้หน่อย
 ```
 
 ---
@@ -21,10 +23,34 @@ export ข้อความ [ชื่อ] node-id=[id]
 1. **ถามชื่อ Product ก่อนเสมอ** — ทั้งตอน export ครั้งแรกและตอน update ทุกครั้ง (ไม่เดาว่ามีไฟล์เดียวจึงข้ามได้ — ถามให้ชัวร์เสมอว่าจะไปแก้ไฟล์ไหน)
 2. ไฟล์ output: `localization/localization-[product].xlsx`
    - ถ้ายังไม่มีไฟล์นี้ → โหมด Export (สร้างใหม่)
-   - ถ้ามีไฟล์นี้อยู่แล้ว → โหมด Update (ดูหัวข้อ "โหมด Update" ด้านล่าง)
+   - ถ้ามีไฟล์นี้อยู่แล้วและ user สั่ง export/update ปกติ → โหมด Update (ดูหัวข้อ "โหมด Update" ด้านล่าง)
+   - ถ้า user สั่ง "แปล" ตรงๆ → โหมด Translate (ดูหัวข้อ "โหมด Translate" ด้านล่าง) — ไม่ต้อง scan Figma ใหม่
 3. รับ node-id (frame/flow/page ที่ต้องการดึงข้อความ)
 4. เดินโครงสร้างหา TEXT layer ที่ **visible เท่านั้น**
 5. กรอง mock data ออก — ข้อความที่เป็นค่าตัวอย่างที่ user กรอกในฟอร์ม (ไม่ใช่ static copy ของระบบ) ไม่เอาเข้า sheet ไหนเลย ถ้าไม่แน่ใจว่าเป็น mock data หรือ copy จริง ให้ถาม
+6. เช็ค **i18n Readiness** ระหว่างเดินโครงสร้างเดียวกัน (ดูหัวข้อด้านล่าง) — ผลเช็คนี้กระทบวิธีตั้ง key ในขั้นถัดไปโดยตรง จึงต้องทำก่อนจัดหมวดหมู่
+
+---
+
+## i18n Readiness Check (ทำระหว่าง scan รอบเดียวกับตอนดึงข้อความ)
+
+ตรวจแต่ละ text layer ที่เจอ:
+
+1. **Text container ยืดได้ไหม** — ถ้า text อยู่ใน frame ที่ fix width/height (ไม่ใช่ auto-layout hug/fill) → flag ว่าเสี่ยงข้อความแปลแล้วล้น โดยเฉพาะจุดพื้นที่จำกัด (ปุ่ม, tab, badge, chip)
+2. **ข้อความปนตัวแปร/ข้อมูลจริง** — เช่น "Total : 100 Items" ต้องแยกส่วนที่เป็น static ("Total :", "Items") ออกจากส่วน dynamic ("100") ก่อนตั้ง key — **ห้ามเอาทั้งสตริงที่มีตัวเลข/ชื่อจริงปนมาเป็น key เดียว** เพราะแปลไม่ได้จริงและพังเวลาเปลี่ยนค่า
+3. **ความยาว TH vs EN ต่างกันมากในจุดพื้นที่จำกัด** — ถ้าเห็นว่าอีกภาษายาวกว่าอีกภาษาชัดเจน (ปุ่ม/tab/badge ที่แคบ) → flag ไว้เตือน
+4. **Format ตัวเลข/วันที่/สกุลเงิน hardcode** — ถ้าเจอ format ตายตัว (เช่น "31/12/2026") ในจุดที่ควรปรับตามภาษา → flag ไว้
+
+**Output ของ readiness check:** แสดงเป็นส่วนแยกต่างหากในรายงานก่อนตาราง Excel เช่น:
+
+```
+## i18n Readiness
+🟡 "Total : 100 Items" (Table Footer) — ตัวเลขปนกับ static text ควรแยก key
+🟡 ปุ่ม "Login" (คงที่ 42px) — ถ้าแปลเป็นคำยาว เช่น "เข้าสู่ระบบ" ต้องเช็คว่า container ยืดได้ไหม
+✅ จุดอื่นไม่พบปัญหา
+```
+
+- ไม่ต้องมี rule ตรวจ RTL (right-to-left) เพราะทีมนี้ใช้แค่ไทย/อังกฤษ
 
 ---
 
@@ -69,12 +95,13 @@ export ข้อความ [ชื่อ] node-id=[id]
 
 ## Output Columns (ทุก sheet ใช้โครงเดียวกัน)
 
-| Key | Type | TH | EN | Context |
-|---|---|---|---|---|
-| `login.error.locked` | error | บัญชีถูกระงับชั่วคราว 5 นาที | Login has been temporarily disabled for 5 minutes | หน้า Login หลังกรอกผิด 3 ครั้ง |
+| Key | Type | TH | EN | Context | Status |
+|---|---|---|---|---|---|
+| `login.error.locked` | error | บัญชีถูกระงับชั่วคราว 5 นาที | Login has been temporarily disabled for 5 minutes | หน้า Login หลังกรอกผิด 3 ครั้ง | Confirmed |
 
 - **Context** = หน้า/สถานการณ์ที่ข้อความนี้โผล่ (ช่วยนักแปลไม่แปลผิดความหมาย)
-- ถ้าไฟล์ Figma มีแค่ภาษาเดียว → เว้นอีกคอลัมน์ว่างไว้ให้แปลทีหลัง ไม่เดาแปลเอง
+- **Status** = `Confirmed` (ข้อความมาจาก Figma จริง ทั้ง TH/EN) หรือ `AI Draft — Needs Review` (ยังไม่มีคนแปล/ตรวจสอบ)
+- ถ้าไฟล์ Figma มีแค่ภาษาเดียว → **เว้นอีกคอลัมน์ว่างไว้ก่อน** (ไม่แปลตอน export/update) ตั้ง Status เป็นว่าง/`Not Translated` — รอสั่ง "แปล localization ให้หน่อย" แยกทีหลัง (ดูโหมด Translate)
 
 ---
 
@@ -87,6 +114,16 @@ export ข้อความ [ชื่อ] node-id=[id]
    - **ข้อความใหม่ที่ไม่เคยมี** → เพิ่มแถวใหม่ต่อท้าย sheet ที่เกี่ยวข้อง (ใช้กฎจัดกลุ่มด้านบน)
    - **Key ที่มีในไฟล์แต่หาไม่เจอใน Figma แล้ว** → ไม่ลบทิ้งอัตโนมัติ ให้ mark ว่า "ไม่พบใน Figma แล้ว — ต้องการลบไหม?" แล้วถาม user ก่อนทุกครั้ง
 3. รายงานสรุปท้าย: เพิ่มกี่แถว, แก้กี่แถว, พบ key ที่อาจไม่ใช้แล้วกี่แถว
+
+---
+
+## โหมด Translate (สั่งแยกทีหลัง เช่น "แปล localization ให้หน่อย")
+
+1. ถามชื่อ Product → เปิดไฟล์ `localization/localization-[product].xlsx` ที่มีอยู่แล้ว (ไม่มีไฟล์ → แจ้งว่ายังไม่เคย export ให้ export ก่อน)
+2. หาแถวที่คอลัมน์ TH หรือ EN ยังว่างอยู่ (Status = ว่าง/`Not Translated`)
+3. แปลให้ด้วย AI ตาม tone จาก `rules/DESIGN.md` — เติมลงคอลัมน์ที่ขาด
+4. เปลี่ยน Status ของแถวนั้นเป็น **`AI Draft — Needs Review`** เสมอ — **ห้ามตั้งเป็น `Confirmed`** เพราะยังไม่มีคนตรวจ
+5. รายงานสรุปท้าย: แปลไปกี่แถว พร้อมเตือนว่า "คำแปลชุดนี้มาจาก AI ต้องมีคนตรวจสอบก่อนส่งใช้งานจริง"
 
 ---
 
@@ -104,3 +141,5 @@ Export/update เป็น .xlsx ผ่าน skill `xlsx`
 - ก่อนตั้ง key ใหม่ ต้องเช็ค key ที่มีอยู่แล้วในไฟล์ก่อนเสมอ (กันสร้างซ้ำ)
 - ไม่ลบ key ที่หายไปจาก Figma โดยไม่ถาม user ก่อน
 - ถามชื่อ Product ทุกครั้งทั้ง export และ update — ไม่เดาจากบริบท
+- ข้อความที่ปนตัวแปร/ข้อมูลจริง (เช่นมีตัวเลขต่อท้าย) ห้ามตั้งเป็น key เดียวรวมกับส่วน dynamic เสมอ — ต้องแยกก่อน
+- คำแปลที่ AI ทำใน โหมด Translate ต้อง mark Status เป็น `AI Draft — Needs Review` เสมอ ห้ามตั้งเป็น `Confirmed` เอง
