@@ -103,6 +103,15 @@ export ข้อความ [ชื่อ] node-id=[id]
 - **Status** = `Confirmed` (ข้อความมาจาก Figma จริง ทั้ง TH/EN) หรือ `AI Draft — Needs Review` (ยังไม่มีคนแปล/ตรวจสอบ)
 - ถ้าไฟล์ Figma มีแค่ภาษาเดียว → **เว้นอีกคอลัมน์ว่างไว้ก่อน** (ไม่แปลตอน export/update) ตั้ง Status เป็นว่าง/`Not Translated` — รอสั่ง "แปล localization ให้หน่อย" แยกทีหลัง (ดูโหมด Translate)
 
+**Dropdown (Data Validation) — ต้องใส่ทุกครั้งตอนสร้างไฟล์ใหม่ (โหมด Export) โดยไม่ต้องถาม:**
+- คอลัมน์ **Status** ทุก sheet ข้อมูล → dropdown list: `Not Translated`, `AI Draft — Needs Review`, `Confirmed`
+- คอลัมน์ **Severity** ใน sheet "i18n Readiness" → dropdown list: `Warning`, `Info`, `Pass`, `Resolved`
+- ตั้ง range ของ dropdown ให้ครอบคลุมเผื่อแถวที่จะเพิ่มทีหลังจากโหมด Update (ไม่ใช่แค่แถวที่มีข้อมูล ณ ตอน export)
+
+**Conditional Formatting — ต้องใส่ทุกครั้งตอนสร้างไฟล์ใหม่ (โหมด Export) โดยไม่ต้องถาม:**
+- ทุก sheet ข้อมูล: ถ้าคอลัมน์ **Type = "error"** → ตัวหนังสือทั้งแถวเป็นสีแดง (`#DC2626`) เพื่อให้ scan เห็นง่ายว่าแถวไหนเป็น error message
+- ใช้ conditional formatting (ไม่ตั้งสีตายตัว) เพื่อให้ครอบคลุมแถวใหม่ที่เพิ่มทีหลังจากโหมด Update ด้วย
+
 ---
 
 ## โหมด Update (เมื่อพบไฟล์ `localization-[product].xlsx` เดิมอยู่แล้ว)
@@ -132,7 +141,7 @@ export ข้อความ [ชื่อ] node-id=[id]
 
 ## Export
 
-Export/update เป็น .xlsx ผ่าน skill `xlsx`
+Export/update เป็น .xlsx ผ่าน skill `xlsx` — ต้องใส่ dropdown (Data Validation) และ conditional formatting (error = ตัวหนังสือแดง) ตามที่ระบุใน "Output Columns" ทุกครั้งที่สร้างไฟล์ใหม่
 
 ---
 
