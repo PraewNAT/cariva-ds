@@ -10,6 +10,25 @@ cv-input-horizontal   -> CvInputHorizontal
 cv-ai-bubble-user     -> CvAiBubbleUser
 ```
 
+## Screen/Page Frame Naming Convention
+
+Screen frames (top-level product screens/flows, not components) use `{Flow}/{Screen Name}` in Title Case. The `/` groups related screens in the Figma layer outline automatically.
+
+```text
+Auth/Login
+Auth/Forgot Password
+Dashboard/Overview
+```
+
+For a specific state variant of a screen, append ` - {State}` in Title Case:
+
+```text
+Auth/Login - Error
+Auth/Login - Loading
+```
+
+This convention applies only to screen/page frames. Component naming stays `crv-{component-name}` kebab-case per the rule below — do not mix the two.
+
 ## MUI Wrapper Rules
 
 Components that wrap MUI:

@@ -53,6 +53,7 @@
 |---|---|---|
 | audit | ตรวจ token binding และ naming ของ component หรือ screen — report ก่อน แล้วถามว่าจะแก้ต่อไหม | `audit [ชื่อ] node-id=[id]` |
 | changelog | บันทึกการเปลี่ยนแปลง component หรือ token | `changelog` หรือ `อัปเดต changelog [ชื่อ]` |
+| rename-frame | Batch rename screen/page frame ให้ตรง naming convention (`{Flow}/{Screen Name}`) — ยืนยันทั้ง batch ก่อนแก้ | `rename frame [page/section name]` |
 
 **📋 UI Flow & Review**
 
