@@ -42,5 +42,3 @@ cariva-ds/
 |---|---|
 | **Design System Owner** | ใช้ skill ทั้งหมด + แก้ไขไฟล์ได้ |
 | **UX/UI Designer** | ใช้ skill ทั้งหมด + อ่านไฟล์อย่างเดียว |
-
-Hello PLAYGROUND
