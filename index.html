@@ -588,6 +588,7 @@ footer {
     <a class="nav-link" href="#skills-ds">Design system</a>
     <a class="nav-link" href="#skills-doc">Documentation</a>
     <a class="nav-link" href="#skills-ui">UI flow & review</a>
+    <a class="nav-link" href="#skills-code">Code</a>
   </div>
 
   <div class="nav-section" style="margin-top:8px">
@@ -811,6 +812,35 @@ https://github.com/PraewNAT/cariva-ds
     </div>
   </div>
 
+  <div class="doc-section" id="skills-code">
+    <div class="section-title">Code</div>
+    <p class="section-desc">Skills สำหรับแปลง Figma เป็นโค้ดจริง และตรวจโค้ดว่าใช้ DS ถูกต้องก่อน merge — เฉพาะ Cariva DS stack (Next.js + MUI)</p>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">crv-component-code</span><span class="badge ds">Cariva DS</span></div>
+      <p class="skill-desc">แปลง Cariva DS component จาก Figma + .md spec → React code (Next.js App Router + MUI + TypeScript) — สร้าง component, types, stories, test, ai.md, code connect, barrel export ครบในรอบเดียว</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">implement component [ชื่อ]</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">verify-ds-usage</span><span class="badge ds">Cariva DS</span></div>
+      <p class="skill-desc">ตรวจโค้ดหน้า UI/Storybook ว่าใช้ Cariva DS component จริง (import `Crv*`) หรือแค่วาดเอง/hardcode ให้หน้าตาเหมือน — รายงานเป็นภาษาไทยเข้าใจง่ายสำหรับคนไม่อ่านโค้ด</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">เช็คว่าใช้ component จริงไหม [path]</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">pr-checklist</span><span class="badge ds">Cariva DS</span></div>
+      <p class="skill-desc">ตรวจ PR ที่มี component ใหม่หรือแก้โค้ด DS ว่าครบถ้วนก่อน merge ไหม — เช็ค token binding, stories, ai.md sync, test, code connect</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">เช็ค PR นี้ก่อน merge</span>
+      </div>
+    </div>
+  </div>
+
   <!-- QUICK REF -->
   <div class="doc-section" id="ref">
     <div class="section-label">Reference</div>
@@ -832,6 +862,9 @@ https://github.com/PraewNAT/cariva-ds
         <tr><td><code>document-update</code></td><td><span class="cmd" onclick="copyCmd(this)">อัปเดต doc component [ชื่อ] node-id=[id]</span></td><td>❌</td></tr>
         <tr><td><code>doc-coverage</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค doc coverage</span></td><td>❌</td></tr>
         <tr><td><code>rename-frame</code></td><td><span class="cmd" onclick="copyCmd(this)">rename frame [page/section name]</span></td><td>✅</td></tr>
+        <tr><td><code>crv-component-code</code></td><td><span class="cmd" onclick="copyCmd(this)">implement component [ชื่อ]</span></td><td>❌</td></tr>
+        <tr><td><code>verify-ds-usage</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็คว่าใช้ component จริงไหม [path]</span></td><td>❌</td></tr>
+        <tr><td><code>pr-checklist</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค PR นี้ก่อน merge</span></td><td>❌</td></tr>
       </tbody>
     </table>
   </div>
