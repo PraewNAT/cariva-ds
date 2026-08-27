@@ -11,19 +11,19 @@ export const colors = {
   brand: {
     primary: {
       onSurface: {
-        default: '#2563eb',
-        hover: '#1d4ed8',
-        pressed: '#1e40af',
-        subtle: '#eff6ff',
-        muted: '#dbeafe',
+        default: '#1789fa',
+        hover: '#0f70e6',
+        pressed: '#135aba',
+        subtle: '#eef9ff',
+        muted: '#d8f0ff',
       },
       content: {
-        default: '#2563eb',
-        strong: '#1d4ed8',
+        default: '#1789fa',
+        strong: '#0f70e6',
       },
       border: {
-        default: '#93c5fd',
-        strong: '#3b82f6',
+        default: '#8bd8ff',
+        strong: '#2da4ff',
       },
     },
     secondary: {
@@ -46,8 +46,8 @@ export const colors = {
   },
   content: {
     primary: '#0f172a',
-    secondary: '#334155',
-    placeholder: '#475569',
+    secondary: '#475569',
+    placeholder: '#64748b',
     disabled: '#94a3b8',
     inverse: '#ffffff',
     link: {
@@ -73,10 +73,12 @@ export const colors = {
     action: {
       hover: '#f1f5f9',
       pressed: '#e2e8f0',
-      selected: '#eff6ff',
+      selected: '#eef9ff',
       disabled: '#f1f5f9',
+      selectedStrong: '#d8f0ff',
     },
     invert: '#0f172a',
+    sunkenStrong: '#cbd5e1',
   },
   border: {
     default: '#cbd5e1',

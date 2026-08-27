@@ -1,2 +1,2 @@
 import '@testing-library/jest-dom/vitest';
-import './code/fonts';
+import './code/core/fonts';

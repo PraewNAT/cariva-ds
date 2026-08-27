@@ -6,7 +6,7 @@
 - Screens / templates: `rules/pixel-perfect-ui.md`
 - Component contracts: `rules/components/{name}.md`
 - Code conventions: `code/CLAUDE.md`
-- Per-component AI rules: `code/components/{Component}/{Component}.ai.md`
+- Per-component AI rules: `code/core/components/{Component}/{Component}.ai.md`
 
 ---
 
@@ -165,7 +165,7 @@ crv-example
 ### B2 — Read docs as checklist
 
 1. `rules/components/{name}.md` — props, slots, token table
-2. `code/components/{Component}/{Component}.ai.md` — exports, AI rules
+2. `code/core/components/{Component}/{Component}.ai.md` — exports, AI rules
 3. `code/CLAUDE.md` — tokens, imports, MUI wrapper rules
 
 Note gaps ระหว่าง doc กับ Figma แล้ว plan fix หลัง implement
@@ -200,7 +200,7 @@ Story title pattern: `{Category}/Crv{Component}`
 | File | Update เมื่อ |
 |---|---|
 | `rules/components/{name}.md` | anatomy, tokens, layout, prop mapping เปลี่ยน |
-| `code/components/{Component}/{Component}.ai.md` | props, slots, implementation rules ใหม่ |
+| `code/core/components/{Component}/{Component}.ai.md` | props, slots, implementation rules ใหม่ |
 | `code/CLAUDE.md` | global pattern ใหม่ที่ใช้ได้กว้าง |
 
 ### Common failure modes

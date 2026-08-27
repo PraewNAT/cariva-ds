@@ -21,10 +21,10 @@ review component นี้
 ### 1. หา component ที่เปลี่ยนใน PR
 
 ```bash
-git diff --name-only main...HEAD | grep "code/components/"
+git diff --name-only main...HEAD | grep "code/core/components/"
 ```
 
-สกัด component name จาก path: `code/components/CrvLink/` → `CrvLink`
+สกัด component name จาก path: `code/core/components/CrvLink/` → `CrvLink`
 
 ---
 
@@ -35,7 +35,7 @@ git diff --name-only main...HEAD | grep "code/components/"
 #### ✅ Token check
 - grep หา hardcode hex หรือ px ใน `.tsx`:
   ```bash
-  grep -n "#[0-9a-fA-F]\{3,6\}\|: '[0-9]\+px'" code/components/{Name}/{Name}.tsx
+  grep -n "#[0-9a-fA-F]\{3,6\}\|: '[0-9]\+px'" code/core/components/{Name}/{Name}.tsx
   ```
 - ถ้าเจอ → flag "hardcoded value"
 - เช็ค `colors.*` ทุกตัวว่ามีใน `tokens.json`
@@ -62,7 +62,7 @@ git diff --name-only main...HEAD | grep "code/components/"
 #### ✅ Code Connect
 - เช็คว่า `{Name}.figma.tsx` มี node URL จริง (ไม่ใช่ `// TODO`)
   ```bash
-  grep "TODO" code/components/{Name}/{Name}.figma.tsx
+  grep "TODO" code/core/components/{Name}/{Name}.figma.tsx
   ```
 - ถ้ายัง TODO → flag "code connect: node URL missing"
 
