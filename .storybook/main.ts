@@ -16,6 +16,12 @@ const config: StorybookConfig = {
   },
   async viteFinal(config) {
     return mergeConfig(config, {
+      // Force the automatic JSX runtime here — the root tsconfig.json belongs
+      // to an unrelated Node tool (no "jsx" option), so without this Vite/esbuild
+      // falls back to the classic runtime and throws "React is not defined".
+      esbuild: {
+        jsx: 'automatic',
+      },
       resolve: {
         dedupe: ['react', 'react-dom', '@emotion/react', '@emotion/styled'],
       },
