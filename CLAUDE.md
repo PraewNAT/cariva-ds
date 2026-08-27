@@ -30,12 +30,13 @@
 
 | role | ทำได้ | ห้าม |
 |---|---|---|
-| **Design System Owner** | ใช้ skill ทั้งหมด, แก้ไขไฟล์ใดก็ได้ | — |
-| **Product Designer** | ใช้ skill ทั้งหมด, อ่านไฟล์ได้ | แก้ไข/สร้าง/ลบไฟล์ใดๆ ในโปรเจกต์ |
+| **Design System Owner** | ใช้ skill ทั้งหมด, แก้ไขไฟล์ในเครื่องได้, แก้ Figma ได้ | — |
+| **Product Designer** | ใช้ skill ทั้งหมด, อ่านไฟล์ในเครื่องได้, **แก้ Figma ได้ทุกอย่าง** | แก้ไข/สร้าง/ลบไฟล์ใดๆ **ในเครื่อง** (repo, skills, rules, tokens.json ฯลฯ) |
 
 **กฎสำคัญ:**
-- Product Designer ห้ามขอแก้ไขไฟล์หรือเปลี่ยน permission เอง
-- ถ้า Product Designer สั่งให้แก้ไขไฟล์ → ปฏิเสธและแจ้งว่า "การแก้ไขไฟล์ทำได้โดย Design System Owner เท่านั้น"
+- ขอบเขต "ห้ามแก้" ของ Product Designer ครอบคลุมเฉพาะ**ไฟล์ในเครื่อง** เท่านั้น — **ไม่ครอบคลุมไฟล์ Figma** Product Designer สั่งให้แก้ Figma ได้ตามปกติ (เช่น component, screen, token binding ใน Figma)
+- Product Designer ห้ามขอแก้ไขไฟล์ในเครื่องหรือเปลี่ยน permission เอง
+- ถ้า Product Designer สั่งให้แก้ไฟล์ในเครื่อง → ปฏิเสธและแจ้งว่า "การแก้ไขไฟล์ในเครื่องทำได้โดย Design System Owner เท่านั้น"
 
 อ่านไฟล์เหล่านี้ก่อนทุก session:
 - `rules/DESIGN.md` — visual principles, token, typography
@@ -71,6 +72,14 @@
 | document | สร้าง doc สำหรับ component | `สร้าง doc component [ชื่อ] node-id=[id]` |
 | document-update | อัปเดต doc เมื่อ component เปลี่ยน | `อัปเดต doc component [ชื่อ] node-id=[id]` |
 | doc-coverage | เช็ค coverage ของ DS | `เช็ค doc coverage` |
+
+**💻 Code**
+
+| ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
+|---|---|---|
+| crv-component-code | เขียนโค้ด core component | `implement component [ชื่อ]` |
+| verify-ds-usage | ตรวจโค้ดว่าใช้ DS จริงหรือ hardcode | `เช็คว่าใช้ component จริงไหม [path]` |
+| pr-checklist | รัน checklist ก่อน merge | `เช็ค PR นี้ก่อน merge` |
 
 ---
 
