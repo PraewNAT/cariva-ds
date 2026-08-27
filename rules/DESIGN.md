@@ -27,12 +27,12 @@ The system is built on **cool gray neutrals** (Tailwind slate family) with a **b
 
 The **border radius** is softly rounded (8px for controls, 12px for cards, 16px for overlaid surfaces) — intentionally avoiding anything that looks too angular or too pill-like. **Elevation is background-contrast-driven**: cards and containers sit on a `#f1f5f9` shell background as white (`#ffffff`) surfaces — no shadow, no border on static surfaces. Borders are reserved for structural layout boundaries (sidebar, topbar) and form field affordance (inputs, selects). Floating surfaces (dropdowns, modals, tooltips) use shadow to communicate that they truly float above the page.
 
-**IBM Plex Sans Thai** is the only permitted typeface. It is structured and readable — weight and size carry hierarchy, not letter-spacing tricks or decorative styling.
+Typeface is **per-product** (see `Product Style` in `tokens.json` / `code/tokens.ts`) — structured and readable, weight and size carry hierarchy, not letter-spacing tricks or decorative styling.
 
 **Key Characteristics:**
-- IBM Plex Sans Thai at Regular (400), Medium (500), Semibold (600), Bold (700) — four weights, no more
+- Per-product typeface — see "Font Family" in section 3 below (cariva app: Aktiv Grotesk Thai / Malila / Google Sans; back office: IBM Plex Sans Thai / IBM Plex Sans Thai Looped / Malila) — Regular (400), Medium (500), Semibold (600), Bold (700), four weights, no more
 - Cool slate neutrals — background `#f1f5f9`, text `#0f172a`
-- Blue primary `#2563eb` for actions and interactive focus; teal secondary `#0d9488` for secondary brand expression
+- Brand primary `#1789fa` (dodger-blue) for actions; `color/border/system` (`#2563eb`, old Tailwind blue — not yet migrated to dodger-blue) for interactive focus; teal secondary `#0d9488` for secondary brand expression
 - Softly rounded: 8px buttons and inputs, 12px cards and containers, 16px modals and panels
 - Background-contrast elevation: cards are white (`#ffffff`) on slate/100 shell (`#f1f5f9`) — no card borders, no card shadows on static surfaces; shadow reserved for floating surfaces only
 - No gradients on UI elements — flat fills only
@@ -43,80 +43,213 @@ The **border radius** is softly rounded (8px for controls, 12px for cards, 16px 
 
 ## 2. Color Palette & Roles
 
-All colors come from **Tailwind CSS primitive families** and are referenced via semantic tokens only. Never use raw hex values or primitive tokens (`color/blue/600`) in components — always use the semantic alias.
+> Verified against Figma's live **Semantic** variable collection (mode: "Light Theme" — this is currently the only mode; there is no Dark Theme in the actual variables, only Light). Do not trust the "Semantic Color Token Guideline — AI Readable" doc frame's (node `3791:2`) prose text at face value — it was out of date versus the bound variables when last checked (Aug 2026), most notably on Brand Primary.
 
-### Brand Primary (Blue)
+All colors come from **Foundation primitive families** and are referenced via semantic tokens only. Never use raw hex values or primitive tokens (e.g. `color/dodger-blue/600`) in components — always use the semantic alias.
 
-| Token | Light Value | Usage |
+**Core rules:**
+- Use `color/bg`, `on-surface`, `content`, `border`, `brand`, `status`, `overlay`, `accent` — never raw primitive colors in components
+- Use `color/content/*` for **both** text and icon layers — do not create separate text/icon token groups
+- Use `color/status/error/*` for destructive, risky, error, and validation — do not create `color/danger/*` or status border tokens outside what's listed here
+- Use `color/accent/*` only for charts, avatars, decorative tags and grouping — never for brand, status, destructive, or validation meaning
+
+### Background Colors — `color/bg`
+
+Page-level backgrounds only.
+
+| Token | Value | Usage |
 |---|---|---|
-| `color/brand/primary/on-surface/default` | `#2563eb` (blue/600) | Primary filled action, CTA |
-| `color/brand/primary/on-surface/hover` | `#1d4ed8` (blue/700) | Primary hover state |
-| `color/brand/primary/on-surface/pressed` | `#1e40af` (blue/800) | Primary pressed state |
-| `color/brand/primary/on-surface/subtle` | `#eff6ff` (blue/50) | Primary tinted surface, selected state |
-| `color/brand/primary/on-surface/muted` | `#dbeafe` (blue/100) | Primary muted background |
-| `color/brand/primary/content/default` | `#2563eb` (blue/600) | Primary icon/text color |
-| `color/brand/primary/border/default` | `#93c5fd` (blue/300) | Primary border |
-
-### Brand Secondary (Teal)
-
-| Token | Light Value | Usage |
-|---|---|---|
-| `color/brand/secondary/on-surface/default` | `#0f766e` (teal/700) | Secondary filled action |
-| `color/brand/secondary/on-surface/subtle` | `#f0fdfa` (teal/50) | Secondary tinted surface |
-| `color/brand/secondary/content/default` | `#0d9488` (teal/600) | Secondary icon/text color |
-
-### Neutrals & Backgrounds
-
-| Token | Light Value | Usage |
-|---|---|---|
-| `color/bg/white` | `#ffffff` | Page and card background |
-| `color/bg/subtle` | `#f1f5f9` (slate/100) | App shell, section background |
+| `color/bg/white` | `#ffffff` (white) | Page / card background |
+| `color/bg/subtle` | `#f1f5f9` (slate/100) | App shell / subtle background |
+| `color/bg/inverse` | `#0f172a` (slate/900) | Inverse/dark background for tooltip/toast |
 | `color/bg/solid` | `#e2e8f0` (slate/200) | Solid neutral background |
-| `color/bg/inverse` | `#0f172a` (slate/900) | Inverse surface (tooltips, toasts) |
-| `color/on-surface/default` | `#ffffff` | Card, input, menu surface |
+
+### On-Surface Colors — `color/on-surface`
+
+Surfaces for cards, panels, inputs, popovers, menus, and neutral action states.
+
+| Token | Value | Usage |
+|---|---|---|
+| `color/on-surface/default` | `#ffffff` (white) | Card, input, menu surface |
 | `color/on-surface/subtle` | `#f8fafc` (slate/50) | Subtle surface variant |
-| `color/on-surface/elevated` | `#ffffff` | Modal, popover surface |
-| `color/on-surface/sunken` | `#f1f5f9` (slate/100) | Recessed/sunken input area |
+| `color/on-surface/elevated` | `#ffffff` (white) | Elevated modal/popover surface |
+| `color/on-surface/sunken` | `#f1f5f9` (slate/100) | Sunken/recessed surface |
+| `color/on-surface/sunken-strong` | `#cbd5e1` (slate/300) | Stronger sunken/recessed surface |
+| `color/on-surface/overlay` | `#ffffff` (white) | Dropdown / overlay surface |
+| `color/on-surface/invert` | `#0f172a` (slate/900) | Inverted surface |
+| `color/on-surface/action/hover` | `#f1f5f9` (slate/100) | Neutral hover surface |
+| `color/on-surface/action/pressed` | `#e2e8f0` (slate/200) | Neutral pressed surface |
+| `color/on-surface/action/selected` | `#eef9ff` (dodger-blue/50) | Selected/active state |
+| `color/on-surface/action/selected-strong` | `#d8f0ff` (dodger-blue/100) | Stronger selected/active state |
+| `color/on-surface/action/disabled` | `#f1f5f9` (slate/100) | Disabled surface — pair with `content/disabled` + `border/disabled` |
 
-### Content (Text & Icons)
+### Content Colors — `color/content`
 
-| Token | Light Value | Usage |
+Readable text and icons. Use content tokens for both text and icon layers.
+
+| Token | Value | Usage |
 |---|---|---|
-| `color/content/primary` | `#0f172a` (slate/900) | Main text and icons |
-| `color/content/secondary` | `#334155` (slate/700) | Supporting text, helper text |
-| `color/content/placeholder` | `#475569` (slate/600) | Placeholder text |
-| `color/content/disabled` | `#94a3b8` (slate/400) | Disabled text and icons |
-| `color/content/inverse` | `#ffffff` | Text/icon on dark or filled surfaces |
-| `color/content/on-brand` | alias → inverse | Text/icon on filled brand surfaces |
-| `color/content/link/default` | `#2563eb` (blue/600) | Link text |
+| `color/content/primary` | `#0f172a` (slate/900) | Main text / icon |
+| `color/content/secondary` | `#475569` (slate/600) | Supporting text / helper text / icon |
+| `color/content/placeholder` | `#64748b` (slate/500) | Placeholder text |
+| `color/content/disabled` | `#94a3b8` (slate/400) | Disabled text / icon |
+| `color/content/inverse` | `#ffffff` (white) | Text/icon on neutral dark or inverse surfaces |
+| `color/content/on-brand` | `#ffffff` (alias → inverse) | Text/icon on filled brand surface |
+| `color/content/link/default` | `#2563eb` (blue/600) | Link default |
+| `color/content/link/hover` | `#1d4ed8` (blue/700) | Link hover |
+| `color/content/link/pressed` | `#1e40af` (blue/800) | Link pressed |
+| `color/content/link/disabled` | `#475569` (slate/600) | Link disabled |
 
-### Borders
+> `color/content/link/*` still aliases the old Tailwind `blue` family, not the new `dodger-blue` brand primitive — confirmed against live variables, not a typo. Worth double-checking with the Design System Owner whether that's intentional or a follow-up fix Figma hasn't made yet.
 
-| Token | Light Value | Usage |
+### Border Colors — `color/border`
+
+Strokes, outlines, dividers, system active borders, and error borders.
+
+| Token | Value | Usage |
 |---|---|---|
-| `color/border/default` | `#cbd5e1` (slate/300) | Default border and divider |
-| `color/border/strong` | `#94a3b8` (slate/400) | Hover border |
-| `color/border/system` | `#2563eb` (blue/600) | Focus ring, active field |
-| `color/border/error` | `#dc2626` (red/600) | Error border |
+| `color/border/default` | `#cbd5e1` (slate/300) | Default border / divider |
+| `color/border/strong` | `#94a3b8` (slate/400) | Hover or stronger border |
 | `color/border/disabled` | `#e2e8f0` (slate/200) | Disabled border |
+| `color/border/system` | `#2563eb` (blue/600) | System active / focused field border |
+| `color/border/error` | `#dc2626` (red/600) | Error or destructive field/control border |
 
-### Status Colors
+> `color/border/system` also still aliases the old `blue` family, not `dodger-blue` — same note as above.
 
-| Status | Filled surface | Content | Usage |
-|---|---|---|---|
-| Success | `#047857` (emerald/700) | `#047857` | Confirmations, completion |
-| Warning | `#d97706` (amber/600) | `#d97706` | Caution states — use dark text on filled warning |
-| Error | `#dc2626` (red/600) | `#dc2626` | Destructive actions, form errors |
-| Info | `#0284c7` (sky/600) | `#0284c7` | Informational banners |
+### Brand Primary — `color/brand/primary`
+
+**Rebranded.** Primary moved off Tailwind `blue` onto a new custom primitive family, **`dodger-blue`** — a brighter, more saturated blue. Update anything that assumed `#2563eb`/Tailwind `blue`.
+
+| Token | Value | Usage |
+|---|---|---|
+| `color/brand/primary/on-surface/default` | `#1789fa` (dodger-blue/600) | Filled action |
+| `color/brand/primary/on-surface/hover` | `#0f70e6` (dodger-blue/700) | Filled hover |
+| `color/brand/primary/on-surface/pressed` | `#135aba` (dodger-blue/800) | Filled pressed |
+| `color/brand/primary/on-surface/subtle` | `#eef9ff` (dodger-blue/50) | Subtle surface |
+| `color/brand/primary/on-surface/muted` | `#d8f0ff` (dodger-blue/100) | Muted surface |
+| `color/brand/primary/content/default` | `#1789fa` (dodger-blue/600) | Content/icon |
+| `color/brand/primary/content/strong` | `#0f70e6` (dodger-blue/700) | Strong content |
+| `color/brand/primary/border/default` | `#8bd8ff` (dodger-blue/300) | Border |
+| `color/brand/primary/border/strong` | `#2da4ff` (dodger-blue/500) | Strong border |
+
+### Brand Secondary (Teal) — `color/brand/secondary`
+
+Unchanged — still Tailwind `teal`.
+
+| Token | Value | Usage |
+|---|---|---|
+| `color/brand/secondary/on-surface/default` | `#0f766e` (teal/700) | Filled action |
+| `color/brand/secondary/on-surface/hover` | `#115e59` (teal/800) | Filled hover |
+| `color/brand/secondary/on-surface/pressed` | `#134e4a` (teal/900) | Filled pressed |
+| `color/brand/secondary/on-surface/subtle` | `#f0fdfa` (teal/50) | Subtle surface |
+| `color/brand/secondary/on-surface/muted` | `#ccfbf1` (teal/100) | Muted surface |
+| `color/brand/secondary/content/default` | `#0d9488` (teal/600) | Content/icon |
+| `color/brand/secondary/content/strong` | `#0f766e` (teal/700) | Strong content |
+| `color/brand/secondary/border/default` | `#5eead4` (teal/300) | Border |
+| `color/brand/secondary/border/strong` | `#14b8a6` (teal/500) | Strong border |
+
+### Status Colors — `color/status/*`
+
+Each status (success, warning, error, info) follows the same shape: `on-surface/default|hover|pressed|subtle|muted`, `content/default|strong`, and `border/default` (success/warning/info only — error uses `color/border/error` from the Borders table above).
+
+**Success** (`color/status/success`) — confirmations, completion
+
+| Token | Value |
+|---|---|
+| `on-surface/default` | `#047857` (emerald/700) |
+| `on-surface/hover` | `#065f46` (emerald/800) |
+| `on-surface/pressed` | `#064e3b` (emerald/900) |
+| `on-surface/subtle` | `#ecfdf5` (emerald/50) |
+| `on-surface/muted` | `#d1fae5` (emerald/100) |
+| `content/default` | `#047857` (emerald/700) |
+| `content/strong` | `#065f46` (emerald/800) |
+| `border/default` | `#047857` (emerald/700) |
+
+**Warning** (`color/status/warning`) — caution states
+
+| Token | Value |
+|---|---|
+| `on-surface/default` | `#d97706` (amber/600) |
+| `on-surface/hover` | `#b45309` (amber/700) |
+| `on-surface/pressed` | `#92400e` (amber/800) |
+| `on-surface/subtle` | `#fffbeb` (amber/50) |
+| `on-surface/muted` | `#fef3c7` (amber/100) |
+| `content/default` | `#d97706` (amber/600) |
+| `content/strong` | `#b45309` (amber/700) |
+| `border/default` | `#d97706` (amber/600) |
+
+**Error** (`color/status/error`) — destructive, risky, error, validation
+
+| Token | Value |
+|---|---|
+| `on-surface/default` | `#dc2626` (red/600) |
+| `on-surface/hover` | `#b91c1c` (red/700) |
+| `on-surface/pressed` | `#991b1b` (red/800) |
+| `on-surface/subtle` | `#fef2f2` (red/50) |
+| `on-surface/muted` | `#fee2e2` (red/100) |
+| `content/default` | `#dc2626` (red/600) |
+| `content/strong` | `#b91c1c` (red/700) |
+
+**Info** (`color/status/info`) — informational feedback
+
+| Token | Value |
+|---|---|
+| `on-surface/default` | `#0284c7` (sky/600) |
+| `on-surface/hover` | `#0369a1` (sky/700) |
+| `on-surface/pressed` | `#075985` (sky/800) |
+| `on-surface/subtle` | `#f0f9ff` (sky/50) |
+| `on-surface/muted` | `#e0f2fe` (sky/100) |
+| `content/default` | `#0284c7` (sky/600) |
+| `content/strong` | `#0369a1` (sky/700) |
 
 **Warning exception**: On a filled warning background, use `color/content/primary` (dark text), not `color/content/inverse` (white) — amber is too light for white text to meet WCAG AA.
 
-### Overlay
+### Overlay Colors — `color/overlay`
 
-| Token | Light Value | Usage |
+Modal/drawer backdrops and scrims.
+
+| Token | Value | Usage |
 |---|---|---|
-| `color/overlay/backdrop` | `rgba(0,0,0,0.40)` | Modal and drawer backdrop |
-| `color/overlay/backdrop/strong` | `rgba(0,0,0,0.60)` | Strong backdrop (confirmations) |
+| `color/overlay/backdrop` | `#00000066` (black/40%) | Modal / drawer backdrop |
+| `color/overlay/backdrop/strong` | `#00000099` (black/60%) | Strong backdrop / scrim |
+
+### Accent Colors — `color/accent`
+
+Decorative only — never use for brand, status, destructive, or validation meaning.
+
+- Syntax: `color/accent/{family}/A01`–`A06`, aliasing Foundation shades `/50, /100, /300, /500, /700, /900` directly
+- Families: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, pink
+- **Use for:** decorative chart colors (chart series, dashboard visualization), avatar/tag/grouping color (non-semantic tags, user avatar background)
+- **Do not use for:** success/warning/error/info meaning, brand primary/secondary action states
+
+### Surface–Content Pairing
+
+Choose the content token by contrast and meaning:
+
+| Surface | Content token | Rule |
+|---|---|---|
+| Brand primary filled | `color/content/on-brand` | Use on-brand alias on filled dodger-blue |
+| Brand secondary filled | `color/content/on-brand` | Use on-brand alias on filled teal |
+| Status/error filled | `color/content/inverse` | Destructive/error filled surfaces |
+| Status/warning filled | `color/content/primary` | Amber is light; use dark text |
+| Status/success or info filled | `color/content/inverse` | White/inverse passes on emerald/sky |
+| Subtle tinted status surface | matching status `content/default` | Use status content token, not raw primitive |
+| Tooltip/toast inverse | `color/content/inverse` | Text on `color/bg/inverse` |
+
+### AI Implementation Rules
+
+1. Use semantic color tokens only in components; primitive colors are references, not component-facing tokens.
+2. Use `color/content/*` for both text and icon layers.
+3. Use `color/on-surface/action/selected` for selected/active states, not `brand/primary/on-surface/subtle` directly.
+4. Use `color/border/system` for focused/system-active borders and `color/border/error` only for error/destructive borders.
+5. Use `color/status/error/*` for destructive, risky, error, and validation meanings.
+6. Use `color/accent/*/A01|A02|A03|A04|A05` only for decorative non-semantic accents.
+7. Do not create or revive `color/danger/*`, `color/field/*`, `color/foreground/*`, `color/border/invalid`, focus ring tokens, status border tokens (beyond `on-surface/*/border/default` above), or tertiary tokens.
+8. If a needed semantic token is missing, ask before creating a new token.
+
+### Accessibility Notes
+
+Normal text should pass WCAG AA 4.5:1 where possible / large text or large icons need at least 3:1 / system active border must be clearly visible / disabled state uses an explicit color token, not opacity alone / status should never be communicated by color alone — pair with text, icon, or label.
 
 ---
 
@@ -124,9 +257,20 @@ All colors come from **Tailwind CSS primitive families** and are referenced via 
 
 ### Font Family
 
-**IBM Plex Sans Thai** — the only permitted typeface. Never use Inter, Roboto, or system fonts.
+Typeface is **per-product**, matching Figma's `Product Style` variable collection (modes: `cariva app` / `back office`). Never use Inter, Roboto, or system fonts as a fallback outside what's listed below.
 
-Load weights before use in Figma plugin context:
+| Role | cariva app | back office |
+|---|---|---|
+| `font-family/display` (hero, display sizes) | Malila | Malila |
+| `font-family/sans` (body, UI text — default) | Aktiv Grotesk Thai | IBM Plex Sans Thai |
+| `font-family/serif` | Google Sans | IBM Plex Sans Thai Looped |
+
+**Licensing — read before assuming a font "just works":**
+- **Aktiv Grotesk Thai** and **Malila** are **Adobe Fonts (Typekit)** typefaces — not self-hosted. They require an active Adobe Fonts subscription and the kit `<link>` loaded in the document `<head>` (see `code/fonts.ts` for the kit URL and integration notes). If the subscription lapses or the kit fails to load, they silently fall back.
+- **Google Sans** is open-source (SIL Open Font License) as of November 2025 — self-hostable via `@fontsource`-style packages, no subscription needed.
+- **IBM Plex Sans Thai** and **IBM Plex Sans Thai Looped** are open-source and self-hosted (`@fontsource/ibm-plex-sans-thai`) — always available regardless of Adobe Fonts status. This is why `back office` keeps them as the safer default for a product that can't tolerate a font dependency lapsing.
+
+Load weights before use in Figma plugin context (example for `back office` — swap family name per product/style):
 ```js
 await figma.loadFontAsync({ family: 'IBM Plex Sans Thai', style: 'Regular' });
 await figma.loadFontAsync({ family: 'IBM Plex Sans Thai', style: 'Medium' });
@@ -169,6 +313,7 @@ Typography uses a structured, readable approach — weight and size create hiera
 | `typography/label/large` | 16px / 24px | 16px / 24px | Medium 500 | Large button, tab label, form label |
 | `typography/label/medium` | 14px / 22px | 14px / 22px | Medium 500 | Default button, menu item, form label |
 | `typography/label/small` | 12px / 18px | 12px / 18px | Medium 500 | Badge text, compact control |
+| `typography/label/xsmall` | 10px / 14px | 10px / 14px | Medium 500 | Dense controls, compact chips, smallest UI text |
 
 #### Caption
 
@@ -200,7 +345,7 @@ Typography uses a structured, readable approach — weight and size create hiera
 | Large | 56px | 16px / 16px | `typography/label/large` |
 
 **Variant rules:**
-- `variant=contained color=primary` — filled blue `#2563eb`, white label, radius 8px. Hover: `#1d4ed8`. Pressed: `#1e40af`. — **1 per action group max**
+- `variant=contained color=primary` — filled dodger-blue `#1789fa`, white label, radius 8px. Hover: `#0f70e6`. Pressed: `#135aba`. — **1 per action group max**
 - `variant=contained color=error` — filled red `#dc2626`, white label. For destructive actions only (Delete, Disable, Remove)
 - `variant=outlined` — transparent fill, `1px` solid blue or error border, colored label
 - `variant=text` — no border or fill, colored label
@@ -397,7 +542,7 @@ Key shifts:
 | Normal body text (< 18px) | 4.5:1 (WCAG AA) | `color/content/primary` on white: ~17:1 ✅ |
 | Large text / UI icons (≥ 18px or 14px bold) | 3:1 | |
 | `color/content/secondary` on white | 5.5:1 ✅ | |
-| Blue primary `#2563eb` on white | 4.6:1 ✅ | Meets AA for large text |
+| Brand primary `#1789fa` (dodger-blue/600) on white | 3.5:1 ⚠️ | Meets AA for large text/icons only (3:1) — **dropped from 4.6:1** since the rebrand off Tailwind blue; no longer usable for normal-size text on white, confirm with Design System Owner if this is acceptable |
 
 ### Focus System
 
@@ -414,7 +559,7 @@ Key shifts:
 | Hover | Background: `color/on-surface/action/hover` (`#f1f5f9`); border: `color/border/strong` |
 | Pressed/Active | Background: `color/on-surface/action/pressed` (`#e2e8f0`) |
 | Focus | Blue `2px` focus ring |
-| Selected | Background: `color/on-surface/action/selected` (`#eff6ff` blue/50) |
+| Selected | Background: `color/on-surface/action/selected` (`#eef9ff` dodger-blue/50) |
 | Disabled | Content: `color/content/disabled`; border: `color/border/disabled`; surface: `color/on-surface/action/disabled` |
 | Error | Border: `color/border/error`; error message required (not color alone) |
 
@@ -451,15 +596,15 @@ Product DS คือ component ที่ extend จาก DS กลาง สำ
 | Card / input surface | `color/on-surface/default` | `#ffffff` |
 | Elevated surface (modal) | `color/on-surface/elevated` | `#ffffff` |
 | Primary text | `color/content/primary` | `#0f172a` |
-| Secondary text | `color/content/secondary` | `#334155` |
-| Placeholder | `color/content/placeholder` | `#475569` |
+| Secondary text | `color/content/secondary` | `#475569` |
+| Placeholder | `color/content/placeholder` | `#64748b` |
 | Disabled text | `color/content/disabled` | `#94a3b8` |
 | Text on filled brand | `color/content/on-brand` | `#ffffff` |
 | Default border | `color/border/default` | `#cbd5e1` |
 | Focus border | `color/border/system` | `#2563eb` |
-| Primary action | `color/brand/primary/on-surface/default` | `#2563eb` |
-| Primary hover | `color/brand/primary/on-surface/hover` | `#1d4ed8` |
-| Selected surface | `color/on-surface/action/selected` | `#eff6ff` |
+| Primary action | `color/brand/primary/on-surface/default` | `#1789fa` |
+| Primary hover | `color/brand/primary/on-surface/hover` | `#0f70e6` |
+| Selected surface | `color/on-surface/action/selected` | `#eef9ff` |
 | Hover surface | `color/on-surface/action/hover` | `#f1f5f9` |
 | Success | `color/status/success/content/default` | `#047857` |
 | Warning | `color/status/warning/content/default` | `#d97706` |
@@ -469,7 +614,7 @@ Product DS คือ component ที่ extend จาก DS กลาง สำ
 ### Example Component Prompts
 
 **Primary Button:**
-"Create a primary button: background `#2563eb`, white label, `typography/label/medium` (14px/500), 8px border-radius, 12px vertical 16px horizontal padding (medium size). Hover: `#1d4ed8`. Disabled: `#e2e8f0` background, `#94a3b8` label, no pointer events."
+"Create a primary button: background `#1789fa`, white label, `typography/label/medium` (14px/500), 8px border-radius, 12px vertical 16px horizontal padding (medium size). Hover: `#0f70e6`. Disabled: `#e2e8f0` background, `#94a3b8` label, no pointer events."
 
 **Form Input:**
 "Create an input field: white background (`#ffffff`), `1px solid #cbd5e1` border, 8px border-radius, `typography/body/medium` (14px/400) for value, `typography/label/medium` (14px/500) for label above the field. On focus: border becomes `2px solid #2563eb`. On error: border `#dc2626`, error message below in `#dc2626` text using `typography/body/small`."
@@ -488,11 +633,11 @@ Product DS คือ component ที่ extend จาก DS กลาง สำ
 
 ### Iteration Guide
 
-1. **Semantic tokens only** — never write `#2563eb` directly into a component; reference `color/brand/primary/on-surface/default`
+1. **Semantic tokens only** — never write `#1789fa` directly into a component; reference `color/brand/primary/on-surface/default`
 2. **Softly rounded, never angular** — minimum 8px radius on interactive elements; 12px on containers
 3. **Background contrast carries elevation** — card uses white (`#ffffff`) on slate/100 shell (`#f1f5f9`); no border, no shadow on static surfaces
 4. **Shadow reserved for floating surfaces** — dropdowns, tooltips, modals, and date picker panels
-5. **IBM Plex Sans Thai exclusively** — no system fonts, no Inter, no fallback fonts in final components
+5. **Only the per-product font list in "Font Family" above** — no system fonts, no Inter, no ad-hoc fallback fonts in final components
 6. **Error always needs a message** — `error=true` without `errorMessage` is incomplete
 7. **One primary button per action group** — never two `variant=contained color=primary` side by side
 8. **Label ≠ placeholder** — `label` is the field name (always visible); `placeholder` is a hint inside the field

@@ -308,6 +308,15 @@ export const productStyle = {
     inputMd:     radius.full,
     containerSm: radius['12'],
     containerMd: radius['16'],
+    fontFamily: {
+      // Aktiv Grotesk Thai + Google Sans are Adobe Fonts — require an active
+      // Adobe Fonts subscription and the kit link from code/fonts.ts to be
+      // loaded in the document <head>. Fall back to the self-hosted fonts
+      // below if the kit fails to load (offline, expired subscription, etc).
+      display: '"Malila", "IBM Plex Sans Thai", sans-serif',
+      sans:    '"Aktiv Grotesk Thai", "IBM Plex Sans Thai", sans-serif',
+      serif:   '"Google Sans", "IBM Plex Sans Thai Looped", serif',
+    },
   },
   backOffice: {
     interactive: radius['12'],
@@ -315,6 +324,12 @@ export const productStyle = {
     inputMd:     radius['12'],
     containerSm: radius['8'],
     containerMd: radius['12'],
+    fontFamily: {
+      // Malila is also an Adobe Fonts typeface — same fallback note as above.
+      display: '"Malila", "IBM Plex Sans Thai", sans-serif',
+      sans:    '"IBM Plex Sans Thai", sans-serif',
+      serif:   '"IBM Plex Sans Thai Looped", serif',
+    },
   },
 } as const;
 
@@ -323,10 +338,7 @@ export type ProductStyleName = keyof typeof productStyle;
 export const defaultProductStyle: ProductStyleName = 'carivaApp';
 
 export const typography = {
-  fontFamily: {
-    sans:  '"IBM Plex Sans Thai", sans-serif',
-    serif: '"IBM Plex Sans Thai Looped", serif',
-  },
+  fontFamily: productStyle[defaultProductStyle].fontFamily,
   fontSize: {
     display:  { large: 64, medium: 48, small: 40 },
     heading:  { large: 24, medium: 20, small: 16 },
