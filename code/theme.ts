@@ -120,19 +120,19 @@ export function buildMuiTypography() {
   return {
     fontFamily: typography.fontFamily.sans,
     h1: {
-      fontFamily: typography.fontFamily.sans,
+      fontFamily: typography.fontFamily.display,
       fontSize: typography.fontSize.display.large,
       lineHeight: `${typography.lineHeight.display.large}px`,
       fontWeight: typography.fontWeight.bold,
     },
     h2: {
-      fontFamily: typography.fontFamily.sans,
+      fontFamily: typography.fontFamily.display,
       fontSize: typography.fontSize.display.medium,
       lineHeight: `${typography.lineHeight.display.medium}px`,
       fontWeight: typography.fontWeight.bold,
     },
     h3: {
-      fontFamily: typography.fontFamily.sans,
+      fontFamily: typography.fontFamily.display,
       fontSize: typography.fontSize.display.small,
       lineHeight: `${typography.lineHeight.display.small}px`,
       fontWeight: typography.fontWeight.semibold,

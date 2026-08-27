@@ -23,7 +23,7 @@ import {
 import { diagnosePairJoinFailure, joinFetchErrorMessage } from "./pair-join-error.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const PUBLIC_DIR = join(__dirname, "..", "public");
+const PUBLIC_DIR = join(__dirname, "..", "code", "public");
 const BRIDGE_ROOT = findBridgeRoot();
 
 function send(res: ServerResponse, status: number, body: string, type = "application/json"): void {

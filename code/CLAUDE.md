@@ -17,7 +17,7 @@ Read this file before writing any UI code.
 - **Tokens**: `@/ds/tokens` — colors, spacing, radius, typography values
 - **Token values**: `../tokens.json` (root) — source of truth สำหรับค่า hex จริงของทุก semantic token อัปเดตจาก Figma โดยตรง ใช้ verify ก่อนใช้ token ใดๆ
 - **Component types**: `@/ds/types` — TypeScript interfaces for all DS components
-- **Font**: IBM Plex Sans Thai — never use Inter or other fonts
+- **Font**: per-product, driven by `productStyle[defaultProductStyle].fontFamily` in `@/ds/tokens` — never hardcode a font name in a component; never use Inter or other fonts outside the set defined in `rules/DESIGN.md` § Font Family. Note: `sans` (Aktiv Grotesk Thai) and `display` (Malila) are Adobe Fonts — see `code/fonts.ts` for the required kit link
 
 ---
 
@@ -283,5 +283,5 @@ Cariva is designed for healthcare professionals — write as a peer, not a begin
 - ❌ ใช้ `CrvBadge` เป็น standalone (ต้อง overlay เสมอ)
 - ❌ ใช้ `CrvTagColor` แทน `CrvTagStandard` สำหรับ error/success/warning
 - ❌ ใช้ font size ใน sx แทน MUI typography variant
-- ❌ ใช้ font family อื่นนอกจาก IBM Plex Sans Thai
+- ❌ hardcode font family เอง — ใช้ `typography.fontFamily.*` จาก `@/ds/tokens` เสมอ ไม่ใช้ฟอนต์นอกเหนือจากที่ระบุใน `rules/DESIGN.md` § Font Family
 - ❌ ใช้ building blocks `crv-tab-item-*` โดยตรง
