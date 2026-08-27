@@ -81,7 +81,7 @@ describe('CrvSidebarMenu', () => {
       />,
     );
     const row = screen.getByText('User Management').closest('[role="menuitem"]');
-    expect(row).toHaveStyle({ color: 'rgb(37, 99, 235)' });
+    expect(row).toHaveStyle({ color: 'rgb(23, 137, 250)' });
     expect(row).not.toHaveClass('Mui-selected');
   });
 
@@ -110,7 +110,7 @@ describe('CrvSidebarMenu', () => {
       />,
     );
     const selected = screen.getByText('Overview').closest('[role="menuitem"]');
-    expect(selected).toHaveStyle({ color: 'rgb(37, 99, 235)' });
+    expect(selected).toHaveStyle({ color: 'rgb(23, 137, 250)' });
     expect(selected).toHaveClass('Mui-selected');
   });
 
@@ -126,6 +126,6 @@ describe('CrvSidebarMenu', () => {
       <CrvSidebarMenu type="default" label="User Management" selected onClick={() => undefined} />,
     );
     const row = screen.getByText('User Management').closest('[role="menuitem"]');
-    expect(row).toHaveStyle({ color: 'rgb(37, 99, 235)' });
+    expect(row).toHaveStyle({ color: 'rgb(23, 137, 250)' });
   });
 });

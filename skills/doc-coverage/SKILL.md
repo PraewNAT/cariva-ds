@@ -1,6 +1,6 @@
 ---
 name: cariva-ds-doc-coverage
-description: เช็คว่า component crv-* ทุกตัวใน Figma มี doc (.md) และโค้ด (code/components/) ครบไหม รายงาน 3 layer: Figma → doc → code
+description: เช็คว่า component crv-* ทุกตัวใน Figma มี doc (.md) และโค้ด (code/core/components/) ครบไหม รายงาน 3 layer: Figma → doc → code
 ---
 
 # Component Doc Coverage
@@ -20,7 +20,7 @@ run automation 2
 ## 3-Layer Coverage Model
 
 ```
-Figma components  →  rules/components/*.md  →  code/components/Crv*/
+Figma components  →  rules/components/*.md  →  code/core/components/Crv*/
      (design)              (doc)                     (implementation)
 ```
 
@@ -49,7 +49,7 @@ Figma components  →  rules/components/*.md  →  code/components/Crv*/
 
 ### Layer 3: Code
 
-4. List folders ทั้งหมดใน `code/components/Crv*/`
+4. List folders ทั้งหมดใน `code/core/components/Crv*/`
 5. Cross-reference doc vs code:
    - มี `.md` แต่ไม่มี folder → **Not implemented**
    - มี folder แต่ไม่มี `.md` → **Undocumented code**

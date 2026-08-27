@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "product": "MIRA",
+    "source": "https://www.figma.com/design/37MSJL69dK206ouPp4F1xW/MIRA-Component-Library",
+    "note": "Product-specific tokens only. Foundation/core tokens (radius, spacing, typography, etc.) are aliased from the core DS — see tokens.json."
+  },
+  "color/card/blue/icon-bg": "#bae6ff",
+  "color/card/blue/content/strong": "#164e92",
+  "color/card/blue/content/subtle": "#2da4ff",
+  "color/card/blue/background/start": "#eef9ff",
+  "color/card/blue/background/end": "#d8f0ff",
+  "gradient/card/blue": "",
+
+  "color/card/emerald/icon-bg": "#a7f3d0",
+  "color/card/emerald/content/strong": "#064e3b",
+  "color/card/emerald/content/subtle": "#10b981",
+  "color/card/emerald/background/start": "#ecfdf5",
+  "color/card/emerald/background/end": "#d1fae5",
+  "gradient/card/emerald": "",
+
+  "color/card/cyan/icon-bg": "#a1f5ff",
+  "color/card/cyan/content/strong": "#134f66",
+  "color/card/cyan/content/subtle": "#00bcdc",
+  "color/card/cyan/background/start": "#ebfeff",
+  "color/card/cyan/background/end": "#cdfbff",
+  "gradient/card/cyan": "",
+
+  "color/card/pink/icon-bg": "#fbcfe8",
+  "color/card/pink/content/strong": "#831843",
+  "color/card/pink/content/subtle": "#ec4899",
+  "color/card/pink/background/start": "#fdf2f8",
+  "color/card/pink/background/end": "#fce7f3",
+  "gradient/card/pink": "",
+
+  "color/card/purple/icon-bg": "#e9d5ff",
+  "color/card/purple/content/strong": "#581c87",
+  "color/card/purple/content/subtle": "#a855f7",
+  "color/card/purple/background/start": "#faf5ff",
+  "color/card/purple/background/end": "#f3e8ff",
+  "gradient/card/purple": ""
+}

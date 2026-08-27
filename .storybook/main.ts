@@ -3,8 +3,8 @@ import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
   stories: [
-    '../code/components/**/*.stories.@(ts|tsx)',
-    '../code/LandingPage/**/*.stories.@(ts|tsx)',
+    '../code/core/components/**/*.stories.@(ts|tsx)',
+    '../code/products/**/components/**/*.stories.@(ts|tsx)',
   ],
   addons: ['@storybook/addon-essentials'],
   framework: {

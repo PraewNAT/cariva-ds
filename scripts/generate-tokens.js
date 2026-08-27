@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * generate-tokens.js
- * Reads tokens.json → writes code/tokens.ts (colors section only)
+ * Reads tokens.json → writes code/core/tokens.ts (colors section only)
  * spacing, radius, productStyle, typography are kept as static sections below
  *
  * Usage: node scripts/generate-tokens.js
@@ -15,8 +15,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const ROOT       = path.resolve(__dirname, '..');
 const INPUT      = path.join(ROOT, 'tokens.json');
-const OUTPUT     = path.join(ROOT, 'code', 'tokens.ts');
-const PALETTE    = path.join(ROOT, 'code', 'theme', 'generatedPalette.ts');
+const OUTPUT     = path.join(ROOT, 'code', 'core', 'tokens.ts');
+const PALETTE    = path.join(ROOT, 'code', 'core', 'theme', 'generatedPalette.ts');
 
 const tokens = JSON.parse(fs.readFileSync(INPUT, 'utf8'));
 const semantic = tokens.semantic; // { "color/brand/primary/...": { alias, value } }

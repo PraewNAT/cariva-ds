@@ -15,7 +15,7 @@ Read this file before writing any UI code.
 - **UI Library**: MUI v9
 - **Theme**: `carivaTheme` from `@/theme` — always wrap app with `<ThemeProvider theme={carivaTheme}>`
 - **Tokens**: `@/ds/tokens` — colors, spacing, radius, typography values
-- **Token values**: `../tokens.json` (root) — source of truth สำหรับค่า hex จริงของทุก semantic token อัปเดตจาก Figma โดยตรง ใช้ verify ก่อนใช้ token ใดๆ
+- **Token values**: `../../tokens.json` (root) — source of truth สำหรับค่า hex จริงของทุก semantic token อัปเดตจาก Figma โดยตรง ใช้ verify ก่อนใช้ token ใดๆ
 - **Component types**: `@/ds/types` — TypeScript interfaces for all DS components
 - **Font**: per-product, driven by `productStyle[defaultProductStyle].fontFamily` in `@/ds/tokens` — never hardcode a font name in a component; never use Inter or other fonts outside the set defined in `rules/DESIGN.md` § Font Family. Note: `sans` (Aktiv Grotesk Thai) and `display` (Malila) are Adobe Fonts — see `code/fonts.ts` for the required kit link
 

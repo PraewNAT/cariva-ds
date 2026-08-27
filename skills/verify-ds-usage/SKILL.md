@@ -38,7 +38,7 @@ audit code หน้านี้
 
 ### 1. ระบุไฟล์เป้าหมาย
 
-- Storybook story: `code/components/**/*.stories.tsx`
+- Storybook story: `code/core/components/**/*.stories.tsx`
 - หน้า app: path ที่ user บอก หรือไฟล์ที่ compose screen
 
 ถ้า user บอกแค่ชื่อ story (เช่น Organization Overview) ให้ค้นหาไฟล์ที่เกี่ยวข้องก่อน
@@ -54,7 +54,7 @@ python3 skills/verify-ds-usage/scripts/scan-ds-usage.py <path-to-file-or-folder>
 ตัวอย่าง:
 
 ```bash
-python3 skills/verify-ds-usage/scripts/scan-ds-usage.py code/components/CrvSidebar/CrvOrganizationOverview.stories.tsx
+python3 skills/verify-ds-usage/scripts/scan-ds-usage.py code/core/components/CrvSidebar/CrvOrganizationOverview.stories.tsx
 ```
 
 อ่าน output ของสคริปต์ แล้วใช้เป็นฐานของรายงาน
@@ -65,7 +65,7 @@ python3 skills/verify-ds-usage/scripts/scan-ds-usage.py code/components/CrvSideb
 
 - `Box` / `Stack` ที่มี `onClick`, `role="button"`, border+padding เหมือนปุ่ม → **ปลอมปุ่ม**
 - Wrapper รอบ `Crv*` ที่ override สี/spacing จนหลุด token
-- Copy component logic ในไฟล์เดียวกันแทน import จาก `code/components/`
+- Copy component logic ในไฟล์เดียวกันแทน import จาก `code/core/components/`
 - Icon จาก `@mui/icons-material` โดยตรง (ยอมรับได้) vs สร้าง SVG เองทั้งก้อน
 
 ### 4. (ถ้ามี) เทียบกับ Figma
@@ -128,7 +128,7 @@ python3 skills/verify-ds-usage/scripts/scan-ds-usage.py code/components/CrvSideb
 | `Tooltip` | `CrvTooltip` |
 | `Toast` / `Snackbar` | `CrvToast` |
 
-รายการ `Crv*` ทั้งหมดอยู่ใน `code/components/*/index.ts`
+รายการ `Crv*` ทั้งหมดอยู่ใน `code/core/components/*/index.ts`
 
 ---
 

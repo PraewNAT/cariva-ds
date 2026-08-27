@@ -207,7 +207,7 @@ AI:
 6. ★ Figma scan — dump ทุก combination จาก component set node
 7. ★ สร้าง ground truth table ครบทุก variant × color × state
 8. ★ เทียบกับ doc — ถ้าผิด แก้ doc ก่อน
-9. Generate 7 ไฟล์ใน code/components/CrvButton/ จาก ground truth table
+9. Generate 7 ไฟล์ใน code/core/components/CrvButton/ จาก ground truth table
 10. cross-check variants, tokens, no hardcoded values
 11. ★ Screenshot AllVariants (Storybook) + Screenshot Figma — เทียบรูป report จุดต่าง
 12. รายงาน: "สร้าง CrvButton ครบ 7 ไฟล์ — 18 variants, 8 tokens, visual verify: no diff"
