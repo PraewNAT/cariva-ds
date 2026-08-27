@@ -88,6 +88,7 @@
 - ห้าม hardcode hex หรือ px — ใช้ token จาก DS กลางเท่านั้น
 - ถ้าต้องการสีใหม่ → แจ้ง Design System Owner ก่อน อย่าสร้างเอง
 - Figma wins — ถ้า doc ขัดกับ Figma ให้เชื่อ Figma
+- **อัปเดต `tokens.json` ต้องอ่านค่าจาก Figma variable จริงเท่านั้น** — ห้ามเดา ห้ามคำนวณ/ประมาณค่าเอง และห้ามเชื่อ doc frame หรือ node ที่ไม่ใช่ variable collection ตรงๆ (เช่น หน้า documentation ของ component ที่อาจมี variable จากไฟล์อื่นปนอยู่, หรือ doc frame แบบ "AI Readable" ที่เคย verify แล้วพบว่าไม่ตรงกับ live variable) — วิธีที่เชื่อถือได้คือดึงจาก variable collection ตรงๆ (เช่นผ่าน Figma Console MCP's `figma_get_variables` ที่เชื่อมกับ Desktop Bridge plugin ใน Figma Desktop) ถ้าเข้าถึง live variable ไม่ได้ (Bridge ไม่เชื่อมต่อ, ไม่มีสิทธิ์, หา collection ที่ถูกต้องไม่เจอ ฯลฯ) **ให้แจ้งปัญหาให้ user ทราบตรงๆ แล้วหยุดรอ** ห้าม fallback ไปเดาหรือใช้ค่าจาก source ที่ไม่ใช่ live variable โดยไม่บอก
 
 ---
 
