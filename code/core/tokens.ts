@@ -345,14 +345,14 @@ export const typography = {
     display:  { large: 64, medium: 48, small: 40 },
     heading:  { large: 24, medium: 20, small: 16 },
     body:     { large: 16, medium: 14, small: 12 },
-    label:    { large: 16, medium: 14, small: 12 },
+    label:    { large: 16, medium: 14, small: 12, xsmall: 10 },
     caption:  { caption: 12 },
   },
   lineHeight: {
     display:  { large: 72, medium: 56, small: 48 },
     heading:  { large: 32, medium: 28, small: 24 },
     body:     { large: 24, medium: 22, small: 18 },
-    label:    { large: 24, medium: 22, small: 18 },
+    label:    { large: 24, medium: 22, small: 18, xsmall: 14 },
     caption:  { caption: 16 },
   },
   fontWeight: {
