@@ -1,6 +1,6 @@
 {
   "name": "cariva-design-system",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Cariva Core Design System — React + MUI components, tokens, and theme.",
   "license": "MIT",
   "type": "module",
