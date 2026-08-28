@@ -39,7 +39,7 @@ export interface CrvTooltipWithActionProps
   extends CrvTooltipWithActionPanelProps,
     Omit<
       PopoverProps,
-      'children' | 'open' | 'anchorEl' | 'content' | 'slotProps' | 'slots'
+      'children' | 'open' | 'anchorEl' | 'content' | 'slots'
     > {
   placement?: CrvTooltipWithActionPlacement;
   open: boolean;

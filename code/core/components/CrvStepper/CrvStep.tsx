@@ -20,7 +20,6 @@ export function CrvStep({
     <Step
       active={state === 'active'}
       completed={state === 'complete'}
-      error={state === 'error'}
       sx={{ px: 0, ...(typeof sx === 'object' && !Array.isArray(sx) ? sx : {}) }}
       {...rest}
     >

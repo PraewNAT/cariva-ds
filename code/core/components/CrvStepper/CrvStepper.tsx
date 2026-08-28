@@ -38,8 +38,7 @@ export const CrvStepper = forwardRef<HTMLDivElement, CrvStepperProps>(
     ref,
   ) {
     const orientation = alignment === 'vertical' ? 'vertical' : 'horizontal';
-    const alternativeLabel =
-      textAlign === 'center' || (smallScreen && textAlign === 'center');
+    const alternativeLabel = textAlign === 'center';
 
     return (
       <Stepper
@@ -67,7 +66,6 @@ export const CrvStepper = forwardRef<HTMLDivElement, CrvStepperProps>(
               key={`${index}-${String(step.label)}`}
               active={state === 'active'}
               completed={state === 'complete'}
-              error={state === 'error'}
             >
               <StepLabel
                 optional={optionalLabel}

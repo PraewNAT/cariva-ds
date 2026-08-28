@@ -3,6 +3,7 @@
 import { forwardRef } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import type { SxProps, Theme } from '@mui/material/styles';
 import { CrvTag } from '../CrvTag';
 import {
   getAbsoluteActionsSx,
@@ -118,7 +119,7 @@ export const CrvCard = forwardRef<HTMLDivElement, CrvCardProps>(function CrvCard
         {...rest}
       >
         {imageNode}
-        <Box sx={[getCardContentSx(), { flex: 1, minWidth: 0 }]}>
+        <Box sx={[getCardContentSx(), { flex: 1, minWidth: 0 }] as SxProps<Theme>}>
           {tagNode}
           {headingGroup}
         </Box>
