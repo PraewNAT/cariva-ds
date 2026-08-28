@@ -119,67 +119,7 @@ export const CrvDropdown = forwardRef<HTMLDivElement, CrvDropdownProps>(
           disabled={disabled}
           error={error}
           displayEmpty
-          input={
-            <OutlinedInput
-              notched={false}
-              sx={{
-                overflow:        'hidden',
-                minHeight:       FIELD_MIN_HEIGHT[size],
-                borderRadius:    `${fieldRadius}px`,
-                backgroundColor: disabled
-                  ? colors.onSurface.action.disabled
-                  : colors.onSurface.default,
-                paddingTop:      `${FIELD_PADDING_V[size]}px`,
-                paddingBottom:   `${FIELD_PADDING_V[size]}px`,
-                paddingLeft:     `${spacing.lg}px`,
-                paddingRight:    `${spacing.lg}px`,
-                fontFamily:      typography.fontFamily.sans,
-                fontSize:        `${CONTENT_FONT_SIZE[size]}px`,
-                lineHeight:      `${CONTENT_LINE_HEIGHT[size]}px`,
-                fontWeight:      typography.fontWeight.regular,
-                color:           disabled
-                  ? colors.content.disabled
-                  : hasValue
-                    ? colors.content.primary
-                    : colors.content.placeholder,
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor:  colors.border.default,
-                  borderWidth:  1,
-                  borderRadius: `${fieldRadius}px`,
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor:  disabled ? colors.border.disabled : colors.border.strong,
-                  borderRadius: `${fieldRadius}px`,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor:  colors.border.system,
-                  borderWidth:  2,
-                  borderRadius: `${fieldRadius}px`,
-                },
-                '&.Mui-error .MuiOutlinedInput-notchedOutline': {
-                  borderColor:  colors.border.error,
-                  borderWidth:  2,
-                  borderRadius: `${fieldRadius}px`,
-                },
-                '&.Mui-disabled .MuiOutlinedInput-notchedOutline': {
-                  borderColor:  colors.border.disabled,
-                  borderRadius: `${fieldRadius}px`,
-                },
-                '& legend': {
-                  display: 'none',
-                  width:   0,
-                },
-                '& .MuiSelect-select': {
-                  padding: 0,
-                  // Reserve gap + chevron so text does not overlap icon (Figma Field gap=16)
-                  paddingRight: `${FIELD_INNER_GAP + CHEVRON_SIZE}px !important`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  minHeight: 'unset',
-                },
-              }}
-            />
-          }
+          input={<OutlinedInput notched={false} />}
           IconComponent={KeyboardArrowDownIcon}
           renderValue={(selected) => {
             if (!selected) {
@@ -188,8 +128,64 @@ export const CrvDropdown = forwardRef<HTMLDivElement, CrvDropdownProps>(
             return options.find((opt) => opt.value === selected)?.label ?? selected;
           }}
           sx={{
-            borderRadius: `${fieldRadius}px`,
-            overflow:     'hidden',
+            // NOTE: MUI Select clones `input` and applies this sx to the clone last,
+            // so sizing/color/border rules must live here — an sx passed to the
+            // `input={<OutlinedInput sx={...} />}` element gets clobbered and never
+            // reaches the DOM. Keep everything field-related in this one object.
+            overflow:        'hidden',
+            minHeight:       FIELD_MIN_HEIGHT[size],
+            borderRadius:    `${fieldRadius}px`,
+            backgroundColor: disabled
+              ? colors.onSurface.action.disabled
+              : colors.onSurface.default,
+            paddingTop:      `${FIELD_PADDING_V[size]}px`,
+            paddingBottom:   `${FIELD_PADDING_V[size]}px`,
+            paddingLeft:     `${spacing.lg}px`,
+            paddingRight:    `${spacing.lg}px`,
+            fontFamily:      typography.fontFamily.sans,
+            fontSize:        `${CONTENT_FONT_SIZE[size]}px`,
+            lineHeight:      `${CONTENT_LINE_HEIGHT[size]}px`,
+            fontWeight:      typography.fontWeight.regular,
+            color:           disabled
+              ? colors.content.disabled
+              : hasValue
+                ? colors.content.primary
+                : colors.content.placeholder,
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor:  colors.border.default,
+              borderWidth:  1,
+              borderRadius: `${fieldRadius}px`,
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor:  disabled ? colors.border.disabled : colors.border.strong,
+              borderRadius: `${fieldRadius}px`,
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor:  colors.border.system,
+              borderWidth:  2,
+              borderRadius: `${fieldRadius}px`,
+            },
+            '&.Mui-error .MuiOutlinedInput-notchedOutline': {
+              borderColor:  colors.border.error,
+              borderWidth:  2,
+              borderRadius: `${fieldRadius}px`,
+            },
+            '&.Mui-disabled .MuiOutlinedInput-notchedOutline': {
+              borderColor:  colors.border.disabled,
+              borderRadius: `${fieldRadius}px`,
+            },
+            '& legend': {
+              display: 'none',
+              width:   0,
+            },
+            '& .MuiSelect-select': {
+              padding: 0,
+              // Reserve gap + chevron so text does not overlap icon (Figma Field gap=16)
+              paddingRight: `${FIELD_INNER_GAP + CHEVRON_SIZE}px !important`,
+              display: 'flex',
+              alignItems: 'center',
+              minHeight: 'unset',
+            },
             '& .MuiSelect-icon': {
               color:      disabled ? colors.content.disabled : colors.content.secondary,
               fontSize:   CHEVRON_SIZE,
