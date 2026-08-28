@@ -1,8 +1,8 @@
 {
-  "name": "@PraewNAT/cariva-ds",
+  "name": "cariva-design-system",
   "version": "0.1.0",
   "description": "Cariva Core Design System — React + MUI components, tokens, and theme.",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -17,9 +17,6 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/PraewNAT/cariva-ds.git",

@@ -1,16 +1,15 @@
-# Publishing `@PraewNAT/cariva-ds`
+# Publishing `cariva-design-system`
 
-This package is built from `code/core/` and published to **GitHub Packages**.
-Not yet wired to CI — publish manually until the flow is proven out.
+This package is built from `code/core/` and published to the **public npm registry**
+(npmjs.com) — not GitHub Packages. Not yet wired to CI — publish manually until the
+flow is proven out.
 
-## One-time setup (per machine)
+## One-time setup (per machine, only needed to publish — not to install)
 
-1. Create a GitHub [personal access token](https://github.com/settings/tokens) with `write:packages` (and `read:packages` for installing).
-2. Export it as an env var before publishing or installing:
-   ```bash
-   export GITHUB_TOKEN=ghp_xxxxxxxx
-   ```
-   `.npmrc` in this folder reads `${GITHUB_TOKEN}` — never hardcode the token in `.npmrc` itself.
+```bash
+npm login
+```
+Logs into your npm account (create one free at [npmjs.com](https://www.npmjs.com/signup) if you don't have one). No GitHub token, no scopes to configure.
 
 ## Publish a new version
 
@@ -25,11 +24,10 @@ npm publish
 ## Install in a consuming project
 
 ```bash
-echo "@PraewNAT:registry=https://npm.pkg.github.com" >> .npmrc
-npm install @PraewNAT/cariva-ds
+npm install cariva-design-system
 ```
 
-The consumer also needs a `GITHUB_TOKEN` with `read:packages` available to npm (env var, or `~/.npmrc`) since GitHub Packages requires auth even for public repos.
+That's it — **no token, no `.npmrc`, no auth setup** needed on the install side. It's a public package like any other npm package (e.g. `react`).
 
 ## What's NOT changed by this setup
 
