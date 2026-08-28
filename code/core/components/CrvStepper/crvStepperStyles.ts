@@ -116,8 +116,7 @@ export function getStepperSx(
   textAlign: CrvStepTextAlign,
   smallScreen: boolean,
 ): SxProps<Theme> {
-  const useAlternativeLabel =
-    textAlign === 'center' || (smallScreen && textAlign === 'center');
+  const useAlternativeLabel = textAlign === 'center';
 
   return {
     px: `${spacing.sm}px`,

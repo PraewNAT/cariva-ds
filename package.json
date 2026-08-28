@@ -3,6 +3,9 @@
   "version": "0.1.8",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "code/core"
+  ],
   "scripts": {
     "start": "npx tsx src/index.ts",
     "start:supervised": "npx tsx scripts/watchdog.ts",
