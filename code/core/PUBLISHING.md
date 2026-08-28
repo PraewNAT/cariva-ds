@@ -1,25 +1,36 @@
 # Publishing `cariva-design-system`
 
 This package is built from `code/core/` and published to the **public npm registry**
-(npmjs.com) — not GitHub Packages. Not yet wired to CI — publish manually until the
-flow is proven out.
+(npmjs.com) — not GitHub Packages.
 
-## One-time setup (per machine, only needed to publish — not to install)
+## Publishing is automated
+
+`.github/workflows/publish-ds-package.yml` publishes automatically whenever
+`code/core/package.json`'s version changes on `main`. To ship a new version:
+
+1. Bump the version in `code/core/package.json` (or run `npm version patch`
+   inside `code/core` locally and commit the result).
+2. Merge that into `main` as usual (normal PR flow — no extra steps).
+
+CI checks whether that version is already on npm; if it's new, it builds and
+publishes. Merging without a version bump is safe — the workflow just no-ops.
+
+Auth is a GitHub Actions secret (`NPM_TOKEN`, an npm granular access token
+scoped to this package) — set once in the repo's Settings → Secrets → Actions.
+npm currently caps granular token expiry at 4 months, so this secret needs
+regenerating and re-pasting there periodically (quick — 2FA is already set
+up on the npm account, no OTP/browser-auth hassle like the first publish).
+
+## Manual publish (fallback, if CI is down or you want to publish locally)
 
 ```bash
 npm login
-```
-Logs into your npm account (create one free at [npmjs.com](https://www.npmjs.com/signup) if you don't have one). No GitHub token, no scopes to configure.
-
-## Publish a new version
-
-```bash
 cd code/core
 npm version patch   # or minor / major
 npm publish
 ```
-
 `prepublishOnly` runs the build automatically, so `dist/` is always fresh before publish.
+Manual publish needs your own npm account with 2FA — the CI path above doesn't.
 
 ## Install in a consuming project
 
