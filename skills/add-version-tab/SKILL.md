@@ -1,6 +1,6 @@
 ---
 name: add-version-tab
-description: ตอน commit งานในโปรเจกต์ vibe-code ที่มี sidebar shell อยู่แล้ว (จาก create-project) ให้ถามว่าจะขึ้นเป็นแท็บเวอร์ชันใหม่ หรือแก้ทับเวอร์ชันปัจจุบัน แล้วตั้งชื่อแท็บให้อัตโนมัติ
+description: ตอน commit งานในโปรเจกต์ vibe-code ที่มี sidebar shell อยู่แล้ว (จาก create-project) ให้ถามว่าจะขึ้นเป็นแท็บเวอร์ชันใหม่ หรือแก้ทับเวอร์ชันปัจจุบัน แล้วตั้งชื่อแท็บให้อัตโนมัติ พร้อมเขียนสรุปการเปลี่ยนแปลง (AI-written) ให้ปุ่ม "ดูสิ่งที่เปลี่ยนแปลง" ในแท็บนั้น
 ---
 
 # Add Version Tab — Cariva DS
@@ -30,7 +30,9 @@ description: ตอน commit งานในโปรเจกต์ vibe-code 
 
 4. ย้ายงานที่เพิ่งแก้ (ที่กำลังจะ commit) เข้าไปอยู่ในหน้า/route ใหม่นี้
 
-5. commit + push ตาม Git workflow ปกติ — Vercel จะ deploy ซ้ำที่ลิงก์เดิม (ไม่มีลิงก์ใหม่เกิดขึ้น)
+5. **เขียนสรุปการเปลี่ยนแปลงเอง (AI-written)** — อ่าน `git diff` ของงานที่กำลังจะ commit แล้วสรุปเป็นภาษาที่ designer อ่านเข้าใจง่าย (ไม่ใช่ commit message แบบ technical) เช่น "เพิ่มปุ่ม export CSV และแก้สีปุ่มหลักให้เข้ม" ไม่ใช่ "Add CrvButton variant, update theme.ts" — เพิ่ม entry ใหม่ใน `versions.json` (จาก `create-project`) ด้วย `id`/`label`/`date`/`summary` ของแท็บนี้ — **ห้ามให้ user เขียนเอง** เว้นแต่ user อยากแก้ข้อความที่เขียนไปแล้ว
+
+6. commit + push ตาม Git workflow ปกติ — Vercel จะ deploy ซ้ำที่ลิงก์เดิม (ไม่มีลิงก์ใหม่เกิดขึ้น)
 
 ## Rules
 
@@ -38,3 +40,4 @@ description: ตอน commit งานในโปรเจกต์ vibe-code 
 - ชื่อแท็บอัตโนมัติต้องไม่ซ้ำกับแท็บที่มีอยู่ — เช็คก่อนตั้งชื่อเสมอ
 - ถ้า repo ปัจจุบันไม่มี sidebar shell (ไม่ได้มาจาก `create-project`) → skill นี้ไม่ทำงาน ไม่ต้องถามคำถามข้างบนเลย ปล่อยให้ commit ไหลตาม Git workflow ปกติ
 - ถ้า user ขอ "โปรเจกต์ใหม่" ระหว่างจังหวะนี้ ให้เตือนว่าน่าจะเข้าเงื่อนไข skill `create-project` แทน (คนละ repo กัน) ไม่ใช่แท็บใหม่ในนี้
+- Summary การเปลี่ยนแปลงต้อง AI เขียนเองเสมอ ห้ามถาม user ว่าจะเขียนอะไร — เขียนสั้น กระชับ 1-2 ประโยค ภาษาที่ designer อ่านเข้าใจ ไม่ใช้ศัพท์เทคนิค/ชื่อไฟล์/ชื่อ component ตรงๆ
