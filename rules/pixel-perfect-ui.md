@@ -17,14 +17,11 @@ Layout wrappers (`Box`, `grid`, `flex`) are allowed for page composition. They a
 
 ---
 
-## Two task modes
+## Always pixel-perfect — no mode to choose
 
-| Mode | User intent | Agent behavior |
-|---|---|---|
-| **Compose** | “ลองสร้าง UI / demo หน้า” | Fast assembly from DS; close enough for structure review |
-| **Pixel-perfect** | “ตรง Figma เป๊ะ / pixel-perfect” | Figma spec per layer → implement → Storybook vs Figma screenshot loop until pass |
+Every implementation from a Figma frame follows **pixel-perfect** by default: Figma spec per layer → implement → Storybook vs Figma screenshot loop until pass. **Do not ask the user which mode to use** — there is only one mode now.
 
-If the user does not say which mode, **ask once** or infer from words like *เป๊ะ*, *pixel-perfect*, *ตรงฟิกม่า*, *เทียบ screenshot*.
+(A faster "Compose" mode — assemble quickly from the DS, close-enough for a structure review — used to exist as a separate choice. It's gone; always do the full pixel-perfect loop below instead.)
 
 ---
 
