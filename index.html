@@ -589,6 +589,7 @@ footer {
     <a class="nav-link" href="#skills-doc">Documentation</a>
     <a class="nav-link" href="#skills-ui">UI flow & review</a>
     <a class="nav-link" href="#skills-code">Code</a>
+    <a class="nav-link" href="#skills-setup">Project Setup</a>
   </div>
 
   <div class="nav-section" style="margin-top:8px">
@@ -841,6 +842,27 @@ https://github.com/PraewNAT/cariva-ds
     </div>
   </div>
 
+  <div class="doc-section" id="skills-setup">
+    <div class="section-title">Project Setup</div>
+    <p class="section-desc">Skills สำหรับจัดการ repo ของโปรเจกต์ vibe-code ที่ designer สร้างขึ้นเอง — 1 repo ต่อ 1 โปรเจกต์จริง เวอร์ชันใหม่ของโปรเจกต์เดิมใช้แท็บใน sidebar แทนการเปิด repo ใหม่ ไม่ให้ repo/deploy กระจัดกระจาย</p>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">create-project</span><span class="badge all">✅ ทุก DS</span></div>
+      <p class="skill-desc">สร้าง repo ใหม่บน GitHub ส่วนตัวของ designer สำหรับโปรเจกต์ vibe-code ใหม่จริงๆ — scaffold Next.js + MUI พร้อม sidebar shell จาก Cariva DS, สอนติดตั้ง `gh` ถ้ายังไม่มี (`brew install gh` + `gh auth login`), และแนะนำขั้นตอนต่อ Vercel</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">สร้างโปรเจกต์ใหม่ [ชื่อ]</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-top"><span class="skill-name">add-version-tab</span><span class="badge all">✅ ทุก DS</span></div>
+      <p class="skill-desc">ทำงานอัตโนมัติตอนใกล้ commit ในโปรเจกต์ที่มี sidebar shell อยู่แล้ว — ถามว่างานนี้จะขึ้นเป็นแท็บเวอร์ชันใหม่ (ตั้งชื่ออัตโนมัติเป็นวันที่/เวลา หรือชื่อที่ระบุ) หรือแก้ทับเวอร์ชันปัจจุบัน ไม่ต้องเรียกด้วยคำสั่งเอง</p>
+      <div class="cmd-group">
+        <span class="cmd" onclick="copyCmd(this)">ไม่ต้องเรียกเอง — ทำงานอัตโนมัติตอน commit</span>
+      </div>
+    </div>
+  </div>
+
   <!-- QUICK REF -->
   <div class="doc-section" id="ref">
     <div class="section-label">Reference</div>
@@ -865,6 +887,8 @@ https://github.com/PraewNAT/cariva-ds
         <tr><td><code>crv-component-code</code></td><td><span class="cmd" onclick="copyCmd(this)">implement component [ชื่อ]</span></td><td>❌</td></tr>
         <tr><td><code>verify-ds-usage</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็คว่าใช้ component จริงไหม [path]</span></td><td>❌</td></tr>
         <tr><td><code>pr-checklist</code></td><td><span class="cmd" onclick="copyCmd(this)">เช็ค PR นี้ก่อน merge</span></td><td>❌</td></tr>
+        <tr><td><code>create-project</code></td><td><span class="cmd" onclick="copyCmd(this)">สร้างโปรเจกต์ใหม่ [ชื่อ]</span></td><td>✅</td></tr>
+        <tr><td><code>add-version-tab</code></td><td>อัตโนมัติตอน commit</td><td>✅</td></tr>
       </tbody>
     </table>
   </div>
