@@ -81,6 +81,13 @@
 | verify-ds-usage | ตรวจโค้ดว่าใช้ DS จริงหรือ hardcode | `เช็คว่าใช้ component จริงไหม [path]` |
 | pr-checklist | รัน checklist ก่อน merge | `เช็ค PR นี้ก่อน merge` |
 
+**🚀 Project Setup**
+
+| ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
+|---|---|---|
+| create-project | สร้าง repo ใหม่สำหรับโปรเจกต์ vibe-code ใหม่จริงๆ — scaffold sidebar shell จาก Cariva DS + สอนติดตั้ง `gh` ถ้ายังไม่มี | `สร้างโปรเจกต์ใหม่ [ชื่อ]` |
+| add-version-tab | ทำงานอัตโนมัติตอนใกล้ commit ในโปรเจกต์ที่มี sidebar shell — ถามว่าจะขึ้นแท็บเวอร์ชันใหม่หรือแก้ทับของเดิม | ไม่ต้องเรียกเอง ทำงานร่วมกับจังหวะ commit |
+
 ---
 
 ## กฎที่ต้องรู้
