@@ -1,19 +1,19 @@
 import figma from '@figma/code-connect';
-import { CrvMobileStepper, CrvStep, CrvStepper, CrvStepperIcon } from './index';
+import { CrvStepperCompact, CrvStep, CrvStepper, CrvStepperMarker } from './index';
 
-// Figma node: crv-stepper-icon
+// Figma node: crv-stepper-marker
 figma.connect(
-  CrvStepperIcon,
+  CrvStepperMarker,
   'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=4714-6245',
   {
     props: {
-      state: figma.enum('state', {
+      state: figma.enum('status', {
         Default: 'default',
         Done:    'done',
       }),
     },
     example: ({ state }) => (
-      <CrvStepperIcon state={state} value="1" />
+      <CrvStepperMarker state={state} value="1" />
     ),
   },
 );
@@ -24,7 +24,7 @@ figma.connect(
   'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=4714-6331',
   {
     props: {
-      state: figma.enum('state', {
+      state: figma.enum('status', {
         Inactive: 'inactive',
         Active:   'active',
         Complete: 'complete',
@@ -99,9 +99,9 @@ figma.connect(
   },
 );
 
-// Figma node: crv-mobile-stepper
+// Figma node: crv-stepper-compact
 figma.connect(
-  CrvMobileStepper,
+  CrvStepperCompact,
   'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=4714-6420',
   {
     props: {
@@ -112,7 +112,7 @@ figma.connect(
       }),
     },
     example: ({ progressType }) => (
-      <CrvMobileStepper
+      <CrvStepperCompact
         progressType={progressType}
         activeStep={0}
         steps={5}

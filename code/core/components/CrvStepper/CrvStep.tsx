@@ -2,7 +2,7 @@
 
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import { CrvStepIcon } from './CrvStepperIcon';
+import { CrvStepIcon } from './CrvStepperMarker';
 import { getStepLabelSx } from './crvStepperStyles';
 import type { CrvStepProps } from './CrvStepper.types';
 

@@ -3,7 +3,7 @@ import type { StepProps as MuiStepProps } from '@mui/material/Step';
 import type { StepperProps as MuiStepperProps } from '@mui/material/Stepper';
 import type { ReactNode } from 'react';
 
-export type CrvStepperIconState = 'default' | 'done';
+export type CrvStepperMarkerState = 'default' | 'done';
 
 export type CrvStepState =
   | 'inactive'
@@ -18,10 +18,10 @@ export type CrvStepTextAlign = 'left' | 'center';
 
 export type CrvStepperAlignment = 'horizontal' | 'vertical';
 
-export type CrvMobileStepperProgressType = 'dots' | 'text' | 'progress';
+export type CrvStepperCompactProgressType = 'dots' | 'text' | 'progress';
 
-export interface CrvStepperIconProps {
-  state?: CrvStepperIconState;
+export interface CrvStepperMarkerProps {
+  state?: CrvStepperMarkerState;
   value?: ReactNode;
 }
 
@@ -49,8 +49,8 @@ export interface CrvStepperProps extends Omit<MuiStepperProps, 'orientation'> {
   smallScreen?: boolean;
 }
 
-export interface CrvMobileStepperProps {
-  progressType?: CrvMobileStepperProgressType;
+export interface CrvStepperCompactProps {
+  progressType?: CrvStepperCompactProgressType;
   activeStep: number;
   steps: number;
   backLabel?: string;
