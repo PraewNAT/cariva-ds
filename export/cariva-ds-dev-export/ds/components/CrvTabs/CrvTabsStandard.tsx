@@ -9,9 +9,10 @@ import { colors } from '../../tokens';
 import { getStandardTabSx, getStandardTabsSx } from './crvTabsStyles';
 import type { CrvTabsStandardProps, CrvTabValue } from './CrvTabs.types';
 
-// Ground truth: Figma crv-tabs-standard 4838:9365 (base set 4724:141435)
+// Ground truth: Figma crv-tabs-standard set 6086:59 — size=large 4838:9365, size=small 6086:17
+// (base set 4724:141435)
 export const CrvTabsStandard = forwardRef<HTMLDivElement, CrvTabsStandardProps>(
-  function CrvTabsStandard({ items, value, onChange, sx }, ref) {
+  function CrvTabsStandard({ items, value, onChange, size = 'large', sx }, ref) {
     const handleChange = (event: SyntheticEvent, next: CrvTabValue) => {
       onChange?.(next, event);
     };
@@ -23,7 +24,7 @@ export const CrvTabsStandard = forwardRef<HTMLDivElement, CrvTabsStandardProps>(
         onChange={handleChange}
         variant="scrollable"
         scrollButtons={false}
-        sx={[getStandardTabsSx(), ...(Array.isArray(sx) ? sx : sx ? [sx] : [])]}
+        sx={[getStandardTabsSx(size), ...(Array.isArray(sx) ? sx : sx ? [sx] : [])]}
       >
         {items.map((item) => (
           <Tab
@@ -45,7 +46,7 @@ export const CrvTabsStandard = forwardRef<HTMLDivElement, CrvTabsStandardProps>(
                 item.label
               )
             }
-            sx={getStandardTabSx()}
+            sx={getStandardTabSx(size)}
           />
         ))}
       </Tabs>

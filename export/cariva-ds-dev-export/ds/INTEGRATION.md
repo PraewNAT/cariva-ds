@@ -75,4 +75,4 @@ Component styles read from `theme.palette.cariva` via `getCarivaColors(theme)` â
 npm run tokens:generate
 ```
 
-Updates `code/tokens.ts` and `code/theme/generatedPalette.ts` from `tokens.json`.
+Updates `code/core/tokens.ts` and `code/core/theme/generatedPalette.ts` from `tokens.json`.

@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Popover from '@mui/material/Popover';
+import type { SxProps, Theme } from '@mui/material/styles';
 import { CrvButton } from '../CrvButton';
 import {
   getPopoverAnchorOrigin,
@@ -37,6 +38,12 @@ export const CrvTooltip = forwardRef<HTMLDivElement, CrvTooltipProps>(
     ref,
   ) {
     const showArrow = placement !== 'none';
+    const tooltipSlotProps = slotProps?.tooltip as
+      | ({ sx?: SxProps<Theme> } & Record<string, unknown>)
+      | undefined;
+    const arrowSlotProps = slotProps?.arrow as
+      | ({ sx?: SxProps<Theme> } & Record<string, unknown>)
+      | undefined;
 
     return (
       <Tooltip
@@ -47,24 +54,24 @@ export const CrvTooltip = forwardRef<HTMLDivElement, CrvTooltipProps>(
         slotProps={{
           ...slotProps,
           tooltip: {
-            ...slotProps?.tooltip,
+            ...tooltipSlotProps,
             sx: [
               getStandardTooltipSx(),
-              ...(Array.isArray(slotProps?.tooltip?.sx)
-                ? slotProps.tooltip.sx
-                : slotProps?.tooltip?.sx
-                  ? [slotProps.tooltip.sx]
+              ...(Array.isArray(tooltipSlotProps?.sx)
+                ? tooltipSlotProps.sx
+                : tooltipSlotProps?.sx
+                  ? [tooltipSlotProps.sx]
                   : []),
             ],
           },
           arrow: {
-            ...slotProps?.arrow,
+            ...arrowSlotProps,
             sx: [
               getStandardArrowSx(),
-              ...(Array.isArray(slotProps?.arrow?.sx)
-                ? slotProps.arrow.sx
-                : slotProps?.arrow?.sx
-                  ? [slotProps.arrow.sx]
+              ...(Array.isArray(arrowSlotProps?.sx)
+                ? arrowSlotProps.sx
+                : arrowSlotProps?.sx
+                  ? [arrowSlotProps.sx]
                   : []),
             ],
           },
@@ -145,6 +152,9 @@ export const CrvTooltipWithAction = forwardRef<HTMLDivElement, CrvTooltipWithAct
     ref,
   ) {
     const origins = getPopoverAnchorOrigin(placement);
+    const paperSlotProps = slotProps?.paper as
+      | ({ sx?: SxProps<Theme> } & Record<string, unknown>)
+      | undefined;
 
     return (
       <>
@@ -158,14 +168,14 @@ export const CrvTooltipWithAction = forwardRef<HTMLDivElement, CrvTooltipWithAct
           slotProps={{
             ...slotProps,
             paper: {
-              ...slotProps?.paper,
+              ...paperSlotProps,
               elevation: 0,
               sx: [
                 { backgroundColor: 'transparent', overflow: 'visible' },
-                ...(Array.isArray(slotProps?.paper?.sx)
-                  ? slotProps.paper.sx
-                  : slotProps?.paper?.sx
-                    ? [slotProps.paper.sx]
+                ...(Array.isArray(paperSlotProps?.sx)
+                  ? paperSlotProps.sx
+                  : paperSlotProps?.sx
+                    ? [paperSlotProps.sx]
                     : []),
               ],
             },

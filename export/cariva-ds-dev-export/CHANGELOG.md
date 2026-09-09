@@ -1,5 +1,25 @@
 # Changelog — cariva-ds-dev-export
 
+## 2026-09-09
+
+Refreshed from `code/core/` — the previous bundle was a 2026-06-19 snapshot and
+had drifted badly from Figma.
+
+### Changed
+
+- **Tokens rebuilt from the current `tokens.json`** — brand primary was still
+  `#2563eb`; it is `#1789fa`. `color/content/secondary` `#334155` → `#64748b`,
+  `placeholder` `#475569` → `#64748b`, plus tokens that did not exist in the old
+  snapshot at all (`selectedStrong`, `sunkenStrong`, `typography/prose/*`)
+- **Typography** — `label` line-heights, the `display` scale, and the
+  `font-family/sans|serif` → `ui|prose` rename (old keys kept as deprecated)
+- **Stepper renamed** — `CrvStepperIcon` → `CrvStepperMarker`,
+  `CrvMobileStepper` → `CrvStepperCompact`; both old names still exported as
+  deprecated aliases
+- **`CrvTabsStandard` gained `size="small"`**
+- **44 component folders** — unchanged (the 2026-06-19 entry said 45, but the bundle has always held 44)
+
+
 ## 2026-06-19
 
 ### Included

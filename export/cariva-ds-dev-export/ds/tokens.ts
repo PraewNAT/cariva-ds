@@ -11,19 +11,19 @@ export const colors = {
   brand: {
     primary: {
       onSurface: {
-        default: '#2563eb',
-        hover: '#1d4ed8',
-        pressed: '#1e40af',
-        subtle: '#eff6ff',
-        muted: '#dbeafe',
+        default: '#1789fa',
+        hover: '#0f70e6',
+        pressed: '#135aba',
+        subtle: '#eef9ff',
+        muted: '#d8f0ff',
       },
       content: {
-        default: '#2563eb',
-        strong: '#1d4ed8',
+        default: '#1789fa',
+        strong: '#0f70e6',
       },
       border: {
-        default: '#93c5fd',
-        strong: '#3b82f6',
+        default: '#8bd8ff',
+        strong: '#2da4ff',
       },
     },
     secondary: {
@@ -46,8 +46,10 @@ export const colors = {
   },
   content: {
     primary: '#0f172a',
-    secondary: '#334155',
-    placeholder: '#475569',
+    // Moved slate/600 → slate/500 in Figma on 2026-08-31. Intentionally the
+    // same value as `placeholder` — confirmed with the Design System Owner.
+    secondary: '#64748b',
+    placeholder: '#64748b',
     disabled: '#94a3b8',
     inverse: '#ffffff',
     link: {
@@ -73,10 +75,12 @@ export const colors = {
     action: {
       hover: '#f1f5f9',
       pressed: '#e2e8f0',
-      selected: '#eff6ff',
+      selected: '#eef9ff',
       disabled: '#f1f5f9',
+      selectedStrong: '#d8f0ff',
     },
     invert: '#0f172a',
+    sunkenStrong: '#cbd5e1',
   },
   border: {
     default: '#cbd5e1',
@@ -308,6 +312,19 @@ export const productStyle = {
     inputMd:     radius.full,
     containerSm: radius['12'],
     containerMd: radius['16'],
+    fontFamily: {
+      // Aktiv Grotesk Thai + Google Sans are Adobe Fonts — require an active
+      // Adobe Fonts subscription and the kit link from code/fonts.ts to be
+      // loaded in the document <head>. Fall back to the self-hosted fonts
+      // below if the kit fails to load (offline, expired subscription, etc).
+      display: '"Malila", "IBM Plex Sans Thai", sans-serif',
+      ui:      '"Aktiv Grotesk Thai", "IBM Plex Sans Thai", sans-serif',
+      prose:   '"Google Sans", "IBM Plex Sans Thai Looped", serif',
+      /** @deprecated Figma renamed `font-family/sans` → `font-family/ui` (2026-08-31). Use `ui`. */
+      sans:    '"Aktiv Grotesk Thai", "IBM Plex Sans Thai", sans-serif',
+      /** @deprecated Figma renamed `font-family/serif` → `font-family/prose` (2026-08-31). Use `prose`. */
+      serif:   '"Google Sans", "IBM Plex Sans Thai Looped", serif',
+    },
   },
   backOffice: {
     interactive: radius['12'],
@@ -315,6 +332,16 @@ export const productStyle = {
     inputMd:     radius['12'],
     containerSm: radius['8'],
     containerMd: radius['12'],
+    fontFamily: {
+      // Malila is also an Adobe Fonts typeface — same fallback note as above.
+      display: '"Malila", "IBM Plex Sans Thai", sans-serif',
+      ui:      '"IBM Plex Sans Thai", sans-serif',
+      prose:   '"IBM Plex Sans Thai Looped", serif',
+      /** @deprecated Figma renamed `font-family/sans` → `font-family/ui` (2026-08-31). Use `ui`. */
+      sans:    '"IBM Plex Sans Thai", sans-serif',
+      /** @deprecated Figma renamed `font-family/serif` → `font-family/prose` (2026-08-31). Use `prose`. */
+      serif:   '"IBM Plex Sans Thai Looped", serif',
+    },
   },
 } as const;
 
@@ -323,22 +350,23 @@ export type ProductStyleName = keyof typeof productStyle;
 export const defaultProductStyle: ProductStyleName = 'carivaApp';
 
 export const typography = {
-  fontFamily: {
-    sans:  '"IBM Plex Sans Thai", sans-serif',
-    serif: '"IBM Plex Sans Thai Looped", serif',
-  },
+  fontFamily: productStyle[defaultProductStyle].fontFamily,
+  // Desktop mode of the Figma "Typography" collection. Verified against live
+  // Figma variables 2026-09-07.
   fontSize: {
-    display:  { large: 64, medium: 48, small: 40 },
+    display:  { large: 60, medium: 48, small: 36 },
     heading:  { large: 24, medium: 20, small: 16 },
     body:     { large: 16, medium: 14, small: 12 },
-    label:    { large: 16, medium: 14, small: 12 },
+    prose:    { large: 16, medium: 14, small: 12 },
+    label:    { large: 16, medium: 14, small: 12, xsmall: 10 },
     caption:  { caption: 12 },
   },
   lineHeight: {
     display:  { large: 72, medium: 56, small: 48 },
     heading:  { large: 32, medium: 28, small: 24 },
     body:     { large: 24, medium: 22, small: 18 },
-    label:    { large: 24, medium: 22, small: 18 },
+    prose:    { large: 24, medium: 22, small: 18 },
+    label:    { large: 24, medium: 20, small: 16, xsmall: 16 },
     caption:  { caption: 16 },
   },
   fontWeight: {

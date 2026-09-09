@@ -1,5 +1,5 @@
 /** @deprecated Import from `../../theme/components/crvTabs` instead. */
-export type { CrvTabsPillsVariant } from '../../theme/components/crvTabs';
+export type { CrvTabsPillsVariant, CrvTabsStandardSize } from '../../theme/components/crvTabs';
 export {
   TABS_FOLDER_SHADOW,
   FOLDER_Z,
