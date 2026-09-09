@@ -43,7 +43,7 @@ Typeface is **per-product** (see `Product Style` in `tokens.json` / `code/tokens
 
 ## 2. Color Palette & Roles
 
-> Verified against Figma's live **Semantic** variable collection (mode: "Light Theme" — this is currently the only mode; there is no Dark Theme in the actual variables, only Light). Do not trust the "Semantic Color Token Guideline — AI Readable" doc frame's (node `3791:2`) prose text at face value — it was out of date versus the bound variables when last checked (Aug 2026), most notably on Brand Primary.
+> Verified against Figma's live **Semantic** variable collection (mode: "Light Theme" — this is currently the only mode; there is no Dark Theme in the actual variables, only Light). The "Semantic Color Token Guideline — AI Readable" doc frame (node `3791:2`) was re-checked row by row against the bound variables on 2026-09-07: all 76 token rows now match, including Brand Primary (the earlier Aug 2026 warning no longer applies). The one stale row found, `color/content/secondary`, was corrected in that frame at the same time.
 
 All colors come from **Foundation primitive families** and are referenced via semantic tokens only. Never use raw hex values or primitive tokens (e.g. `color/dodger-blue/600`) in components — always use the semantic alias.
 
@@ -90,7 +90,7 @@ Readable text and icons. Use content tokens for both text and icon layers.
 | Token | Value | Usage |
 |---|---|---|
 | `color/content/primary` | `#0f172a` (slate/900) | Main text / icon |
-| `color/content/secondary` | `#475569` (slate/600) | Supporting text / helper text / icon |
+| `color/content/secondary` | `#64748b` (slate/500) | Supporting text / helper text / icon |
 | `color/content/placeholder` | `#64748b` (slate/500) | Placeholder text |
 | `color/content/disabled` | `#94a3b8` (slate/400) | Disabled text / icon |
 | `color/content/inverse` | `#ffffff` (white) | Text/icon on neutral dark or inverse surfaces |
@@ -262,8 +262,10 @@ Typeface is **per-product**, matching Figma's `Product Style` variable collectio
 | Role | cariva app | back office |
 |---|---|---|
 | `font-family/display` (hero, display sizes) | Malila | Malila |
-| `font-family/sans` (body, UI text — default) | Aktiv Grotesk Thai | IBM Plex Sans Thai |
-| `font-family/serif` | Google Sans | IBM Plex Sans Thai Looped |
+| `font-family/ui` (body, UI text — default) | Aktiv Grotesk Thai | IBM Plex Sans Thai |
+| `font-family/prose` (long-form reading — `typography/prose/*`) | Google Sans | IBM Plex Sans Thai Looped |
+
+> **Renamed 2026-08-31:** `font-family/sans` → **`font-family/ui`**, `font-family/serif` → **`font-family/prose`**. Values are unchanged; only the names moved. In code, `typography.fontFamily.ui` / `.prose` are the canonical keys — `.sans` / `.serif` still resolve but are deprecated aliases.
 
 **Licensing — read before assuming a font "just works":**
 - **Aktiv Grotesk Thai** and **Malila** are **Adobe Fonts (Typekit)** typefaces — not self-hosted. They require an active Adobe Fonts subscription and the kit `<link>` loaded in the document `<head>` (see `code/fonts.ts` for the kit URL and integration notes). If the subscription lapses or the kit fails to load, they silently fall back.
@@ -286,9 +288,9 @@ Typography uses a structured, readable approach — weight and size create hiera
 
 | Style | Desktop Size / LH | Mobile Size / LH | Weight | Use for |
 |---|---|---|---|---|
-| `typography/display/large` | 64px / 72px | 40px / 48px | Bold 700 | Hero headline |
+| `typography/display/large` | 60px / 72px | 48px / 48px | Bold 700 | Hero headline |
 | `typography/display/medium` | 48px / 56px | 36px / 44px | Bold 700 | Large marketing headline |
-| `typography/display/small` | 40px / 48px | 32px / 40px | Semibold 600 | Section display title |
+| `typography/display/small` | 36px / 48px | 30px / 40px | Semibold 600 | Section display title |
 
 #### Heading
 
@@ -306,14 +308,26 @@ Typography uses a structured, readable approach — weight and size create hiera
 | `typography/body/medium` | 14px / 22px | 14px / 20px | Regular 400 | Default UI text — forms, tables, descriptions |
 | `typography/body/small` | 12px / 18px | 12px / 16px | Regular 400 | Compact text, helper detail |
 
+#### Prose — Long-form Reading
+
+Added 2026-08-31. Sizes and line-heights are **identical to `body/*`** — the only difference is the typeface: prose styles use `font-family/prose`, body styles use `font-family/ui`.
+
+| Style | Desktop Size / LH | Mobile Size / LH | Weight | Use for |
+|---|---|---|---|---|
+| `typography/prose/large` | 16px / 24px | 16px / 24px | Regular 400 | Long AI answers, articles |
+| `typography/prose/medium` | 14px / 22px | 14px / 20px | Regular 400 | Default long-form paragraph |
+| `typography/prose/small` | 12px / 18px | 12px / 16px | Regular 400 | Compact long-form text |
+
+> Use prose **only** for continuous reading (AI responses, article bodies). Every control, form, table, and label stays on `body/*` or `label/*`.
+
 #### Label — Controls & Actions
 
 | Style | Desktop Size / LH | Mobile Size / LH | Weight | Use for |
 |---|---|---|---|---|
 | `typography/label/large` | 16px / 24px | 16px / 24px | Medium 500 | Large button, tab label, form label |
-| `typography/label/medium` | 14px / 22px | 14px / 22px | Medium 500 | Default button, menu item, form label |
-| `typography/label/small` | 12px / 18px | 12px / 18px | Medium 500 | Badge text, compact control |
-| `typography/label/xsmall` | 10px / 14px | 10px / 14px | Medium 500 | Dense controls, compact chips, smallest UI text |
+| `typography/label/medium` | 14px / 20px | 14px / 20px | Medium 500 | Default button, menu item, form label |
+| `typography/label/small` | 12px / 16px | 12px / 16px | Medium 500 | Badge text, compact control |
+| `typography/label/xsmall` | 10px / 16px | 10px / 16px | Medium 500 | Dense controls, compact chips, smallest UI text |
 
 #### Caption
 
@@ -541,7 +555,7 @@ Key shifts:
 |---|---|---|
 | Normal body text (< 18px) | 4.5:1 (WCAG AA) | `color/content/primary` on white: ~17:1 ✅ |
 | Large text / UI icons (≥ 18px or 14px bold) | 3:1 | |
-| `color/content/secondary` on white | 5.5:1 ✅ | |
+| `color/content/secondary` on white | 4.76:1 ✅ | Dropped from 5.5:1 when secondary moved slate/600 → slate/500 (2026-08-31); still clears AA for normal text (4.5:1) |
 | Brand primary `#1789fa` (dodger-blue/600) on white | 3.5:1 ⚠️ | Meets AA for large text/icons only (3:1) — **dropped from 4.6:1** since the rebrand off Tailwind blue; no longer usable for normal-size text on white, confirm with Design System Owner if this is acceptable |
 
 ### Focus System
@@ -596,7 +610,7 @@ Product DS คือ component ที่ extend จาก DS กลาง สำ
 | Card / input surface | `color/on-surface/default` | `#ffffff` |
 | Elevated surface (modal) | `color/on-surface/elevated` | `#ffffff` |
 | Primary text | `color/content/primary` | `#0f172a` |
-| Secondary text | `color/content/secondary` | `#475569` |
+| Secondary text | `color/content/secondary` | `#64748b` |
 | Placeholder | `color/content/placeholder` | `#64748b` |
 | Disabled text | `color/content/disabled` | `#94a3b8` |
 | Text on filled brand | `color/content/on-brand` | `#ffffff` |

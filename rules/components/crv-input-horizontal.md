@@ -81,7 +81,7 @@
 - `typography/body/medium/font-size` — size small
 - `typography/label/medium/font-size` — label text medium
 - `typography/label/small/font-size` — label text small
-- Font family: `font-family/sans` (Product Style collection)
+- Font family: `font-family/ui` (Product Style collection)
 
 ### Spacing
 - Padding H: `spacing/md`

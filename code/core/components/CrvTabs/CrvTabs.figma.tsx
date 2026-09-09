@@ -3,13 +3,17 @@ import { CrvTabsStandard } from './CrvTabsStandard';
 import { CrvTabsPills } from './CrvTabsPills';
 import { CrvTabsFolder } from './CrvTabsFolder';
 
-// crv-tabs-standard (4838:9365)
+// crv-tabs-standard (6086:59)
 figma.connect(
   CrvTabsStandard,
-  'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=4838-9365',
+  'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=6086-59',
   {
-    example: () => (
+    props: {
+      size: figma.enum('size', { large: 'large', small: 'small' }),
+    },
+    example: (props) => (
       <CrvTabsStandard
+        size={props.size}
         value="home"
         items={[
           { value: 'home', label: 'Home' },

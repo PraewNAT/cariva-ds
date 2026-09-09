@@ -7,14 +7,15 @@
 - Component type: Button
 - Component set: `crv-button-standard`
 - Loading state: `crv-button-loading` (แยก component set)
-- Naming pattern: `variant={contained|outlined|text}, color={primary|error}, state={default|hover|pressed|disabled}, size={small|medium|large}`
+- Naming pattern: `variant={contained|outlined|text|elevated}, color={primary|error|neutral}, state={default|hover|pressed|disabled}, size={small|medium|large}`
+- 120 variants — คู่ที่ยังไม่มีคือ `contained/neutral` และ `elevated/error`
 
 ## Variants
 
 | Property | Values |
 |---|---|
-| `variant` | `contained`, `outlined`, `text` |
-| `color` | `primary`, `error` |
+| `variant` | `contained`, `outlined`, `text`, `elevated` |
+| `color` | `primary`, `error`, `neutral` |
 | `state` | `default`, `hover`, `pressed`, `disabled` |
 | `size` | `small`, `medium`, `large` |
 
@@ -45,8 +46,8 @@
 
 | Property | Type | Default | Notes |
 |---|---|---|---|
-| `variant` | variant | `contained` | contained / outlined / text |
-| `color` | variant | `primary` | primary / error |
+| `variant` | variant | `contained` | contained / outlined / text / elevated |
+| `color` | variant | `primary` | primary / error / neutral |
 | `state` | variant | `default` | default / hover / pressed / disabled |
 | `size` | variant | `medium` | small / medium / large |
 | `startIconVisible` | boolean | **`true`** | แสดง/ซ่อน leading icon — ค่า default คือ true |

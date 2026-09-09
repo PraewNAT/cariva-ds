@@ -27,7 +27,10 @@ export interface CrvTabsBaseProps {
   sx?: SxProps<Theme>;
 }
 
-export type CrvTabsStandardProps = CrvTabsBaseProps;
+export interface CrvTabsStandardProps extends CrvTabsBaseProps {
+  /** Figma `size` — controls tab height, padding, icon size and label scale. */
+  size?: 'small' | 'large';
+}
 
 export interface CrvTabsPillsProps extends CrvTabsBaseProps {
   /** Figma `variant` — `standard` hugs, `fullWidth` stretches tabs equally. */
