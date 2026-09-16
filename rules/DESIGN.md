@@ -92,6 +92,9 @@ Readable text and icons. Use content tokens for both text and icon layers.
 | `color/content/primary` | `#0f172a` (slate/900) | Main text / icon |
 | `color/content/secondary` | `#64748b` (slate/500) | Supporting text / helper text / icon |
 | `color/content/placeholder` | `#64748b` (slate/500) | Placeholder text |
+
+> `secondary` and `placeholder` share `#64748b` on purpose — Figma moved `secondary` from slate/600 to slate/500 on 2026-08-31 and the Design System Owner confirmed the match is intended. Keep them as two tokens so they can diverge later.
+
 | `color/content/disabled` | `#94a3b8` (slate/400) | Disabled text / icon |
 | `color/content/inverse` | `#ffffff` (white) | Text/icon on neutral dark or inverse surfaces |
 | `color/content/on-brand` | `#ffffff` (alias → inverse) | Text/icon on filled brand surface |
@@ -150,7 +153,9 @@ Unchanged — still Tailwind `teal`.
 
 ### Status Colors — `color/status/*`
 
-Each status (success, warning, error, info) follows the same shape: `on-surface/default|hover|pressed|subtle|muted`, `content/default|strong`, and `border/default` (success/warning/info only — error uses `color/border/error` from the Borders table above).
+Each status (success, warning, error, info) follows the same shape: `on-surface/default|hover|pressed|subtle|muted`, `content/default|strong`, and `border/default|strong`.
+
+Status borders follow the same steps as every other border family (brand primary, brand secondary, neutral): **`border/default` = hue/300** for soft outlines on tinted surfaces, **`border/strong` = hue/500** for outlines on white. `color/border/error` is still the one to use for form-field validation borders.
 
 **Success** (`color/status/success`) — confirmations, completion
 
@@ -163,7 +168,8 @@ Each status (success, warning, error, info) follows the same shape: `on-surface/
 | `on-surface/muted` | `#d1fae5` (emerald/100) |
 | `content/default` | `#047857` (emerald/700) |
 | `content/strong` | `#065f46` (emerald/800) |
-| `border/default` | `#047857` (emerald/700) |
+| `border/default` | `#6ee7b7` (emerald/300) |
+| `border/strong` | `#10b981` (emerald/500) |
 
 **Warning** (`color/status/warning`) — caution states
 
@@ -176,7 +182,8 @@ Each status (success, warning, error, info) follows the same shape: `on-surface/
 | `on-surface/muted` | `#fef3c7` (amber/100) |
 | `content/default` | `#d97706` (amber/600) |
 | `content/strong` | `#b45309` (amber/700) |
-| `border/default` | `#d97706` (amber/600) |
+| `border/default` | `#fcd34d` (amber/300) |
+| `border/strong` | `#f59e0b` (amber/500) |
 
 **Error** (`color/status/error`) — destructive, risky, error, validation
 
@@ -189,6 +196,8 @@ Each status (success, warning, error, info) follows the same shape: `on-surface/
 | `on-surface/muted` | `#fee2e2` (red/100) |
 | `content/default` | `#dc2626` (red/600) |
 | `content/strong` | `#b91c1c` (red/700) |
+| `border/default` | `#fca5a5` (red/300) |
+| `border/strong` | `#ef4444` (red/500) |
 
 **Info** (`color/status/info`) — informational feedback
 
@@ -201,6 +210,8 @@ Each status (success, warning, error, info) follows the same shape: `on-surface/
 | `on-surface/muted` | `#e0f2fe` (sky/100) |
 | `content/default` | `#0284c7` (sky/600) |
 | `content/strong` | `#0369a1` (sky/700) |
+| `border/default` | `#7dd3fc` (sky/300) |
+| `border/strong` | `#0ea5e9` (sky/500) |
 
 **Warning exception**: On a filled warning background, use `color/content/primary` (dark text), not `color/content/inverse` (white) — amber is too light for white text to meet WCAG AA.
 
@@ -244,7 +255,7 @@ Choose the content token by contrast and meaning:
 4. Use `color/border/system` for focused/system-active borders and `color/border/error` only for error/destructive borders.
 5. Use `color/status/error/*` for destructive, risky, error, and validation meanings.
 6. Use `color/accent/*/A01|A02|A03|A04|A05` only for decorative non-semantic accents.
-7. Do not create or revive `color/danger/*`, `color/field/*`, `color/foreground/*`, `color/border/invalid`, focus ring tokens, status border tokens (beyond `on-surface/*/border/default` above), or tertiary tokens.
+7. Do not create or revive `color/danger/*`, `color/field/*`, `color/foreground/*`, `color/border/invalid`, focus ring tokens, status border tokens beyond `color/status/*/border/default|strong` above, or tertiary tokens.
 8. If a needed semantic token is missing, ask before creating a new token.
 
 ### Accessibility Notes
