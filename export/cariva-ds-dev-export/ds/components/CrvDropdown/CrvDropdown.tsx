@@ -155,6 +155,10 @@ export const CrvDropdown = forwardRef<HTMLDivElement, CrvDropdownProps>(
               borderColor:  colors.border.default,
               borderWidth:  1,
               borderRadius: `${fieldRadius}px`,
+              // MUI lifts the outline 5px so a notch legend can straddle the top
+              // border. We hide the legend, and `overflow: hidden` above was
+              // clipping those 5px away — taking the entire top border with them.
+              top: 0,
             },
             '&:hover .MuiOutlinedInput-notchedOutline': {
               borderColor:  disabled ? colors.border.disabled : colors.border.strong,
