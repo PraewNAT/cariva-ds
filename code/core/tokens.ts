@@ -338,10 +338,14 @@ export const productStyle = {
     containerSm: radius['12'],
     containerMd: radius['16'],
     fontFamily: {
-      // Aktiv Grotesk Thai + Google Sans are Adobe Fonts — require an active
-      // Adobe Fonts subscription and the kit link from code/fonts.ts to be
-      // loaded in the document <head>. Fall back to the self-hosted fonts
-      // below if the kit fails to load (offline, expired subscription, etc).
+      // Aktiv Grotesk Thai is an Adobe Font — it requires an active Adobe Fonts
+      // subscription and the kit link from code/fonts.ts to be loaded in the
+      // document <head>. Fall back to the self-hosted fonts below if the kit
+      // fails to load (offline, expired subscription, etc).
+      //
+      // Google Sans is NOT in the kit (checked against tfw1cme on 2026-09-16).
+      // It is self-hosted from @fontsource/google-sans (OFL-1.1) by
+      // code/fonts.ts, so `prose` renders without any subscription.
       //
       // Each Adobe family is listed twice on purpose. The first spelling is the
       // typeface name as installed by Creative Cloud desktop; the second is the

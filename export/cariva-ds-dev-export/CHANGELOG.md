@@ -13,13 +13,14 @@
   deprecated `sans`) now list both spellings. `Malila` needs no alias; family
   matching is case-insensitive, so it already matched the kit's `malila`.
 
-### Known issues
-
-- **`font-family/prose` still cannot resolve.** `Google Sans` is not on the
-  Adobe kit and is not licensable through Adobe Fonts at all, and the declared
-  fallback `IBM Plex Sans Thai Looped` is not imported by `ds/fonts.ts` — so
-  prose text lands on generic `serif`. Consuming apps can import
-  `@fontsource/ibm-plex-sans-thai-looped` themselves as a stopgap.
+- **`font-family/prose` resolved to generic `serif` everywhere.** Neither font
+  in the stack was actually served: `Google Sans` is not on Adobe kit `tfw1cme`,
+  and the fallback `IBM Plex Sans Thai Looped` was never imported by
+  `ds/fonts.ts`. Every piece of prose text rendered as Times. Both are now
+  self-hosted by `ds/fonts.ts` — Google Sans has been released under OFL-1.1 and
+  ships as `@fontsource/google-sans` (Latin + Thai subsets), so prose no longer
+  depends on an Adobe subscription at all. Add `@fontsource/google-sans` and
+  `@fontsource/ibm-plex-sans-thai-looped` to the consuming app's dependencies.
 
 ## 2026-09-11
 

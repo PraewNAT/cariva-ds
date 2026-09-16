@@ -3,6 +3,18 @@ import '@fontsource/ibm-plex-sans-thai/500.css';
 import '@fontsource/ibm-plex-sans-thai/600.css';
 import '@fontsource/ibm-plex-sans-thai/700.css';
 
+// `font-family/prose` — Google Sans, self-hosted. It is NOT in the Adobe kit
+// (verified against kit tfw1cme on 2026-09-16), but Google released it under
+// OFL-1.1, so it ships as a normal npm package. These files cover Latin and
+// Thai. IBM Plex Sans Thai Looped stays behind it as the fallback; without both
+// of them, prose text drops straight through to the generic `serif` (Times).
+import '@fontsource/google-sans/400.css';
+import '@fontsource/google-sans/500.css';
+import '@fontsource/google-sans/600.css';
+import '@fontsource/ibm-plex-sans-thai-looped/400.css';
+import '@fontsource/ibm-plex-sans-thai-looped/500.css';
+import '@fontsource/ibm-plex-sans-thai-looped/600.css';
+
 /**
  * Adobe Fonts (Typekit) — Aktiv Grotesk Thai + Malila
  * -----------------------------------------------------------------------

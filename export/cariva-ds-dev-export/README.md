@@ -44,7 +44,9 @@ cp -R ds /path/to/your-next-app/src/ds
   "@emotion/react": "^11.13.3",
   "@emotion/styled": "^11.13.0",
   "@mui/icons-material": "^6.1.6",
-  "@fontsource/ibm-plex-sans-thai": "^5.2.8"
+  "@fontsource/ibm-plex-sans-thai": "^5.2.8",
+  "@fontsource/ibm-plex-sans-thai-looped": "^5.3.0",
+  "@fontsource/google-sans": "^5.3.1"
 }
 ```
 
