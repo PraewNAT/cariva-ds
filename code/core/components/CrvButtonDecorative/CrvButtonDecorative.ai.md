@@ -38,7 +38,7 @@ Gradient button for AI actions.
 
 The aurora is code-only — Figma has no animation for this component, so the
 resting frame is what the two match on. Two blurred pseudo-element layers of
-radial blobs drift against each other at 9s and 13s, painted from the same
+radial blobs drift against each other at 6s and 8.5s, painted from the same
 three decorative tokens so the navy core survives. Only `transform` animates.
 `animated={false}`, `prefers-reduced-motion: reduce` and `disabled` each fall
 back to the static Figma gradient.
