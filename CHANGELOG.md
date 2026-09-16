@@ -53,6 +53,14 @@ Figma มี 7 ปุ่ม แต่โค้ดมีแค่ 4 และ 2 �
 - **เพิ่ม `code/core/theme/shadows.ts`** — เดิมเงาถูก hardcode กระจายตาม component ตอนนี้มี token `shadows.sm|default|md|lg|xl|2xl|inner` ตรงกับ effect style ใน Figma
 - **sync token เพิ่ม 6 ตัว**: `color/brand/decorative/gradient/{from,via,to}` และ `color/status/active/*` ซึ่งมีใน Figma แต่ไม่เคยถูก export
 
+### 🔍 ตรวจกับ Figma อีกรอบแล้วเจอ 4 จุดไม่ตรง
+
+- **`CrvButton` ยังไม่มี story ของ `elevated` / `neutral`** — เพิ่มโค้ดแล้วแต่ลืมเปิดให้เห็นใน Storybook เพิ่ม `ElevatedPrimary/Error/Neutral`, `OutlinedNeutral`, `TextNeutral`, ตาราง `ElevatedStates`, `NeutralColor` และใส่ตัวเลือกใหม่ใน control panel · `AllVariants` รวม elevated ด้วยแล้ว
+- **ไล่เฉดของ `CrvButtonDecorative` ผิดทิศ** — ของเดิมเขียนเป็นวงรีสว่างที่ก้นปุ่ม แต่ Figma ไล่จากน้ำเงินเข้มตรงกลางออกไปสว่างที่ขอบซ้าย-ขวา (ถอดจาก `gradientTransform` ได้เป็นวงรี 50% ของความกว้าง × 129.76% ของความสูง จุดกึ่งกลางปุ่ม) แก้ตามค่าจริง และเพิ่ม `opacity: 0.85` ตอน pressed ตามที่ Figma ทำ
+- **เส้นขอบ `standard` ของ toast หนา 2px ทั้งที่ Figma ใช้ 1px** — ทุก variant ใน Figma เป็น 1px เท่ากันหมด แก้แล้วทั้ง status และ notification
+- **`color/status/{severity}/border/default` ใน `tokens.json` ไม่ตรงกับ variable จริง** — บันทึกไว้เป็นเฉด `300` แต่ variable ใน Figma alias ไปที่ `100` ทำให้เส้นขอบ toast เข้มกว่าที่ออกแบบไว้มาก แก้เป็นค่าจาก variable จริง (`#fee2e2` / `#fef3c7` / `#e0f2fe` / `#d1fae5`) พร้อมอัปเดต `rules/DESIGN.md`
+- **พื้นหลัง `outlined` ของ toast เป็น `transparent` แต่ Figma ใช้ `color/bg/white`** — แก้ให้ตรง ไม่งั้นวางบนพื้นสีเข้มแล้วอ่านไม่ออก
+
 ### 🔄 Code
 
 - **`CrvToast` เขียนใหม่ให้ตรงกับ `crv-toast-standard` ตัวใหม่** — เดิมเป็น `variant=primary|secondary` + severity 4 แบบ ไม่มี Description และปุ่ม Action ส่วน Code Connect ยังชี้ไป component ที่ถูกลบไปแล้ว

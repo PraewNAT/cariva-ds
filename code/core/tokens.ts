@@ -125,7 +125,7 @@ export const colors = {
         strong: '#065f46',
       },
       border: {
-        default: '#6ee7b7',
+        default: '#d1fae5',
         strong: '#10b981',
       },
     },
@@ -151,7 +151,7 @@ export const colors = {
         strong: '#b45309',
       },
       border: {
-        default: '#fcd34d',
+        default: '#fef3c7',
         strong: '#f59e0b',
       },
     },
@@ -168,7 +168,7 @@ export const colors = {
         strong: '#b91c1c',
       },
       border: {
-        default: '#fca5a5',
+        default: '#fee2e2',
         strong: '#ef4444',
       },
     },
@@ -185,7 +185,7 @@ export const colors = {
         strong: '#0369a1',
       },
       border: {
-        default: '#7dd3fc',
+        default: '#e0f2fe',
         strong: '#0ea5e9',
       },
     },

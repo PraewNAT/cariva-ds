@@ -168,7 +168,7 @@ Status borders follow the same steps as every other border family (brand primary
 | `on-surface/muted` | `#d1fae5` (emerald/100) |
 | `content/default` | `#047857` (emerald/700) |
 | `content/strong` | `#065f46` (emerald/800) |
-| `border/default` | `#6ee7b7` (emerald/300) |
+| `border/default` | `#d1fae5` (emerald/100) |
 | `border/strong` | `#10b981` (emerald/500) |
 
 **Warning** (`color/status/warning`) — caution states
@@ -182,7 +182,7 @@ Status borders follow the same steps as every other border family (brand primary
 | `on-surface/muted` | `#fef3c7` (amber/100) |
 | `content/default` | `#d97706` (amber/600) |
 | `content/strong` | `#b45309` (amber/700) |
-| `border/default` | `#fcd34d` (amber/300) |
+| `border/default` | `#fef3c7` (amber/100) |
 | `border/strong` | `#f59e0b` (amber/500) |
 
 **Error** (`color/status/error`) — destructive, risky, error, validation
@@ -196,7 +196,7 @@ Status borders follow the same steps as every other border family (brand primary
 | `on-surface/muted` | `#fee2e2` (red/100) |
 | `content/default` | `#dc2626` (red/600) |
 | `content/strong` | `#b91c1c` (red/700) |
-| `border/default` | `#fca5a5` (red/300) |
+| `border/default` | `#fee2e2` (red/100) |
 | `border/strong` | `#ef4444` (red/500) |
 
 **Info** (`color/status/info`) — informational feedback
@@ -210,7 +210,7 @@ Status borders follow the same steps as every other border family (brand primary
 | `on-surface/muted` | `#e0f2fe` (sky/100) |
 | `content/default` | `#0284c7` (sky/600) |
 | `content/strong` | `#0369a1` (sky/700) |
-| `border/default` | `#7dd3fc` (sky/300) |
+| `border/default` | `#e0f2fe` (sky/100) |
 | `border/strong` | `#0ea5e9` (sky/500) |
 
 **Warning exception**: On a filled warning background, use `color/content/primary` (dark text), not `color/content/inverse` (white) — amber is too light for white text to meet WCAG AA.

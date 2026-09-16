@@ -75,7 +75,7 @@ function notificationTokens(variant: CrvToastVariant): SurfaceTokens {
   if (variant === 'outlined') {
     return {
       ...base,
-      backgroundColor: 'transparent',
+      backgroundColor: colors.bg.white,
       borderColor: colors.neutral.border.strong,
       borderWidth: 1,
     };
@@ -84,7 +84,7 @@ function notificationTokens(variant: CrvToastVariant): SurfaceTokens {
     ...base,
     backgroundColor: colors.neutral.onSurface.subtle,
     borderColor: colors.neutral.border.default,
-    borderWidth: 2,
+    borderWidth: 1,
     boxShadow: statusShadow(colors.brand.primary.onSurface.default),
   };
 }
@@ -110,7 +110,7 @@ export function getToastTokens(
 
   if (variant === 'outlined') {
     return {
-      backgroundColor: 'transparent',
+      backgroundColor: colors.bg.white,
       borderColor: status.border.strong,
       borderWidth: 1,
       iconColor: status.content.default,
@@ -123,7 +123,7 @@ export function getToastTokens(
   return {
     backgroundColor: status.onSurface.subtle,
     borderColor: status.border.default,
-    borderWidth: 2,
+    borderWidth: 1,
     iconColor: status.content.default,
     closeColor: colors.neutral.content.default,
     titleColor: colors.content.primary,

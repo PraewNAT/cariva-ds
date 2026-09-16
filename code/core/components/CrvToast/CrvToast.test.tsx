@@ -72,16 +72,16 @@ describe('CrvToast', () => {
         const tokens = getToastTokens('standard', severity);
         expect(tokens.backgroundColor).toBe(colors.status[severity].onSurface.subtle);
         expect(tokens.borderColor).toBe(colors.status[severity].border.default);
-        expect(tokens.borderWidth).toBe(2);
+        expect(tokens.borderWidth).toBe(1);
         expect(tokens.boxShadow).toContain('rgba');
       },
     );
 
-    it('outlined uses the strong border and no fill', () => {
+    it('outlined uses the strong border on a white surface', () => {
       const tokens = getToastTokens('outlined', 'error');
       expect(tokens.borderColor).toBe(colors.status.error.border.strong);
       expect(tokens.borderWidth).toBe(1);
-      expect(tokens.backgroundColor).toBe('transparent');
+      expect(tokens.backgroundColor).toBe(colors.bg.white);
     });
 
     it('notification is neutral with a brand icon', () => {

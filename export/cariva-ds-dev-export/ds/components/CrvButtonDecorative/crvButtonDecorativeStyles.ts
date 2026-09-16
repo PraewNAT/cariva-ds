@@ -15,11 +15,15 @@ export const ICON_SIZE_BY_SIZE: Record<CrvButtonDecorativeSize, number> = {
 };
 
 /**
- * The decorative surface is a deep navy base with a radial wash running through
- * brand blue into cyan — Figma paints it as a solid
- * `brand/decorative/gradient/from` plus a radial gradient of via → to.
+ * The decorative surface is a deep navy base with a radial wash that brightens
+ * toward the left and right edges — Figma paints it as a solid
+ * `brand/decorative/gradient/from` under a radial gradient whose ending shape is
+ * an ellipse centred on the button: 50% of the width across, 129.76% of the
+ * height down (from the Figma `gradientTransform`). The first stop is `from` at
+ * zero alpha so the navy base shows through the middle.
  */
-export const DECORATIVE_GRADIENT = `radial-gradient(120% 160% at 50% 135%, ${colors.brand.decorative.gradient.to} 0%, ${colors.brand.decorative.gradient.via} 25%, ${colors.brand.decorative.gradient.from} 100%)`;
+export const DECORATIVE_GRADIENT =
+  `radial-gradient(50% 129.76% at 50% 50%, ${colors.brand.decorative.gradient.from}00 0%, ${colors.brand.decorative.gradient.via} 75%, ${colors.brand.decorative.gradient.to} 100%)`;
 
 /** glow/primary, the hover effect style on the Figma component. */
 const GLOW_PRIMARY = `0 0 4px 0 rgba(23, 137, 250, 0.36)`;
@@ -50,6 +54,8 @@ export function getDecorativeSx(size: CrvButtonDecorativeSize): SxProps<Theme> {
     '&:active': {
       backgroundImage: DECORATIVE_GRADIENT,
       boxShadow: 'none',
+      // Figma dims the whole pressed variant rather than recolouring it.
+      opacity: 0.85,
       color: colors.content.inverse,
     },
     '&.Mui-disabled, &:disabled': {

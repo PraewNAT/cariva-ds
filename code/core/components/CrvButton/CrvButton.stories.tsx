@@ -6,6 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DownloadIcon from '@mui/icons-material/Download';
 import UploadIcon from '@mui/icons-material/Upload';
 import { CrvButton } from './CrvButton';
+import type { CrvButtonProps } from './CrvButton.types';
 
 const ICONS = {
   none: undefined,
@@ -26,13 +27,20 @@ const meta: Meta<typeof CrvButton> = {
     docs: {
       description: {
         component:
-          'Standard button — Figma `crv-button-standard` (3646:404). Variants: contained / outlined / text × primary / error × small / medium / large.',
+          'Standard button — Figma `crv-button-standard` (3646:28000). Variants: contained / outlined / text / elevated × primary / error / neutral × small / medium / large. `neutral` has no contained form in Figma, so the types reject it.',
       },
     },
   },
   argTypes: {
-    variant: { control: 'inline-radio', options: ['contained', 'outlined', 'text'] },
-    color: { control: 'inline-radio', options: ['primary', 'error'] },
+    variant: {
+      control: 'inline-radio',
+      options: ['contained', 'outlined', 'text', 'elevated'],
+    },
+    color: {
+      control: 'inline-radio',
+      options: ['primary', 'error', 'neutral'],
+      description: 'neutral ใช้ได้กับ outlined / text / elevated เท่านั้น',
+    },
     size: { control: 'inline-radio', options: ['small', 'medium', 'large'] },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
@@ -112,6 +120,68 @@ export const OutlinedStates: Story = {
   },
 };
 
+export const ElevatedPrimary: Story = { args: { variant: 'elevated', color: 'primary' } };
+export const ElevatedError: Story = { args: { variant: 'elevated', color: 'error' } };
+export const ElevatedNeutral: Story = {
+  args: { variant: 'elevated', color: 'neutral' } as Partial<CrvButtonProps>,
+};
+
+export const OutlinedNeutral: Story = {
+  args: { variant: 'outlined', color: 'neutral' } as Partial<CrvButtonProps>,
+};
+export const TextNeutral: Story = {
+  args: { variant: 'text', color: 'neutral' } as Partial<CrvButtonProps>,
+};
+
+/**
+ * `elevated` is a DS-only variant: a white surface carrying shadow/sm, lifting to
+ * shadow/xl on hover and settling to shadow/md on press. Hover each button to see it.
+ */
+export const ElevatedStates: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <div style={{ display: 'grid', gap: 24, padding: 24, background: '#f8fafc' }}>
+      {(['primary', 'error', 'neutral'] as const).map((color) => (
+        <div key={color}>
+          <div style={{ fontSize: 12, color: '#64748b', marginBottom: 8 }}>
+            elevated / {color}
+          </div>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            {(['small', 'medium', 'large'] as const).map((size) => (
+              <CrvButton
+                key={size}
+                {...({ variant: 'elevated', color, size } as CrvButtonProps)}
+              >
+                Label
+              </CrvButton>
+            ))}
+            <CrvButton {...({ variant: 'elevated', color, disabled: true } as CrvButtonProps)}>
+              Label
+            </CrvButton>
+          </div>
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+/** neutral drops the brand hue — Figma gives it no contained form, only these three. */
+export const NeutralColor: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      {(['outlined', 'text', 'elevated'] as const).map((variant) => (
+        <CrvButton
+          key={variant}
+          {...({ variant, color: 'neutral' } as CrvButtonProps)}
+        >
+          {variant}
+        </CrvButton>
+      ))}
+    </div>
+  ),
+};
+
 export const TextPrimary: Story = { args: { variant: 'text', color: 'primary' } };
 export const TextError: Story = { args: { variant: 'text', color: 'error' } };
 
@@ -141,7 +211,7 @@ export const AllVariants: Story = {
     },
   },
   render: () => {
-    const variants = ['contained', 'outlined', 'text'] as const;
+    const variants = ['contained', 'outlined', 'text', 'elevated'] as const;
     const colorList = ['primary', 'error'] as const;
     const sizes = ['small', 'medium', 'large'] as const;
     return (
@@ -151,7 +221,10 @@ export const AllVariants: Story = {
             <span style={{ width: 90, fontSize: 12 }}>{v}</span>
             {colorList.map((c) =>
               sizes.map((s) => (
-                <CrvButton key={`${v}-${c}-${s}`} variant={v} color={c} size={s}>
+                <CrvButton
+                  key={`${v}-${c}-${s}`}
+                  {...({ variant: v, color: c, size: s } as CrvButtonProps)}
+                >
                   {`${c} ${s}`}
                 </CrvButton>
               )),
