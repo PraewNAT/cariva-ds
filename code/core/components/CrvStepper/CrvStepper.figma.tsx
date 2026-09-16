@@ -24,7 +24,7 @@ figma.connect(
   'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=4714-6331',
   {
     props: {
-      state: figma.enum('status', {
+      state: figma.enum('state', {
         Inactive: 'inactive',
         Active:   'active',
         Complete: 'complete',

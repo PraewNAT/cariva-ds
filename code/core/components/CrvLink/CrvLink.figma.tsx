@@ -26,18 +26,27 @@ figma.connect(
         hover:    false,
         pressed:  false,
       }),
-      startIconVisible: figma.boolean('startIconVisible'),
-      endIconVisible:   figma.boolean('endIconVisible'),
+      // Figma has a visibility toggle + an instance swap per icon; CrvLink
+      // takes the icon element itself, so emit the swapped icon only when shown.
+      startIcon: figma.boolean('startIconVisible', {
+        true:  figma.instance('startIcon'),
+        false: undefined,
+      }),
+      endIcon: figma.boolean('endIconVisible', {
+        true:  figma.instance('endIcon'),
+        false: undefined,
+      }),
+      children: figma.textContent('label'),
     },
-    example: ({ size, disabled, startIconVisible, endIconVisible }) => (
+    example: ({ size, disabled, startIcon, endIcon, children }) => (
       <CrvLink
         href="#"
         size={size}
         disabled={disabled}
-        startIconVisible={startIconVisible}
-        endIconVisible={endIconVisible}
+        startIcon={startIcon}
+        endIcon={endIcon}
       >
-        Label
+        {children}
       </CrvLink>
     ),
   },

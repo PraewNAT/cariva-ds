@@ -1,7 +1,4 @@
 import figma from '@figma/code-connect';
-import MenuList from '@mui/material/MenuList';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import { CrvMenuItem } from '../CrvMenuItem';
 import { CrvDrawer } from './CrvDrawer';
 
 // Figma node: crv-drawer component
@@ -15,13 +12,7 @@ figma.connect(
     },
     example: ({ children }) => (
       <CrvDrawer open onClose={() => {}}>
-        {children ?? (
-          <MenuList disablePadding>
-            <CrvMenuItem leftIcon={<PersonOutlineIcon fontSize="small" />} rightIconVisible>
-              Menu item
-            </CrvMenuItem>
-          </MenuList>
-        )}
+        {children}
       </CrvDrawer>
     ),
   },

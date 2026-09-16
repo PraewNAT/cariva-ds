@@ -62,13 +62,14 @@ figma.connect(
   'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=4705-20105',
   {
     props: {
-      showDescription: figma.boolean('descriptionVisible'),
+      main: figma.textContent('Head'),
+      description: figma.boolean('descriptionVisible', {
+        true:  figma.textContent('Description'),
+        false: undefined,
+      }),
     },
-    example: ({ showDescription }) => (
-      <CrvTableTextCell
-        main="Main text"
-        description={showDescription ? 'Description' : undefined}
-      />
+    example: ({ main, description }) => (
+      <CrvTableTextCell main={main} description={description} />
     ),
   },
 );
