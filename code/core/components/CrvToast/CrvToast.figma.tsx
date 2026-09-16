@@ -32,16 +32,21 @@ figma.connect(
         true: figma.instance('↳Instance'),
         false: undefined,
       }),
-      showClose: figma.boolean('On Close?'),
+      // Code Connect allows no logic in the example, so the handler itself is
+      // mapped here — present when the toggle is on, absent when it is off.
+      onClose: figma.boolean('On Close?', {
+        true: () => {},
+        false: undefined,
+      }),
     },
-    example: ({ variant, severity, title, description, action, showClose }) => (
+    example: ({ variant, severity, title, description, action, onClose }) => (
       <CrvToast
         variant={variant}
         severity={severity}
         title={title}
         description={description}
         action={action}
-        onClose={showClose ? () => {} : undefined}
+        onClose={onClose}
       />
     ),
   },
