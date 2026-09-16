@@ -66,6 +66,20 @@ git diff --name-only main...HEAD | grep "code/core/components/"
   ```
 - ถ้ายัง TODO → flag "code connect: node URL missing"
 
+### 3. ตรวจไฟล์ที่ generate — ทำครั้งเดียวต่อ PR
+
+ถ้า PR แตะ `tokens.json` หรือ `code/core/` ให้รัน:
+
+```bash
+npm run tokens:check   # tokens.ts colors + generatedPalette.ts ตรงกับ tokens.json ไหม
+npm run export:check   # export/cariva-ds-dev-export/ และ zip ตรงกับ code/core ไหม
+```
+
+- `tokens:check` fail → flag "tokens.ts out of sync — run `npm run tokens:generate`"
+- `export:check` fail → flag "dev export stale — run `npm run export:dev` + เขียน entry ใน `export/cariva-ds-dev-export/CHANGELOG.md`"
+- **อย่าข้ามข้อนี้แม้ PR จะเล็ก** — package นี้เคยค้างที่ 2026-06-19 นาน 3 เดือนเพราะไม่มีใครรัน ทำให้ใครที่ใช้ `apply.sh` ได้ brand primary `#2563eb` แทน `#1789fa`
+- ถ้าเครื่องไม่มี Node → `export:check` ยังรันได้ (bash ล้วน) แต่ `tokens:check` ข้ามได้ ให้แจ้งใน report ว่า "tokens:check skipped — no Node" ห้ามรายงานว่าผ่าน
+
 ---
 
 ## Report Format
@@ -85,8 +99,12 @@ Components changed: CrvLink, CrvButton
 ── CrvButton ─────────────────────────
 ✅ All checks passed
 
+── Generated files ───────────────────
+✅ tokens:check
+❌ export:check — ds/components/CrvLink/CrvLink.tsx differs
+
 ──────────────────────────────────────
-Result: ❌ NOT READY — 2 issues to fix
+Result: ❌ NOT READY — 3 issues to fix
 ```
 
 ---
