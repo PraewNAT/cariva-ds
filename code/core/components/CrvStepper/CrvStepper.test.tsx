@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { CrvStepperMarker } from './CrvStepperMarker';
-import { getStepIconColors } from './crvStepperStyles';
+import { getStepIconColors, getStepTitleColor } from './crvStepperStyles';
 import { colors } from '../../tokens';
 import type { CrvStepperMarkerStatus } from './CrvStepper.types';
 
@@ -40,6 +40,24 @@ describe('CrvStepperMarker', () => {
     it('treats the step state `inactive` as the marker status `default`', () => {
       expect(getStepIconColors('inactive')).toEqual(getStepIconColors('default'));
     });
+  });
+
+  describe('step title colours', () => {
+    it.each(['inactive', 'active', 'complete'] as const)(
+      '%s reads at full contrast',
+      (state) => {
+        expect(getStepTitleColor(state)).toBe(colors.content.primary);
+      },
+    );
+
+    it.each(['error', 'warning', 'info', 'success'] as const)(
+      '%s carries the status colour',
+      (severity) => {
+        expect(getStepTitleColor(severity)).toBe(
+          colors.status[severity].onSurface.default,
+        );
+      },
+    );
   });
 
   describe('content axis', () => {

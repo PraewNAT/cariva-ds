@@ -10,6 +10,8 @@ export const STEPPER_ICON_SIZE = 24;
 /** Figma nests a 20px glyph inside the 24px circle. */
 export const STEPPER_ICON_GLYPH_SIZE = 20;
 export const STEPPER_COMPACT_WIDTH = 400;
+/** MUI v7 renders `StepLabel`'s optional slot unwrapped, so the step supplies this hook. */
+export const OPTIONAL_CLASS = 'crv-step-optional';
 
 /**
  * Figma `crv-stepper-marker`: every status paints a filled 24px circle. Only
@@ -59,8 +61,11 @@ export function getStepIconColors(state: CrvStepState | CrvStepperMarkerStatus) 
   }
 }
 
+/**
+ * Title and `Optional` always share one colour — Figma sets both from the same
+ * token in all seven states, including `inactive`, which is as dark as the rest.
+ */
 export function getStepTitleColor(state: CrvStepState): string {
-  if (state === 'inactive') return colors.content.secondary;
   if (state === 'error') return colors.status.error.onSurface.default;
   if (state === 'warning') return colors.status.warning.onSurface.default;
   if (state === 'info') return colors.status.info.onSurface.default;
@@ -98,33 +103,33 @@ export function getStepLabelSx(
   textAlign: CrvStepTextAlign,
 ): SxProps<Theme> {
   return {
-    '& .MuiStepLabel-label': {
-      color:         getStepTitleColor(state),
-      fontFamily:    typography.fontFamily.sans,
-      fontSize:      typography.fontSize.label.medium,
-      lineHeight:    `${typography.lineHeight.label.medium}px`,
-      fontWeight:    typography.fontWeight.regular,
-      textAlign:     textAlign === 'center' ? 'center' : 'left',
-      marginTop:     textAlign === 'center' ? `${spacing.sm}px` : 0,
+    // Figma stacks title over optional with no gap between them.
+    '& .MuiStepLabel-labelContainer': {
+      display:       'flex',
+      flexDirection: 'column',
+      gap:           0,
     },
-    '& .MuiStepLabel-label.Mui-active': {
-      color:      getStepTitleColor('active'),
-      fontWeight: typography.fontWeight.regular,
-    },
-    '& .MuiStepLabel-label.Mui-completed': {
-      color:      getStepTitleColor('complete'),
-      fontWeight: typography.fontWeight.regular,
-    },
+    '& .MuiStepLabel-label, & .MuiStepLabel-label.Mui-active, & .MuiStepLabel-label.Mui-completed':
+      {
+        color:      getStepTitleColor(state),
+        fontFamily: typography.fontFamily.sans,
+        fontSize:   typography.fontSize.label.medium,
+        lineHeight: `${typography.lineHeight.label.medium}px`,
+        fontWeight: typography.fontWeight.medium,
+        textAlign:  textAlign === 'center' ? 'center' : 'left',
+        marginTop:  textAlign === 'center' ? `${spacing.sm}px` : 0,
+      },
     '& .MuiStepLabel-label.Mui-error': {
       color: colors.status.error.onSurface.default,
     },
-    '& .MuiStepLabel-optional': {
-      color:         getStepTitleColor(state),
-      fontFamily:    typography.fontFamily.sans,
-      fontSize:      typography.fontSize.body.small,
-      lineHeight:    `${typography.lineHeight.body.small}px`,
-      fontWeight:    typography.fontWeight.regular,
-      marginTop:     `${spacing['2xs']}px`,
+    [`& .${OPTIONAL_CLASS}`]: {
+      display:    'block',
+      color:      getStepTitleColor(state),
+      fontFamily: typography.fontFamily.sans,
+      fontSize:   typography.fontSize.caption.caption,
+      lineHeight: `${typography.lineHeight.caption.caption}px`,
+      fontWeight: typography.fontWeight.regular,
+      textAlign:  textAlign === 'center' ? 'center' : 'left',
     },
   };
 }

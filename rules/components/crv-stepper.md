@@ -100,8 +100,15 @@
 | Marker Error / Warning / Info / Success BG | `color/status/{severity}/on-surface/default` |
 | Marker content บนพื้น status ทุกสี | `color/content/on-brand` (ขาว) |
 | Step Complete icon | `color/content/on-brand` |
-| Step title default | `color/content/secondary` |
-| Step title active | `color/content/primary` |
+| Step title + Optional (Inactive / Active / Complete) | `color/content/primary` |
+| Step title + Optional (Error / Warning / Info / Success) | `color/status/{severity}/on-surface/default` |
+
+### Typography
+| Element | Style |
+|---|---|
+| Step title | `typography/label/medium` — 14/20 **Medium (500)** |
+| Optional | `typography/caption/caption` — 12/16 Regular |
+| ระยะห่าง title ↔ Optional | 0 (Content frame gap = 0) |
 | Connector line | `color/border/default` |
 | Error state | `color/status/error/on-surface/default` |
 | Warning state | `color/status/warning/on-surface/default` |
@@ -135,6 +142,4 @@
 
 ## Needs designer review
 
-- `crv-stepper-base` state=Inactive: `Step title` ใช้ `color/content/secondary` แต่ `Optional` ใช้ `color/content/primary` — ทำให้ข้อความประกอบเข้มกว่าหัวข้อ ส่วน state อื่นทั้ง 6 ตัว `Optional` ใช้สีเดียวกับ `Step title` เสมอ
-
-> ✅ เคลียร์แล้ว (2026-09-16): `state=Info` ใช้ `color/status/info/on-surface/default` ทั้ง `text=Left` และ `text=Center` แล้ว · `crv-stepper-desktop` ถูกลบออกจากไฟล์แล้ว ทั้งหน้า Stepper ไม่เหลือ `padding: 7` หรือ `Ellipse 1` อีก
+> ✅ เคลียร์แล้ว (2026-09-16): `state=Inactive` ให้ `Step title` เป็น `color/content/primary` เท่ากับ state อื่นแล้ว ทั้ง 14 variants ใช้สีเดียวกันระหว่าง title กับ Optional · `state=Info` ใช้ `color/status/info/on-surface/default` ทั้ง `text=Left` และ `text=Center` แล้ว · `crv-stepper-desktop` ถูกลบออกจากไฟล์แล้ว ทั้งหน้า Stepper ไม่เหลือ `padding: 7` หรือ `Ellipse 1` อีก

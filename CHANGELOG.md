@@ -104,6 +104,13 @@ Figma มี 7 ปุ่ม แต่โค้ดมีแค่ 4 และ 2 �
 - Storybook แสดงครบทั้ง 14 variants แล้ว (เดิมมีแค่ 2) · Code Connect map แกนใหม่ครบ ตรวจ parse ผ่าน
 - **เพิ่ม `CrvStepper.test.tsx` (16 test)** ล็อกตารางสีไว้ทั้งหมด — drift แบบนี้จะไม่เงียบอีก
 
+### ✏️ Stepper — สี title ของ Inactive และ Optional ที่ไม่เคยถูก style เลย
+
+- **แก้ใน Figma: `state=Inactive` ให้ `Step title` เป็น `color/content/primary`** เท่ากับ state อื่น (เดิมเป็น `content/secondary` ทำให้จางกว่าคำว่า Optional ข้างล่างมันเอง) ตอนนี้ทั้ง 14 variants ใช้สีเดียวกันระหว่าง title กับ Optional เสมอ · sync เข้าโค้ดแล้ว
+- **`Optional` ไม่เคยรับ style ที่เขียนไว้เลย** — กฎในโค้ดชี้ไปที่ `.MuiStepLabel-optional` แต่ MUI v7 วางข้อความนั้นเป็น text node เปล่าๆ ไม่มี class ให้จับ ทั้ง block เลยเป็น dead code มาตลอด · ครอบด้วย `<span class="crv-step-optional">` เองแล้ว
+- ผลที่ตามมาจากข้อบน: **`Optional` ใช้ขนาดผิด** — เดิมตั้งใจให้เป็น `body/small` (12/18) แต่ Figma ใช้ `caption/caption` (12/16) และ**ไม่มีระยะห่าง**จาก title (โค้ดใส่ margin-top 2px ไว้) ตอนนี้ตรงแล้ว
+- **น้ำหนักฟอนต์ของ Step title ผิด** — Figma ใช้ `typography/label/medium` ซึ่งเป็น **Medium (500)** โค้ดใช้ Regular (400)
+
 ### 🔄 Code
 
 - **`CrvToast` เขียนใหม่ให้ตรงกับ `crv-toast-standard` ตัวใหม่** — เดิมเป็น `variant=primary|secondary` + severity 4 แบบ ไม่มี Description และปุ่ม Action ส่วน Code Connect ยังชี้ไป component ที่ถูกลบไปแล้ว
