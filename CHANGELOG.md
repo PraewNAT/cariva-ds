@@ -30,12 +30,55 @@
 - **`Inactive` กับ `Active` เคยหน้าตาเหมือนกันเป๊ะ** — เพิ่ม `status=Active` ให้ `crv-stepper-marker` (พื้น `color/brand/primary/on-surface/muted` เลข `color/brand/primary/on-surface/default`) ตอนนี้แยกออกจาก `Default` ชัดเจน
 - **step 2 ใน `crv-stepper` เป็น `Inactive` ผิด 9 variants** และเลข step ค้างเป็น "1" อีก 4 จุด — แก้ให้ทุก variant เป็น Complete → Active(2) → Inactive(3) เหมือนกันหมด
 
+### 🧰 Tooling
+
+- **`npm run tokens:generate` ไม่มีอยู่จริง** ทั้งที่ README, `tokens.ts` และ `generatedPalette.ts` สั่งให้รัน — เพิ่มแล้ว พร้อม `tokens:check`
+- **`generate-tokens.js` จะลบ typography ทั้งหมดถ้ามีคนรัน** — มันเขียน `tokens.ts` ใหม่ทั้งไฟล์จาก template ที่ค้างมาตั้งแต่ มิ.ย. (ไม่มี `fontFamily.ui`/`prose`, display scale เก่า, label line-height ผิด) แก้ให้แทนที่เฉพาะ block `colors` ส่วนที่เหลือไม่แตะ
+- **`export/cariva-ds-dev-export/` ค้างอยู่ที่ 2026-06-19** — ไม่มี script สร้าง ทำมือครั้งเดียวแล้วไม่มีใคร rebuild อีก เพิ่ม `npm run export:dev` / `export:check` และใส่ใน `pr-checklist`
+- **`package.json` ของ DS ถูกเขียนทับด้วยของ `@agent/peer-bridge` เมื่อ 2026-06-26** (`78b5615`) ทำให้ script `test`, `test:run`, `code-connect:dry-run`, `code-connect:publish` หายไป — skill `crv-component-code` สั่งให้รัน `code-connect:publish` ทุกครั้ง แต่มันไม่มีอยู่ กู้คืนแล้ว
+- **กู้ `@figma/code-connect` คืนเข้า devDependencies** (`^1.5.3`) — หายไปตอน `package.json` โดนทับ ทั้งที่ `.figma.tsx` 44 ไฟล์ยัง import อยู่
+- **ผลตรวจครั้งแรกหลังแก้ทั้งหมด:** `tokens:check` ✅ · `export:check` ✅ · `test:run` ✅ 36 ไฟล์ / 199 test · `typecheck:ds` ❌ 19 error เดิมทั้งหมด ไม่มี error ใหม่จากงานรอบนี้
+- **`npm run typecheck` ไม่เคยตรวจ `code/` เลยตั้งแต่วันนั้น** — `tsconfig.json` ก็ถูกเขียนทับเหมือนกัน ตอนนี้ครอบแค่ `src/` ของ peer-bridge เพิ่ม `tsconfig.ds.json` (config เดิมก่อนถูกทับ) + `npm run typecheck:ds` แยกไว้ ไม่แตะของ peer-bridge
+
+### 🎨 Icon
+
+- **ไอคอนทั้งไลบรารีเชื่อม Code Connect แล้ว — 1,076 จาก 1,077 ชุด × 5 style** เดิม Dev Mode แสดงไอคอนเป็น instance ที่ไม่มีชื่อ ตอนนี้โชว์เป็น `<ArrowBackRounded />` ตาม style ที่เลือกใน Figma สร้างด้วย `npm run icons:connect` ซึ่งดึงรายชื่อจาก Figma เอง ไอคอนใหม่ไม่ต้อง map มือ ข้ามแค่ `flags` เพราะเป็นชุดธงชาติ ไม่ใช่ไอคอน
+- **`chevron-up` / `chevron-down` → `ExpandLess` / `ExpandMore`** เทียบ path แล้วตรงกันทั้ง filled และ rounded — `chevron-down` ถูกใช้ 25 จุดใน Button, Breadcrumb, Accordion, Dropdown
+- **เพิ่ม `code/core/icons/`** — ไอคอน 9 ชุด × 5 style ที่ Figma ใช้แต่ MUI ไม่มี: 8 ชุดถูกตัดออกจาก MUI ตั้งแต่ v5 (`eco`, `polymer`, `amp-stories`, `exposure-*`) และ `dock-to-right` ที่มาจาก Material Symbols สร้างจาก vector ใน Figma ด้วย `npm run icons:custom` ใช้ `createSvgIcon` ของ MUI สีตาม `currentColor` เหมือนไอคอนอื่น มี test ครอบทั้ง 45 ตัว
+- **`Component 1` / `Component 2` → `picture-in-picture` / `picture-in-picture-alt`** (Design System Owner แก้ใน Figma) — ชุดเดิม style filled/outlined สลับกันระหว่างสองชุด ชุดใหม่ถูกต้องครบ 5 style
+- **จัด 4 ชุดให้เข้ากับไลบรารี** — `picture-in-picture`, `picture-in-picture-alt`, `arrow-circle-up`, `dock-to-right` เปิด "Include stroke in layout" ไว้ ทำให้ set ใหญ่กว่าตัวอื่น 2px และสีเส้นประไม่ตรง ตอนนี้ครบ 1,076 ชุดเหมือนกันหมด
+- `CrvLink` Code Connect เคยแสดง `startIconVisible` ซึ่งไม่มีใน `CrvLink` ตอนนี้แสดง `startIcon={<ไอคอนจริง />}`; `CrvTableTextCell` และ `CrvDrawer` เคยถูกข้ามตอน publish เพราะมีเงื่อนไขในตัวอย่าง แก้แล้ว; `CrvButton` ชี้ไปที่ section แทน component set มาตั้งแต่ มิ.ย. แก้แล้ว
+
+### 🎨 Token
+
+- **Status border tokens ครบชุด — `color/status/{error,warning,info,success}/border/default|strong`** เดิมมีไม่ครบและไม่เป็นแพทเทิร์นเดียวกัน (error มีแค่ `strong`, info ไม่มีเลย, success/warning มีแค่ `default` แต่ใช้ step 700/600 ซึ่งเข้มเท่าพื้นทึบ) ตอนนี้ตามแพทเทิร์นเดียวกับ border ตระกูลอื่นทั้งหมด: `default` = hue/300, `strong` = hue/500 ตั้ง scope เป็น stroke อย่างเดียว
+  - เปลี่ยนค่า 2 ตัว: `success/border/default` emerald/700 → **emerald/300**, `warning/border/default` amber/600 → **amber/300** — ตรวจทั้งไฟล์ Figma และโค้ดแล้ว ไม่มีที่ไหนใช้สองตัวนี้
+  - `error/border/strong` (red/500) มีใน Figma มาตลอดแต่ไม่เคยถูก sync ลง `tokens.json` — เพิ่มแล้ว
+  - แก้กฎข้อ 7 ใน `rules/DESIGN.md` ที่เคยห้ามสร้าง status border token (Design System Owner อนุมัติ)
+- **Effect style ใหม่ `shadow/status/{error,warning,info,success,notification}`** — เงานุ่ม 3 ชั้น (y 8/−2/2, blur 8/8/4, spread 0/2/0, 6%/4%/12%) สีตาม `status/*/on-surface/default`; `notification` ใช้สีฐานเดียวกับ `shadow/*` (`#1e3a8a`) ให้เข้ากับพื้น neutral
+
+### 🔔 Alert (แทน `crv-toast-standard` — Figma เท่านั้น ยังไม่มีในโค้ด)
+
+- **ย้าย `<Alert>` (`6413:55828`) จาก MUI kit มาใช้ของ DS ทั้งหมด** — 15 variants: `Severity` (Error, Warning, Info, Success, Notification) × `Variant` (Filled, Outlined, Standard) ไม่เหลือ component, ตัวแปร หรือ style จาก library อื่นเลย
+  - ไอคอน → ไลบรารีเรา 24px เทียบรูปทรงกับของเดิมทีละเส้น (warning แบบเส้นใช้ `report-problem` outlined ตามค่า default ของ MUI Alert)
+  - ปุ่ม Action → `crv-button-standard` text/neutral/small, ปุ่มปิด → `crv-button-icon` ghost/neutral/small + `close`; ช่องสลับปุ่ม Action รับเฉพาะ `crv-button-standard`
+  - สี, เส้นขอบ (`status/*/border/default|strong`), text style `label/large` + `label/medium`, spacing ทั้งหมด, `radius/12`, padding บน-ล่าง `spacing/xs`
+  - **เพิ่ม `Severity=Notification`** ตามสีของ toast notification เดิม: ไอคอน/ปุ่มปิด `brand/primary`, พื้นและเส้นขอบเป็น neutral — Filled `bg/white` + `shadow/md`, Outlined `neutral/border/strong`, Standard `neutral/on-surface/subtle` + `neutral/border/default`
+- ปุ่มบนพื้นทึบ (Filled) ตั้งสีทับเป็น `content/inverse` เพราะปุ่มใน DS ยังไม่มีสีแบบขาวบนพื้นสี
+- **ตั้งชื่อเป็น `crv-toast-standard` แทนตัวเดิม** (Design System Owner ลบตัวเก่า `4165:5387` แล้ว) และอัปเดต `Doc — crv-toast-standard` (เดิมชื่อ `crv-alert-standard`): เนื้อหาใหม่ทั้งหมด, ส่วน Variant เป็น 3 คอลัมน์, ตัวอย่างครบทั้ง 15 variant + ตัวอย่างที่เปิดทุกส่วน, แทนตัวอย่าง 13 ชิ้นที่ยังชี้ไป component ที่ถูกลบ
+- แก้ bug ที่เกิดตอนเพิ่ม Notification: variant ที่ก็อปมาไม่ได้ต่อกับ property (toggle Action / ปุ่มปิด / Title / Description และช่องสลับปุ่ม) ตอนนี้ทั้ง 15 variant ต่อเหมือนกันหมด
+- ⚠️ **`CrvToast.figma.tsx` ยังชี้ไปที่ `4165:5387` ซึ่งถูกลบแล้ว** — publish Code Connect รอบหน้าจะ fail จนกว่าจะอัปเดตโค้ด `CrvToast` ให้ตรง
+
 ### ⚠️ ยังค้าง
 
 - `CrvStepperMarker` ใน code รองรับแค่ `state='default' | 'done'` แต่ Figma มี `status` 7 ค่า + แกน `content` — Code Connect map เฉพาะ `Default` / `Done`
 - `crv-stepper-base` `state=Info`: `text=Left` ใช้ `color/brand/primary/on-surface/default` แต่ `text=Center` ใช้ `color/status/info/on-surface/default`
 - `crv-stepper-desktop` ยังเป็น instance จาก DS อื่น — เป็นที่เดียวที่เหลือ `padding: 7` (2 จุด) และ `Ellipse 1` (1 จุด) ในหมวด Stepper
-- `export/cariva-ds-dev-export/` ยังเป็น snapshot ชื่อเก่า — รอ regenerate
+- **type error เดิม 19 จุด** ที่ `typecheck:ds` เจอ — ทั้งหมดมีอยู่ก่อนแล้ว (เทียบกับ `d828de9` ตรงกันทุกจุด) ส่วนใหญ่อยู่ใน `*.stories.tsx` เช่น `CrvModal` ขาด prop `open` 5 จุด, `CrvSidebar.stories.tsx` เรียก `colors.bg.page` ที่ไม่มีแล้ว, `CrvTabs.stories.tsx` 2 จุด และ 1 จุดใน `CrvLink.figma.tsx`
+- **`CrvStepper` ไม่มี test** — `test:run` ผ่านทั้ง 36 ไฟล์ แต่ไม่มีไฟล์ไหนครอบ Stepper
+- **`npm audit` รายงาน 10 ช่องโหว่** (critical 1, high 2) ใน dependency — ยังไม่แก้ เพราะ `audit fix --force` จะอัปเกรดข้าม major version
+- **Code Connect ยัง publish/dry-run ไม่ได้** — ต้องมี `FIGMA_ACCESS_TOKEN` ใน `.env.local` ซึ่งยังไม่มีในเครื่อง
+- **เวอร์ชัน MUI ขัดกันเอง 3 ที่** — `package.json` `^7.1.0`, `code/core/CLAUDE.md` บอก v9, README ของ export บอก `^6.1.6` และ `@mui/x-date-pickers` ถูกลดจาก `^8.29.0` → `^7.23.3` ตอนโดนทับ ต้องให้ dev ยืนยันว่าใช้เวอร์ชันไหน
 
 ---
 

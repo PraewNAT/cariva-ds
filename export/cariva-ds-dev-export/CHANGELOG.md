@@ -1,6 +1,6 @@
 # Changelog — cariva-ds-dev-export
 
-## 2026-09-09
+## 2026-09-11
 
 Refreshed from `code/core/` — the previous bundle was a 2026-06-19 snapshot and
 had drifted badly from Figma.
@@ -18,6 +18,20 @@ had drifted badly from Figma.
   deprecated aliases
 - **`CrvTabsStandard` gained `size="small"`**
 - **44 component folders** — unchanged (the 2026-06-19 entry said 45, but the bundle has always held 44)
+- **README font guidance rewritten** — it said the DS uses IBM Plex Sans Thai
+  only. `carivaApp` actually renders Aktiv Grotesk Thai and Malila, which come
+  from an Adobe Fonts kit that must be linked in `<head>`; without it the app
+  silently falls back to IBM Plex
+- **Status border tokens completed** — `colors.status.{error,warning,info,success}.border.default|strong`
+  (300 / 500 steps). `success.border.default` and `warning.border.default` changed
+  from the dark 700/600 steps to 300
+- **New `ds/icons/`** — 9 icons in 5 styles each that the Figma library uses but
+  `@mui/icons-material` doesn't ship (`Eco`, `Polymer`, `AmpStories`,
+  `ExposureNeg1/2`, `ExposurePlus1/2`, `ExposureZero`, `DockToRight`).
+  Import them from `@/ds`; every other icon still comes from
+  `@mui/icons-material`
+- **Bundle is now built by `npm run export:dev`** in the DS repo, and
+  `npm run export:check` fails when it goes stale — don't edit `ds/` by hand
 
 
 ## 2026-06-19

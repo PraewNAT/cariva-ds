@@ -46,8 +46,6 @@ export const colors = {
   },
   content: {
     primary: '#0f172a',
-    // Moved slate/600 → slate/500 in Figma on 2026-08-31. Intentionally the
-    // same value as `placeholder` — confirmed with the Design System Owner.
     secondary: '#64748b',
     placeholder: '#64748b',
     disabled: '#94a3b8',
@@ -103,7 +101,8 @@ export const colors = {
         strong: '#065f46',
       },
       border: {
-        default: '#047857',
+        default: '#6ee7b7',
+        strong: '#10b981',
       },
     },
     warning: {
@@ -119,7 +118,8 @@ export const colors = {
         strong: '#b45309',
       },
       border: {
-        default: '#d97706',
+        default: '#fcd34d',
+        strong: '#f59e0b',
       },
     },
     error: {
@@ -134,6 +134,10 @@ export const colors = {
         default: '#dc2626',
         strong: '#b91c1c',
       },
+      border: {
+        default: '#fca5a5',
+        strong: '#ef4444',
+      },
     },
     info: {
       onSurface: {
@@ -146,6 +150,10 @@ export const colors = {
       content: {
         default: '#0284c7',
         strong: '#0369a1',
+      },
+      border: {
+        default: '#7dd3fc',
+        strong: '#0ea5e9',
       },
     },
   },
