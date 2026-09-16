@@ -54,7 +54,8 @@
 | Outlined เส้นขอบ (1px) | `color/status/{severity}/border/strong` |
 | Standard พื้น | `color/status/{severity}/on-surface/subtle` |
 | Standard เส้นขอบ (1px) | `color/status/{severity}/border/default` |
-| Standard เงา | `shadow/status/{severity}` |
+| Standard เงา | `shadow/status/{severity}` — Notification ใช้ `shadow/status/notification` |
+| Notification + Filled เงา | `shadow/md` (สีพื้นฐาน navy ไม่ใช่เงาสีสถานะ) |
 | Outlined / Standard icon | `color/status/{severity}/content/default` |
 | Title | `color/content/primary` · Description `color/content/secondary` |
 | Notification | พื้น/เส้นขอบ `color/neutral/*` · icon `color/brand/primary/on-surface/default` · Filled ใช้ `color/bg/white` |

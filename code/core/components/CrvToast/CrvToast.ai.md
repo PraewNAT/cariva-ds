@@ -37,6 +37,7 @@ Toast for feedback and notification messages.
 - filled → `status/{severity}/on-surface/default` + `content/inverse`
 - outlined → `status/{severity}/border/strong` 1px + `content/primary` / `content/secondary`
 - standard → `status/{severity}/on-surface/subtle` + `border/default` 1px + `shadow/status/{severity}`
+- notification filled → `bg/white` + `shadow/md` (พื้นฐาน navy ไม่ใช่เงาสีสถานะ) · notification standard → `shadow/status/notification`
 - notification → `neutral/*` surfaces and borders, `brand/primary` icon
 
 ## AI Implementation Rules

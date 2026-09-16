@@ -6,7 +6,10 @@
  * elevations used by status surfaces (toast/alert).
  */
 
-const BASE = 'rgba(30, 58, 138, 0.25)'; // #1e3a8a — the shadow colour of every shadow/* style
+/** #1e3a8a — the shadow colour of every `shadow/*` style, and of `shadow/status/notification`. */
+export const SHADOW_BASE_COLOR = '#1e3a8a';
+
+const BASE = 'rgba(30, 58, 138, 0.25)';
 
 export const shadows = {
   sm: `0 1px 2px 0 ${BASE}`,

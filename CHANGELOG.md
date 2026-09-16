@@ -80,6 +80,14 @@ Figma มี 7 ปุ่ม แต่โค้ดมีแค่ 4 และ 2 �
 - ตรวจค่าที่เบราว์เซอร์คำนวณจริงแล้ว **ทั้ง 5 component ตรงกับ Figma ครบทุกขนาด**
 - อัปเดตตารางขนาดใน `rules/components/crv-button-{standard,icon,split}.md`, `crv-link.md` และ `.ai.md` ที่เกี่ยวข้องให้ตรงด้วย
 
+### 🧹 เก็บของค้างใน Figma
+
+- **`crv-button-split` แก้แล้วฝั่ง Figma** — ตรวจครบทั้ง 24 variants: `size=small` frame นอกสูง 32 เท่ากับลูกข้างในแล้ว (เดิม 36 ชนกับ medium) และ padding ของ `trigger` ขนาด medium สมมาตร 8 ทุกด้านแล้ว ตรงกับที่โค้ดเขียนไว้พอดี ไม่ต้องแก้โค้ดเพิ่ม
+- **`crv-stepper-desktop` ถูกลบไปแล้ว** — ทั้งหน้า Stepper ไม่เหลือ `padding: 7` หรือ `Ellipse 1` (ที่เหลือคือ `Ellipse 5` ซึ่งเป็นจุด dot ของ `crv-stepper-compact` ตามดีไซน์)
+- **`crv-stepper-base` state=Info ตรงกันแล้ว** ทั้ง `text=Left` และ `text=Center` ใช้ `color/status/info/on-surface/default`
+- **เงาของ Notification ในโค้ดผิด** — Figma ใช้ `shadow/md` (navy) สำหรับ `filled` และ `shadow/status/notification` (navy โปร่ง 3 ชั้น) สำหรับ `standard` แต่โค้ดย้อมเงาด้วยสี brand ทั้งคู่ · แก้แล้ว พร้อมลบ `statusShadow` ที่เขียนซ้ำไว้ใน `crvToastStyles.ts` ให้ใช้ตัวเดียวจาก `theme/shadows.ts`
+- **แก้ doc ของ Toast ใน Figma** — คำอธิบาย `Variant=Outlined` เขียนว่า "ไม่มีพื้น" ทั้งที่จริงใช้ `color/bg/white`, คำอธิบาย `Variant=Standard` ยังเขียนเส้นขอบ 2px และ Do/Don't ยังเรียกตัวเองว่า "alert" ทั้งที่ component นี้คือ Toast (ข้อห้าม "อย่าใช้ alert แทน Toast" จึงขัดกันเอง) เขียนใหม่ทั้งสามจุด
+
 ### 🔄 Code
 
 - **`CrvToast` เขียนใหม่ให้ตรงกับ `crv-toast-standard` ตัวใหม่** — เดิมเป็น `variant=primary|secondary` + severity 4 แบบ ไม่มี Description และปุ่ม Action ส่วน Code Connect ยังชี้ไป component ที่ถูกลบไปแล้ว
@@ -125,7 +133,7 @@ Figma มี 7 ปุ่ม แต่โค้ดมีแค่ 4 และ 2 �
 
 - `CrvStepperMarker` ใน code รองรับแค่ `state='default' | 'done'` แต่ Figma มี `status` 7 ค่า + แกน `content` — Code Connect map เฉพาะ `Default` / `Done`
 - `crv-stepper-base` `state=Info`: `text=Left` ใช้ `color/brand/primary/on-surface/default` แต่ `text=Center` ใช้ `color/status/info/on-surface/default`
-- `crv-stepper-desktop` ยังเป็น instance จาก DS อื่น — เป็นที่เดียวที่เหลือ `padding: 7` (2 จุด) และ `Ellipse 1` (1 จุด) ในหมวด Stepper
+- ~~`crv-stepper-desktop` ยังเป็น instance จาก DS อื่น — เป็นที่เดียวที่เหลือ `padding: 7` (2 จุด) และ `Ellipse 1` (1 จุด) ในหมวด Stepper~~ → **เคลียร์แล้ว 2026-09-16** component ถูกลบออกจาก Figma ทั้งหน้า Stepper ไม่เหลือทั้งสองอย่างแล้ว
 - **type error เดิม 19 จุด** ที่ `typecheck:ds` เจอ — ทั้งหมดมีอยู่ก่อนแล้ว (เทียบกับ `d828de9` ตรงกันทุกจุด) ส่วนใหญ่อยู่ใน `*.stories.tsx` เช่น `CrvModal` ขาด prop `open` 5 จุด, `CrvSidebar.stories.tsx` เรียก `colors.bg.page` ที่ไม่มีแล้ว, `CrvTabs.stories.tsx` 2 จุด และ 1 จุดใน `CrvLink.figma.tsx`
 - **`CrvStepper` ไม่มี test** — `test:run` ผ่านทั้ง 36 ไฟล์ แต่ไม่มีไฟล์ไหนครอบ Stepper
 - **`npm audit` รายงาน 10 ช่องโหว่** (critical 1, high 2) ใน dependency — ยังไม่แก้ เพราะ `audit fix --force` จะอัปเกรดข้าม major version

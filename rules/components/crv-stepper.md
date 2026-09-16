@@ -124,5 +124,6 @@
 ## Needs designer review
 
 - `CrvStepperMarker` ใน code รองรับแค่ `state='default' | 'done'` ส่วน Figma มี `status` 7 ค่าและแกน `content` — ต้องตัดสินใจว่าจะขยาย props ให้ตรงหรือไม่
-- `crv-stepper-base` state=Info: `text=Left` ใช้ `color/brand/primary/on-surface/default` แต่ `text=Center` ใช้ `color/status/info/on-surface/default` — ต้องเลือกอันเดียว
-- `crv-stepper-desktop` ยังเป็น instance จาก DS อื่น — รอตัดสินใจว่าจะรื้อหรือลบ
+- `crv-stepper-base` state=Inactive: `Step title` ใช้ `color/content/secondary` แต่ `Optional` ใช้ `color/content/primary` — ทำให้ข้อความประกอบเข้มกว่าหัวข้อ ส่วน state อื่นทั้ง 6 ตัว `Optional` ใช้สีเดียวกับ `Step title` เสมอ
+
+> ✅ เคลียร์แล้ว (2026-09-16): `state=Info` ใช้ `color/status/info/on-surface/default` ทั้ง `text=Left` และ `text=Center` แล้ว · `crv-stepper-desktop` ถูกลบออกจากไฟล์แล้ว ทั้งหน้า Stepper ไม่เหลือ `padding: 7` หรือ `Ellipse 1` อีก
