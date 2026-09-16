@@ -16,6 +16,7 @@ Gradient button for AI actions.
 | `size` | `small`, `medium`, `large` | `medium` |
 | `startIcon` / `endIcon` | ReactNode | — |
 | `disabled` | boolean | `false` |
+| `animated` | boolean | `true` |
 
 ## Tokens
 
@@ -29,3 +30,15 @@ Gradient button for AI actions.
 1. Use only for the primary action of an AI feature — never as a general primary button.
 2. One per screen area; it is meant to stand out.
 3. Do not recolour the gradient or swap in status colours.
+4. Leave `animated` on. Set `animated={false}` only to calm a dense area or a row
+   of several decorative buttons — never for accessibility, which
+   `prefers-reduced-motion` already handles.
+
+## Motion
+
+The aurora is code-only — Figma has no animation for this component, so the
+resting frame is what the two match on. Two blurred pseudo-element layers of
+radial blobs drift against each other at 16s and 23s, painted from the same
+three decorative tokens so the navy core survives. Only `transform` animates.
+`animated={false}`, `prefers-reduced-motion: reduce` and `disabled` each fall
+back to the static Figma gradient.

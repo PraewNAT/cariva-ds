@@ -111,6 +111,18 @@ Figma มี 7 ปุ่ม แต่โค้ดมีแค่ 4 และ 2 �
 - ผลที่ตามมาจากข้อบน: **`Optional` ใช้ขนาดผิด** — เดิมตั้งใจให้เป็น `body/small` (12/18) แต่ Figma ใช้ `caption/caption` (12/16) และ**ไม่มีระยะห่าง**จาก title (โค้ดใส่ margin-top 2px ไว้) ตอนนี้ตรงแล้ว
 - **น้ำหนักฟอนต์ของ Step title ผิด** — Figma ใช้ `typography/label/medium` ซึ่งเป็น **Medium (500)** โค้ดใช้ Regular (400)
 
+### ✨ อนิเมชันของ `CrvButtonDecorative` — แสงออโรราไหล
+
+ทำตามแนวคิด "Colorful Buttons" (fluid aurora backdrop) จาก freefrontend แต่**เขียนขึ้นใหม่ด้วย token ของเราเอง** ไม่ได้ก๊อปโค้ดต้นฉบับ และไม่ใช้สีนอกชุด
+
+- เลเยอร์เบลอ 2 ชั้นของ blob วงกลมนุ่มๆ เคลื่อนสวนกันที่ **16s** กับ **23s** — จังหวะเหลื่อมกันจนไม่เห็นรอบซ้ำ
+- **ใช้แค่ 3 token เดิม** (`brand/decorative/gradient/{from,via,to}`) · วาง blob สีกรมไว้ชั้นล่างสุดเพื่อ**รักษาแกนสีเข้มตาม Figma** ไม่ให้ปุ่มซีดกลายเป็นฟ้าทั้งใบ
+- ต้นฉบับใช้ `<div>` 12 ตัว — ของเราอยู่บน pseudo-element 2 ตัวที่ `z-index: -1` ใน stacking context ของปุ่มเอง **ไม่เพิ่ม DOM เลยสักตัว** และตัวอักษรไม่ต้องแย่งลำดับการซ้อน
+- **animate เฉพาะ `transform`** อยู่บน compositor ล้วน ไม่มี repaint ต่อเฟรม
+- หยุดนิ่งเมื่อ `animated={false}`, `prefers-reduced-motion: reduce` หรือ `disabled` — ทุกกรณีตกกลับไปเป็นไล่เฉดนิ่งตาม Figma เป๊ะ
+- เพิ่ม prop `animated` (default `true`) ไว้ปิดตอนหน้าจอแน่นหรือมีปุ่มนี้หลายตัวเรียงกัน
+- story ใหม่ `Animated` + test 7 ตัว · **หมายเหตุ: Figma ไม่มีอนิเมชันของ component นี้ เฟรมหยุดนิ่งคือจุดที่สองฝั่งตรงกัน** บันทึกไว้ใน `rules/components/crv-button-decorative.md` แล้ว
+
 ### 🔄 Code
 
 - **`CrvToast` เขียนใหม่ให้ตรงกับ `crv-toast-standard` ตัวใหม่** — เดิมเป็น `variant=primary|secondary` + severity 4 แบบ ไม่มี Description และปุ่ม Action ส่วน Code Connect ยังชี้ไป component ที่ถูกลบไปแล้ว

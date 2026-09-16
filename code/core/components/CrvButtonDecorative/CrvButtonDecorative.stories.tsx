@@ -21,6 +21,7 @@ const meta: Meta<typeof CrvButtonDecorative> = {
   },
   argTypes: {
     size: { control: 'inline-radio', options: SIZES },
+    animated: { control: 'boolean' },
     disabled: { control: 'boolean' },
     children: { control: 'text' },
     sx: { table: { disable: true } },
@@ -45,6 +46,29 @@ export const AllStates: Story = {
           </CrvButtonDecorative>
           <CrvButtonDecorative size={size} disabled>
             ปิดใช้งาน
+          </CrvButtonDecorative>
+        </Box>
+      ))}
+    </Box>
+  ),
+};
+
+/**
+ * The aurora drifts continuously behind the label — two blurred layers moving
+ * against each other at 16s and 23s, so the pattern never visibly loops. Watch
+ * for a few seconds; hover brings the light forward.
+ */
+export const Animated: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+      {SIZES.map((size) => (
+        <Box key={size} sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <CrvButtonDecorative size={size} startIcon={<AutoAwesomeRoundedIcon />}>
+            สรุปด้วย AI
+          </CrvButtonDecorative>
+          <CrvButtonDecorative size={size} animated={false}>
+            animated={'{false}'}
           </CrvButtonDecorative>
         </Box>
       ))}

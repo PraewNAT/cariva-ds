@@ -2,7 +2,7 @@
 
 import { forwardRef } from 'react';
 import MuiButton from '@mui/material/Button';
-import { getDecorativeSx } from './crvButtonDecorativeStyles';
+import { getDecorativeAuroraSx, getDecorativeSx } from './crvButtonDecorativeStyles';
 import type { CrvButtonDecorativeProps } from './CrvButtonDecorative.types';
 
 /**
@@ -10,7 +10,10 @@ import type { CrvButtonDecorativeProps } from './CrvButtonDecorative.types';
  * see rules/components/crv-button-decorative.md.
  */
 export const CrvButtonDecorative = forwardRef<HTMLButtonElement, CrvButtonDecorativeProps>(
-  function CrvButtonDecorative({ size = 'medium', startIcon, endIcon, children, sx, ...rest }, ref) {
+  function CrvButtonDecorative(
+    { size = 'medium', animated = true, startIcon, endIcon, children, sx, ...rest },
+    ref,
+  ) {
     return (
       <MuiButton
         ref={ref}
@@ -18,7 +21,11 @@ export const CrvButtonDecorative = forwardRef<HTMLButtonElement, CrvButtonDecora
         size={size}
         startIcon={startIcon}
         endIcon={endIcon}
-        sx={[getDecorativeSx(size), ...(Array.isArray(sx) ? sx : sx ? [sx] : [])]}
+        sx={[
+          getDecorativeSx(size),
+          ...(animated ? [getDecorativeAuroraSx()] : []),
+          ...(Array.isArray(sx) ? sx : sx ? [sx] : []),
+        ]}
         {...rest}
       >
         {children}

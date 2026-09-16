@@ -30,6 +30,18 @@
 | มุมโค้ง | `radius/full` · ตัวอักษร `typography/label/medium` |
 | Disabled | พื้น `color/on-surface/action/disabled` · ตัวอักษร `color/content/disabled` (ไม่มีไล่เฉด) |
 
+## Motion (มีเฉพาะในโค้ด)
+
+Figma ไม่มีอนิเมชันของ component นี้ — **เฟรมหยุดนิ่งคือจุดที่ Figma กับโค้ดตรงกัน** ส่วนการเคลื่อนไหวเป็นของฝั่งโค้ดล้วน
+
+- แสงออโรราไหลอยู่เบื้องหลัง label — เลเยอร์เบลอ 2 ชั้นเคลื่อนสวนกันที่ **16 วินาที** กับ **23 วินาที** จังหวะจึงไม่ซ้ำรอบให้เห็น
+- ใช้แค่ 3 token เดิม (`from` / `via` / `to`) ไม่มีสีใหม่ · blob สีกรมอยู่ชั้นล่างเพื่อรักษาแกนสีเข้มตาม Figma
+- อยู่บน pseudo-element `z-index: -1` ใน stacking context ของปุ่มเอง — ไม่เพิ่ม DOM และไม่บังตัวอักษร
+- animate เฉพาะ `transform` เท่านั้น ไม่มี repaint
+- **หยุดนิ่งเมื่อ**: `animated={false}` · `prefers-reduced-motion: reduce` · `disabled`
+
+> `animated={false}` ไว้ใช้ตอนหน้าจอแน่นหรือมีปุ่มนี้หลายตัวเรียงกัน — ไม่ใช่เรื่อง accessibility เพราะ `prefers-reduced-motion` จัดการให้อยู่แล้ว
+
 ## ควรทำ / ไม่ควรทำ
 
 ### ควรทำ
