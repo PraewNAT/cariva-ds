@@ -20,10 +20,17 @@ figma.connect(
         number: 'number',
         icon:   'icon',
       }),
-      icon: figma.instance('icon'),
+      // `icon` is a plain child instance, not an instance-swap property, so
+      // there is nothing to bind to — `figma.instance('icon')` emitted a bare
+      // `icon={}` into the snippet. The consumer passes their own icon; the
+      // number variants take a value instead.
+      value: figma.enum('content', {
+        number: '1',
+        icon:   undefined,
+      }),
     },
-    example: ({ status, content, icon }) => (
-      <CrvStepperMarker status={status} content={content} value="1" icon={icon} />
+    example: ({ status, content, value }) => (
+      <CrvStepperMarker status={status} content={content} value={value} />
     ),
   },
 );
