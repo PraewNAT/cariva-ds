@@ -174,6 +174,12 @@ export function getToastSx(
       padding: `${spacing.xs}px 0 0 ${spacing.lg}px`,
       alignItems: 'flex-start',
       gap: `${spacing.xs}px`,
+      // Figma overrides the action/close colour per variant: on a filled
+      // surface both go inverse, since neither DS button has an on-colour
+      // variant of its own.
+      '& .MuiButtonBase-root': {
+        color: tokens.closeColor,
+      },
     },
     '&.MuiAlert-standard, &.MuiAlert-filled, &.MuiAlert-outlined': {
       backgroundColor: tokens.backgroundColor,
