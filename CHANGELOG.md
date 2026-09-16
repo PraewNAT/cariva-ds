@@ -40,6 +40,19 @@
 - **ผลตรวจครั้งแรกหลังแก้ทั้งหมด:** `tokens:check` ✅ · `export:check` ✅ · `test:run` ✅ 36 ไฟล์ / 199 test · `typecheck:ds` ❌ 19 error เดิมทั้งหมด ไม่มี error ใหม่จากงานรอบนี้
 - **`npm run typecheck` ไม่เคยตรวจ `code/` เลยตั้งแต่วันนั้น** — `tsconfig.json` ก็ถูกเขียนทับเหมือนกัน ตอนนี้ครอบแค่ `src/` ของ peer-bridge เพิ่ม `tsconfig.ds.json` (config เดิมก่อนถูกทับ) + `npm run typecheck:ds` แยกไว้ ไม่แตะของ peer-bridge
 
+### 🆕 Button ที่ขาดไป — ตอนนี้มีในโค้ดครบแล้ว
+
+Figma มี 7 ปุ่ม แต่โค้ดมีแค่ 4 และ 2 ตัวที่มีก็ขาด axis:
+
+- **`CrvButton` เพิ่ม `color="neutral"` และ `variant="elevated"`** — neutral ใช้ได้กับ outlined / text / elevated เท่านั้น (ตรงกับ Figma ที่ไม่มี contained neutral) บังคับด้วย type ไม่ให้เผลอใช้ผิด · elevated = พื้นขาว + เงา `shadow/sm` → hover `shadow/xl` → pressed `shadow/md`
+- **`CrvButtonIcon` เพิ่ม `color="neutral"`** ครบทั้ง contained / outlined / ghost
+- **`CrvButtonDecorative` (ใหม่)** — ปุ่มไล่เฉดสำหรับ action ของ AI, 3 ขนาด + glow ตอน hover
+- **`CrvButtonMic` (ใหม่)** — ปุ่มเลือกไมโครโฟน พร้อมคลื่นเสียง 5 แท่งที่ขยับได้ (เคารพ `prefers-reduced-motion`)
+- **`CrvButtonSplit` (ใหม่)** — action หลัก + ปุ่มเปิดตัวเลือกอื่น ใช้พื้นเดียวกันทั้งก้อนตาม Figma (ไม่ใช่ `ButtonGroup` ของ MUI) บังคับใส่ `triggerLabel` เพราะฝั่งขวาไม่มีข้อความ
+- ทั้ง 3 ตัวใหม่มีครบชุด: types, styles, stories, test, `.ai.md`, doc ใน `rules/components/` และ Code Connect (ตรวจ dry-run ผ่านแล้วทั้งหมด)
+- **เพิ่ม `code/core/theme/shadows.ts`** — เดิมเงาถูก hardcode กระจายตาม component ตอนนี้มี token `shadows.sm|default|md|lg|xl|2xl|inner` ตรงกับ effect style ใน Figma
+- **sync token เพิ่ม 6 ตัว**: `color/brand/decorative/gradient/{from,via,to}` และ `color/status/active/*` ซึ่งมีใน Figma แต่ไม่เคยถูก export
+
 ### 🔄 Code
 
 - **`CrvToast` เขียนใหม่ให้ตรงกับ `crv-toast-standard` ตัวใหม่** — เดิมเป็น `variant=primary|secondary` + severity 4 แบบ ไม่มี Description และปุ่ม Action ส่วน Code Connect ยังชี้ไป component ที่ถูกลบไปแล้ว

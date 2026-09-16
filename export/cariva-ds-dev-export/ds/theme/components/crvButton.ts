@@ -1,6 +1,7 @@
 import type { SxProps, Theme } from '@mui/material/styles';
 import type { CrvButtonColor } from '../../components/CrvButton/CrvButton.types';
 import { getCarivaColors } from '../carivaTokens';
+import { shadows } from '../shadows';
 
 type OutlinedTokens = {
   color: string;
@@ -13,6 +14,16 @@ type OutlinedTokens = {
 
 function outlinedTokens(color: CrvButtonColor, theme?: Theme): OutlinedTokens {
   const c = getCarivaColors(theme);
+  if (color === 'neutral') {
+    return {
+      color: c.neutral.content.default,
+      borderColor: c.neutral.border.default,
+      hoverBg: c.neutral.onSurface.subtle,
+      pressedBg: c.neutral.onSurface.muted,
+      hoverColor: c.neutral.content.default,
+      pressedColor: c.neutral.content.default,
+    };
+  }
   if (color === 'primary') {
     return {
       color: c.brand.primary.content.default,
@@ -77,4 +88,53 @@ export function getCrvButtonIconOutlinedTokens(
   theme?: Theme,
 ): OutlinedTokens {
   return outlinedTokens(color, theme as Theme);
+}
+
+/**
+ * `variant="text"` follows the outlined palette without the border — Figma
+ * gives neutral text buttons the same hover/pressed tints.
+ */
+export function getCrvButtonTextSx(color: CrvButtonColor): SxProps<Theme> {
+  return (theme) => {
+    const tokens = outlinedTokens(color, theme);
+    return {
+      color: tokens.color,
+      backgroundColor: 'transparent',
+      '&:hover': { backgroundColor: tokens.hoverBg, color: tokens.hoverColor },
+      '&:active': { backgroundColor: tokens.pressedBg, color: tokens.pressedColor },
+    };
+  };
+}
+
+/**
+ * `variant="elevated"` is a DS variant, not a MUI one: a white surface that
+ * lifts on hover and settles on press, with the label carrying the colour.
+ */
+export function getCrvButtonElevatedSx(color: CrvButtonColor): SxProps<Theme> {
+  return (theme) => {
+    const c = getCarivaColors(theme);
+    const label =
+      color === 'neutral'
+        ? { rest: c.neutral.content.default, pressed: c.neutral.content.default }
+        : color === 'error'
+          ? { rest: c.status.error.content.default, pressed: c.status.error.content.strong }
+          : { rest: c.brand.primary.content.default, pressed: c.brand.primary.content.strong };
+
+    return {
+      color: label.rest,
+      backgroundColor: c.onSurface.default,
+      boxShadow: shadows.sm,
+      '&:hover': {
+        backgroundColor: c.onSurface.default,
+        boxShadow: shadows.xl,
+        color: label.rest,
+      },
+      '&:active': {
+        backgroundColor: c.onSurface.action.pressed,
+        boxShadow: shadows.md,
+        color: label.pressed,
+      },
+      '&.Mui-disabled, &:disabled': { boxShadow: 'none' },
+    };
+  };
 }

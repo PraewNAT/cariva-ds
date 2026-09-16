@@ -43,6 +43,13 @@ export const colors = {
         strong: '#14b8a6',
       },
     },
+    decorative: {
+      gradient: {
+        from: '#192450',
+        via: '#1789fa',
+        to: '#55ebff',
+      },
+    },
   },
   neutral: {
     onSurface: {
@@ -120,6 +127,15 @@ export const colors = {
       border: {
         default: '#6ee7b7',
         strong: '#10b981',
+      },
+    },
+    active: {
+      onSurface: {
+        default: '#4ade80',
+        muted: '#dcfce7',
+      },
+      content: {
+        default: '#22c55e',
       },
     },
     warning: {
