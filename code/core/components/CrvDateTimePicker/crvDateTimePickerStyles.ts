@@ -56,7 +56,8 @@ export function crvPickerTextFieldSx(
       paddingTop: `${FIELD_PADDING_V[size]}px`,
       paddingBottom: `${FIELD_PADDING_V[size]}px`,
       paddingLeft: `${spacing.lg}px`,
-      paddingRight: `${spacing.md}px`,
+      // Figma's Field pads 16 on both sides (`crv-input-standard`).
+      paddingRight: `${spacing.lg}px`,
       fontFamily: typography.fontFamily.sans,
       fontSize: `${FIELD_FONT_SIZE[size]}px`,
       lineHeight: `${FIELD_LINE_HEIGHT[size]}px`,
@@ -94,8 +95,25 @@ export function crvPickerTextFieldSx(
       },
     },
     '& .MuiInputAdornment-root': {
-      margin: 0,
+      // Figma puts 8 between the content and the trailing icon.
+      margin: `0 0 0 ${spacing.sm}px`,
       color: disabled ? colors.content.disabled : colors.content.secondary,
+      // The open-picker button carries 8px of its own padding, which pushed the
+      // glyph to 20 from the edge instead of 16 and stretched the field past its
+      // 48px height. Strip it and put the hit area back as an overlay, so the
+      // target stays comfortable without moving the icon.
+      '& .MuiIconButton-root': {
+        padding: 0,
+        // MUI passes `edge="end"` to the open-picker button, which adds
+        // `margin-right: -12px` and pulled the glyph to 4 from the edge.
+        marginRight: 0,
+        position: 'relative',
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          inset: `-${spacing.sm}px`,
+        },
+      },
     },
     '& .MuiSvgIcon-root': {
       color: disabled ? colors.content.disabled : colors.content.secondary,
