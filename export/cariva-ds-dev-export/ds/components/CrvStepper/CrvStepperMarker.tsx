@@ -1,38 +1,46 @@
 'use client';
 
-import CheckIcon from '@mui/icons-material/Check';
-import ErrorIcon from '@mui/icons-material/Error';
-import InfoIcon from '@mui/icons-material/Info';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
+import PriorityHighRoundedIcon from '@mui/icons-material/PriorityHighRounded';
 import Box from '@mui/material/Box';
 import { getStepIconSx } from './crvStepperStyles';
-import type { CrvStepIconProps, CrvStepperMarkerProps, CrvStepState } from './CrvStepper.types';
+import type {
+  CrvStepIconProps,
+  CrvStepperMarkerProps,
+  CrvStepperMarkerStatus,
+  CrvStepState,
+} from './CrvStepper.types';
 
-function SemanticStepIcon({ state }: { state: CrvStepState }) {
-  switch (state) {
-    case 'error':
-      return <ErrorIcon />;
-    case 'warning':
-      return <WarningAmberIcon />;
-    case 'info':
-      return <InfoIcon />;
-    case 'success':
-      return <CheckCircleIcon />;
-    default:
-      return null;
-  }
-}
+/**
+ * The icon `crv-stepper-base` swaps into the marker for each state. The marker
+ * set itself ships `panorama-fish-eye` as a placeholder, so this mapping lives
+ * with the step, not with the marker.
+ */
+const STEP_ICON_BY_STATE: Partial<Record<CrvStepState, JSX.Element>> = {
+  complete: <CheckRoundedIcon />,
+  error: <CloseRoundedIcon />,
+  warning: <PriorityHighRoundedIcon />,
+  info: <InfoOutlinedIcon />,
+  success: <CheckRoundedIcon />,
+};
 
 export function CrvStepperMarker({
-  state = 'default',
+  status,
+  content,
   value = 1,
+  icon,
+  state,
 }: CrvStepperMarkerProps) {
-  const visualState: CrvStepState = state === 'done' ? 'complete' : 'inactive';
+  const resolvedStatus: CrvStepperMarkerStatus =
+    status ?? (state === 'done' ? 'done' : 'default');
+  const resolvedContent = content ?? (icon ? 'icon' : 'number');
 
   return (
-    <Box sx={getStepIconSx(visualState)} aria-hidden>
-      {state === 'done' ? <CheckIcon /> : value}
+    <Box sx={getStepIconSx(resolvedStatus)} aria-hidden>
+      {resolvedContent === 'icon' ? (icon ?? <PanoramaFishEyeIcon />) : value}
     </Box>
   );
 }
@@ -54,17 +62,9 @@ export function CrvStepIcon({
           ? 'active'
           : 'inactive');
 
-  const isSemantic = ['error', 'warning', 'info', 'success'].includes(resolvedState);
-
   return (
     <Box sx={getStepIconSx(resolvedState)} aria-hidden>
-      {resolvedState === 'complete' ? (
-        <CheckIcon />
-      ) : isSemantic ? (
-        <SemanticStepIcon state={resolvedState} />
-      ) : (
-        icon
-      )}
+      {STEP_ICON_BY_STATE[resolvedState] ?? icon}
     </Box>
   );
 }

@@ -43,6 +43,13 @@ export const colors = {
         strong: '#14b8a6',
       },
     },
+    decorative: {
+      gradient: {
+        from: '#192450',
+        via: '#1789fa',
+        to: '#55ebff',
+      },
+    },
   },
   neutral: {
     onSurface: {
@@ -118,8 +125,17 @@ export const colors = {
         strong: '#065f46',
       },
       border: {
-        default: '#6ee7b7',
+        default: '#d1fae5',
         strong: '#10b981',
+      },
+    },
+    active: {
+      onSurface: {
+        default: '#4ade80',
+        muted: '#dcfce7',
+      },
+      content: {
+        default: '#22c55e',
       },
     },
     warning: {
@@ -135,7 +151,7 @@ export const colors = {
         strong: '#b45309',
       },
       border: {
-        default: '#fcd34d',
+        default: '#fef3c7',
         strong: '#f59e0b',
       },
     },
@@ -152,7 +168,7 @@ export const colors = {
         strong: '#b91c1c',
       },
       border: {
-        default: '#fca5a5',
+        default: '#fee2e2',
         strong: '#ef4444',
       },
     },
@@ -169,7 +185,7 @@ export const colors = {
         strong: '#0369a1',
       },
       border: {
-        default: '#7dd3fc',
+        default: '#e0f2fe',
         strong: '#0ea5e9',
       },
     },

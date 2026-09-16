@@ -1,49 +1,71 @@
 import type { SxProps, Theme } from '@mui/material/styles';
 import { colors, radius, spacing, typography } from '../../tokens';
-import type { CrvStepState, CrvStepTextAlign } from './CrvStepper.types';
+import type {
+  CrvStepperMarkerStatus,
+  CrvStepState,
+  CrvStepTextAlign,
+} from './CrvStepper.types';
 
 export const STEPPER_ICON_SIZE = 24;
+/** Figma nests a 20px glyph inside the 24px circle. */
+export const STEPPER_ICON_GLYPH_SIZE = 20;
 export const STEPPER_COMPACT_WIDTH = 400;
+/** MUI v7 renders `StepLabel`'s optional slot unwrapped, so the step supplies this hook. */
+export const OPTIONAL_CLASS = 'crv-step-optional';
 
-export function getStepIconColors(state: CrvStepState) {
+/**
+ * Figma `crv-stepper-marker`: every status paints a filled 24px circle. Only
+ * `default` and `active` carry their content in a colour; the rest knock it out
+ * in white.
+ */
+export function getStepIconColors(state: CrvStepState | CrvStepperMarkerStatus) {
   switch (state) {
     case 'active':
+      return {
+        backgroundColor: colors.brand.primary.onSurface.muted,
+        color:           colors.brand.primary.onSurface.default,
+      };
     case 'complete':
+    case 'done':
       return {
         backgroundColor: colors.brand.primary.onSurface.default,
         color:           colors.content.onBrand,
       };
     case 'error':
       return {
-        backgroundColor: 'transparent',
-        color:           colors.status.error.onSurface.default,
+        backgroundColor: colors.status.error.onSurface.default,
+        color:           colors.content.onBrand,
       };
     case 'warning':
       return {
-        backgroundColor: 'transparent',
-        color:           colors.status.warning.onSurface.default,
+        backgroundColor: colors.status.warning.onSurface.default,
+        color:           colors.content.onBrand,
       };
     case 'info':
       return {
-        backgroundColor: 'transparent',
-        color:           colors.status.info.onSurface.default,
+        backgroundColor: colors.status.info.onSurface.default,
+        color:           colors.content.onBrand,
       };
     case 'success':
       return {
-        backgroundColor: 'transparent',
-        color:           colors.status.success.onSurface.default,
+        backgroundColor: colors.status.success.onSurface.default,
+        color:           colors.content.onBrand,
       };
     case 'inactive':
+    case 'default':
     default:
       return {
-        backgroundColor: colors.content.disabled,
-        color:           colors.content.onBrand,
+        backgroundColor: colors.bg.solid,
+        color:           colors.content.secondary,
       };
   }
 }
 
+/**
+ * Title and `Optional` always share one colour — Figma sets both from the same
+ * token in all seven states, including `inactive`, which is as dark as the rest.
+ */
 export function getStepTitleColor(state: CrvStepState): string {
-  if (state === 'inactive') return colors.content.secondary;
   if (state === 'error') return colors.status.error.onSurface.default;
   if (state === 'warning') return colors.status.warning.onSurface.default;
   if (state === 'info') return colors.status.info.onSurface.default;
@@ -51,9 +73,10 @@ export function getStepTitleColor(state: CrvStepState): string {
   return colors.content.primary;
 }
 
-export function getStepIconSx(state: CrvStepState): SxProps<Theme> {
+export function getStepIconSx(
+  state: CrvStepState | CrvStepperMarkerStatus,
+): SxProps<Theme> {
   const palette = getStepIconColors(state);
-  const isSemanticIcon = ['error', 'warning', 'info', 'success'].includes(state);
 
   return {
     width:           STEPPER_ICON_SIZE,
@@ -70,7 +93,7 @@ export function getStepIconSx(state: CrvStepState): SxProps<Theme> {
     lineHeight:      `${typography.lineHeight.caption.caption}px`,
     fontWeight:      typography.fontWeight.regular,
     '& .MuiSvgIcon-root': {
-      fontSize: isSemanticIcon ? STEPPER_ICON_SIZE : 20,
+      fontSize: STEPPER_ICON_GLYPH_SIZE,
     },
   };
 }
@@ -80,33 +103,33 @@ export function getStepLabelSx(
   textAlign: CrvStepTextAlign,
 ): SxProps<Theme> {
   return {
-    '& .MuiStepLabel-label': {
-      color:         getStepTitleColor(state),
-      fontFamily:    typography.fontFamily.sans,
-      fontSize:      typography.fontSize.label.medium,
-      lineHeight:    `${typography.lineHeight.label.medium}px`,
-      fontWeight:    typography.fontWeight.regular,
-      textAlign:     textAlign === 'center' ? 'center' : 'left',
-      marginTop:     textAlign === 'center' ? `${spacing.sm}px` : 0,
+    // Figma stacks title over optional with no gap between them.
+    '& .MuiStepLabel-labelContainer': {
+      display:       'flex',
+      flexDirection: 'column',
+      gap:           0,
     },
-    '& .MuiStepLabel-label.Mui-active': {
-      color:      getStepTitleColor('active'),
-      fontWeight: typography.fontWeight.regular,
-    },
-    '& .MuiStepLabel-label.Mui-completed': {
-      color:      getStepTitleColor('complete'),
-      fontWeight: typography.fontWeight.regular,
-    },
+    '& .MuiStepLabel-label, & .MuiStepLabel-label.Mui-active, & .MuiStepLabel-label.Mui-completed':
+      {
+        color:      getStepTitleColor(state),
+        fontFamily: typography.fontFamily.sans,
+        fontSize:   typography.fontSize.label.medium,
+        lineHeight: `${typography.lineHeight.label.medium}px`,
+        fontWeight: typography.fontWeight.medium,
+        textAlign:  textAlign === 'center' ? 'center' : 'left',
+        marginTop:  textAlign === 'center' ? `${spacing.sm}px` : 0,
+      },
     '& .MuiStepLabel-label.Mui-error': {
       color: colors.status.error.onSurface.default,
     },
-    '& .MuiStepLabel-optional': {
-      color:         getStepTitleColor(state),
-      fontFamily:    typography.fontFamily.sans,
-      fontSize:      typography.fontSize.body.small,
-      lineHeight:    `${typography.lineHeight.body.small}px`,
-      fontWeight:    typography.fontWeight.regular,
-      marginTop:     `${spacing['2xs']}px`,
+    [`& .${OPTIONAL_CLASS}`]: {
+      display:    'block',
+      color:      getStepTitleColor(state),
+      fontFamily: typography.fontFamily.sans,
+      fontSize:   typography.fontSize.caption.caption,
+      lineHeight: `${typography.lineHeight.caption.caption}px`,
+      fontWeight: typography.fontWeight.regular,
+      textAlign:  textAlign === 'center' ? 'center' : 'left',
     },
   };
 }

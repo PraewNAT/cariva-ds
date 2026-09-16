@@ -2,7 +2,7 @@ import type { IconButtonProps as MuiIconButtonProps } from '@mui/material/IconBu
 import type { ReactNode } from 'react';
 
 export type CrvButtonIconVariant = 'contained' | 'outlined' | 'ghost';
-export type CrvButtonIconColor = 'primary' | 'error';
+export type CrvButtonIconColor = 'primary' | 'error' | 'neutral';
 export type CrvButtonIconSize = 'small' | 'medium' | 'large';
 
 export interface CrvButtonIconProps

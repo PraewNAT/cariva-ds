@@ -4,6 +4,7 @@ import { forwardRef } from 'react';
 import MuiLink from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import { getCrvLinkSx } from '../../theme/components/crvLink';
+import { buttonSizing } from '../../theme/buttonSizing';
 import type { CrvLinkProps } from './CrvLink.types';
 
 export const CrvLink = forwardRef<HTMLAnchorElement, CrvLinkProps>(
@@ -20,6 +21,8 @@ export const CrvLink = forwardRef<HTMLAnchorElement, CrvLinkProps>(
     },
     ref,
   ) {
+    const { iconSize } = buttonSizing[size];
+
     return (
       <MuiLink
         ref={ref}
@@ -36,8 +39,8 @@ export const CrvLink = forwardRef<HTMLAnchorElement, CrvLinkProps>(
             sx={{
               display: 'inline-flex',
               alignItems: 'center',
-              width: 20,
-              height: 20,
+              width: iconSize,
+              height: iconSize,
               flexShrink: 0,
               color: 'inherit',
             }}
@@ -52,8 +55,8 @@ export const CrvLink = forwardRef<HTMLAnchorElement, CrvLinkProps>(
             sx={{
               display: 'inline-flex',
               alignItems: 'center',
-              width: 20,
-              height: 20,
+              width: iconSize,
+              height: iconSize,
               flexShrink: 0,
               color: 'inherit',
             }}

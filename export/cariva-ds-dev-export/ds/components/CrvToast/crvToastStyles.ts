@@ -1,5 +1,6 @@
 import type { SxProps, Theme } from '@mui/material/styles';
 import { colors, radius, spacing, typography } from '../../tokens';
+import { SHADOW_BASE_COLOR, shadows, statusShadow } from '../../theme/shadows';
 import type {
   CrvToastLegacyVariant,
   CrvToastSeverity,
@@ -40,21 +41,6 @@ interface SurfaceTokens {
   boxShadow?: string;
 }
 
-function hexToRgba(hex: string, alpha: number): string {
-  const value = hex.replace('#', '');
-  const int = parseInt(value.length === 3 ? value.replace(/./g, (c) => c + c) : value, 16);
-  return `rgba(${(int >> 16) & 255}, ${(int >> 8) & 255}, ${int & 255}, ${alpha})`;
-}
-
-/** shadow/status/* — 3 soft layers, recoloured per severity. */
-function statusShadow(color: string): string {
-  return [
-    `0 8px 8px 0 ${hexToRgba(color, 0.06)}`,
-    `0 -2px 8px 2px ${hexToRgba(color, 0.04)}`,
-    `0 2px 4px 0 ${hexToRgba(color, 0.12)}`,
-  ].join(', ');
-}
-
 /** Notification is neutral: brand icon, neutral surfaces, dark text. */
 function notificationTokens(variant: CrvToastVariant): SurfaceTokens {
   const base = {
@@ -69,13 +55,14 @@ function notificationTokens(variant: CrvToastVariant): SurfaceTokens {
       ...base,
       backgroundColor: colors.bg.white,
       borderWidth: 0,
-      boxShadow: statusShadow(colors.brand.primary.onSurface.default),
+      // Figma gives this one plain `shadow/md`, not a tinted status shadow.
+      boxShadow: shadows.md,
     };
   }
   if (variant === 'outlined') {
     return {
       ...base,
-      backgroundColor: 'transparent',
+      backgroundColor: colors.bg.white,
       borderColor: colors.neutral.border.strong,
       borderWidth: 1,
     };
@@ -84,8 +71,9 @@ function notificationTokens(variant: CrvToastVariant): SurfaceTokens {
     ...base,
     backgroundColor: colors.neutral.onSurface.subtle,
     borderColor: colors.neutral.border.default,
-    borderWidth: 2,
-    boxShadow: statusShadow(colors.brand.primary.onSurface.default),
+    borderWidth: 1,
+    // `shadow/status/notification` is the navy shadow base, not the brand blue.
+    boxShadow: statusShadow(SHADOW_BASE_COLOR),
   };
 }
 
@@ -110,7 +98,7 @@ export function getToastTokens(
 
   if (variant === 'outlined') {
     return {
-      backgroundColor: 'transparent',
+      backgroundColor: colors.bg.white,
       borderColor: status.border.strong,
       borderWidth: 1,
       iconColor: status.content.default,
@@ -123,7 +111,7 @@ export function getToastTokens(
   return {
     backgroundColor: status.onSurface.subtle,
     borderColor: status.border.default,
-    borderWidth: 2,
+    borderWidth: 1,
     iconColor: status.content.default,
     closeColor: colors.neutral.content.default,
     titleColor: colors.content.primary,
@@ -174,6 +162,12 @@ export function getToastSx(
       padding: `${spacing.xs}px 0 0 ${spacing.lg}px`,
       alignItems: 'flex-start',
       gap: `${spacing.xs}px`,
+      // Figma overrides the action/close colour per variant: on a filled
+      // surface both go inverse, since neither DS button has an on-colour
+      // variant of its own.
+      '& .MuiButtonBase-root': {
+        color: tokens.closeColor,
+      },
     },
     '&.MuiAlert-standard, &.MuiAlert-filled, &.MuiAlert-outlined': {
       backgroundColor: tokens.backgroundColor,

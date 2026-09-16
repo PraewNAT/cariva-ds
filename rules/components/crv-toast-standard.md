@@ -28,7 +28,7 @@
 
 - `Filled`: พื้นทึบตาม severity — ใช้เมื่อต้องการเน้นให้เห็นชัดที่สุด
 - `Outlined`: ไม่มีพื้น มีแค่เส้นขอบ 1px — ใช้บนพื้นขาวเมื่อต้องการน้ำหนักเบา
-- `Standard`: พื้นอ่อน + เส้นขอบ 2px + เงา — ใช้เมื่อต้องการแจ้งเตือนแบบนุ่มนวล ไม่รบกวน layout
+- `Standard`: พื้นอ่อน + เส้นขอบ 1px + เงา — ใช้เมื่อต้องการแจ้งเตือนแบบนุ่มนวล ไม่รบกวน layout
 
 ## Sizes
 
@@ -53,8 +53,9 @@
 | Filled text / icon / ปุ่ม | `color/content/inverse` |
 | Outlined เส้นขอบ (1px) | `color/status/{severity}/border/strong` |
 | Standard พื้น | `color/status/{severity}/on-surface/subtle` |
-| Standard เส้นขอบ (2px) | `color/status/{severity}/border/default` |
-| Standard เงา | `shadow/status/{severity}` |
+| Standard เส้นขอบ (1px) | `color/status/{severity}/border/default` |
+| Standard เงา | `shadow/status/{severity}` — Notification ใช้ `shadow/status/notification` |
+| Notification + Filled เงา | `shadow/md` (สีพื้นฐาน navy ไม่ใช่เงาสีสถานะ) |
 | Outlined / Standard icon | `color/status/{severity}/content/default` |
 | Title | `color/content/primary` · Description `color/content/secondary` |
 | Notification | พื้น/เส้นขอบ `color/neutral/*` · icon `color/brand/primary/on-surface/default` · Filled ใช้ `color/bg/white` |

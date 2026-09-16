@@ -32,6 +32,18 @@
 
 สีของ marker ตั้งที่ fill ของ frame ตัวเอง (`cornerRadius: 9999`) ไม่มี layer วงกลมซ้อนข้างใน
 
+`content=icon` ใน component set ใส่ `panorama-fish-eye` ไว้เป็น placeholder เฉยๆ — **ไอคอนจริงมาจาก `crv-stepper-base` ที่ swap เข้าไปตาม state**:
+
+| state | icon | style |
+|---|---|---|
+| Complete / Done | `check` | rounded |
+| Error | `close` | rounded |
+| Warning | `priority-high` | rounded |
+| Info | `info` | **outlined** |
+| Success | `check` | rounded |
+
+`Inactive` และ `Active` ใช้ `content=number` ไม่ใช้ไอคอน
+
 ### crv-stepper-base (`<Step>`)
 | Property | Values |
 |---|---|
@@ -85,11 +97,18 @@
 | Marker Active number | `color/brand/primary/on-surface/default` |
 | Marker Default BG | `color/bg/solid` |
 | Marker Default number | `color/content/secondary` |
+| Marker Error / Warning / Info / Success BG | `color/status/{severity}/on-surface/default` |
+| Marker content บนพื้น status ทุกสี | `color/content/on-brand` (ขาว) |
 | Step Complete icon | `color/content/on-brand` |
-| Step Inactive BG | `color/on-surface/default` |
-| Step Inactive text | `color/content/disabled` |
-| Step title default | `color/content/secondary` |
-| Step title active | `color/content/primary` |
+| Step title + Optional (Inactive / Active / Complete) | `color/content/primary` |
+| Step title + Optional (Error / Warning / Info / Success) | `color/status/{severity}/on-surface/default` |
+
+### Typography
+| Element | Style |
+|---|---|
+| Step title | `typography/label/medium` — 14/20 **Medium (500)** |
+| Optional | `typography/caption/caption` — 12/16 Regular |
+| ระยะห่าง title ↔ Optional | 0 (Content frame gap = 0) |
 | Connector line | `color/border/default` |
 | Error state | `color/status/error/on-surface/default` |
 | Warning state | `color/status/warning/on-surface/default` |
@@ -123,6 +142,4 @@
 
 ## Needs designer review
 
-- `CrvStepperMarker` ใน code รองรับแค่ `state='default' | 'done'` ส่วน Figma มี `status` 7 ค่าและแกน `content` — ต้องตัดสินใจว่าจะขยาย props ให้ตรงหรือไม่
-- `crv-stepper-base` state=Info: `text=Left` ใช้ `color/brand/primary/on-surface/default` แต่ `text=Center` ใช้ `color/status/info/on-surface/default` — ต้องเลือกอันเดียว
-- `crv-stepper-desktop` ยังเป็น instance จาก DS อื่น — รอตัดสินใจว่าจะรื้อหรือลบ
+> ✅ เคลียร์แล้ว (2026-09-16): `state=Inactive` ให้ `Step title` เป็น `color/content/primary` เท่ากับ state อื่นแล้ว ทั้ง 14 variants ใช้สีเดียวกันระหว่าง title กับ Optional · `state=Info` ใช้ `color/status/info/on-surface/default` ทั้ง `text=Left` และ `text=Center` แล้ว · `crv-stepper-desktop` ถูกลบออกจากไฟล์แล้ว ทั้งหน้า Stepper ไม่เหลือ `padding: 7` หรือ `Ellipse 1` อีก

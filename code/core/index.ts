@@ -8,7 +8,10 @@ export * from './components/CrvBottomSheet';
 export * from './components/CrvBreadcrumb';
 export * from './components/CrvBreadcrumbBase';
 export * from './components/CrvButton';
+export * from './components/CrvButtonDecorative';
 export * from './components/CrvButtonIcon';
+export * from './components/CrvButtonMic';
+export * from './components/CrvButtonSplit';
 export * from './components/CrvCard';
 export * from './components/CrvCheckbox';
 export * from './components/CrvCheckboxBase';
@@ -62,4 +65,8 @@ export {
   getCarivaTypography,
   getCarivaTokens,
 } from './theme';
+export { shadows, statusShadow } from './theme/shadows';
+export type { CarivaShadow } from './theme/shadows';
+export { buttonSizing } from './theme/buttonSizing';
+export type { CrvButtonMetrics, CrvButtonSizeName } from './theme/buttonSizing';
 export { getOverlayBackdropSx } from './crvOverlayStyles';

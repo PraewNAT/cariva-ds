@@ -20,6 +20,21 @@ Multi-step progress for wizard-like flows.
 - `crv-stepper` → `CrvStepper`
 - `crv-stepper-compact` → `CrvStepperCompact`
 
+### CrvStepperMarker
+
+ตรงกับแกนของ Figma 1:1 — `status` 7 ค่า × `content` 2 ค่า = 14 variants
+
+| status | พื้น | content |
+|---|---|---|
+| `default` | `bg/solid` | `content/secondary` |
+| `active` | `brand/primary/on-surface/muted` | `brand/primary/on-surface/default` |
+| `done` | `brand/primary/on-surface/default` | `content/on-brand` |
+| `error` / `warning` / `info` / `success` | `status/{severity}/on-surface/default` | `content/on-brand` |
+
+ทุก status เป็นวงกลมทึบ 24px มี glyph 20px ข้างใน · `content='icon'` ต้องส่ง `icon` มาเอง
+(`crv-stepper-base` เป็นตัว swap ไอคอนตาม state ให้ ไม่ใช่ marker) · prop `state` เดิม
+(`'default' | 'done'`) ยังใช้ได้แต่ deprecated
+
 ## AI Implementation Rules
 
 1. Use `CrvStepper` for desktop/tablet multi-step flows with 3–5 steps.

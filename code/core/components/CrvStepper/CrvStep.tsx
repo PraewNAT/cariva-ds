@@ -1,9 +1,10 @@
 'use client';
 
+import Box from '@mui/material/Box';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import { CrvStepIcon } from './CrvStepperMarker';
-import { getStepLabelSx } from './crvStepperStyles';
+import { OPTIONAL_CLASS, getStepLabelSx } from './crvStepperStyles';
 import type { CrvStepProps } from './CrvStepper.types';
 
 export function CrvStep({
@@ -24,7 +25,15 @@ export function CrvStep({
       {...rest}
     >
       <StepLabel
-        optional={optional ? optionalContent : undefined}
+        optional={
+          optional ? (
+            // MUI v7 drops the optional slot in as a bare text node, so it has
+            // no class of its own to style — give it one.
+            <Box component="span" className={OPTIONAL_CLASS}>
+              {optionalContent}
+            </Box>
+          ) : undefined
+        }
         StepIconComponent={(iconProps) => (
           <CrvStepIcon {...iconProps} state={state} icon={stepNumber} />
         )}

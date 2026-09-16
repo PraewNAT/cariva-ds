@@ -40,6 +40,89 @@
 - **ผลตรวจครั้งแรกหลังแก้ทั้งหมด:** `tokens:check` ✅ · `export:check` ✅ · `test:run` ✅ 36 ไฟล์ / 199 test · `typecheck:ds` ❌ 19 error เดิมทั้งหมด ไม่มี error ใหม่จากงานรอบนี้
 - **`npm run typecheck` ไม่เคยตรวจ `code/` เลยตั้งแต่วันนั้น** — `tsconfig.json` ก็ถูกเขียนทับเหมือนกัน ตอนนี้ครอบแค่ `src/` ของ peer-bridge เพิ่ม `tsconfig.ds.json` (config เดิมก่อนถูกทับ) + `npm run typecheck:ds` แยกไว้ ไม่แตะของ peer-bridge
 
+### 🆕 Button ที่ขาดไป — ตอนนี้มีในโค้ดครบแล้ว
+
+Figma มี 7 ปุ่ม แต่โค้ดมีแค่ 4 และ 2 ตัวที่มีก็ขาด axis:
+
+- **`CrvButton` เพิ่ม `color="neutral"` และ `variant="elevated"`** — neutral ใช้ได้กับ outlined / text / elevated เท่านั้น (ตรงกับ Figma ที่ไม่มี contained neutral) บังคับด้วย type ไม่ให้เผลอใช้ผิด · elevated = พื้นขาว + เงา `shadow/sm` → hover `shadow/xl` → pressed `shadow/md`
+- **`CrvButtonIcon` เพิ่ม `color="neutral"`** ครบทั้ง contained / outlined / ghost
+- **`CrvButtonDecorative` (ใหม่)** — ปุ่มไล่เฉดสำหรับ action ของ AI, 3 ขนาด + glow ตอน hover
+- **`CrvButtonMic` (ใหม่)** — ปุ่มเลือกไมโครโฟน พร้อมคลื่นเสียง 5 แท่งที่ขยับได้ (เคารพ `prefers-reduced-motion`)
+- **`CrvButtonSplit` (ใหม่)** — action หลัก + ปุ่มเปิดตัวเลือกอื่น ใช้พื้นเดียวกันทั้งก้อนตาม Figma (ไม่ใช่ `ButtonGroup` ของ MUI) บังคับใส่ `triggerLabel` เพราะฝั่งขวาไม่มีข้อความ
+- ทั้ง 3 ตัวใหม่มีครบชุด: types, styles, stories, test, `.ai.md`, doc ใน `rules/components/` และ Code Connect (ตรวจ dry-run ผ่านแล้วทั้งหมด)
+- **เพิ่ม `code/core/theme/shadows.ts`** — เดิมเงาถูก hardcode กระจายตาม component ตอนนี้มี token `shadows.sm|default|md|lg|xl|2xl|inner` ตรงกับ effect style ใน Figma
+- **sync token เพิ่ม 6 ตัว**: `color/brand/decorative/gradient/{from,via,to}` และ `color/status/active/*` ซึ่งมีใน Figma แต่ไม่เคยถูก export
+
+### 🔍 ตรวจกับ Figma อีกรอบแล้วเจอ 4 จุดไม่ตรง
+
+- **`CrvButton` ยังไม่มี story ของ `elevated` / `neutral`** — เพิ่มโค้ดแล้วแต่ลืมเปิดให้เห็นใน Storybook เพิ่ม `ElevatedPrimary/Error/Neutral`, `OutlinedNeutral`, `TextNeutral`, ตาราง `ElevatedStates`, `NeutralColor` และใส่ตัวเลือกใหม่ใน control panel · `AllVariants` รวม elevated ด้วยแล้ว
+- **ไล่เฉดของ `CrvButtonDecorative` ผิดทิศ** — ของเดิมเขียนเป็นวงรีสว่างที่ก้นปุ่ม แต่ Figma ไล่จากน้ำเงินเข้มตรงกลางออกไปสว่างที่ขอบซ้าย-ขวา (ถอดจาก `gradientTransform` ได้เป็นวงรี 50% ของความกว้าง × 129.76% ของความสูง จุดกึ่งกลางปุ่ม) แก้ตามค่าจริง และเพิ่ม `opacity: 0.85` ตอน pressed ตามที่ Figma ทำ
+- **เส้นขอบ `standard` ของ toast หนา 2px ทั้งที่ Figma ใช้ 1px** — ทุก variant ใน Figma เป็น 1px เท่ากันหมด แก้แล้วทั้ง status และ notification
+- **`color/status/{severity}/border/default` ใน `tokens.json` ไม่ตรงกับ variable จริง** — บันทึกไว้เป็นเฉด `300` แต่ variable ใน Figma alias ไปที่ `100` ทำให้เส้นขอบ toast เข้มกว่าที่ออกแบบไว้มาก แก้เป็นค่าจาก variable จริง (`#fee2e2` / `#fef3c7` / `#e0f2fe` / `#d1fae5`) พร้อมอัปเดต `rules/DESIGN.md`
+- **พื้นหลัง `outlined` ของ toast เป็น `transparent` แต่ Figma ใช้ `color/bg/white`** — แก้ให้ตรง ไม่งั้นวางบนพื้นสีเข้มแล้วอ่านไม่ออก
+
+### 📏 สเกลขนาดปุ่ม — รวมไว้ที่เดียว และแก้ที่เพี้ยนมานาน
+
+ไล่เช็คทุก component set ใน Figma แล้วพบว่า **ปุ่มทุกตัวใช้สเกลเดียวกันเป๊ะ** แต่โค้ดจำไว้ผิดมาตลอดและกระจายอยู่ 5 ไฟล์
+
+| Size | สูง | Padding V | Padding H | Gap | Icon |
+|---|---|---|---|---|---|
+| `small` | 32 | 8 | 12 | 4 | 16 |
+| `medium` | **36** | 8 | 16 | 8 | 20 |
+| `large` | 48 | 12 | 24 | 12 | 24 |
+
+- **เพิ่ม `code/core/theme/buttonSizing.ts`** เป็นที่เดียวที่เก็บสเกลนี้ — `CrvButton`, `CrvButtonIcon`, `CrvLink`, `CrvButtonDecorative`, `CrvButtonSplit` ดึงไปใช้ทั้งหมด (export ออกจาก `code/core` แล้ว พร้อม `shadows` / `statusShadow` ที่เพิ่มรอบก่อนแต่ลืม export)
+- **`medium` สูง 40 มาตลอด ทั้งที่ Figma เป็น 36** — ผิดพร้อมกันทั้ง `CrvButton`, `CrvButtonIcon` และ `CrvLink`
+- **padding ซ้าย-ขวาถูก fix ไว้ที่ 16 ทุกขนาด** — ที่จริงต่างกันตามขนาด (12 / 16 / 24) เหมือนที่ padding บน-ล่างต่างกันอยู่แล้ว
+- **`gap` ถูก fix ไว้ที่ 8 ทุกขนาด** — ที่จริงเป็น 4 / 8 / 12
+- **`small` มี padding บน-ล่าง 4 แทนที่จะเป็น 8** — ทำให้ปุ่มเล็กสูงไม่ถึง 32
+- **icon ของปุ่ม small เป็น 20 แทน 16** (`CrvButtonIcon`) และ icon ใน `CrvLink` fix ไว้ที่ 20 ทุกขนาด
+- ตรวจค่าที่เบราว์เซอร์คำนวณจริงแล้ว **ทั้ง 5 component ตรงกับ Figma ครบทุกขนาด**
+- อัปเดตตารางขนาดใน `rules/components/crv-button-{standard,icon,split}.md`, `crv-link.md` และ `.ai.md` ที่เกี่ยวข้องให้ตรงด้วย
+
+### 🧹 เก็บของค้างใน Figma
+
+- **`crv-button-split` แก้แล้วฝั่ง Figma** — ตรวจครบทั้ง 24 variants: `size=small` frame นอกสูง 32 เท่ากับลูกข้างในแล้ว (เดิม 36 ชนกับ medium) และ padding ของ `trigger` ขนาด medium สมมาตร 8 ทุกด้านแล้ว ตรงกับที่โค้ดเขียนไว้พอดี ไม่ต้องแก้โค้ดเพิ่ม
+- **`crv-stepper-desktop` ถูกลบไปแล้ว** — ทั้งหน้า Stepper ไม่เหลือ `padding: 7` หรือ `Ellipse 1` (ที่เหลือคือ `Ellipse 5` ซึ่งเป็นจุด dot ของ `crv-stepper-compact` ตามดีไซน์)
+- **`crv-stepper-base` state=Info ตรงกันแล้ว** ทั้ง `text=Left` และ `text=Center` ใช้ `color/status/info/on-surface/default`
+- **เงาของ Notification ในโค้ดผิด** — Figma ใช้ `shadow/md` (navy) สำหรับ `filled` และ `shadow/status/notification` (navy โปร่ง 3 ชั้น) สำหรับ `standard` แต่โค้ดย้อมเงาด้วยสี brand ทั้งคู่ · แก้แล้ว พร้อมลบ `statusShadow` ที่เขียนซ้ำไว้ใน `crvToastStyles.ts` ให้ใช้ตัวเดียวจาก `theme/shadows.ts`
+- **แก้ doc ของ Toast ใน Figma** — คำอธิบาย `Variant=Outlined` เขียนว่า "ไม่มีพื้น" ทั้งที่จริงใช้ `color/bg/white`, คำอธิบาย `Variant=Standard` ยังเขียนเส้นขอบ 2px และ Do/Don't ยังเรียกตัวเองว่า "alert" ทั้งที่ component นี้คือ Toast (ข้อห้าม "อย่าใช้ alert แทน Toast" จึงขัดกันเอง) เขียนใหม่ทั้งสามจุด
+
+### 🔵 Stepper marker — สีผิดทุก state และขาดไป 5 status
+
+เปิดดูใน Storybook แล้วไม่ตรงกับ Figma เลย ทั้งที่ `rules/components/crv-stepper.md` เขียนค่าที่ถูกไว้ตั้งแต่แรก — โค้ดไม่เคยทำตาม
+
+| status | โค้ดเดิม | Figma |
+|---|---|---|
+| `default` | พื้น `content/disabled` + เลขสีขาว | พื้น `bg/solid` + เลข `content/secondary` |
+| `active` | พื้นน้ำเงินทึบ + เลขขาว (เหมือน done) | พื้น `brand/primary/on-surface/muted` + เลข `brand/primary/on-surface/default` |
+| `error` / `warning` / `info` / `success` | **พื้นโปร่งใส** + ไอคอนสีสถานะ | วงกลมทึบสีสถานะ + ไอคอนขาว |
+
+- **`CrvStepperMarker` มีแค่ 2 status จาก 7** และไม่มีแกน `content` เลย — ตอนนี้ตรงกับ Figma 1:1 (`status` 7 ค่า × `content` 2 ค่า = 14 variants) prop `state` เดิมยังใช้ได้ในฐานะ deprecated
+- **ไอคอนคนละตัวกับ Figma** — เดิมใช้ `Error` / `WarningAmber` / `Info` / `CheckCircle` ซึ่งเป็น glyph ที่มีวงกลมในตัวอยู่แล้ว เลยกลายเป็นวงกลมซ้อนวงกลม · Figma ใช้ `close`, `priority-high`, `info` (outlined), `check` แบบ rounded วางบนวงกลมสีเปล่าๆ
+- พบว่า `content=icon` ใน component set ใส่ `panorama-fish-eye` ไว้เป็น **placeholder** — ไอคอนจริงมาจาก `crv-stepper-base` ที่ swap เข้าไปตาม state บันทึกไว้ใน rules แล้ว โค้ดทำตามโครงนี้ (marker ไม่ผูกไอคอนกับ status เอง)
+- Storybook แสดงครบทั้ง 14 variants แล้ว (เดิมมีแค่ 2) · Code Connect map แกนใหม่ครบ ตรวจ parse ผ่าน
+- **เพิ่ม `CrvStepper.test.tsx` (16 test)** ล็อกตารางสีไว้ทั้งหมด — drift แบบนี้จะไม่เงียบอีก
+
+### ✏️ Stepper — สี title ของ Inactive และ Optional ที่ไม่เคยถูก style เลย
+
+- **แก้ใน Figma: `state=Inactive` ให้ `Step title` เป็น `color/content/primary`** เท่ากับ state อื่น (เดิมเป็น `content/secondary` ทำให้จางกว่าคำว่า Optional ข้างล่างมันเอง) ตอนนี้ทั้ง 14 variants ใช้สีเดียวกันระหว่าง title กับ Optional เสมอ · sync เข้าโค้ดแล้ว
+- **`Optional` ไม่เคยรับ style ที่เขียนไว้เลย** — กฎในโค้ดชี้ไปที่ `.MuiStepLabel-optional` แต่ MUI v7 วางข้อความนั้นเป็น text node เปล่าๆ ไม่มี class ให้จับ ทั้ง block เลยเป็น dead code มาตลอด · ครอบด้วย `<span class="crv-step-optional">` เองแล้ว
+- ผลที่ตามมาจากข้อบน: **`Optional` ใช้ขนาดผิด** — เดิมตั้งใจให้เป็น `body/small` (12/18) แต่ Figma ใช้ `caption/caption` (12/16) และ**ไม่มีระยะห่าง**จาก title (โค้ดใส่ margin-top 2px ไว้) ตอนนี้ตรงแล้ว
+- **น้ำหนักฟอนต์ของ Step title ผิด** — Figma ใช้ `typography/label/medium` ซึ่งเป็น **Medium (500)** โค้ดใช้ Regular (400)
+
+### ✨ อนิเมชันของ `CrvButtonDecorative` — แสงออโรราไหล
+
+ทำตามแนวคิด "Colorful Buttons" (fluid aurora backdrop) จาก freefrontend แต่**เขียนขึ้นใหม่ด้วย token ของเราเอง** ไม่ได้ก๊อปโค้ดต้นฉบับ และไม่ใช้สีนอกชุด
+
+- เลเยอร์เบลอ 2 ชั้นของ blob วงกลมนุ่มๆ เคลื่อนสวนกันที่ **6s** กับ **8.5s** — คาบไม่หารกันลงตัว จังหวะจึงเหลื่อมกันจนไม่เห็นรอบซ้ำ
+- **ใช้แค่ 3 token เดิม** (`brand/decorative/gradient/{from,via,to}`) · วาง blob สีกรมไว้ชั้นล่างสุดเพื่อ**รักษาแกนสีเข้มตาม Figma** ไม่ให้ปุ่มซีดกลายเป็นฟ้าทั้งใบ
+- ต้นฉบับใช้ `<div>` 12 ตัว — ของเราอยู่บน pseudo-element 2 ตัวที่ `z-index: -1` ใน stacking context ของปุ่มเอง **ไม่เพิ่ม DOM เลยสักตัว** และตัวอักษรไม่ต้องแย่งลำดับการซ้อน
+- **animate เฉพาะ `transform`** อยู่บน compositor ล้วน ไม่มี repaint ต่อเฟรม
+- หยุดนิ่งเมื่อ `animated={false}`, `prefers-reduced-motion: reduce` หรือ `disabled` — ทุกกรณีตกกลับไปเป็นไล่เฉดนิ่งตาม Figma เป๊ะ
+- เพิ่ม prop `animated` (default `true`) ไว้ปิดตอนหน้าจอแน่นหรือมีปุ่มนี้หลายตัวเรียงกัน
+- story ใหม่ `Animated` + test 7 ตัว · **หมายเหตุ: Figma ไม่มีอนิเมชันของ component นี้ เฟรมหยุดนิ่งคือจุดที่สองฝั่งตรงกัน** บันทึกไว้ใน `rules/components/crv-button-decorative.md` แล้ว
+
 ### 🔄 Code
 
 - **`CrvToast` เขียนใหม่ให้ตรงกับ `crv-toast-standard` ตัวใหม่** — เดิมเป็น `variant=primary|secondary` + severity 4 แบบ ไม่มี Description และปุ่ม Action ส่วน Code Connect ยังชี้ไป component ที่ถูกลบไปแล้ว
@@ -85,7 +168,7 @@
 
 - `CrvStepperMarker` ใน code รองรับแค่ `state='default' | 'done'` แต่ Figma มี `status` 7 ค่า + แกน `content` — Code Connect map เฉพาะ `Default` / `Done`
 - `crv-stepper-base` `state=Info`: `text=Left` ใช้ `color/brand/primary/on-surface/default` แต่ `text=Center` ใช้ `color/status/info/on-surface/default`
-- `crv-stepper-desktop` ยังเป็น instance จาก DS อื่น — เป็นที่เดียวที่เหลือ `padding: 7` (2 จุด) และ `Ellipse 1` (1 จุด) ในหมวด Stepper
+- ~~`crv-stepper-desktop` ยังเป็น instance จาก DS อื่น — เป็นที่เดียวที่เหลือ `padding: 7` (2 จุด) และ `Ellipse 1` (1 จุด) ในหมวด Stepper~~ → **เคลียร์แล้ว 2026-09-16** component ถูกลบออกจาก Figma ทั้งหน้า Stepper ไม่เหลือทั้งสองอย่างแล้ว
 - **type error เดิม 19 จุด** ที่ `typecheck:ds` เจอ — ทั้งหมดมีอยู่ก่อนแล้ว (เทียบกับ `d828de9` ตรงกันทุกจุด) ส่วนใหญ่อยู่ใน `*.stories.tsx` เช่น `CrvModal` ขาด prop `open` 5 จุด, `CrvSidebar.stories.tsx` เรียก `colors.bg.page` ที่ไม่มีแล้ว, `CrvTabs.stories.tsx` 2 จุด และ 1 จุดใน `CrvLink.figma.tsx`
 - **`CrvStepper` ไม่มี test** — `test:run` ผ่านทั้ง 36 ไฟล์ แต่ไม่มีไฟล์ไหนครอบ Stepper
 - **`npm audit` รายงาน 10 ช่องโหว่** (critical 1, high 2) ใน dependency — ยังไม่แก้ เพราะ `audit fix --force` จะอัปเกรดข้าม major version

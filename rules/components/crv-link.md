@@ -19,11 +19,13 @@
 
 ## Sizes
 
-| Size | Height |
-|---|---|
-| `small` | 36px |
-| `medium` | 40px |
-| `large` | 48px |
+| Size | Height | Padding (V) | Gap | Icon size |
+|---|---|---|---|---|
+| `small` | 32px | 8px | 4px | 16px |
+| `medium` | 36px | 8px | 8px | 20px |
+| `large` | 48px | 12px | 12px | 24px |
+
+> ความสูงเท่ากับ `crv-button-standard` ทุกขนาด ต่างกันแค่ไม่มี padding ซ้าย-ขวา
 
 ## States
 

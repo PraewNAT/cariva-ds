@@ -7,13 +7,30 @@ figma.connect(
   'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=4714-6245',
   {
     props: {
-      state: figma.enum('status', {
+      status: figma.enum('status', {
         Default: 'default',
+        Active:  'active',
         Done:    'done',
+        Error:   'error',
+        Warning: 'warning',
+        Info:    'info',
+        Success: 'success',
+      }),
+      content: figma.enum('content', {
+        number: 'number',
+        icon:   'icon',
+      }),
+      // `icon` is a plain child instance, not an instance-swap property, so
+      // there is nothing to bind to — `figma.instance('icon')` emitted a bare
+      // `icon={}` into the snippet. The consumer passes their own icon; the
+      // number variants take a value instead.
+      value: figma.enum('content', {
+        number: '1',
+        icon:   undefined,
       }),
     },
-    example: ({ state }) => (
-      <CrvStepperMarker state={state} value="1" />
+    example: ({ status, content, value }) => (
+      <CrvStepperMarker status={status} content={content} value={value} />
     ),
   },
 );

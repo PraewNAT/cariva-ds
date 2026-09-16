@@ -5,6 +5,7 @@ import MuiIconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import type { Theme } from '@mui/material/styles';
 import { productStyle, defaultProductStyle } from '../../tokens';
+import { buttonSizing } from '../../theme/buttonSizing';
 import { getCarivaColors } from '../../theme';
 import { getCrvButtonIconOutlinedTokens } from '../CrvButton/crvButtonStyles';
 import type {
@@ -14,17 +15,6 @@ import type {
   CrvButtonIconVariant,
 } from './CrvButtonIcon.types';
 
-const SIZE_BY_SIZE: Record<CrvButtonIconSize, number> = {
-  small: 32,
-  medium: 40,
-  large: 48,
-};
-
-const ICON_SIZE_BY_SIZE: Record<CrvButtonIconSize, number> = {
-  small: 20,
-  medium: 20,
-  large: 24,
-};
 
 type State = 'default' | 'hover' | 'pressed';
 
@@ -40,7 +30,9 @@ function bgFor(
     const palette =
       color === 'primary'
         ? colors.brand.primary.onSurface
-        : colors.status.error.onSurface;
+        : color === 'neutral'
+          ? colors.neutral.onSurface
+          : colors.status.error.onSurface;
     return palette[state];
   }
 
@@ -57,6 +49,11 @@ function bgFor(
       ? colors.brand.primary.onSurface.subtle
       : colors.brand.primary.onSurface.muted;
   }
+  if (color === 'neutral') {
+    return state === 'hover'
+      ? colors.neutral.onSurface.subtle
+      : colors.neutral.onSurface.muted;
+  }
   return state === 'hover'
     ? colors.status.error.onSurface.subtle
     : colors.status.error.onSurface.muted;
@@ -70,7 +67,10 @@ function iconColorFor(
 ): string {
   const colors = getCarivaColors(theme);
 
-  if (variant === 'contained') return colors.content.onBrand;
+  // A contained neutral button is a light grey chip, so its icon stays dark.
+  if (variant === 'contained') {
+    return color === 'neutral' ? colors.neutral.content.default : colors.content.onBrand;
+  }
 
   if (variant === 'outlined') {
     const tokens = getCrvButtonIconOutlinedTokens(color, theme);
@@ -79,6 +79,7 @@ function iconColorFor(
   }
 
   if (color === 'primary') return colors.brand.primary.content.default;
+  if (color === 'neutral') return colors.neutral.content.default;
   return state === 'pressed'
     ? colors.status.error.content.strong
     : colors.status.error.content.default;
@@ -108,8 +109,7 @@ export const CrvButtonIcon = forwardRef<HTMLButtonElement, CrvButtonIconProps>(
   ) {
     const theme = useTheme();
     const colors = getCarivaColors(theme);
-    const dim = SIZE_BY_SIZE[size];
-    const iconSize = ICON_SIZE_BY_SIZE[size];
+    const { height: dim, iconSize } = buttonSizing[size];
     const isOutlined = variant === 'outlined';
     const outlinedBorder = isOutlined ? `1px solid ${borderFor(variant, color, theme)}` : 'none';
 
