@@ -7,13 +7,23 @@ figma.connect(
   'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=4714-6245',
   {
     props: {
-      state: figma.enum('status', {
+      status: figma.enum('status', {
         Default: 'default',
+        Active:  'active',
         Done:    'done',
+        Error:   'error',
+        Warning: 'warning',
+        Info:    'info',
+        Success: 'success',
       }),
+      content: figma.enum('content', {
+        number: 'number',
+        icon:   'icon',
+      }),
+      icon: figma.instance('icon'),
     },
-    example: ({ state }) => (
-      <CrvStepperMarker state={state} value="1" />
+    example: ({ status, content, icon }) => (
+      <CrvStepperMarker status={status} content={content} value="1" icon={icon} />
     ),
   },
 );

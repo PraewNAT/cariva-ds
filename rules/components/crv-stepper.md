@@ -32,6 +32,18 @@
 
 สีของ marker ตั้งที่ fill ของ frame ตัวเอง (`cornerRadius: 9999`) ไม่มี layer วงกลมซ้อนข้างใน
 
+`content=icon` ใน component set ใส่ `panorama-fish-eye` ไว้เป็น placeholder เฉยๆ — **ไอคอนจริงมาจาก `crv-stepper-base` ที่ swap เข้าไปตาม state**:
+
+| state | icon | style |
+|---|---|---|
+| Complete / Done | `check` | rounded |
+| Error | `close` | rounded |
+| Warning | `priority-high` | rounded |
+| Info | `info` | **outlined** |
+| Success | `check` | rounded |
+
+`Inactive` และ `Active` ใช้ `content=number` ไม่ใช้ไอคอน
+
 ### crv-stepper-base (`<Step>`)
 | Property | Values |
 |---|---|
@@ -85,9 +97,9 @@
 | Marker Active number | `color/brand/primary/on-surface/default` |
 | Marker Default BG | `color/bg/solid` |
 | Marker Default number | `color/content/secondary` |
+| Marker Error / Warning / Info / Success BG | `color/status/{severity}/on-surface/default` |
+| Marker content บนพื้น status ทุกสี | `color/content/on-brand` (ขาว) |
 | Step Complete icon | `color/content/on-brand` |
-| Step Inactive BG | `color/on-surface/default` |
-| Step Inactive text | `color/content/disabled` |
 | Step title default | `color/content/secondary` |
 | Step title active | `color/content/primary` |
 | Connector line | `color/border/default` |
@@ -123,7 +135,6 @@
 
 ## Needs designer review
 
-- `CrvStepperMarker` ใน code รองรับแค่ `state='default' | 'done'` ส่วน Figma มี `status` 7 ค่าและแกน `content` — ต้องตัดสินใจว่าจะขยาย props ให้ตรงหรือไม่
 - `crv-stepper-base` state=Inactive: `Step title` ใช้ `color/content/secondary` แต่ `Optional` ใช้ `color/content/primary` — ทำให้ข้อความประกอบเข้มกว่าหัวข้อ ส่วน state อื่นทั้ง 6 ตัว `Optional` ใช้สีเดียวกับ `Step title` เสมอ
 
 > ✅ เคลียร์แล้ว (2026-09-16): `state=Info` ใช้ `color/status/info/on-surface/default` ทั้ง `text=Left` และ `text=Center` แล้ว · `crv-stepper-desktop` ถูกลบออกจากไฟล์แล้ว ทั้งหน้า Stepper ไม่เหลือ `padding: 7` หรือ `Ellipse 1` อีก

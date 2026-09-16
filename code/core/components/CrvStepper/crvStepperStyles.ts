@@ -1,43 +1,60 @@
 import type { SxProps, Theme } from '@mui/material/styles';
 import { colors, radius, spacing, typography } from '../../tokens';
-import type { CrvStepState, CrvStepTextAlign } from './CrvStepper.types';
+import type {
+  CrvStepperMarkerStatus,
+  CrvStepState,
+  CrvStepTextAlign,
+} from './CrvStepper.types';
 
 export const STEPPER_ICON_SIZE = 24;
+/** Figma nests a 20px glyph inside the 24px circle. */
+export const STEPPER_ICON_GLYPH_SIZE = 20;
 export const STEPPER_COMPACT_WIDTH = 400;
 
-export function getStepIconColors(state: CrvStepState) {
+/**
+ * Figma `crv-stepper-marker`: every status paints a filled 24px circle. Only
+ * `default` and `active` carry their content in a colour; the rest knock it out
+ * in white.
+ */
+export function getStepIconColors(state: CrvStepState | CrvStepperMarkerStatus) {
   switch (state) {
     case 'active':
+      return {
+        backgroundColor: colors.brand.primary.onSurface.muted,
+        color:           colors.brand.primary.onSurface.default,
+      };
     case 'complete':
+    case 'done':
       return {
         backgroundColor: colors.brand.primary.onSurface.default,
         color:           colors.content.onBrand,
       };
     case 'error':
       return {
-        backgroundColor: 'transparent',
-        color:           colors.status.error.onSurface.default,
+        backgroundColor: colors.status.error.onSurface.default,
+        color:           colors.content.onBrand,
       };
     case 'warning':
       return {
-        backgroundColor: 'transparent',
-        color:           colors.status.warning.onSurface.default,
+        backgroundColor: colors.status.warning.onSurface.default,
+        color:           colors.content.onBrand,
       };
     case 'info':
       return {
-        backgroundColor: 'transparent',
-        color:           colors.status.info.onSurface.default,
+        backgroundColor: colors.status.info.onSurface.default,
+        color:           colors.content.onBrand,
       };
     case 'success':
       return {
-        backgroundColor: 'transparent',
-        color:           colors.status.success.onSurface.default,
+        backgroundColor: colors.status.success.onSurface.default,
+        color:           colors.content.onBrand,
       };
     case 'inactive':
+    case 'default':
     default:
       return {
-        backgroundColor: colors.content.disabled,
-        color:           colors.content.onBrand,
+        backgroundColor: colors.bg.solid,
+        color:           colors.content.secondary,
       };
   }
 }
@@ -51,9 +68,10 @@ export function getStepTitleColor(state: CrvStepState): string {
   return colors.content.primary;
 }
 
-export function getStepIconSx(state: CrvStepState): SxProps<Theme> {
+export function getStepIconSx(
+  state: CrvStepState | CrvStepperMarkerStatus,
+): SxProps<Theme> {
   const palette = getStepIconColors(state);
-  const isSemanticIcon = ['error', 'warning', 'info', 'success'].includes(state);
 
   return {
     width:           STEPPER_ICON_SIZE,
@@ -70,7 +88,7 @@ export function getStepIconSx(state: CrvStepState): SxProps<Theme> {
     lineHeight:      `${typography.lineHeight.caption.caption}px`,
     fontWeight:      typography.fontWeight.regular,
     '& .MuiSvgIcon-root': {
-      fontSize: isSemanticIcon ? STEPPER_ICON_SIZE : 20,
+      fontSize: STEPPER_ICON_GLYPH_SIZE,
     },
   };
 }

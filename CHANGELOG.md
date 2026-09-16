@@ -88,6 +88,22 @@ Figma มี 7 ปุ่ม แต่โค้ดมีแค่ 4 และ 2 �
 - **เงาของ Notification ในโค้ดผิด** — Figma ใช้ `shadow/md` (navy) สำหรับ `filled` และ `shadow/status/notification` (navy โปร่ง 3 ชั้น) สำหรับ `standard` แต่โค้ดย้อมเงาด้วยสี brand ทั้งคู่ · แก้แล้ว พร้อมลบ `statusShadow` ที่เขียนซ้ำไว้ใน `crvToastStyles.ts` ให้ใช้ตัวเดียวจาก `theme/shadows.ts`
 - **แก้ doc ของ Toast ใน Figma** — คำอธิบาย `Variant=Outlined` เขียนว่า "ไม่มีพื้น" ทั้งที่จริงใช้ `color/bg/white`, คำอธิบาย `Variant=Standard` ยังเขียนเส้นขอบ 2px และ Do/Don't ยังเรียกตัวเองว่า "alert" ทั้งที่ component นี้คือ Toast (ข้อห้าม "อย่าใช้ alert แทน Toast" จึงขัดกันเอง) เขียนใหม่ทั้งสามจุด
 
+### 🔵 Stepper marker — สีผิดทุก state และขาดไป 5 status
+
+เปิดดูใน Storybook แล้วไม่ตรงกับ Figma เลย ทั้งที่ `rules/components/crv-stepper.md` เขียนค่าที่ถูกไว้ตั้งแต่แรก — โค้ดไม่เคยทำตาม
+
+| status | โค้ดเดิม | Figma |
+|---|---|---|
+| `default` | พื้น `content/disabled` + เลขสีขาว | พื้น `bg/solid` + เลข `content/secondary` |
+| `active` | พื้นน้ำเงินทึบ + เลขขาว (เหมือน done) | พื้น `brand/primary/on-surface/muted` + เลข `brand/primary/on-surface/default` |
+| `error` / `warning` / `info` / `success` | **พื้นโปร่งใส** + ไอคอนสีสถานะ | วงกลมทึบสีสถานะ + ไอคอนขาว |
+
+- **`CrvStepperMarker` มีแค่ 2 status จาก 7** และไม่มีแกน `content` เลย — ตอนนี้ตรงกับ Figma 1:1 (`status` 7 ค่า × `content` 2 ค่า = 14 variants) prop `state` เดิมยังใช้ได้ในฐานะ deprecated
+- **ไอคอนคนละตัวกับ Figma** — เดิมใช้ `Error` / `WarningAmber` / `Info` / `CheckCircle` ซึ่งเป็น glyph ที่มีวงกลมในตัวอยู่แล้ว เลยกลายเป็นวงกลมซ้อนวงกลม · Figma ใช้ `close`, `priority-high`, `info` (outlined), `check` แบบ rounded วางบนวงกลมสีเปล่าๆ
+- พบว่า `content=icon` ใน component set ใส่ `panorama-fish-eye` ไว้เป็น **placeholder** — ไอคอนจริงมาจาก `crv-stepper-base` ที่ swap เข้าไปตาม state บันทึกไว้ใน rules แล้ว โค้ดทำตามโครงนี้ (marker ไม่ผูกไอคอนกับ status เอง)
+- Storybook แสดงครบทั้ง 14 variants แล้ว (เดิมมีแค่ 2) · Code Connect map แกนใหม่ครบ ตรวจ parse ผ่าน
+- **เพิ่ม `CrvStepper.test.tsx` (16 test)** ล็อกตารางสีไว้ทั้งหมด — drift แบบนี้จะไม่เงียบอีก
+
 ### 🔄 Code
 
 - **`CrvToast` เขียนใหม่ให้ตรงกับ `crv-toast-standard` ตัวใหม่** — เดิมเป็น `variant=primary|secondary` + severity 4 แบบ ไม่มี Description และปุ่ม Action ส่วน Code Connect ยังชี้ไป component ที่ถูกลบไปแล้ว

@@ -13,6 +13,7 @@ import {
 } from './index';
 import type {
   CrvStepperCompactProgressType,
+  CrvStepperMarkerStatus,
   CrvStepState,
   CrvStepTextAlign,
 } from './CrvStepper.types';
@@ -100,11 +101,35 @@ export const CenterLabels: Story = {
   },
 };
 
+const MARKER_STATUSES: CrvStepperMarkerStatus[] = [
+  'default',
+  'active',
+  'done',
+  'error',
+  'warning',
+  'info',
+  'success',
+];
+
+/** All 14 variants of the Figma `crv-stepper-marker` set: 7 statuses × 2 content types. */
 export const StepIconStates: StoryObj<typeof CrvStepperMarker> = {
   render: () => (
-    <Box sx={{ display: 'flex', gap: 2 }}>
-      <CrvStepperMarker state="default" value={1} />
-      <CrvStepperMarker state="done" />
+    <Box sx={{ display: 'grid', gap: 2 }}>
+      {(['number', 'icon'] as const).map((content) => (
+        <Box key={content} sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <Typography variant="caption" sx={{ width: 64 }}>
+            {content}
+          </Typography>
+          {MARKER_STATUSES.map((status) => (
+            <CrvStepperMarker
+              key={status}
+              status={status}
+              content={content}
+              value={1}
+            />
+          ))}
+        </Box>
+      ))}
     </Box>
   ),
   parameters: { controls: { disable: true } },
