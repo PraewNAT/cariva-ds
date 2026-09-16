@@ -358,11 +358,20 @@ export const productStyle = {
       // Adobe Fonts subscription and the kit link from code/fonts.ts to be
       // loaded in the document <head>. Fall back to the self-hosted fonts
       // below if the kit fails to load (offline, expired subscription, etc).
+      //
+      // Each Adobe family is listed twice on purpose. The first spelling is the
+      // typeface name as installed by Creative Cloud desktop; the second is the
+      // CSS family the web kit actually declares (`aktiv-grotesk-thai`). CSS
+      // treats those as different families, so a stack with only the spaced name
+      // silently renders the desktop font on designers' machines and falls back
+      // to IBM Plex everywhere else — including production. Verified against kit
+      // tfw1cme on 2026-09-16. (`Malila` needs no alias: family matching is
+      // case-insensitive, so it already matches the kit's `malila`.)
       display: '"Malila", "IBM Plex Sans Thai", sans-serif',
-      ui:      '"Aktiv Grotesk Thai", "IBM Plex Sans Thai", sans-serif',
+      ui:      '"Aktiv Grotesk Thai", "aktiv-grotesk-thai", "IBM Plex Sans Thai", sans-serif',
       prose:   '"Google Sans", "IBM Plex Sans Thai Looped", serif',
       /** @deprecated Figma renamed `font-family/sans` → `font-family/ui` (2026-08-31). Use `ui`. */
-      sans:    '"Aktiv Grotesk Thai", "IBM Plex Sans Thai", sans-serif',
+      sans:    '"Aktiv Grotesk Thai", "aktiv-grotesk-thai", "IBM Plex Sans Thai", sans-serif',
       /** @deprecated Figma renamed `font-family/serif` → `font-family/prose` (2026-08-31). Use `prose`. */
       serif:   '"Google Sans", "IBM Plex Sans Thai Looped", serif',
     },

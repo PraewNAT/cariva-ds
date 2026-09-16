@@ -845,14 +845,47 @@ https://github.com/PraewNAT/cariva-ds
 
   <div class="doc-section" id="skills-setup">
     <div class="section-title">Project Setup</div>
-    <p class="section-desc">Skills สำหรับจัดการ repo ของโปรเจกต์ vibe-code ที่ designer สร้างขึ้นเอง — 1 repo ต่อ 1 โปรเจกต์จริง เวอร์ชันใหม่ของโปรเจกต์เดิมใช้แท็บใน sidebar แทนการเปิด repo ใหม่ ไม่ให้ repo/deploy กระจัดกระจาย</p>
+    <p class="section-desc">Skills สำหรับจัดการ repo ของโปรเจกต์ vibe-code ที่ designer สร้างขึ้นเอง — sidebar เป็นโครง 2 ชั้นแบบเดียวกับ sidebar ของ Claude คือ <strong>กลุ่ม = โปรเจกต์</strong> และข้างในเป็น <strong>เวอร์ชัน</strong> ของแต่ละครั้ง 1 repo จึงเก็บได้หลายโปรเจกต์ ไม่ต้องเปิด repo/deploy ใหม่ทุกครั้ง</p>
 
     <div class="skill-card">
       <div class="skill-top"><span class="skill-name">create-project</span><span class="badge all">✅ ทุก DS</span></div>
-      <p class="skill-desc">สร้าง repo ใหม่บน GitHub ส่วนตัวของ designer สำหรับโปรเจกต์ vibe-code ใหม่จริงๆ — scaffold Next.js + MUI พร้อม sidebar shell จาก Cariva DS, สอนติดตั้ง `gh` ถ้ายังไม่มี (`brew install gh` + `gh auth login`), และแนะนำขั้นตอนต่อ Vercel</p>
+      <p class="skill-desc">ตั้งโปรเจกต์ vibe-code ใหม่ — ถ้ายังไม่มี repo จะสร้าง repo ใหม่บน GitHub ส่วนตัวของ designer แล้ว scaffold Next.js + MUI พร้อม sidebar shell จาก Cariva DS, แต่ถ้าโฟลเดอร์นั้นมี shell อยู่แล้วจะถามก่อนว่าจะขึ้นเป็น<strong>กลุ่มโปรเจกต์ใหม่ใน repo เดิม</strong>หรือ<strong>แยก repo ใหม่</strong> พร้อมสอนติดตั้ง `gh` ถ้ายังไม่มี (`brew install gh` + `gh auth login`) และแนะนำขั้นตอนต่อ Vercel</p>
       <div class="cmd-group">
         <span class="cmd" onclick="copyCmd(this)">สร้างโปรเจกต์ใหม่ [ชื่อ]</span>
       </div>
+    </div>
+
+    <p class="section-desc" style="margin-top:28px">เริ่มจากหน้าจอที่ออกแบบไว้ใน Figma ใช้เทมเพลตนี้ได้เลย — เติม 3 ช่องแล้ววางใน Claude Code</p>
+
+    <div class="prompt-wrap">
+      <div class="prompt-header">
+        <div class="prompt-header-left">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <span class="prompt-label" style="margin-left:4px">Claude Code — prototype จาก Figma</span>
+        </div>
+        <button class="copy-btn" onclick="copyBlock('prototype-prompt', this)">Copy prompt</button>
+      </div>
+      <div class="prompt-body">
+        <pre id="prototype-prompt">อ่าน skills/create-project/SKILL.md ให้จบก่อน แล้วค่อยเปิด Figma link นี้
+
+Figma: [วาง link ที่มี node-id]
+ชื่อโปรเจกต์: [ชื่อ]
+โฟลเดอร์ปลายทาง: [ชื่อโฟลเดอร์ว่างที่แนบไว้ในเซสชันนี้]</pre>
+      </div>
+    </div>
+
+    <p class="section-desc" style="margin-top:20px">เช็ค 3 ข้อนี้ก่อนพิมพ์ ไม่งั้น AI จะหยุดถามกลางทาง</p>
+    <ul class="section-desc" style="margin-top:8px;padding-left:20px;line-height:1.9">
+      <li><strong>แนบโฟลเดอร์ว่างเข้าเซสชันด้วย</strong> (กด <code>+</code>) แยกจากโฟลเดอร์ <code>cariva-ds</code> — AI ห้ามเขียนโปรเจกต์ใหม่ลงในโฟลเดอร์ DS เด็ดขาด ถ้าไม่แนบมาจะหยุดรอทันที</li>
+      <li><strong>node-id ต้องเป็น frame หน้าจอเต็ม</strong> (เช่น 1440 หรือ 375px) ไม่ใช่ component เดี่ยว — ถ้าเป็น component เดี่ยว AI จะตีความว่าเป็นงานแก้ DS ไม่ใช่โปรเจกต์ใหม่</li>
+      <li><strong>เปิดไฟล์นั้นค้างไว้ใน Figma Desktop</strong> และติดตั้ง <code>gh</code> พร้อม login แล้ว (<code>brew install gh</code> + <code>gh auth login</code>)</li>
+    </ul>
+
+    <div class="tip" style="margin-top:20px">
+      <span class="tip-icon">💡</span>
+      AI จะถามยืนยันก่อนสร้าง repo จริงเสมอ ถ้าอยากดูหน้าตาก่อนค่อยตัดสินใจ ให้ตอบว่า <strong>"เดี๋ยวค่อยสร้าง ขอดูผลลัพธ์ก่อน"</strong> — AI จะ scaffold ในเครื่องแล้วเปิด preview ให้ดูโดยยังไม่แตะ git
     </div>
 
     <div class="skill-card">
