@@ -97,11 +97,11 @@ export function getDecorativeAuroraSx(): SxProps<Theme> {
     ...AURORA_KEYFRAMES,
     '&::before': auroraLayer(
       AURORA_LAYER_A,
-      'crvDecorativeDriftA 16s ease-in-out infinite',
+      'crvDecorativeDriftA 9s ease-in-out infinite',
     ),
     '&::after': auroraLayer(
       AURORA_LAYER_B,
-      'crvDecorativeDriftB 23s ease-in-out infinite',
+      'crvDecorativeDriftB 13s ease-in-out infinite',
     ),
     // Hover pulls the light forward rather than speeding it up — a faster drift
     // on hover reads as a glitch on a button this small.
