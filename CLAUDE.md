@@ -85,14 +85,18 @@
 
 | ชื่อ skill | ใช้ทำอะไร | วิธีใช้ |
 |---|---|---|
-| create-project | สร้าง repo ใหม่สำหรับโปรเจกต์ vibe-code ใหม่จริงๆ — scaffold sidebar shell จาก Cariva DS + สอนติดตั้ง `gh` ถ้ายังไม่มี | `สร้างโปรเจกต์ใหม่ [ชื่อ]` |
+| create-project | สร้าง repo ใหม่สำหรับโปรเจกต์ vibe-code ใหม่จริงๆ — scaffold sidebar shell จาก Cariva DS + สอนติดตั้ง `gh` ถ้ายังไม่มี | `สร้างโปรเจกต์ใหม่ [ชื่อ]` — **หรือเมื่อ user ส่ง Figma link ที่เป็น page/screen frame มาให้ implement โดยไม่ระบุโปรเจกต์ ก็เข้าข่ายด้วย อ่าน SKILL.md ก่อนเสมอ** |
 | add-version-tab | ทำงานอัตโนมัติตอนใกล้ commit ในโปรเจกต์ที่มี sidebar shell — ถามว่าจะขึ้นแท็บเวอร์ชันใหม่หรือแก้ทับของเดิม พร้อมเขียนสรุปการเปลี่ยนแปลง (AI-written) ให้ไอคอนท้ายแท็บใน sidebar | ไม่ต้องเรียกเอง ทำงานร่วมกับจังหวะ commit |
 
 ---
 
 ## กฎที่ต้องรู้
 
-- ห้าม hardcode hex หรือ px — ใช้ token จาก DS กลางเท่านั้น
+- **Stack ของ DS ไม่ใช่เรื่องให้เลือก** — Cariva DS คือ **React + MUI 6 + emotion `sx`** ไม่ใช่ Tailwind ไม่ใช่ plain CSS
+  - เขียนโค้ด UI ที่ไหนก็ตาม ให้ดึง DS ด้วย dev export เสมอ: `bash export/cariva-ds-dev-export/apply.sh /path/to/target`
+  - **ห้ามถาม user ว่าจะใช้ stack อะไร** — ไม่ใช่ตัวเลือก
+  - **ห้ามเขียน `Crv*` component ขึ้นมาเอง** ถ้า DS ไม่มีตัวที่ดีไซน์ต้องการ → สร้างได้แต่ต้องใช้ชื่ออื่น ใส่ comment กำกับ แล้วรายงาน user ว่าเป็นช่องว่างของ DS
+- ห้าม hardcode hex หรือ px — ใช้ token จาก DS กลางเท่านั้น (มี hook ใน `.claude/hooks/` บล็อกให้อัตโนมัติ)
 - ถ้าต้องการสีใหม่ → แจ้ง Design System Owner ก่อน อย่าสร้างเอง
 - Figma wins — ถ้า doc ขัดกับ Figma ให้เชื่อ Figma
 - **อัปเดต `tokens.json` ต้องอ่านค่าจาก Figma variable จริงเท่านั้น** — ห้ามเดา ห้ามคำนวณ/ประมาณค่าเอง และห้ามเชื่อ doc frame หรือ node ที่ไม่ใช่ variable collection ตรงๆ (เช่น หน้า documentation ของ component ที่อาจมี variable จากไฟล์อื่นปนอยู่, หรือ doc frame แบบ "AI Readable" ที่เคย verify แล้วพบว่าไม่ตรงกับ live variable) — วิธีที่เชื่อถือได้คือดึงจาก variable collection ตรงๆ (เช่นผ่าน Figma Console MCP's `figma_get_variables` ที่เชื่อมกับ Desktop Bridge plugin ใน Figma Desktop) ถ้าเข้าถึง live variable ไม่ได้ (Bridge ไม่เชื่อมต่อ, ไม่มีสิทธิ์, หา collection ที่ถูกต้องไม่เจอ ฯลฯ) **ให้แจ้งปัญหาให้ user ทราบตรงๆ แล้วหยุดรอ** ห้าม fallback ไปเดาหรือใช้ค่าจาก source ที่ไม่ใช่ live variable โดยไม่บอก

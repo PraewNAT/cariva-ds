@@ -71,7 +71,14 @@ user อาจไม่พูดตรงๆ ว่า "สร้างโปร
 
 4. Scaffold โปรเจกต์ **ในโฟลเดอร์เป้าหมายที่หาเจอในขั้นตอนแรกเท่านั้น**:
    - Next.js (App Router) + MUI
-   - Vendor component/token ที่จำเป็นจาก Cariva DS (`code/`) — **อ่านจากโฟลเดอร์ DS แล้วคัดลอกเข้าไปในโฟลเดอร์เป้าหมาย** ไม่ใช่เขียนงานลงในโฟลเดอร์ DS — **ห้าม publish DS เป็น npm package** และห้าม `npm install` จาก package ที่ยังไม่ได้ publish (ทีมเคยตัดสินใจเลิกทำ npm publish แล้ว)
+   - ดึง Cariva DS เข้าโปรเจกต์ด้วย **dev export เท่านั้น** — รันจากโฟลเดอร์ DS:
+     ```bash
+     bash export/cariva-ds-dev-export/apply.sh /path/to/target
+     ```
+     ได้ `carivaTheme` + `Crv*` + token ครบชุดที่ `src/ds/` **ห้ามเลือกคัดลอกเองทีละไฟล์** — เคยพลาดมาแล้วเพราะตัดสินใจเองว่าอะไร "จำเป็น" แล้วจบลงที่เขียน component ปลอมขึ้นมาแทน
+   - อ่านจากโฟลเดอร์ DS แล้วคัดลอกเข้าไปในโฟลเดอร์เป้าหมาย ไม่ใช่เขียนงานลงในโฟลเดอร์ DS
+   - **ห้าม publish DS เป็น npm package** และห้าม `npm install` จาก package ที่ยังไม่ได้ publish (ทีมเคยตัดสินใจเลิกทำ npm publish แล้ว)
+   - ต่อ `ThemeProvider` + `carivaTheme` + `import '@/ds/fonts'` ตาม `src/ds/INTEGRATION.md`
 
 5. สร้าง **sidebar shell** ด้วย `CrvSidebar` จริง (ไม่ใช่ mockup) พร้อม 1 แท็บเริ่มต้น — ตั้งชื่อแท็บว่า "Overview" หรือชื่อที่ user ระบุ
 
@@ -97,11 +104,19 @@ user อาจไม่พูดตรงๆ ว่า "สร้างโปร
    - **แท็บแรก (เวอร์ชันแรกของโปรเจกต์) ไม่ต้องมีไอคอนนี้** — ไม่มีเวอร์ชันก่อนหน้าให้เทียบ
    - ปุ่มนี้ทำงานร่วมกับ skill `add-version-tab` ที่เป็นคนเขียน summary ให้ตอนสร้างเวอร์ชันใหม่แต่ละครั้ง
 
-8. Commit แรก + push
+8. **Copy guard hook เข้าโปรเจกต์ใหม่** — คัดลอกจากโฟลเดอร์ DS:
+   ```bash
+   mkdir -p <target>/.claude
+   cp -R .claude/hooks <target>/.claude/
+   cp .claude/settings.json <target>/.claude/settings.json
+   ```
+   hook นี้บล็อกการ hardcode hex และการสร้างไฟล์ชื่อ `Crv*` ปลอม — ต้อง **commit ลง git ของโปรเจกต์ใหม่** ด้วย เพื่อให้ทุกคนที่ clone ได้ไปเอง ไม่ต้องตั้งค่าในเครื่องใคร
 
-9. แนะนำขั้นตอนต่อ Vercel (import repo ผ่าน vercel.com) — ช่วยรันให้ถ้าเป็นไปได้ ไม่งั้นแนะนำขั้นตอนให้ user ทำเอง
+9. Commit แรก + push
 
-10. สรุปให้ user: repo link, สถานะ deploy, ขั้นตอนที่เหลือ (ถ้ามี)
+10. แนะนำขั้นตอนต่อ Vercel (import repo ผ่าน vercel.com) — ช่วยรันให้ถ้าเป็นไปได้ ไม่งั้นแนะนำขั้นตอนให้ user ทำเอง
+
+11. สรุปให้ user: repo link, สถานะ deploy, ขั้นตอนที่เหลือ (ถ้ามี)
 
 ## Rules
 
