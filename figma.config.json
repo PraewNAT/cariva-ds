@@ -2,11 +2,14 @@
   "codeConnect": {
     "parser": "react",
     "importPaths": {
-      "code/core/components/*": "@/components/*"
+      "code/core/components/*": "@/components/*",
+      "code/core/icons/*": "@/icons/*"
     },
     "include": [
       "code/core/components/**/*.figma.tsx",
-      "code/core/components/**/*.tsx"
+      "code/core/components/**/*.tsx",
+      "code/core/icons/**/*.tsx",
+      "code-connect/**/*.figma.tsx"
     ],
     "exclude": [
       "node_modules/**",
