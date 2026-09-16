@@ -1,17 +1,19 @@
 import type { SxProps, Theme } from '@mui/material/styles';
-import { colors, spacing, typography, radius } from '../../tokens';
+import { colors, typography, radius } from '../../tokens';
+import { buttonSizing } from '../../theme/buttonSizing';
 import type { CrvButtonDecorativeSize } from './CrvButtonDecorative.types';
 
+/** Re-exported so the stories and tests keep their existing imports. */
 export const HEIGHT_BY_SIZE: Record<CrvButtonDecorativeSize, number> = {
-  small: 32,
-  medium: 36,
-  large: 48,
+  small: buttonSizing.small.height,
+  medium: buttonSizing.medium.height,
+  large: buttonSizing.large.height,
 };
 
 export const ICON_SIZE_BY_SIZE: Record<CrvButtonDecorativeSize, number> = {
-  small: 16,
-  medium: 20,
-  large: 24,
+  small: buttonSizing.small.iconSize,
+  medium: buttonSizing.medium.iconSize,
+  large: buttonSizing.large.iconSize,
 };
 
 /**
@@ -29,12 +31,14 @@ export const DECORATIVE_GRADIENT =
 const GLOW_PRIMARY = `0 0 4px 0 rgba(23, 137, 250, 0.36)`;
 
 export function getDecorativeSx(size: CrvButtonDecorativeSize): SxProps<Theme> {
+  const metrics = buttonSizing[size];
+
   return {
-    height: HEIGHT_BY_SIZE[size],
-    minHeight: HEIGHT_BY_SIZE[size],
-    px: `${spacing.lg}px`,
-    py: `${spacing.sm}px`,
-    gap: `${spacing.sm}px`,
+    height: metrics.height,
+    minHeight: metrics.height,
+    px: `${metrics.paddingX}px`,
+    py: `${metrics.paddingY}px`,
+    gap: `${metrics.gap}px`,
     borderRadius: `${radius.full}px`,
     textTransform: 'none',
     fontFamily: typography.fontFamily.ui,
@@ -45,7 +49,7 @@ export function getDecorativeSx(size: CrvButtonDecorativeSize): SxProps<Theme> {
     backgroundColor: colors.brand.decorative.gradient.from,
     backgroundImage: DECORATIVE_GRADIENT,
     boxShadow: 'none',
-    '& .MuiSvgIcon-root': { fontSize: ICON_SIZE_BY_SIZE[size] },
+    '& .MuiSvgIcon-root': { fontSize: metrics.iconSize },
     '&:hover': {
       backgroundImage: DECORATIVE_GRADIENT,
       boxShadow: GLOW_PRIMARY,

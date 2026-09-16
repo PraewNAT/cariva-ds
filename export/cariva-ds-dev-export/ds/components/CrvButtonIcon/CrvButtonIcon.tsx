@@ -5,6 +5,7 @@ import MuiIconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import type { Theme } from '@mui/material/styles';
 import { productStyle, defaultProductStyle } from '../../tokens';
+import { buttonSizing } from '../../theme/buttonSizing';
 import { getCarivaColors } from '../../theme';
 import { getCrvButtonIconOutlinedTokens } from '../CrvButton/crvButtonStyles';
 import type {
@@ -14,17 +15,6 @@ import type {
   CrvButtonIconVariant,
 } from './CrvButtonIcon.types';
 
-const SIZE_BY_SIZE: Record<CrvButtonIconSize, number> = {
-  small: 32,
-  medium: 40,
-  large: 48,
-};
-
-const ICON_SIZE_BY_SIZE: Record<CrvButtonIconSize, number> = {
-  small: 20,
-  medium: 20,
-  large: 24,
-};
 
 type State = 'default' | 'hover' | 'pressed';
 
@@ -119,8 +109,7 @@ export const CrvButtonIcon = forwardRef<HTMLButtonElement, CrvButtonIconProps>(
   ) {
     const theme = useTheme();
     const colors = getCarivaColors(theme);
-    const dim = SIZE_BY_SIZE[size];
-    const iconSize = ICON_SIZE_BY_SIZE[size];
+    const { height: dim, iconSize } = buttonSizing[size];
     const isOutlined = variant === 'outlined';
     const outlinedBorder = isOutlined ? `1px solid ${borderFor(variant, color, theme)}` : 'none';
 

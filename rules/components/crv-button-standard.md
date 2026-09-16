@@ -28,11 +28,13 @@
 
 ## Sizes
 
-| Size | Height | Padding (H) | Padding (V) | Icon size |
-|---|---|---|---|---|
-| `small` | 32px | `spacing/lg` (16px) | `spacing/xs` (4px) | 16px |
-| `medium` | 40px | `spacing/lg` (16px) | `spacing/sm` (8px) | 24px |
-| `large` | 48px | `spacing/xl` (24px) | `spacing/sm` (8px) | 24px |
+| Size | Height | Padding (H) | Padding (V) | Gap | Icon size |
+|---|---|---|---|---|---|
+| `small` | 32px | `spacing/md` (12px) | `spacing/sm` (8px) | `spacing/xs` (4px) | 16px |
+| `medium` | 36px | `spacing/lg` (16px) | `spacing/sm` (8px) | `spacing/sm` (8px) | 20px |
+| `large` | 48px | `spacing/xl` (24px) | `spacing/md` (12px) | `spacing/md` (12px) | 24px |
+
+> ตารางนี้คือสเกลกลางของปุ่มทุกตัว — `crv-button-loading`, `crv-button-decorative` และฝั่ง action ของ `crv-button-split` ใช้ค่าเดียวกันเป๊ะ ในโค้ดอยู่ที่ `theme/buttonSizing.ts` ที่เดียว
 
 ## States
 

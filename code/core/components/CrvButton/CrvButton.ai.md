@@ -17,11 +17,13 @@ See `rules/components/crv-button-standard.md` for the full spec (variants, sizes
 
 ## Sizes (height × V padding)
 
-| Size | Height | V padding | H padding |
-|---|---|---|---|
-| small | 32 | spacing/xs (4) | spacing/lg (16) |
-| medium | 40 | spacing/sm (8) | spacing/lg (16) |
-| large | 48 | spacing/md (12) | spacing/lg (16) |
+| Size | Height | V padding | H padding | Gap | Icon |
+|---|---|---|---|---|---|
+| small | 32 | spacing/sm (8) | spacing/md (12) | spacing/xs (4) | 16 |
+| medium | 36 | spacing/sm (8) | spacing/lg (16) | spacing/sm (8) | 20 |
+| large | 48 | spacing/md (12) | spacing/xl (24) | spacing/md (12) | 24 |
+
+ค่าทั้งหมดมาจาก `theme/buttonSizing.ts` — แก้ที่เดียวแล้วปุ่มทุกตัวขยับตาม
 
 ## Rules
 

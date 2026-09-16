@@ -2,26 +2,15 @@
 
 import { forwardRef } from 'react';
 import MuiButton from '@mui/material/Button';
-import { spacing, typography, productStyle, defaultProductStyle } from '../../tokens';
+import { typography, productStyle, defaultProductStyle } from '../../tokens';
+import { buttonSizing } from '../../theme/buttonSizing';
 import {
   getCrvButtonDisabledSx,
   getCrvButtonElevatedSx,
   getCrvButtonOutlinedSx,
   getCrvButtonTextSx,
 } from '../../theme/components/crvButton';
-import type { CrvButtonProps, CrvButtonSize } from './CrvButton.types';
-
-const HEIGHT_BY_SIZE: Record<CrvButtonSize, number> = {
-  small: 32,
-  medium: 40,
-  large: 48,
-};
-
-const PADDING_V_BY_SIZE: Record<CrvButtonSize, number> = {
-  small: spacing.xs,
-  medium: spacing.sm,
-  large: spacing.md,
-};
+import type { CrvButtonProps } from './CrvButton.types';
 
 export const CrvButton = forwardRef<HTMLButtonElement, CrvButtonProps>(
   function CrvButton(
@@ -43,6 +32,8 @@ export const CrvButton = forwardRef<HTMLButtonElement, CrvButtonProps>(
     const muiVariant = variant === 'elevated' ? 'text' : variant;
     const muiColor = color === 'neutral' ? 'primary' : color;
 
+    const metrics = buttonSizing[size];
+
     return (
       <MuiButton
         ref={ref}
@@ -55,13 +46,14 @@ export const CrvButton = forwardRef<HTMLButtonElement, CrvButtonProps>(
         endIcon={loading ? undefined : endIcon}
         sx={[
           {
-            height: HEIGHT_BY_SIZE[size],
-            minHeight: HEIGHT_BY_SIZE[size],
-            paddingTop: `${PADDING_V_BY_SIZE[size]}px`,
-            paddingBottom: `${PADDING_V_BY_SIZE[size]}px`,
-            paddingLeft: `${spacing.lg}px`,
-            paddingRight: `${spacing.lg}px`,
-            gap: `${spacing.sm}px`,
+            height: metrics.height,
+            minHeight: metrics.height,
+            paddingTop: `${metrics.paddingY}px`,
+            paddingBottom: `${metrics.paddingY}px`,
+            paddingLeft: `${metrics.paddingX}px`,
+            paddingRight: `${metrics.paddingX}px`,
+            gap: `${metrics.gap}px`,
+            '& .MuiSvgIcon-root': { fontSize: metrics.iconSize },
             borderRadius: `${productStyle[defaultProductStyle].interactive}px`,
             textTransform: 'none',
             fontSize: `${typography.fontSize.label.large}px`,

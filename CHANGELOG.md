@@ -61,6 +61,25 @@ Figma มี 7 ปุ่ม แต่โค้ดมีแค่ 4 และ 2 �
 - **`color/status/{severity}/border/default` ใน `tokens.json` ไม่ตรงกับ variable จริง** — บันทึกไว้เป็นเฉด `300` แต่ variable ใน Figma alias ไปที่ `100` ทำให้เส้นขอบ toast เข้มกว่าที่ออกแบบไว้มาก แก้เป็นค่าจาก variable จริง (`#fee2e2` / `#fef3c7` / `#e0f2fe` / `#d1fae5`) พร้อมอัปเดต `rules/DESIGN.md`
 - **พื้นหลัง `outlined` ของ toast เป็น `transparent` แต่ Figma ใช้ `color/bg/white`** — แก้ให้ตรง ไม่งั้นวางบนพื้นสีเข้มแล้วอ่านไม่ออก
 
+### 📏 สเกลขนาดปุ่ม — รวมไว้ที่เดียว และแก้ที่เพี้ยนมานาน
+
+ไล่เช็คทุก component set ใน Figma แล้วพบว่า **ปุ่มทุกตัวใช้สเกลเดียวกันเป๊ะ** แต่โค้ดจำไว้ผิดมาตลอดและกระจายอยู่ 5 ไฟล์
+
+| Size | สูง | Padding V | Padding H | Gap | Icon |
+|---|---|---|---|---|---|
+| `small` | 32 | 8 | 12 | 4 | 16 |
+| `medium` | **36** | 8 | 16 | 8 | 20 |
+| `large` | 48 | 12 | 24 | 12 | 24 |
+
+- **เพิ่ม `code/core/theme/buttonSizing.ts`** เป็นที่เดียวที่เก็บสเกลนี้ — `CrvButton`, `CrvButtonIcon`, `CrvLink`, `CrvButtonDecorative`, `CrvButtonSplit` ดึงไปใช้ทั้งหมด (export ออกจาก `code/core` แล้ว พร้อม `shadows` / `statusShadow` ที่เพิ่มรอบก่อนแต่ลืม export)
+- **`medium` สูง 40 มาตลอด ทั้งที่ Figma เป็น 36** — ผิดพร้อมกันทั้ง `CrvButton`, `CrvButtonIcon` และ `CrvLink`
+- **padding ซ้าย-ขวาถูก fix ไว้ที่ 16 ทุกขนาด** — ที่จริงต่างกันตามขนาด (12 / 16 / 24) เหมือนที่ padding บน-ล่างต่างกันอยู่แล้ว
+- **`gap` ถูก fix ไว้ที่ 8 ทุกขนาด** — ที่จริงเป็น 4 / 8 / 12
+- **`small` มี padding บน-ล่าง 4 แทนที่จะเป็น 8** — ทำให้ปุ่มเล็กสูงไม่ถึง 32
+- **icon ของปุ่ม small เป็น 20 แทน 16** (`CrvButtonIcon`) และ icon ใน `CrvLink` fix ไว้ที่ 20 ทุกขนาด
+- ตรวจค่าที่เบราว์เซอร์คำนวณจริงแล้ว **ทั้ง 5 component ตรงกับ Figma ครบทุกขนาด**
+- อัปเดตตารางขนาดใน `rules/components/crv-button-{standard,icon,split}.md`, `crv-link.md` และ `.ai.md` ที่เกี่ยวข้องให้ตรงด้วย
+
 ### 🔄 Code
 
 - **`CrvToast` เขียนใหม่ให้ตรงกับ `crv-toast-standard` ตัวใหม่** — เดิมเป็น `variant=primary|secondary` + severity 4 แบบ ไม่มี Description และปุ่ม Action ส่วน Code Connect ยังชี้ไป component ที่ถูกลบไปแล้ว

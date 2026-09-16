@@ -1,29 +1,25 @@
 import type { SxProps, Theme } from '@mui/material/styles';
 import type { CrvLinkSize } from '../../components/CrvLink/CrvLink.types';
-import { getCarivaColors, getCarivaSpacing, getCarivaTypography } from '../carivaTokens';
+import { getCarivaColors, getCarivaTypography } from '../carivaTokens';
+import { buttonSizing } from '../buttonSizing';
 
-const HEIGHT_BY_SIZE: Record<CrvLinkSize, number> = {
-  small: 32,
-  medium: 40,
-  large: 48,
-};
 
 export function getCrvLinkSx(size: CrvLinkSize, disabled: boolean): SxProps<Theme> {
   return (theme) => {
     const c = getCarivaColors(theme);
-    const s = getCarivaSpacing(theme);
     const ty = getCarivaTypography(theme);
-    const padV =
-      size === 'small' ? s.xs : size === 'medium' ? s.sm : s.md;
+    // A link is a button without the horizontal padding — Figma gives it the
+    // same height, vertical padding and gap as `crv-button-standard`.
+    const metrics = buttonSizing[size];
 
     return {
       display: 'inline-flex',
       alignItems: 'center',
-      gap: `${s.sm}px`,
-      height: HEIGHT_BY_SIZE[size],
-      minHeight: HEIGHT_BY_SIZE[size],
-      paddingTop: `${padV}px`,
-      paddingBottom: `${padV}px`,
+      gap: `${metrics.gap}px`,
+      height: metrics.height,
+      minHeight: metrics.height,
+      paddingTop: `${metrics.paddingY}px`,
+      paddingBottom: `${metrics.paddingY}px`,
       fontSize: `${ty.fontSize.label.large}px`,
       lineHeight: `${ty.lineHeight.label.large}px`,
       fontWeight: ty.fontWeight.medium,

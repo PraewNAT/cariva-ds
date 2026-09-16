@@ -65,4 +65,8 @@ export {
   getCarivaTypography,
   getCarivaTokens,
 } from './theme';
+export { shadows, statusShadow } from './theme/shadows';
+export type { CarivaShadow } from './theme/shadows';
+export { buttonSizing } from './theme/buttonSizing';
+export type { CrvButtonMetrics, CrvButtonSizeName } from './theme/buttonSizing';
 export { getOverlayBackdropSx } from './crvOverlayStyles';

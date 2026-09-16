@@ -18,9 +18,11 @@ See `rules/components/crv-button-icon.md` for the full spec.
 
 | Size | Width × Height | Icon size |
 |---|---|---|
-| small | 32 × 32 | 20 |
-| medium | 40 × 40 | 20 |
+| small | 32 × 32 | 16 |
+| medium | 36 × 36 | 20 |
 | large | 48 × 48 | 24 |
+
+ค่าทั้งหมดมาจาก `theme/buttonSizing.ts`
 
 ## Rules
 

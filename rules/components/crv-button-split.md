@@ -16,9 +16,9 @@
 
 ## Anatomy
 
-- `action` (FRAME): icon + label ของ action หลัก — padding `spacing/sm` / `spacing/lg`
+- `action` (FRAME): icon + label ของ action หลัก — padding ตามสเกลกลางของปุ่ม (ดู `crv-button-standard`)
 - `divider` (LINE): เส้นคั่น 1px
-- `trigger` (FRAME): icon เปิดเมนู — padding ซ้าย `spacing/md` ขวา `spacing/sm`
+- `trigger` (FRAME): icon เปิดเมนู — สี่เหลี่ยมจัตุรัสเหมือน `crv-button-icon` padding 8 / 8 / 12 ตามขนาด
 - ทั้งก้อนใช้ radius `radius/full` พื้นเดียวกัน
 
 ## Token usage

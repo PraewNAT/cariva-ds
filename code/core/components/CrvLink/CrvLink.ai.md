@@ -43,13 +43,13 @@ Synced with `rules/components/crv-link.md` → **Token usage → Color**.
 
 > **Disabled:** ใช้ `colors.content.link.disabled` เท่านั้น — **ห้าม** `colors.content.disabled` (generic disabled ≠ link disabled ใน Figma)
 
-| Size | Height (impl.) | Padding V | Font |
-|---|---|---|---|
-| `small` | 32px | 4px | 16/24/500 (`label/large`) |
-| `medium` | 40px | 8px | 16/24/500 |
-| `large` | 48px | 12px | 16/24/500 |
+| Size | Height | Padding V | Gap | Icon | Font |
+|---|---|---|---|---|---|
+| `small` | 32px | 8px | 4px | 16 | 16/24/500 (`label/large`) |
+| `medium` | 36px | 8px | 8px | 20 | 16/24/500 |
+| `large` | 48px | 12px | 12px | 24 | 16/24/500 |
 
-> Rules doc lists small height 36px; implementation follows Figma measured bounding box (32px).
+> Same scale as every other button — it comes from `theme/buttonSizing.ts`.
 
 - Background: transparent in all states
 - Underline: always present (`underline="always"`)

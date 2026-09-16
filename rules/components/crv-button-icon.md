@@ -21,11 +21,11 @@
 
 ## Sizes
 
-| Size | Width × Height | Icon size |
-|---|---|---|
-| `small` | 32 × 32px | 20px |
-| `medium` | 40 × 40px | 20px |
-| `large` | 48 × 48px | 24px |
+| Size | Width × Height | Padding | Icon size |
+|---|---|---|---|
+| `small` | 32 × 32px | 8px | 16px |
+| `medium` | 36 × 36px | 8px | 20px |
+| `large` | 48 × 48px | 12px | 24px |
 
 ## States
 
