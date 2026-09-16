@@ -40,6 +40,18 @@
 - **ผลตรวจครั้งแรกหลังแก้ทั้งหมด:** `tokens:check` ✅ · `export:check` ✅ · `test:run` ✅ 36 ไฟล์ / 199 test · `typecheck:ds` ❌ 19 error เดิมทั้งหมด ไม่มี error ใหม่จากงานรอบนี้
 - **`npm run typecheck` ไม่เคยตรวจ `code/` เลยตั้งแต่วันนั้น** — `tsconfig.json` ก็ถูกเขียนทับเหมือนกัน ตอนนี้ครอบแค่ `src/` ของ peer-bridge เพิ่ม `tsconfig.ds.json` (config เดิมก่อนถูกทับ) + `npm run typecheck:ds` แยกไว้ ไม่แตะของ peer-bridge
 
+### 🔄 Code
+
+- **`CrvToast` เขียนใหม่ให้ตรงกับ `crv-toast-standard` ตัวใหม่** — เดิมเป็น `variant=primary|secondary` + severity 4 แบบ ไม่มี Description และปุ่ม Action ส่วน Code Connect ยังชี้ไป component ที่ถูกลบไปแล้ว
+  - `variant`: `filled` | `outlined` | `standard` (ค่าเดิม `primary` / `secondary` ยังใช้ได้ map เป็น `filled` / `standard` และ mark deprecated)
+  - `severity`: เพิ่ม `notification` (พื้น/เส้นขอบ neutral + ไอคอน brand)
+  - เพิ่ม `title`, `description`, `action` และ `onClose` — ปุ่มปิดจะแสดงเมื่อส่ง `onClose` เท่านั้น และใช้ `CrvButtonIcon` ของ DS แทน `IconButton` ของ MUI
+  - ไอคอนตรงกับ Figma: Filled/Outlined ใช้แบบเส้น, Standard ใช้แบบทึบ
+  - เงา `shadow/status/*` ทำเป็น box-shadow 3 ชั้นจาก token ของแต่ละ severity
+  - Code Connect ชี้ไป node ใหม่ `6413:55828` พร้อม map ครบทุก property
+  - เพิ่ม `CrvToast.test.tsx` (19 test) และเขียน story ใหม่ครบ 15 combination
+- **เพิ่ม `color/neutral/*` 9 token ลง `tokens.json`** — มีใน Figma มาตลอดแต่ไม่เคยถูก sync ทำให้เขียนสี Notification โดยไม่ hardcode ไม่ได้
+
 ### 🎨 Icon
 
 - **ไอคอนทั้งไลบรารีเชื่อม Code Connect แล้ว — 1,076 จาก 1,077 ชุด × 5 style** เดิม Dev Mode แสดงไอคอนเป็น instance ที่ไม่มีชื่อ ตอนนี้โชว์เป็น `<ArrowBackRounded />` ตาม style ที่เลือกใน Figma สร้างด้วย `npm run icons:connect` ซึ่งดึงรายชื่อจาก Figma เอง ไอคอนใหม่ไม่ต้อง map มือ ข้ามแค่ `flags` เพราะเป็นชุดธงชาติ ไม่ใช่ไอคอน

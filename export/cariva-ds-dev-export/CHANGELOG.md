@@ -22,6 +22,11 @@ had drifted badly from Figma.
   only. `carivaApp` actually renders Aktiv Grotesk Thai and Malila, which come
   from an Adobe Fonts kit that must be linked in `<head>`; without it the app
   silently falls back to IBM Plex
+- **CrvToast rewritten** to match the new Figma component: `variant` is now
+  `filled|outlined|standard`, severity adds `notification`, plus `title`,
+  `description`, `action` and `onClose`. The old `primary`/`secondary` values
+  still resolve but are deprecated
+- **`colors.neutral.*`** added (surfaces, content, borders)
 - **Status border tokens completed** — `colors.status.{error,warning,info,success}.border.default|strong`
   (300 / 500 steps). `success.border.default` and `warning.border.default` changed
   from the dark 700/600 steps to 300

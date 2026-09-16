@@ -1,11 +1,20 @@
 'use client';
 
 import type { Meta, StoryObj } from '@storybook/react';
+import Box from '@mui/material/Box';
+import { CrvButton } from '../CrvButton';
 import { CrvToast } from './CrvToast';
+import { TOAST_WIDTH } from './crvToastStyles';
 import type { CrvToastSeverity, CrvToastVariant } from './CrvToast.types';
 
-const VARIANTS: CrvToastVariant[] = ['primary', 'secondary'];
-const SEVERITIES: CrvToastSeverity[] = ['error', 'info', 'success', 'warning'];
+const VARIANTS: CrvToastVariant[] = ['filled', 'outlined', 'standard'];
+const SEVERITIES: CrvToastSeverity[] = [
+  'error',
+  'warning',
+  'info',
+  'success',
+  'notification',
+];
 
 const meta: Meta<typeof CrvToast> = {
   title: 'Feedback/CrvToast',
@@ -14,34 +23,35 @@ const meta: Meta<typeof CrvToast> = {
     docs: {
       description: {
         component:
-          'Toast banner for feedback messages. Maps to Figma crv-alert-standard node 4165:5387.',
+          'Toast for feedback messages. Maps to Figma crv-toast-standard node 6413:55828.',
       },
     },
     controls: {
-      include: ['variant', 'severity', 'showAction', 'children'],
+      include: ['variant', 'severity', 'title', 'description'],
     },
   },
   argTypes: {
     variant: { control: 'inline-radio', options: VARIANTS },
     severity: { control: 'inline-radio', options: SEVERITIES },
-    showAction: { control: 'boolean' },
-    children: { control: 'text' },
+    title: { control: 'text' },
+    description: { control: 'text' },
     sx: { table: { disable: true } },
     ref: { table: { disable: true } },
     onClose: { table: { disable: true } },
-    actionIcon: { table: { disable: true } },
+    action: { table: { disable: true } },
+    icon: { table: { disable: true } },
   },
   args: {
-    variant: 'primary',
+    variant: 'standard',
     severity: 'error',
-    showAction: true,
-    children: 'Something went wrong. Please try again.',
+    title: 'ไม่สามารถบันทึกได้',
+    description: 'ตรวจสอบการเชื่อมต่อแล้วลองใหม่',
   },
   decorators: [
     (Story) => (
-      <div style={{ maxWidth: 420 }}>
+      <Box sx={{ width: TOAST_WIDTH }}>
         <Story />
-      </div>
+      </Box>
     ),
   ],
 };
@@ -51,61 +61,57 @@ type Story = StoryObj<typeof CrvToast>;
 
 export const Playground: Story = {};
 
-export const Primary: Story = {
-  render: () => (
-    <div style={{ display: 'grid', gap: 12 }}>
-      {SEVERITIES.map((severity) => (
-        <CrvToast key={severity} variant="primary" severity={severity}>
-          {`${severity.charAt(0).toUpperCase()}${severity.slice(1)} toast message`}
-        </CrvToast>
-      ))}
-    </div>
-  ),
-  parameters: {
-    controls: { disable: true },
-  },
-};
-
-export const Secondary: Story = {
-  render: () => (
-    <div style={{ display: 'grid', gap: 12 }}>
-      {SEVERITIES.map((severity) => (
-        <CrvToast key={severity} variant="secondary" severity={severity}>
-          {`${severity.charAt(0).toUpperCase()}${severity.slice(1)} toast message`}
-        </CrvToast>
-      ))}
-    </div>
-  ),
-  parameters: {
-    controls: { disable: true },
-  },
-};
-
-export const WithoutAction: Story = {
-  args: {
-    showAction: false,
-    severity: 'info',
-    variant: 'secondary',
-    children: 'Read-only toast without a dismiss action.',
-  },
-};
-
 export const AllVariants: Story = {
+  parameters: { controls: { disable: true } },
   render: () => (
-    <div style={{ display: 'grid', gap: 24 }}>
+    <Box sx={{ display: 'flex', gap: 4, width: TOAST_WIDTH * 3 + 64 }}>
       {VARIANTS.map((variant) => (
-        <div key={variant} style={{ display: 'grid', gap: 12 }}>
-          <strong style={{ textTransform: 'capitalize' }}>{variant}</strong>
+        <Box
+          key={variant}
+          sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: TOAST_WIDTH }}
+        >
           {SEVERITIES.map((severity) => (
-            <CrvToast key={`${variant}-${severity}`} variant={variant} severity={severity}>
-              {`${severity} — ${variant}`}
-            </CrvToast>
+            <CrvToast
+              key={severity}
+              variant={variant}
+              severity={severity}
+              title="{Title}"
+              description="{Description}"
+            />
           ))}
-        </div>
+        </Box>
       ))}
-    </div>
+    </Box>
   ),
-  parameters: {
-    controls: { disable: true },
-  },
+};
+
+export const WithActionAndClose: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: TOAST_WIDTH }}>
+      {VARIANTS.map((variant) => (
+        <CrvToast
+          key={variant}
+          variant={variant}
+          severity="error"
+          title="ลบไฟล์แล้ว"
+          description="ไฟล์ถูกย้ายไปถังขยะ"
+          // Figma uses color=neutral here; CrvButton has no neutral colour yet.
+          action={
+            <CrvButton variant="text" size="small">
+              เลิกทำ
+            </CrvButton>
+          }
+          onClose={() => {}}
+        />
+      ))}
+    </Box>
+  ),
+};
+
+export const TitleOnly: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <CrvToast severity="success" title="บันทึกข้อมูลสำเร็จ" onClose={() => {}} />
+  ),
 };

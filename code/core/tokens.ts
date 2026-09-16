@@ -44,6 +44,23 @@ export const colors = {
       },
     },
   },
+  neutral: {
+    onSurface: {
+      default: '#e2e8f0',
+      hover: '#cbd5e1',
+      pressed: '#94a3b8',
+      subtle: '#f8fafc',
+      muted: '#f1f5f9',
+    },
+    content: {
+      default: '#0f172a',
+      strong: '#0f172a',
+    },
+    border: {
+      default: '#cbd5e1',
+      strong: '#94a3b8',
+    },
+  },
   content: {
     primary: '#0f172a',
     secondary: '#64748b',
