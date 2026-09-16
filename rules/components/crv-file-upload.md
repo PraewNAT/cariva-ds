@@ -75,7 +75,7 @@
 ### Typography
 - `typography/label/medium` — label text
 - `typography/body/small` — description text
-- Font family: `font-family/sans` (Product Style collection)
+- Font family: `font-family/ui` (Product Style collection)
 
 ### Spacing
 - Padding: `spacing/xl`

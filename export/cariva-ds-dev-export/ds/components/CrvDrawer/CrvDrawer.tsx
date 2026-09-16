@@ -3,6 +3,7 @@
 import { forwardRef } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import type { SxProps, Theme } from '@mui/material/styles';
 import { getOverlayBackdropSx } from '../../crvOverlayStyles';
 import {
   getContentSlotSx,
@@ -24,6 +25,13 @@ export const CrvDrawer = forwardRef<HTMLDivElement, CrvDrawerProps>(function Crv
   },
   ref,
 ) {
+  const backdropSlotProps = slotProps?.backdrop as
+    | ({ sx?: SxProps<Theme> } & Record<string, unknown>)
+    | undefined;
+  const paperSlotProps = slotProps?.paper as
+    | ({ sx?: SxProps<Theme> } & Record<string, unknown>)
+    | undefined;
+
   return (
     <Drawer
       ref={ref}
@@ -34,25 +42,25 @@ export const CrvDrawer = forwardRef<HTMLDivElement, CrvDrawerProps>(function Crv
       slotProps={{
         ...slotProps,
         backdrop: {
-          ...slotProps?.backdrop,
+          ...backdropSlotProps,
           sx: [
             getOverlayBackdropSx(),
-            ...(Array.isArray(slotProps?.backdrop?.sx)
-              ? slotProps.backdrop.sx
-              : slotProps?.backdrop?.sx
-                ? [slotProps.backdrop.sx]
+            ...(Array.isArray(backdropSlotProps?.sx)
+              ? backdropSlotProps.sx
+              : backdropSlotProps?.sx
+                ? [backdropSlotProps.sx]
                 : []),
           ],
         },
         paper: {
-          ...slotProps?.paper,
+          ...paperSlotProps,
           sx: [
             getDrawerPaperSx(anchor),
             ...(Array.isArray(paperSx) ? paperSx : paperSx ? [paperSx] : []),
-            ...(Array.isArray(slotProps?.paper?.sx)
-              ? slotProps.paper.sx
-              : slotProps?.paper?.sx
-                ? [slotProps.paper.sx]
+            ...(Array.isArray(paperSlotProps?.sx)
+              ? paperSlotProps.sx
+              : paperSlotProps?.sx
+                ? [paperSlotProps.sx]
                 : []),
           ],
         },

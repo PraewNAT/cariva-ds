@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 /**
  * generate-tokens.js
- * Reads tokens.json → writes code/core/tokens.ts (colors section only)
- * spacing, radius, productStyle, typography are kept as static sections below
+ * Reads tokens.json → replaces the `colors` block in code/core/tokens.ts.
+ * Everything else in tokens.ts (spacing, radius, productStyle, typography)
+ * is hand-maintained and left untouched.
  *
- * Usage: node scripts/generate-tokens.js
+ * Usage:
+ *   npm run tokens:generate   write the colors block + generatedPalette.ts
+ *   npm run tokens:check      exit 1 if either file is out of sync (no writes)
  */
 
 import fs from 'fs';
@@ -85,102 +88,26 @@ function serialize(obj, indent = 2) {
   return `{\n${lines.join('\n')}\n${pad}}`;
 }
 
-// ─── compose final file ────────────────────────────────────────────────────
+// ─── splice into tokens.ts ─────────────────────────────────────────────────
+// Only the `colors` block is generated. spacing, radius, productStyle and
+// typography are maintained by hand in tokens.ts and must survive a run.
+//
+// This script used to rewrite the whole file from a template. The template
+// had drifted (no fontFamily ui/prose, the old display scale, label
+// line-heights copied from body), so every run silently reverted them.
 
-const output = `/**
- * Cariva Design System — Tokens
- * ⚠️  colors section is AUTO-GENERATED from tokens.json
- * DO NOT EDIT colors manually — run: npm run tokens:generate
- *
- * Source: tokens.json (synced from Figma via token-sync skill)
- * Figma file: https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System
- */
+const CHECK = process.argv.includes('--check');
+const COLORS_BLOCK = /export const colors = \{[\s\S]*?\n\} as const;/;
 
-export const colors = ${serialize(colors, 0)} as const;
+const current = fs.readFileSync(OUTPUT, 'utf8');
+if (!COLORS_BLOCK.test(current)) {
+  console.error(`✖ No \`export const colors = { … } as const;\` block found in ${path.relative(ROOT, OUTPUT)}`);
+  process.exit(1);
+}
 
-export const spacing = {
-  none:  0,
-  '2xs': 2,
-  xs:    4,
-  sm:    8,
-  md:    12,
-  lg:    16,
-  xl:    24,
-  '2xl': 28,
-  '3xl': 32,
-  '4xl': 40,
-} as const;
-
-export const radius = {
-  none:  0,
-  '2':   2,
-  '4':   4,
-  '8':   8,
-  '12':  12,
-  '16':  16,
-  '24':  24,
-  '32':  32,
-  full:  9999,
-} as const;
-
-/**
- * Product Style — theme-aware radius tokens.
- * Mirrors Figma's "Product Style" collection (modes: cariva app / back office).
- */
-export const productStyle = {
-  carivaApp: {
-    interactive: radius.full,
-    inputSm:     radius.full,
-    inputMd:     radius.full,
-    containerSm: radius['12'],
-    containerMd: radius['16'],
-  },
-  backOffice: {
-    interactive: radius['12'],
-    inputSm:     radius['8'],
-    inputMd:     radius['12'],
-    containerSm: radius['8'],
-    containerMd: radius['12'],
-  },
-} as const;
-
-export type ProductStyleName = keyof typeof productStyle;
-
-export const defaultProductStyle: ProductStyleName = 'carivaApp';
-
-export const typography = {
-  fontFamily: {
-    sans:  '"IBM Plex Sans Thai", sans-serif',
-    serif: '"IBM Plex Sans Thai Looped", serif',
-  },
-  fontSize: {
-    display:  { large: 64, medium: 48, small: 40 },
-    heading:  { large: 24, medium: 20, small: 16 },
-    body:     { large: 16, medium: 14, small: 12 },
-    label:    { large: 16, medium: 14, small: 12 },
-    caption:  { caption: 12 },
-  },
-  lineHeight: {
-    display:  { large: 72, medium: 56, small: 48 },
-    heading:  { large: 32, medium: 28, small: 24 },
-    body:     { large: 24, medium: 22, small: 18 },
-    label:    { large: 24, medium: 22, small: 18 },
-    caption:  { caption: 16 },
-  },
-  fontWeight: {
-    regular:   400,
-    medium:    500,
-    semibold:  600,
-    bold:      700,
-  },
-} as const;
-
-export type CarivaColors  = typeof colors;
-export type CarivaSpacing = typeof spacing;
-`;
-
-fs.writeFileSync(OUTPUT, output, 'utf8');
-console.log(`✅ Generated ${path.relative(ROOT, OUTPUT)}`);
+const generatedBlock = `export const colors = ${serialize(colors, 0)} as const;`;
+// Function replacer so `$` sequences in values are never read as patterns.
+const output = current.replace(COLORS_BLOCK, () => generatedBlock);
 
 const paletteOutput = `/**
  * AUTO-GENERATED from tokens.json — run: npm run tokens:generate
@@ -188,6 +115,23 @@ const paletteOutput = `/**
  */
 export { colors } from '../tokens';
 `;
+
+if (CHECK) {
+  const paletteCurrent = fs.existsSync(PALETTE) ? fs.readFileSync(PALETTE, 'utf8') : '';
+  const stale = [];
+  if (output !== current) stale.push(path.relative(ROOT, OUTPUT));
+  if (paletteOutput !== paletteCurrent) stale.push(path.relative(ROOT, PALETTE));
+  if (stale.length) {
+    console.error(`✖ Out of sync with tokens.json: ${stale.join(', ')}`);
+    console.error('  Run: npm run tokens:generate');
+    process.exit(1);
+  }
+  console.log('✅ tokens.ts colors and generatedPalette.ts match tokens.json');
+  process.exit(0);
+}
+
+fs.writeFileSync(OUTPUT, output, 'utf8');
+console.log(`✅ Updated colors in ${path.relative(ROOT, OUTPUT)}`);
 
 fs.writeFileSync(PALETTE, paletteOutput, 'utf8');
 console.log(`✅ Generated ${path.relative(ROOT, PALETTE)}`);

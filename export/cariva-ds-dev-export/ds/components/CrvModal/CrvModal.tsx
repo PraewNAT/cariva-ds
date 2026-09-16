@@ -5,6 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PanoramaFishEyeOutlinedIcon from '@mui/icons-material/PanoramaFishEyeOutlined';
+import type { SxProps, Theme } from '@mui/material/styles';
 import { getOverlayBackdropSx } from '../../crvOverlayStyles';
 import {
   getModalContainerSx,
@@ -45,6 +46,12 @@ export const CrvModal = forwardRef<HTMLDivElement, CrvModalProps>(
     ref,
   ) {
     const showHeader = showIcon || title || (showDescription && description);
+    const backdropSlotProps = slotProps?.backdrop as
+      | ({ sx?: SxProps<Theme> } & Record<string, unknown>)
+      | undefined;
+    const paperSlotProps = slotProps?.paper as
+      | ({ sx?: SxProps<Theme> } & Record<string, unknown>)
+      | undefined;
 
     return (
       <Dialog
@@ -55,24 +62,24 @@ export const CrvModal = forwardRef<HTMLDivElement, CrvModalProps>(
         slotProps={{
           ...slotProps,
           backdrop: {
-            ...slotProps?.backdrop,
+            ...backdropSlotProps,
             sx: [
               getOverlayBackdropSx(),
-              ...(Array.isArray(slotProps?.backdrop?.sx)
-                ? slotProps.backdrop.sx
-                : slotProps?.backdrop?.sx
-                  ? [slotProps.backdrop.sx]
+              ...(Array.isArray(backdropSlotProps?.sx)
+                ? backdropSlotProps.sx
+                : backdropSlotProps?.sx
+                  ? [backdropSlotProps.sx]
                   : []),
             ],
           },
           paper: {
-            ...slotProps?.paper,
+            ...paperSlotProps,
             sx: [
               getModalPaperSx(breakpoint),
-              ...(Array.isArray(slotProps?.paper?.sx)
-                ? slotProps.paper.sx
-                : slotProps?.paper?.sx
-                  ? [slotProps.paper.sx]
+              ...(Array.isArray(paperSlotProps?.sx)
+                ? paperSlotProps.sx
+                : paperSlotProps?.sx
+                  ? [paperSlotProps.sx]
                   : []),
               ...(Array.isArray(sx) ? sx : sx ? [sx] : []),
             ],
@@ -85,7 +92,16 @@ export const CrvModal = forwardRef<HTMLDivElement, CrvModalProps>(
             <Box sx={getModalHeaderSectionSx(type, breakpoint)}>
               <Box sx={getModalHeaderSx(type)}>
                 {showIcon ? (
-                  <Box sx={[getModalIconContainerSx(), iconContainerSx]}>
+                  <Box
+                    sx={[
+                      getModalIconContainerSx(),
+                      ...(Array.isArray(iconContainerSx)
+                        ? iconContainerSx
+                        : iconContainerSx
+                          ? [iconContainerSx]
+                          : []),
+                    ]}
+                  >
                     {icon}
                   </Box>
                 ) : null}

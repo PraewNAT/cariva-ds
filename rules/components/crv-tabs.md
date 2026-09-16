@@ -20,20 +20,29 @@ Tab แบบ underline indicator รองรับ primary/secondary style, ic
 
 ### Figma structure
 
-- Component type: assembled COMPONENT (single variant)
+- Component type: COMPONENT_SET
 - Component set: `crv-tabs-standard`
-- Node ID: `4838:9365`
-- Size: 176 × 48px (base)
+- Node ID: `6086:59` — variants `size=large` (`4838:9365`), `size=small` (`6086:17`)
+- Size: large 176 × 48px · small 112 × 32px
 - Slot prop: `tabs` (SLOT) — รับ `crv-tabs-standard-base` instance
+
+### Variants
+
+| Property | Values |
+|---|---|
+| `size` | `large` (default), `small` |
+
+> `size` คุมเฉพาะ tab เริ่มต้นที่มากับ component — ถ้า designer ลบแล้วใส่ `crv-tabs-standard-base` instance ของตัวเองลง slot ต้องตั้ง `size` ที่ instance นั้นเองด้วย
 
 ### Building block — `crv-tabs-standard-base`
 
-Component set ที่ใช้สร้าง `crv-tabs-standard`
+Component set ที่ใช้สร้าง `crv-tabs-standard` (node `4724:141435`, 8 variants)
 
 | Property | Type | Values |
 |---|---|---|
 | `selected` | VARIANT | `true`, `false` |
 | `state` | VARIANT | `default`, `hover` |
+| `size` | VARIANT | `large` (default), `small` |
 | `Icon` | INSTANCE_SWAP | icon instance |
 | `Label text` | TEXT | — |
 | `Show badge` | BOOLEAN | true / false |
@@ -48,8 +57,21 @@ Component set ที่ใช้สร้าง `crv-tabs-standard`
 | Selected icon | `color/brand/primary/content/default` |
 | Unselected icon | `color/content/secondary` |
 | Indicator underline | `color/brand/primary/on-surface/default` |
-| Typography | `typography/label/medium` |
 | Tab background | `color/on-surface/default` |
+
+### Size spec
+
+| | `large` | `small` |
+|---|---|---|
+| ความสูง | 48 | 32 |
+| Icon | 24 | 16 |
+| Typography | `typography/label/medium` (14/20) | `typography/label/small` (12/16) |
+| Padding ซ้าย–ขวา | `spacing/lg` (16) | `spacing/sm` (8) |
+| Padding บน–ล่าง | `spacing/lg` (16) | `spacing/sm` (8) |
+| Gap icon–label | 8 | `spacing/xs` (4) |
+| Indicator | 2px เต็มความกว้าง | 2px เต็มความกว้าง |
+
+> ⚠️ `size=small` ผูก font-size/line-height กับ variable `typography/label/small/*` โดยตรง (ไม่ได้ใช้ text style) เพราะ font `Aktiv Grotesk Thai` โหลดไม่ได้ใน environment ที่แก้ ทำให้ต้องคง typeface เดิม (`Static/Title Small/Font` = IBM Plex Sans Thai) ไว้ให้ตรงกับ `size=large` — ถ้าจะย้ายทั้ง component ไปใช้ `typography/label/*` ต้องทำในเครื่องที่มี font ครบ
 
 ---
 

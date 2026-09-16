@@ -9,6 +9,17 @@
     "check-env": "npx tsx src/check-env.ts",
     "probe": "npx tsx src/agent-probe.ts",
     "typecheck": "tsc --noEmit",
+    "typecheck:ds": "tsc -p tsconfig.ds.json",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "code-connect:dry-run": "bash scripts/code-connect.sh publish --dry-run",
+    "code-connect:publish": "bash scripts/code-connect.sh publish",
+    "icons:custom": "node scripts/generate-custom-icons.js",
+    "icons:connect": "node scripts/generate-icon-connect.js",
+    "tokens:generate": "node scripts/generate-tokens.js",
+    "tokens:check": "node scripts/generate-tokens.js --check",
+    "export:dev": "bash scripts/export-dev.sh",
+    "export:check": "bash scripts/export-dev.sh --check",
     "peer:wizard": "node scripts/peer-wizard.mjs",
     "storybook": "storybook dev -p 6006 --disable-telemetry",
     "build-storybook": "storybook build --disable-telemetry"
@@ -29,6 +40,7 @@
     "tsx": "^4.19.3"
   },
   "devDependencies": {
+    "@figma/code-connect": "^1.5.3",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/react": "^8.4.7",
     "@storybook/react-vite": "^8.4.7",

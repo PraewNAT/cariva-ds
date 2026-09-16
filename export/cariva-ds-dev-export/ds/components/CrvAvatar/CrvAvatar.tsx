@@ -9,7 +9,7 @@ import { getAvatarOnlineBadgeSx } from '../CrvBadge/crvBadgeStyles';
 import { getAvatarSx, getIconSize } from './crvAvatarStyles';
 import type { CrvAvatarProps } from './CrvAvatar.types';
 
-export const CrvAvatar = forwardRef<HTMLSpanElement, CrvAvatarProps>(
+export const CrvAvatar = forwardRef<HTMLDivElement, CrvAvatarProps>(
   function CrvAvatar(
     {
       variant = 'circular',

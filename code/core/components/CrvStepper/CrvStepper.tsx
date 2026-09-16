@@ -8,18 +8,18 @@ import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { CrvButton } from '../CrvButton';
-import { CrvStepIcon } from './CrvStepperIcon';
+import { CrvStepIcon } from './CrvStepperMarker';
 import {
-  getMobileDotSx,
-  getMobileProgressSx,
-  getMobileStepTextSx,
-  getMobileStepperSx,
+  getStepperCompactDotSx,
+  getStepperCompactProgressSx,
+  getStepperCompactTextSx,
+  getStepperCompactSx,
   getStepLabelSx,
   getStepperSx,
   resolveStepState,
 } from './crvStepperStyles';
 import type {
-  CrvMobileStepperProps,
+  CrvStepperCompactProps,
   CrvStepperProps,
 } from './CrvStepper.types';
 
@@ -88,7 +88,7 @@ export const CrvStepper = forwardRef<HTMLDivElement, CrvStepperProps>(
   },
 );
 
-export function CrvMobileStepper({
+export function CrvStepperCompact({
   progressType = 'text',
   activeStep,
   steps,
@@ -98,13 +98,13 @@ export function CrvMobileStepper({
   nextDisabled,
   onBack,
   onNext,
-}: CrvMobileStepperProps) {
+}: CrvStepperCompactProps) {
   const progress = steps > 0 ? ((activeStep + 1) / steps) * 100 : 0;
   const isFirst = activeStep <= 0;
   const isLast = activeStep >= steps - 1;
 
   return (
-    <Box sx={getMobileStepperSx()}>
+    <Box sx={getStepperCompactSx()}>
       <CrvButton
         variant="text"
         color="primary"
@@ -119,13 +119,13 @@ export function CrvMobileStepper({
       {progressType === 'dots' ? (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: `${8}px`, flex: 1, justifyContent: 'center' }}>
           {Array.from({ length: steps }, (_, index) => (
-            <Box key={index} sx={getMobileDotSx(index === activeStep)} />
+            <Box key={index} sx={getStepperCompactDotSx(index === activeStep)} />
           ))}
         </Box>
       ) : null}
 
       {progressType === 'text' ? (
-        <Box sx={getMobileStepTextSx()}>
+        <Box sx={getStepperCompactTextSx()}>
           {activeStep + 1}/{steps}
         </Box>
       ) : null}
@@ -134,7 +134,7 @@ export function CrvMobileStepper({
         <LinearProgress
           variant="determinate"
           value={progress}
-          sx={getMobileProgressSx()}
+          sx={getStepperCompactProgressSx()}
         />
       ) : null}
 

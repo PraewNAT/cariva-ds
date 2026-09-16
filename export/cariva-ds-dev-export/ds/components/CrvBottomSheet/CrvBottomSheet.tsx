@@ -6,6 +6,7 @@ import Drawer from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
 import SearchIcon from '@mui/icons-material/Search';
 import { CrvInput } from '../CrvInput';
+import type { SxProps, Theme } from '@mui/material/styles';
 import { getOverlayBackdropSx } from '../../crvOverlayStyles';
 import {
   getBottomSheetPaperSx,
@@ -43,6 +44,12 @@ export const CrvBottomSheet = forwardRef<HTMLDivElement, CrvBottomSheetProps>(
     ref,
   ) {
     const showHeader = Boolean(title || headerActions || showHeaderGradient || variant === 'search');
+    const backdropSlotProps = slotProps?.backdrop as
+      | ({ sx?: SxProps<Theme> } & Record<string, unknown>)
+      | undefined;
+    const paperSlotProps = slotProps?.paper as
+      | ({ sx?: SxProps<Theme> } & Record<string, unknown>)
+      | undefined;
 
     return (
       <Drawer
@@ -53,25 +60,25 @@ export const CrvBottomSheet = forwardRef<HTMLDivElement, CrvBottomSheetProps>(
         slotProps={{
           ...slotProps,
           backdrop: {
-            ...slotProps?.backdrop,
+            ...backdropSlotProps,
             sx: [
               getOverlayBackdropSx(),
-              ...(Array.isArray(slotProps?.backdrop?.sx)
-                ? slotProps.backdrop.sx
-                : slotProps?.backdrop?.sx
-                  ? [slotProps.backdrop.sx]
+              ...(Array.isArray(backdropSlotProps?.sx)
+                ? backdropSlotProps.sx
+                : backdropSlotProps?.sx
+                  ? [backdropSlotProps.sx]
                   : []),
             ],
           },
           paper: {
-            ...slotProps?.paper,
+            ...paperSlotProps,
             sx: [
               getBottomSheetPaperSx(),
               ...(Array.isArray(paperSx) ? paperSx : paperSx ? [paperSx] : []),
-              ...(Array.isArray(slotProps?.paper?.sx)
-                ? slotProps.paper.sx
-                : slotProps?.paper?.sx
-                  ? [slotProps.paper.sx]
+              ...(Array.isArray(paperSlotProps?.sx)
+                ? paperSlotProps.sx
+                : paperSlotProps?.sx
+                  ? [paperSlotProps.sx]
                   : []),
             ],
           },

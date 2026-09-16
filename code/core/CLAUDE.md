@@ -169,18 +169,26 @@ import type { CrvButtonProps } from '@/ds/types';
 ### Toast
 
 - `severity` must match meaning — never use `error` for warning
-- `variant="primary"` = filled, emphatic — use sparingly
-- `variant="secondary"` = tinted, subtle — default choice
+- `variant="filled"` = พื้นทึบ เน้นสุด — use sparingly
+- `variant="outlined"` = เส้นขอบอย่างเดียว บนพื้นขาว
+- `variant="standard"` = พื้นอ่อน + เงา — default choice
+- `severity="notification"` = ข้อความระบบที่ไม่ใช่ status (neutral + ไอคอน brand)
+- ปุ่มปิดจะแสดงก็ต่อเมื่อส่ง `onClose`
 
 ```tsx
 // ✅ correct
-<CrvToast severity="success" variant="secondary">
-  บันทึกข้อมูลสำเร็จ
-</CrvToast>
+<CrvToast
+  severity="success"
+  variant="standard"
+  title="บันทึกข้อมูลสำเร็จ"
+  onClose={handleClose}
+/>
 
 // ❌ wrong severity
-<CrvToast severity="error">กรุณาตรวจสอบข้อมูล</CrvToast> // นี่คือ warning ไม่ใช่ error
+<CrvToast severity="error" title="กรุณาตรวจสอบข้อมูล" /> // นี่คือ warning ไม่ใช่ error
 ```
+
+`variant="primary"` / `"secondary"` ของเดิมยังใช้ได้แต่ deprecated — ใช้ `filled` / `standard` แทน
 
 ---
 

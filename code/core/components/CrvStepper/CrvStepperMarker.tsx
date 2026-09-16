@@ -7,7 +7,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import Box from '@mui/material/Box';
 import { getStepIconSx } from './crvStepperStyles';
-import type { CrvStepIconProps, CrvStepperIconProps, CrvStepState } from './CrvStepper.types';
+import type { CrvStepIconProps, CrvStepperMarkerProps, CrvStepState } from './CrvStepper.types';
 
 function SemanticStepIcon({ state }: { state: CrvStepState }) {
   switch (state) {
@@ -24,10 +24,10 @@ function SemanticStepIcon({ state }: { state: CrvStepState }) {
   }
 }
 
-export function CrvStepperIcon({
+export function CrvStepperMarker({
   state = 'default',
   value = 1,
-}: CrvStepperIconProps) {
+}: CrvStepperMarkerProps) {
   const visualState: CrvStepState = state === 'done' ? 'complete' : 'inactive';
 
   return (
