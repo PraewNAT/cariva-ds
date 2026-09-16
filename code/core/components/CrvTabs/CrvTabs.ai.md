@@ -6,7 +6,7 @@
 
 | Export | Figma | Use |
 |---|---|---|
-| `CrvTabsStandard` | `crv-tabs-standard` 4838:9365 | underline indicator — default web/app tabs |
+| `CrvTabsStandard` | `crv-tabs-standard` 6086:59 | underline indicator — default web/app tabs |
 | `CrvTabsPills` | `crv-tabs-pills` 3875:4462 | segmented pill container |
 | `CrvTabsFolder` | `crv-tabs-folder` 4725:21088 | outermost tab layer — **web / back office only** |
 
@@ -24,8 +24,16 @@ Shared API: `items: CrvTabItem[]`, controlled `value` + `onChange(value, event)`
 | Selected label/icon | `color/brand/primary/content/default` |
 | Unselected label/icon | `color/content/secondary` |
 | Badge dot | `color/border/error` |
-| Padding | 12 / 16 (`spacing/md` / `lg`), gap `spacing/sm` |
-| Typography | `typography/label/medium` |
+
+`size` prop — `large` (default) | `small`:
+
+| | `large` | `small` |
+|---|---|---|
+| minHeight | 48 | 32 |
+| Padding | 12 / 16 (`spacing/md` / `lg`) | 8 / 8 (`spacing/sm`) |
+| Gap | `spacing/sm` (8) | `spacing/xs` (4) |
+| Icon | 24 | 16 |
+| Typography | `typography/label/medium` | `typography/label/small` |
 
 ### Pills
 | Element | Token |

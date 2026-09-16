@@ -6,13 +6,13 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stepper from '@mui/material/Stepper';
 import {
-  CrvMobileStepper,
+  CrvStepperCompact,
   CrvStep,
   CrvStepper,
-  CrvStepperIcon,
+  CrvStepperMarker,
 } from './index';
 import type {
-  CrvMobileStepperProgressType,
+  CrvStepperCompactProgressType,
   CrvStepState,
   CrvStepTextAlign,
 } from './CrvStepper.types';
@@ -100,11 +100,11 @@ export const CenterLabels: Story = {
   },
 };
 
-export const StepIconStates: StoryObj<typeof CrvStepperIcon> = {
+export const StepIconStates: StoryObj<typeof CrvStepperMarker> = {
   render: () => (
     <Box sx={{ display: 'flex', gap: 2 }}>
-      <CrvStepperIcon state="default" value={1} />
-      <CrvStepperIcon state="done" />
+      <CrvStepperMarker state="default" value={1} />
+      <CrvStepperMarker state="done" />
     </Box>
   ),
   parameters: { controls: { disable: true } },
@@ -121,9 +121,9 @@ export const StepBaseStates: Story = {
   parameters: { controls: { disable: true } },
 };
 
-const PROGRESS_TYPES: CrvMobileStepperProgressType[] = ['text', 'dots', 'progress'];
+const PROGRESS_TYPES: CrvStepperCompactProgressType[] = ['text', 'dots', 'progress'];
 
-export const MobileStepperVariants: StoryObj<typeof CrvMobileStepper> = {
+export const StepperCompactVariants: StoryObj<typeof CrvStepperCompact> = {
   render: () => {
     const [activeStep, setActiveStep] = useState(0);
     return (
@@ -131,7 +131,7 @@ export const MobileStepperVariants: StoryObj<typeof CrvMobileStepper> = {
         {PROGRESS_TYPES.map((progressType) => (
           <Box key={progressType} sx={{ display: 'grid', gap: 1 }}>
             <Typography variant="caption">{progressType}</Typography>
-            <CrvMobileStepper
+            <CrvStepperCompact
               progressType={progressType}
               activeStep={activeStep}
               steps={5}

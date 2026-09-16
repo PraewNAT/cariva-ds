@@ -2,7 +2,7 @@
 
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import { CrvStepIcon } from './CrvStepperIcon';
+import { CrvStepIcon } from './CrvStepperMarker';
 import { getStepLabelSx } from './crvStepperStyles';
 import type { CrvStepProps } from './CrvStepper.types';
 
@@ -20,7 +20,6 @@ export function CrvStep({
     <Step
       active={state === 'active'}
       completed={state === 'complete'}
-      error={state === 'error'}
       sx={{ px: 0, ...(typeof sx === 'object' && !Array.isArray(sx) ? sx : {}) }}
       {...rest}
     >

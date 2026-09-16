@@ -3,22 +3,34 @@ import { getCarivaColors, getCarivaRadius, getCarivaSpacing, getCarivaTypography
 
 export const TABS_FOLDER_SHADOW = '0 25px 50px -12px rgba(30, 58, 138, 0.25)';
 
-function labelMediumSx(theme: Theme) {
+function labelSx(theme: Theme, scale: 'small' | 'medium') {
   const ty = getCarivaTypography(theme);
   return {
-    fontFamily: ty.fontFamily.sans,
+    fontFamily: ty.fontFamily.ui,
     fontWeight: ty.fontWeight.medium,
-    fontSize: `${ty.fontSize.label.medium}px`,
-    lineHeight: `${ty.lineHeight.label.medium}px`,
+    fontSize: `${ty.fontSize.label[scale]}px`,
+    lineHeight: `${ty.lineHeight.label[scale]}px`,
     textTransform: 'none' as const,
   };
 }
 
-export function getStandardTabsSx(): SxProps<Theme> {
+function labelMediumSx(theme: Theme) {
+  return labelSx(theme, 'medium');
+}
+
+// Figma crv-tabs-standard set 6086:59 — size=large 4838:9365, size=small 6086:17
+const STANDARD_SIZE = {
+  large: { minHeight: 48, label: 'medium', icon: 24, padY: 'md', padX: 'lg', gap: 'sm' },
+  small: { minHeight: 32, label: 'small', icon: 16, padY: 'sm', padX: 'sm', gap: 'xs' },
+} as const;
+
+export type CrvTabsStandardSize = keyof typeof STANDARD_SIZE;
+
+export function getStandardTabsSx(size: CrvTabsStandardSize = 'large'): SxProps<Theme> {
   return (theme) => {
     const c = getCarivaColors(theme);
     return {
-      minHeight: 48,
+      minHeight: STANDARD_SIZE[size].minHeight,
       backgroundColor: c.onSurface.default,
       '& .MuiTabs-indicator': {
         height: 2,
@@ -28,17 +40,18 @@ export function getStandardTabsSx(): SxProps<Theme> {
   };
 }
 
-export function getStandardTabSx(): SxProps<Theme> {
+export function getStandardTabSx(size: CrvTabsStandardSize = 'large'): SxProps<Theme> {
   return (theme) => {
     const c = getCarivaColors(theme);
     const s = getCarivaSpacing(theme);
+    const cfg = STANDARD_SIZE[size];
     return {
-      ...labelMediumSx(theme),
-      minHeight: 48,
-      padding: `${s.md}px ${s.lg}px`,
-      gap: `${s.sm}px`,
+      ...labelSx(theme, cfg.label),
+      minHeight: cfg.minHeight,
+      padding: `${s[cfg.padY]}px ${s[cfg.padX]}px`,
+      gap: `${s[cfg.gap]}px`,
       color: c.content.secondary,
-      '& .MuiSvgIcon-root': { color: 'inherit', fontSize: 24 },
+      '& .MuiSvgIcon-root': { color: 'inherit', fontSize: cfg.icon },
       '&:hover': { backgroundColor: c.onSurface.subtle },
       '&.Mui-selected': { color: c.brand.primary.content.default },
       '&.Mui-disabled': { color: c.content.disabled },

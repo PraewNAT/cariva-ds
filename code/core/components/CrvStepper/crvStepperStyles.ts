@@ -3,7 +3,7 @@ import { colors, radius, spacing, typography } from '../../tokens';
 import type { CrvStepState, CrvStepTextAlign } from './CrvStepper.types';
 
 export const STEPPER_ICON_SIZE = 24;
-export const MOBILE_STEPPER_WIDTH = 400;
+export const STEPPER_COMPACT_WIDTH = 400;
 
 export function getStepIconColors(state: CrvStepState) {
   switch (state) {
@@ -150,9 +150,9 @@ export function getStepperSx(
   };
 }
 
-export function getMobileStepperSx(): SxProps<Theme> {
+export function getStepperCompactSx(): SxProps<Theme> {
   return {
-    width:          MOBILE_STEPPER_WIDTH,
+    width:          STEPPER_COMPACT_WIDTH,
     maxWidth:       '100%',
     display:        'flex',
     alignItems:     'center',
@@ -163,7 +163,7 @@ export function getMobileStepperSx(): SxProps<Theme> {
   };
 }
 
-export function getMobileDotSx(active: boolean): SxProps<Theme> {
+export function getStepperCompactDotSx(active: boolean): SxProps<Theme> {
   return {
     width:           8,
     height:          8,
@@ -175,7 +175,7 @@ export function getMobileDotSx(active: boolean): SxProps<Theme> {
   };
 }
 
-export function getMobileStepTextSx(): SxProps<Theme> {
+export function getStepperCompactTextSx(): SxProps<Theme> {
   return {
     color:      colors.content.primary,
     fontFamily: typography.fontFamily.sans,
@@ -187,7 +187,7 @@ export function getMobileStepTextSx(): SxProps<Theme> {
   };
 }
 
-export function getMobileProgressSx(): SxProps<Theme> {
+export function getStepperCompactProgressSx(): SxProps<Theme> {
   return {
     flex:            1,
     mx:              `${spacing.sm}px`,

@@ -2,63 +2,128 @@
 
 import { forwardRef } from 'react';
 import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
+import Box from '@mui/material/Box';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import ErrorRoundedIcon from '@mui/icons-material/ErrorRounded';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
-import { getCloseButtonSx, getToastSx } from './crvToastStyles';
-import type { CrvToastProps, CrvToastSeverity } from './CrvToast.types';
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
+import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
+import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
+import { CrvButtonIcon } from '../CrvButtonIcon';
+import {
+  getToastCloseSx,
+  getToastDescriptionSx,
+  getToastSx,
+  getToastTitleSx,
+  resolveVariant,
+  toMuiSeverity,
+} from './crvToastStyles';
+import type {
+  CrvToastProps,
+  CrvToastSeverity,
+  CrvToastVariant,
+} from './CrvToast.types';
 
-const severityIcons: Record<CrvToastSeverity, typeof ErrorOutlineIcon> = {
-  error:   ErrorOutlineIcon,
-  info:    InfoOutlinedIcon,
-  success: CheckCircleOutlineIcon,
-  warning: WarningAmberRoundedIcon,
+/**
+ * Same glyphs as Figma: Filled/Outlined use the outline icons, Standard uses
+ * the solid rounded ones.
+ */
+const severityIcons: Record<
+  'outline' | 'solid',
+  Record<CrvToastSeverity, typeof ErrorOutlineIcon>
+> = {
+  outline: {
+    error: ErrorOutlineIcon,
+    warning: ReportProblemOutlinedIcon,
+    info: InfoOutlinedIcon,
+    success: CheckCircleOutlineIcon,
+    notification: InfoOutlinedIcon,
+  },
+  solid: {
+    error: ErrorRoundedIcon,
+    warning: WarningRoundedIcon,
+    info: InfoRoundedIcon,
+    success: CheckCircleRoundedIcon,
+    notification: InfoRoundedIcon,
+  },
 };
+
+function getSeverityIcon(variant: CrvToastVariant, severity: CrvToastSeverity) {
+  return severityIcons[variant === 'standard' ? 'solid' : 'outline'][severity];
+}
 
 export const CrvToast = forwardRef<HTMLDivElement, CrvToastProps>(
   function CrvToast(
     {
-      variant = 'primary',
+      variant = 'standard',
       severity = 'error',
-      showAction = true,
-      actionIcon = <CloseRoundedIcon />,
-      children,
+      title,
+      description,
+      action,
       onClose,
+      closeLabel = 'Dismiss',
+      icon,
+      children,
+      showAction,
+      actionIcon,
       sx,
       ...rest
     },
     ref,
   ) {
-    const SeverityIcon = severityIcons[severity];
+    const resolvedVariant = resolveVariant(variant);
+    const heading = title ?? children;
+    // `showAction` is the old prop name for "render the close button".
+    const showClose = showAction ?? Boolean(onClose);
+    const SeverityIcon = getSeverityIcon(resolvedVariant, severity);
 
-    const action = showAction ? (
-      <IconButton
-        aria-label="Dismiss toast"
-        size="small"
-        onClick={onClose}
-        sx={getCloseButtonSx(variant, severity)}
-      >
-        {actionIcon}
-      </IconButton>
-    ) : undefined;
+    const actions =
+      action || showClose ? (
+        <>
+          {action}
+          {showClose ? (
+            <CrvButtonIcon
+              variant="ghost"
+              size="small"
+              aria-label={closeLabel}
+              onClick={onClose}
+              sx={getToastCloseSx(resolvedVariant, severity)}
+            >
+              <CloseRoundedIcon />
+            </CrvButtonIcon>
+          ) : null}
+        </>
+      ) : undefined;
 
     return (
       <Alert
         ref={ref}
-        severity={severity}
+        severity={toMuiSeverity(severity)}
         variant="standard"
-        icon={<SeverityIcon />}
-        action={action}
+        icon={icon ?? (actionIcon as typeof icon) ?? <SeverityIcon />}
+        action={actions}
         sx={[
-          getToastSx(variant, severity),
+          getToastSx(resolvedVariant, severity),
           ...(Array.isArray(sx) ? sx : sx ? [sx] : []),
         ]}
         {...rest}
       >
-        {children}
+        {heading ? (
+          <Box component="span" sx={getToastTitleSx(resolvedVariant, severity)}>
+            {heading}
+          </Box>
+        ) : null}
+        {description ? (
+          <Box
+            component="span"
+            sx={getToastDescriptionSx(resolvedVariant, severity)}
+          >
+            {description}
+          </Box>
+        ) : null}
       </Alert>
     );
   },

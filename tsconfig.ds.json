@@ -1,0 +1,23 @@
+// Type-checks the design system (code/core + Storybook): npm run typecheck:ds
+// The root tsconfig.json belongs to the peer-bridge tool in src/ and never
+// covers code/ — it replaced this config on 2026-06-26 (78b5615).
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "types": ["@types/react"]
+  },
+  "include": ["code/core/**/*", ".storybook/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.tsx", "**/*.test.ts"]
+}

@@ -12,7 +12,7 @@ MUI X picker wrappers for date, time, and date-time input. Keep picker behavior 
 
 ## Rules
 
-- Font family: `font-family/sans` (IBM Plex Sans Thai)
+- Font family: `font-family/ui` (IBM Plex Sans Thai)
 - Field content:
   - `small`: `typography/body/medium`
   - `medium`: `typography/body/large`

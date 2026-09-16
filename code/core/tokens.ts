@@ -44,9 +44,26 @@ export const colors = {
       },
     },
   },
+  neutral: {
+    onSurface: {
+      default: '#e2e8f0',
+      hover: '#cbd5e1',
+      pressed: '#94a3b8',
+      subtle: '#f8fafc',
+      muted: '#f1f5f9',
+    },
+    content: {
+      default: '#0f172a',
+      strong: '#0f172a',
+    },
+    border: {
+      default: '#cbd5e1',
+      strong: '#94a3b8',
+    },
+  },
   content: {
     primary: '#0f172a',
-    secondary: '#475569',
+    secondary: '#64748b',
     placeholder: '#64748b',
     disabled: '#94a3b8',
     inverse: '#ffffff',
@@ -101,7 +118,8 @@ export const colors = {
         strong: '#065f46',
       },
       border: {
-        default: '#047857',
+        default: '#6ee7b7',
+        strong: '#10b981',
       },
     },
     warning: {
@@ -117,7 +135,8 @@ export const colors = {
         strong: '#b45309',
       },
       border: {
-        default: '#d97706',
+        default: '#fcd34d',
+        strong: '#f59e0b',
       },
     },
     error: {
@@ -132,6 +151,10 @@ export const colors = {
         default: '#dc2626',
         strong: '#b91c1c',
       },
+      border: {
+        default: '#fca5a5',
+        strong: '#ef4444',
+      },
     },
     info: {
       onSurface: {
@@ -144,6 +167,10 @@ export const colors = {
       content: {
         default: '#0284c7',
         strong: '#0369a1',
+      },
+      border: {
+        default: '#7dd3fc',
+        strong: '#0ea5e9',
       },
     },
   },
@@ -316,7 +343,11 @@ export const productStyle = {
       // loaded in the document <head>. Fall back to the self-hosted fonts
       // below if the kit fails to load (offline, expired subscription, etc).
       display: '"Malila", "IBM Plex Sans Thai", sans-serif',
+      ui:      '"Aktiv Grotesk Thai", "IBM Plex Sans Thai", sans-serif',
+      prose:   '"Google Sans", "IBM Plex Sans Thai Looped", serif',
+      /** @deprecated Figma renamed `font-family/sans` → `font-family/ui` (2026-08-31). Use `ui`. */
       sans:    '"Aktiv Grotesk Thai", "IBM Plex Sans Thai", sans-serif',
+      /** @deprecated Figma renamed `font-family/serif` → `font-family/prose` (2026-08-31). Use `prose`. */
       serif:   '"Google Sans", "IBM Plex Sans Thai Looped", serif',
     },
   },
@@ -329,7 +360,11 @@ export const productStyle = {
     fontFamily: {
       // Malila is also an Adobe Fonts typeface — same fallback note as above.
       display: '"Malila", "IBM Plex Sans Thai", sans-serif',
+      ui:      '"IBM Plex Sans Thai", sans-serif',
+      prose:   '"IBM Plex Sans Thai Looped", serif',
+      /** @deprecated Figma renamed `font-family/sans` → `font-family/ui` (2026-08-31). Use `ui`. */
       sans:    '"IBM Plex Sans Thai", sans-serif',
+      /** @deprecated Figma renamed `font-family/serif` → `font-family/prose` (2026-08-31). Use `prose`. */
       serif:   '"IBM Plex Sans Thai Looped", serif',
     },
   },
@@ -341,10 +376,13 @@ export const defaultProductStyle: ProductStyleName = 'carivaApp';
 
 export const typography = {
   fontFamily: productStyle[defaultProductStyle].fontFamily,
+  // Desktop mode of the Figma "Typography" collection. Verified against live
+  // Figma variables 2026-09-07.
   fontSize: {
-    display:  { large: 64, medium: 48, small: 40 },
+    display:  { large: 60, medium: 48, small: 36 },
     heading:  { large: 24, medium: 20, small: 16 },
     body:     { large: 16, medium: 14, small: 12 },
+    prose:    { large: 16, medium: 14, small: 12 },
     label:    { large: 16, medium: 14, small: 12, xsmall: 10 },
     caption:  { caption: 12 },
   },
@@ -352,7 +390,8 @@ export const typography = {
     display:  { large: 72, medium: 56, small: 48 },
     heading:  { large: 32, medium: 28, small: 24 },
     body:     { large: 24, medium: 22, small: 18 },
-    label:    { large: 24, medium: 22, small: 18, xsmall: 14 },
+    prose:    { large: 24, medium: 22, small: 18 },
+    label:    { large: 24, medium: 20, small: 16, xsmall: 16 },
     caption:  { caption: 16 },
   },
   fontWeight: {

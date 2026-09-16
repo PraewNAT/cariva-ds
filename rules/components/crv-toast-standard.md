@@ -1,96 +1,85 @@
 # crv-toast-standard
 
-> Toast banner สำหรับแสดงข้อความ feedback/notification รองรับ 2 variant (primary/secondary) และ 4 severity (error/info/success/warning)
+> Toast สำหรับแสดงข้อความ feedback/notification — 3 variant (Filled/Outlined/Standard) × 5 severity (error/warning/info/success/notification) รองรับ Title, Description, ปุ่ม Action และปุ่มปิด
 
 ## Figma structure
 
-- Component type: Toast
-- Figma component set: `crv-toast-standard` (page Toast)
+- Figma component set: `crv-toast-standard` (page Toast) — node `6413:55828`
 - Code component: `CrvToast`
-- Naming pattern: `variant=primary|secondary, severity=error|info|success|warning`
+- Naming pattern: `Severity=Error|Warning|Info|Success|Notification, Variant=Filled|Outlined|Standard`
 
 ## Code mapping
 
-- Use `CrvToast` for Figma `crv-toast-standard`.
-- `variant="primary"` maps to Figma filled toast surfaces.
-- `variant="secondary"` maps to Figma tinted toast surfaces.
-- `showAction` maps to Figma `showAction`.
-- `actionIcon` maps to Figma `actionIcon`.
-- Pass toast copy via `children` (Figma `{Title}`).
+- `Variant` → `variant` (`filled` | `outlined` | `standard`)
+- `Severity` → `severity` (`error` | `warning` | `info` | `success` | `notification`)
+- `Title?` / `↳ Title` → `title` · `Description?` / `↳ Description` → `description`
+- `Action?` / `↳Instance` → `action` — สลับได้เฉพาะ `crv-button-standard` (text / neutral / small)
+- `On Close?` → `onClose` — ส่ง handler มาเมื่อไหร่ ปุ่มปิดถึงจะแสดง
+- `variant="primary"` / `"secondary"` ของเดิมยังใช้ได้ (map เป็น `filled` / `standard`) แต่ mark deprecated แล้ว
 
 ## Variants
 
 | Property | Values |
 |---|---|
-| `variant` | `primary`, `secondary` |
-| `severity` | `error`, `info`, `success`, `warning` |
+| `Variant` | `Filled`, `Outlined`, `Standard` |
+| `Severity` | `Error`, `Warning`, `Info`, `Success`, `Notification` |
 
 ## Variant อธิบาย
 
-- `variant=primary`: filled background เข้ม — ใช้เมื่อต้องการเน้น toast ให้ชัดเจน
-- `variant=secondary`: tinted background อ่อน — ใช้เมื่อต้องการ toast แบบ subtle ไม่รบกวน layout
+- `Filled`: พื้นทึบตาม severity — ใช้เมื่อต้องการเน้นให้เห็นชัดที่สุด
+- `Outlined`: ไม่มีพื้น มีแค่เส้นขอบ 1px — ใช้บนพื้นขาวเมื่อต้องการน้ำหนักเบา
+- `Standard`: พื้นอ่อน + เส้นขอบ 2px + เงา — ใช้เมื่อต้องการแจ้งเตือนแบบนุ่มนวล ไม่รบกวน layout
 
 ## Sizes
 
 | ขนาด | หมายเหตุ |
 |---|---|
-| width=320, height=40 | Fixed — ความกว้างปรับตาม container ใน product |
+| width 320 | ใน Figma กว้างคงที่ ส่วนในโค้ดยืดตาม container |
 
 ## Anatomy
 
-- Severity icon (INSTANCE): icon ซ้ายสุด แสดง severity — `ErrorOutline`, `InfoOutlined`, `CheckCircleOutlined`, `WarningAmberRounded`
-- `Text` (FRAME): กลุ่ม text content
-  - `{Title}` (TEXT): ข้อความหลัก
-- `ClearRounded` (INSTANCE): close icon
-- `On Close Container` (FRAME): พื้นที่สำหรับ close button
-  - `<IconButton>` (INSTANCE): ปุ่มปิด — shared component `Size=Small, Color=Inherit, State=Enabled`
-
-## Layout behavior
-
-- Direction: horizontal
-- Padding: `spacing/sm` (8px) ทุกด้าน
-- Gap: `spacing/sm` (8px)
-- Sizing: FIXED width, height hug content
-- Radius: `radius/8`
+- Severity icon (24px) — Filled/Outlined ใช้ไอคอนแบบเส้น (`error-outline`, `report-problem`, `info` outlined, `check-circle-outline`) · Standard ใช้แบบทึบ (`error`, `warning`, `info`, `check-circle` rounded)
+- `{Title}` — `typography/label/large`
+- `{Description}` — `typography/label/medium` (ซ่อนได้)
+- Action — `crv-button-standard` text / neutral / small (ซ่อนได้)
+- Close — `crv-button-icon` ghost / neutral / small + icon `close` (ซ่อนได้)
+- Layout: horizontal · padding `spacing/xs` บน-ล่าง, `spacing/lg` ซ้าย-ขวา · radius `radius/12`
 
 ## Token usage
 
-### primary variant
+| Element | Token |
+|---|---|
+| Filled พื้น | `color/status/{severity}/on-surface/default` |
+| Filled text / icon / ปุ่ม | `color/content/inverse` |
+| Outlined เส้นขอบ (1px) | `color/status/{severity}/border/strong` |
+| Standard พื้น | `color/status/{severity}/on-surface/subtle` |
+| Standard เส้นขอบ (2px) | `color/status/{severity}/border/default` |
+| Standard เงา | `shadow/status/{severity}` |
+| Outlined / Standard icon | `color/status/{severity}/content/default` |
+| Title | `color/content/primary` · Description `color/content/secondary` |
+| Notification | พื้น/เส้นขอบ `color/neutral/*` · icon `color/brand/primary/on-surface/default` · Filled ใช้ `color/bg/white` |
 
-| Severity | Background token | Icon/text color |
-|---|---|---|
-| `error` | `color/status/error/on-surface/default` | `color/content/inverse` |
-| `info` | `color/status/info/on-surface/default` | `color/content/inverse` |
-| `success` | `color/status/success/on-surface/default` | `color/content/inverse` |
-| `warning` | `color/status/warning/on-surface/default` | `color/content/inverse` |
+## ควรทำ / ไม่ควรทำ
 
-### secondary variant
+### ควรทำ
 
-| Severity | Background token | Icon color | Text color |
-|---|---|---|---|
-| `error` | `color/status/error/on-surface/muted` | `color/status/error/on-surface/default` | `color/content/primary` |
-| `info` | `color/status/info/on-surface/muted` | `color/brand/primary/on-surface/default` | `color/content/primary` |
-| `success` | `color/status/success/on-surface/subtle` | `color/status/success/on-surface/default` | `color/content/primary` |
-| `warning` | `color/status/warning/on-surface/muted` | `color/status/warning/on-surface/default` | `color/content/primary` |
+- เลือก `severity` ให้ตรงความหมาย — error เมื่อผิดพลาด, success เมื่อสำเร็จ, warning เมื่อต้องระวัง, info เมื่อให้ข้อมูล
+- ใช้ `Notification` สำหรับข้อความระบบที่ไม่ใช่ status
+- ใช้ `Variant=Filled` เมื่อต้องการเน้น · `Variant=Standard` เมื่อต้องการ subtle
+- ส่ง `onClose` เมื่อต้องการให้ผู้ใช้ปิดเองได้
 
-- Spacing: `spacing/sm` (padding + gap)
-- Radius: `radius/8`
-- Close button: shared `<IconButton>` — radius = `radius/full`
+### ไม่ควรทำ
 
-## Do / Don't
+- อย่าใช้ `severity=error` แสดง warning
+- อย่าใส่ปุ่ม Action มากกว่า 1 ปุ่ม
+- อย่าวาง toast ซ้อนกันหลายอันโดยไม่มีลำดับความสำคัญ
 
-### Do
+## MUI mapping
 
-- ใช้ `severity` ให้ตรงกับความหมาย — `error` เมื่อเกิดข้อผิดพลาด, `success` เมื่อสำเร็จ, `warning` เมื่อต้องระวัง, `info` เมื่อให้ข้อมูลทั่วไป
-- ใช้ `variant=primary` เมื่อต้องการเน้น toast ให้ชัดเจน (filled background)
-- ใช้ `variant=secondary` เมื่อต้องการแสดง toast แบบ subtle ไม่รบกวน layout
-
-### Don't
-
-- อย่าใช้ `severity=error` เพื่อแสดงข้อความ warning — เลือก severity ให้ตรงความหมายเสมอ
-- อย่าแสดง toast หลายอันซ้อนกันโดยไม่มีลำดับความสำคัญ
-- อย่าใช้ toast แทน inline alert สำหรับข้อความที่ต้องการให้ผู้ใช้อ่านค้างในหน้า
+- `CrvToast` → `MuiAlert` (severity `notification` map เป็น `info` ภายใน) + `CrvButtonIcon` สำหรับปุ่มปิด
 
 ## Needs designer review
 
-- ยังไม่มี variant ที่รองรับ description text (multi-line) — ปัจจุบันมีเฉพาะ `{Title}` บรรทัดเดียว
+- `crv-button-standard` ใน Figma ใช้ `color=neutral` สำหรับปุ่ม Action แต่ `CrvButton` ในโค้ดยังไม่มีสี `neutral` (มีแค่ `primary` / `error`)
+- ปุ่ม Action และปุ่มปิดบน `Variant=Filled` ต้องตั้งสีทับเป็น `color/content/inverse` เพราะ `crv-button-standard` / `crv-button-icon` ยังไม่มีสีแบบขาวบนพื้นสี
+- `Warning` + `Info` แบบ Filled: ตัวหนังสือขาวบนพื้นได้ contrast 3.2:1 และ 4.1:1 (ต่ำกว่า WCAG AA 4.5:1) — Design System Owner รับทราบแล้ว

@@ -44,6 +44,9 @@ export * from './components/CrvTextArea';
 export * from './components/CrvToast';
 export * from './components/CrvTooltip';
 
+// Icons the DS ships itself — not in @mui/icons-material
+export * from './icons';
+
 // Tokens
 export { colors, spacing, radius, typography, productStyle, defaultProductStyle } from './tokens';
 export type { CarivaColors, CarivaSpacing, ProductStyleName } from './tokens';

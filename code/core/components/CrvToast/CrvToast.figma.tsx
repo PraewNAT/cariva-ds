@@ -1,29 +1,48 @@
 import figma from '@figma/code-connect';
 import { CrvToast } from './CrvToast';
 
-// Figma node: crv-alert-standard component set (Toast page)
-// URL: https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=4165-5387
+// Figma node: crv-toast-standard component set (Toast page)
+// URL: https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=6413-55828
 figma.connect(
   CrvToast,
-  'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=4165-5387',
+  'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=6413-55828',
   {
     props: {
-      variant: figma.enum('variant', {
-        primary:   'primary',
-        secondary: 'secondary',
+      variant: figma.enum('Variant', {
+        Filled: 'filled',
+        Outlined: 'outlined',
+        Standard: 'standard',
       }),
-      severity: figma.enum('severity', {
-        error:   'error',
-        info:    'info',
-        success: 'success',
-        warning: 'warning',
+      severity: figma.enum('Severity', {
+        Error: 'error',
+        Warning: 'warning',
+        Info: 'info',
+        Success: 'success',
+        Notification: 'notification',
       }),
-      showAction: figma.boolean('showAction'),
+      title: figma.boolean('Title?', {
+        true: figma.string('↳ Title'),
+        false: undefined,
+      }),
+      description: figma.boolean('Description?', {
+        true: figma.string('↳ Description'),
+        false: undefined,
+      }),
+      action: figma.boolean('Action?', {
+        true: figma.instance('↳Instance'),
+        false: undefined,
+      }),
+      showClose: figma.boolean('On Close?'),
     },
-    example: ({ variant, severity, showAction }) => (
-      <CrvToast variant={variant} severity={severity} showAction={showAction}>
-        Title
-      </CrvToast>
+    example: ({ variant, severity, title, description, action, showClose }) => (
+      <CrvToast
+        variant={variant}
+        severity={severity}
+        title={title}
+        description={description}
+        action={action}
+        onClose={showClose ? () => {} : undefined}
+      />
     ),
   },
 );

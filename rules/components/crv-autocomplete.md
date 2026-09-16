@@ -76,7 +76,7 @@
 ### Typography
 - `typography/body/large/font-size` — content / placeholder (medium)
 - `typography/body/small/font-size` — error message
-- Font family: `font-family/sans` (Product Style collection)
+- Font family: `font-family/ui` (Product Style collection)
 
 ### Spacing
 - Padding H: `spacing/lg`

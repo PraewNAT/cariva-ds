@@ -78,7 +78,7 @@
 - `typography/label/medium` — label text
 - `typography/body/large` — content / placeholder (medium size)
 - `typography/body/small` — helper text / error message
-- Font family: `font-family/sans` (Product Style collection)
+- Font family: `font-family/ui` (Product Style collection)
 
 ### Spacing
 - Padding H: `spacing/lg`
