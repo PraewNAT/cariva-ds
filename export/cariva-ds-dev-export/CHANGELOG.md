@@ -1,5 +1,26 @@
 # Changelog — cariva-ds-dev-export
 
+## 2026-09-16
+
+### Fixed
+
+- **`font-family/ui` never loaded the web font.** The stack asked for
+  `"Aktiv Grotesk Thai"`, but Adobe kit `tfw1cme` declares the family as
+  `aktiv-grotesk-thai`, and CSS treats those as two different families. On a
+  designer's Mac the name still resolved — to the Creative Cloud *desktop*
+  font — so the bug was invisible locally while every deploy and every machine
+  without Creative Cloud silently fell back to IBM Plex. `ui` (and the
+  deprecated `sans`) now list both spellings. `Malila` needs no alias; family
+  matching is case-insensitive, so it already matched the kit's `malila`.
+
+### Known issues
+
+- **`font-family/prose` still cannot resolve.** `Google Sans` is not on the
+  Adobe kit and is not licensable through Adobe Fonts at all, and the declared
+  fallback `IBM Plex Sans Thai Looped` is not imported by `ds/fonts.ts` — so
+  prose text lands on generic `serif`. Consuming apps can import
+  `@fontsource/ibm-plex-sans-thai-looped` themselves as a stopgap.
+
 ## 2026-09-11
 
 Refreshed from `code/core/` — the previous bundle was a 2026-06-19 snapshot and
