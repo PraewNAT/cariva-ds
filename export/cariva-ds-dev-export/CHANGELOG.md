@@ -16,6 +16,13 @@
   avatar instead of `thumbnailInitials`, matching the Figma chip whose avatar
   glyph is swapped (e.g. `thumbnailIcon={<MedicalCrossCircle />}`).
 
+### Fixed
+
+- **`CrvAvatar` icon size (`content="icon"`).** The default icon rendered at
+  16px on large/medium avatars, sized from Figma variants that were themselves
+  wrong. It now matches Figma's icon slot — 24 / 20 / 16 / 12px for large /
+  medium / small / xSmall (padding 8 / 6 / 4 / 3) — with or without `badge`.
+
 ## 2026-09-16
 
 ### Fixed

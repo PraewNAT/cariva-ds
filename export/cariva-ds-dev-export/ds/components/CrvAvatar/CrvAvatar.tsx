@@ -29,7 +29,7 @@ export const CrvAvatar = forwardRef<HTMLDivElement, CrvAvatarProps>(
     const resolvedIcon = icon ?? (
       <PersonOutlineIcon
         sx={{
-          fontSize: iconSizes.glyph,
+          fontSize: iconSizes.slot,
           color:    colors.content.primary,
         }}
       />

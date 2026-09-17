@@ -105,7 +105,7 @@ export const ContentVariants: Story = {
       <CrvAvatar
         content="icon"
         size="large"
-        icon={<PersonOutlineIcon sx={{ fontSize: 16 }} />}
+        icon={<PersonOutlineIcon sx={{ fontSize: 24 }} />}
       />
     </div>
   ),

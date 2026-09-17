@@ -9,18 +9,22 @@ export const AVATAR_SIZE_PX: Record<CrvAvatarSize, number> = {
   xSmall: 18,
 };
 
+// content=icon — Figma 4315:10055. The icon slot is `icon/size/6|5|4|3`, centred,
+// so padding is (avatar − slot) / 2: 8 / 6 / 4 / 3px. Same for badge=false and
+// badge=true (the badge only overlays the corner). Glyph is the vector drawn inside
+// the slot — MUI icons already inset it, so render the icon at `slot`.
 const ICON_SLOT_PX: Record<CrvAvatarSize, number> = {
   large: 24,
-  medium: 24,
-  small: 20,
-  xSmall: 18,
+  medium: 20,
+  small: 16,
+  xSmall: 12,
 };
 
 const ICON_GLYPH_PX: Record<CrvAvatarSize, number> = {
   large: 16,
-  medium: 16,
-  small: 13,
-  xSmall: 12,
+  medium: 13.33,
+  small: 10.67,
+  xSmall: 8,
 };
 
 export const GROUP_BORDER_PX = 2;
