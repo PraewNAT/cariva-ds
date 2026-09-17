@@ -1050,6 +1050,7 @@ import VpnKeyTwoTone from '@mui/icons-material/VpnKeyTwoTone';
 import VpnLockTwoTone from '@mui/icons-material/VpnLockTwoTone';
 import WallpaperTwoTone from '@mui/icons-material/WallpaperTwoTone';
 import WarningTwoTone from '@mui/icons-material/WarningTwoTone';
+import WarningAmberTwoTone from '@mui/icons-material/WarningAmberTwoTone';
 import WatchTwoTone from '@mui/icons-material/WatchTwoTone';
 import WatchLaterTwoTone from '@mui/icons-material/WatchLaterTwoTone';
 import WavesTwoTone from '@mui/icons-material/WavesTwoTone';
@@ -7370,6 +7371,12 @@ figma.connect(WallpaperTwoTone, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlm
 figma.connect(WarningTwoTone, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=3646-7583', {
   variant: { Style: 'two-tone' },
   example: () => <WarningTwoTone />,
+});
+
+// warning-amber
+figma.connect(WarningAmberTwoTone, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=6528-1798', {
+  variant: { Style: 'two-tone' },
+  example: () => <WarningAmberTwoTone />,
 });
 
 // watch

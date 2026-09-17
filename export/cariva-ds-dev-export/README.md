@@ -2,7 +2,7 @@
 
 Package สำหรับ integrate Cariva Design System เข้า Next.js + MUI app
 
-**Generated:** 2026-09-16  
+**Generated:** 2026-09-17  
 **Source repo:** Cariva DS (`code/core/`) — สร้างด้วย `npm run export:dev` ห้ามแก้ไฟล์ใน `ds/` ด้วยมือ
 
 ## สิ่งที่อยู่ใน zip

@@ -1050,6 +1050,7 @@ import VpnKeyRounded from '@mui/icons-material/VpnKeyRounded';
 import VpnLockRounded from '@mui/icons-material/VpnLockRounded';
 import WallpaperRounded from '@mui/icons-material/WallpaperRounded';
 import WarningRounded from '@mui/icons-material/WarningRounded';
+import WarningAmberRounded from '@mui/icons-material/WarningAmberRounded';
 import WatchRounded from '@mui/icons-material/WatchRounded';
 import WatchLaterRounded from '@mui/icons-material/WatchLaterRounded';
 import WavesRounded from '@mui/icons-material/WavesRounded';
@@ -7370,6 +7371,12 @@ figma.connect(WallpaperRounded, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlm
 figma.connect(WarningRounded, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=3646-7583', {
   variant: { Style: 'rounded' },
   example: () => <WarningRounded />,
+});
+
+// warning-amber
+figma.connect(WarningAmberRounded, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=6528-1798', {
+  variant: { Style: 'rounded' },
+  example: () => <WarningAmberRounded />,
 });
 
 // watch

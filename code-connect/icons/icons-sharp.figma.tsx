@@ -1050,6 +1050,7 @@ import VpnKeySharp from '@mui/icons-material/VpnKeySharp';
 import VpnLockSharp from '@mui/icons-material/VpnLockSharp';
 import WallpaperSharp from '@mui/icons-material/WallpaperSharp';
 import WarningSharp from '@mui/icons-material/WarningSharp';
+import WarningAmberSharp from '@mui/icons-material/WarningAmberSharp';
 import WatchSharp from '@mui/icons-material/WatchSharp';
 import WatchLaterSharp from '@mui/icons-material/WatchLaterSharp';
 import WavesSharp from '@mui/icons-material/WavesSharp';
@@ -7370,6 +7371,12 @@ figma.connect(WallpaperSharp, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlmsc
 figma.connect(WarningSharp, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=3646-7583', {
   variant: { Style: 'sharp' },
   example: () => <WarningSharp />,
+});
+
+// warning-amber
+figma.connect(WarningAmberSharp, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=6528-1798', {
+  variant: { Style: 'sharp' },
+  example: () => <WarningAmberSharp />,
 });
 
 // watch

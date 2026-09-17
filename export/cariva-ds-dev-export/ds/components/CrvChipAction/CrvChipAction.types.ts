@@ -1,4 +1,5 @@
 import type { ChipProps } from '@mui/material/Chip';
+import type { ReactNode } from 'react';
 
 export type CrvChipActionSize = 'small' | 'medium';
 export type CrvChipActionColor = 'default' | 'primary';
@@ -23,5 +24,11 @@ export interface CrvChipActionProps
   variant?: CrvChipActionVariant;
   /** Avatar initials when `thumbnailVisible` */
   thumbnailInitials?: string;
+  /**
+   * Icon for the avatar when `thumbnailVisible` — Figma swaps the crv-avatar
+   * (content=icon) glyph, e.g. `<MedicalCrossCircle />`. Takes precedence over
+   * `thumbnailInitials`.
+   */
+  thumbnailIcon?: ReactNode;
   onDelete?: ChipProps['onDelete'];
 }

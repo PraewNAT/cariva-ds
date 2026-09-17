@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CrvChipAction } from './CrvChipAction';
+import { MedicalCrossCircle } from '../../icons';
 
 describe('CrvChipAction', () => {
   it('renders label', () => {
@@ -20,6 +21,24 @@ describe('CrvChipAction', () => {
   it.each(['filled', 'outlined'] as const)('renders %s variant', (variant) => {
     render(<CrvChipAction label="Chip" variant={variant} />);
     expect(screen.getByText('Chip')).toBeInTheDocument();
+  });
+
+  it('shows initials in the thumbnail by default', () => {
+    render(<CrvChipAction label="Chip" thumbnailVisible thumbnailInitials="GP" />);
+    expect(screen.getByText('GP')).toBeInTheDocument();
+  });
+
+  it('shows thumbnailIcon instead of initials when given', () => {
+    render(
+      <CrvChipAction
+        label="Chip"
+        thumbnailVisible
+        thumbnailInitials="GP"
+        thumbnailIcon={<MedicalCrossCircle data-testid="thumb-icon" />}
+      />,
+    );
+    expect(screen.getByTestId('thumb-icon')).toBeInTheDocument();
+    expect(screen.queryByText('GP')).not.toBeInTheDocument();
   });
 
   it('calls onClick when clickable', () => {

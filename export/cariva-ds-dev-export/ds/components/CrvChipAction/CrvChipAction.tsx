@@ -15,6 +15,7 @@ export const CrvChipAction = forwardRef<HTMLDivElement, CrvChipActionProps>(
       thumbnailVisible = false,
       deleteVisible = false,
       thumbnailInitials = 'OP',
+      thumbnailIcon,
       size = 'medium',
       color = 'default',
       variant = 'filled',
@@ -34,7 +35,11 @@ export const CrvChipAction = forwardRef<HTMLDivElement, CrvChipActionProps>(
         disabled={disabled}
         avatar={
           thumbnailVisible ? (
-            <CrvAvatar size="small" content="text" initials={thumbnailInitials} />
+            thumbnailIcon != null ? (
+              <CrvAvatar size="small" content="icon" icon={thumbnailIcon} />
+            ) : (
+              <CrvAvatar size="small" content="text" initials={thumbnailInitials} />
+            )
           ) : undefined
         }
         deleteIcon={<CancelIcon />}

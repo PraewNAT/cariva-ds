@@ -72,7 +72,7 @@
 - `color=primary` → MUI Chip `color="primary"`
 - `state=disabled` → MUI Chip `disabled={true}`
 - `state=hover/pressed/focusVisible` → CSS pseudo-classes — ห้ามส่งเป็น prop
-- `thumbnailVisible=true` → MUI Chip `avatar={<Avatar />}`
+- `thumbnailVisible=true` → MUI Chip `avatar={<Avatar />}` — ถ้า avatar ใน Figma เป็น `content=icon` ให้ส่ง glyph ที่ swap ไว้ผ่าน `thumbnailIcon` (เช่น `<MedicalCrossCircle />` จาก `code/core/icons`) ไม่งั้นใช้ `thumbnailInitials`
 - `deleteVisible=true` → MUI Chip `onDelete` + `deleteIcon`
 
 ## Do / Don't

@@ -1050,6 +1050,7 @@ import VpnKey from '@mui/icons-material/VpnKey';
 import VpnLock from '@mui/icons-material/VpnLock';
 import Wallpaper from '@mui/icons-material/Wallpaper';
 import Warning from '@mui/icons-material/Warning';
+import WarningAmber from '@mui/icons-material/WarningAmber';
 import Watch from '@mui/icons-material/Watch';
 import WatchLater from '@mui/icons-material/WatchLater';
 import Waves from '@mui/icons-material/Waves';
@@ -7370,6 +7371,12 @@ figma.connect(Wallpaper, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Ca
 figma.connect(Warning, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=3646-7583', {
   variant: { Style: 'filled' },
   example: () => <Warning />,
+});
+
+// warning-amber
+figma.connect(WarningAmber, 'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=6528-1798', {
+  variant: { Style: 'filled' },
+  example: () => <WarningAmber />,
 });
 
 // watch
