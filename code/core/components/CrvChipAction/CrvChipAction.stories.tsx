@@ -2,6 +2,7 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { CrvChipAction } from './CrvChipAction';
+import { MedicalCrossCircle } from '../../icons';
 import type { CrvChipActionColor, CrvChipActionSize, CrvChipActionVariant } from './CrvChipAction.types';
 
 const SIZES: CrvChipActionSize[] = ['small', 'medium'];
@@ -72,6 +73,14 @@ export const Small: Story = {
 
 export const WithThumbnail: Story = {
   args: { thumbnailVisible: true },
+};
+
+export const WithThumbnailIcon: Story = {
+  args: {
+    label: 'General Practitioner (GP)',
+    thumbnailVisible: true,
+    thumbnailIcon: <MedicalCrossCircle />,
+  },
 };
 
 export const Deletable: Story = {

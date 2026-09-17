@@ -1,5 +1,21 @@
 # Changelog — cariva-ds-dev-export
 
+## 2026-09-17
+
+### Added
+
+- **Medical icon library — 89 icons in `ds/icons/`.** Every icon in the Figma
+  "Medical" section (Facility & Records, Diagnostics & Monitoring, Medication &
+  Pharmacy, Anatomy, Custom, …) now ships as a React icon generated from the
+  real Figma vectors. Names are the Figma name in PascalCase, one style each:
+  `import { Stethoscope, HeartRateMonitor, MedicalCrossCircle } from '@/ds/icons'`.
+  They behave like MUI icons (`fontSize`, `color`, `sx`, inherit `currentColor`).
+  A few names match MUI icons (`Man`, `Woman`, `Skateboarding`, …) — alias the
+  import if a file uses both. `CustomNurese` keeps the Figma spelling.
+- **`CrvChipAction` `thumbnailIcon`.** Pass an icon to show it in the leading
+  avatar instead of `thumbnailInitials`, matching the Figma chip whose avatar
+  glyph is swapped (e.g. `thumbnailIcon={<MedicalCrossCircle />}`).
+
 ## 2026-09-16
 
 ### Fixed
