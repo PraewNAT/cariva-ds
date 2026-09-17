@@ -18,6 +18,10 @@
 
 ### Fixed
 
+- **`CrvButton` / `CrvButtonDecorative` icon spacing.** MUI's own icon-slot margins
+  stacked on top of the button's `gap`, so the icon sat 12 / 16 / 20px from the
+  label instead of Figma's 4 / 8 / 12, and small buttons got an 18px icon. The
+  slots now have no margin and use the size scale's icon size.
 - **`CrvAvatar` icon size (`content="icon"`).** The default icon rendered at
   16px on large/medium avatars, sized from Figma variants that were themselves
   wrong. It now matches Figma's icon slot — 24 / 20 / 16 / 12px for large /
