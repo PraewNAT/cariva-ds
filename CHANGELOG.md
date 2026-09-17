@@ -2,6 +2,16 @@
 
 ---
 
+## v1.3.2 — 2026-09-17
+
+### 🐛 `crv-avatar` content=icon — icon ใน badge=true ใหญ่กว่า badge=false
+
+- **Figma** — variant `content=icon, badge=true` วาง icon (`person`) ลอยนอก `min-width` และใหญ่เกินขนาด: medium 24 (ควรเป็น 20), small 20 (ควรเป็น 16), xSmall 18 (ควรเป็น 12) → ย้ายเข้า `min-width` ให้ layer structure เหมือน `badge=false`, ผูกขนาดกับ `icon/size/*` และจัดกึ่งกลาง · ตอนนี้ต่างกันแค่ badge ที่มุมขวาล่าง
+- **Code** — ตาราง icon size ของ `CrvAvatar` ลอกมาจาก variant ที่ผิดนี้ (24/24/20/18) และ icon default render ที่ขนาด glyph แทน slot → แก้เป็น slot **24 / 20 / 16 / 12** · padding **8 / 6 / 4 / 3** เท่ากันทั้งมี/ไม่มี badge
+- อัปเดต doc: `rules/components/crv-avatar.md`, `CrvAvatar.ai.md` และ `📄 Avatar Doc` ใน Figma (Sizes & Token Usage)
+
+---
+
 ## v1.3.1 — 2026-09-16
 
 ### 🐛 Field ที่ผิดมาตั้งแต่ต้น

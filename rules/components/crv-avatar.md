@@ -27,13 +27,16 @@
 | `max` | `2`, `3`, `4`, `5` |
 
 ## Sizes
+<!-- updated 2026-09-17 -->
 
-| Size | Dimensions |
-|---|---|
-| `large` | 40×40px |
-| `medium` | 32×32px |
-| `small` | 24×24px |
-| `xSmall` | 18×18px |
+| Size | Dimensions | Icon (content=icon) | Icon padding |
+|---|---|---|---|
+| `large` | 40×40px | 24px — `icon/size/6` | 8px |
+| `medium` | 32×32px | 20px — `icon/size/5` | 6px |
+| `small` | 24×24px | 16px — `icon/size/4` | 4px |
+| `xSmall` | 18×18px | 12px — `icon/size/3` | 3px |
+
+`content=icon` ใช้ขนาด icon และ padding **เดียวกันทั้ง `badge=false` และ `badge=true`** — badge แค่ซ้อนทับที่มุมขวาล่าง ไม่ทำให้ icon ใหญ่ขึ้น
 
 ## Properties
 
@@ -58,7 +61,7 @@
 - **container** — frame หลัก ทรงกลม `radius/full`
 - **image** — รูปภาพ profile (content=image)
 - **initials** — ข้อความย่อชื่อ (content=text)
-- **icon** — icon ผู้ใช้ (content=icon)
+- **icon** — icon ผู้ใช้ (content=icon) — layer `min-width` › `person` (instance swap ได้) ขนาดผูก `icon/size/*` จัดกึ่งกลาง · โครงสร้างนี้เหมือนกันทั้ง `badge=false` และ `badge=true` <!-- updated 2026-09-17 -->
 - **border** — วงแหวนรอบ container ใช้ `color/on-surface/default`
 - **`<CrvBadge>`** — online dot มุมขวาล่าง via `crv-badge` (`variant=dot`, `color=success`) เมื่อ `badge=true`
 
@@ -79,9 +82,13 @@
 |---|---|
 | Border | `color/on-surface/default` |
 | Badge (online) | `color/status/success/on-surface/default` |
+| Icon (content=icon) | `color/content/secondary` |
 
 ### Radius
 - `radius/full` — ทุก element ที่เป็นวงกลม
+
+### Size
+- Icon: `icon/size/6` (large) · `icon/size/5` (medium) · `icon/size/4` (small) · `icon/size/3` (xSmall)
 
 ### Spacing
 - Badge gap: `spacing/md` (12px)

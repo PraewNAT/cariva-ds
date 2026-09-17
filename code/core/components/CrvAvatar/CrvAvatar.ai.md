@@ -17,12 +17,14 @@ See `rules/components/crv-avatar.md` for the full spec.
 
 ## Layout (Figma 4315:10055)
 
-| Size | Dimensions |
-|---|---|
-| `large` | 40×40 |
-| `medium` | 32×32 |
-| `small` | 24×24 |
-| `xSmall` | 18×18 |
+| Size | Dimensions | Icon slot (content=icon) | Icon padding |
+|---|---|---|---|
+| `large` | 40×40 | 24 (`icon/size/6`) | 8 |
+| `medium` | 32×32 | 20 (`icon/size/5`) | 6 |
+| `small` | 24×24 | 16 (`icon/size/4`) | 4 |
+| `xSmall` | 18×18 | 12 (`icon/size/3`) | 3 |
+
+Icon size and padding are identical for `badge=false` and `badge=true`.
 
 | Part | Spec |
 |---|---|
