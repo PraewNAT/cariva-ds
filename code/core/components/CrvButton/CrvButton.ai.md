@@ -17,13 +17,15 @@ See `rules/components/crv-button-standard.md` for the full spec (variants, sizes
 
 ## Sizes (height × V padding)
 
-| Size | Height | V padding | H padding | Gap | Icon |
-|---|---|---|---|---|---|
-| small | 32 | spacing/sm (8) | spacing/md (12) | spacing/xs (4) | 16 |
-| medium | 36 | spacing/sm (8) | spacing/lg (16) | spacing/sm (8) | 20 |
-| large | 48 | spacing/md (12) | spacing/xl (24) | spacing/md (12) | 24 |
+| Size | Height | V padding | H padding | Gap | Icon | Label |
+|---|---|---|---|---|---|---|
+| small | 32 | spacing/sm (8) | spacing/md (12) | spacing/xs (4) | 16 | typography/label/small (12/16) |
+| medium | 36 | spacing/sm (8) | spacing/lg (16) | spacing/sm (8) | 20 | typography/label/medium (14/20) |
+| large | 48 | spacing/md (12) | spacing/xl (24) | spacing/md (12) | 24 | typography/label/large (16/24) |
 
 ค่าทั้งหมดมาจาก `theme/buttonSizing.ts` — แก้ที่เดียวแล้วปุ่มทุกตัวขยับตาม
+
+`variant="outlined"`: H padding หัก 1px ให้ border — stroke ใน Figma อยู่นอก frame ไม่กินพื้นที่ ความกว้างรวมจึงเท่ากับ Figma
 
 ## Rules
 

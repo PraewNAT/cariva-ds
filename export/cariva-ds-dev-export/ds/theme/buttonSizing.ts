@@ -22,6 +22,8 @@ export type CrvButtonMetrics = {
   iconSize: number;
   /** Padding on every side of an icon-only button. */
   squarePadding: number;
+  /** Label text style — Figma binds `typography/label/{small|medium|large}` per size. */
+  label: 'small' | 'medium' | 'large';
 };
 
 export const buttonSizing: Record<CrvButtonSizeName, CrvButtonMetrics> = {
@@ -32,6 +34,7 @@ export const buttonSizing: Record<CrvButtonSizeName, CrvButtonMetrics> = {
     gap: spacing.xs,
     iconSize: 16,
     squarePadding: spacing.sm,
+    label: 'small',
   },
   medium: {
     height: 36,
@@ -40,6 +43,7 @@ export const buttonSizing: Record<CrvButtonSizeName, CrvButtonMetrics> = {
     gap: spacing.sm,
     iconSize: 20,
     squarePadding: spacing.sm,
+    label: 'medium',
   },
   large: {
     height: 48,
@@ -48,5 +52,6 @@ export const buttonSizing: Record<CrvButtonSizeName, CrvButtonMetrics> = {
     gap: spacing.md,
     iconSize: 24,
     squarePadding: spacing.md,
+    label: 'large',
   },
 };

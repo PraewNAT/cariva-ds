@@ -50,8 +50,10 @@ export const CrvButton = forwardRef<HTMLButtonElement, CrvButtonProps>(
             minHeight: metrics.height,
             paddingTop: `${metrics.paddingY}px`,
             paddingBottom: `${metrics.paddingY}px`,
-            paddingLeft: `${metrics.paddingX}px`,
-            paddingRight: `${metrics.paddingX}px`,
+            // Figma's outlined stroke sits outside the frame and takes no layout space;
+            // a CSS border does, so give its 1px back from the side padding.
+            paddingLeft: `${metrics.paddingX - (variant === 'outlined' ? 1 : 0)}px`,
+            paddingRight: `${metrics.paddingX - (variant === 'outlined' ? 1 : 0)}px`,
             gap: `${metrics.gap}px`,
             '& .MuiSvgIcon-root': { fontSize: metrics.iconSize },
             // MUI puts its own margins on the icon slots (and an 18px icon on size=small);
@@ -63,8 +65,8 @@ export const CrvButton = forwardRef<HTMLButtonElement, CrvButtonProps>(
             },
             borderRadius: `${productStyle[defaultProductStyle].interactive}px`,
             textTransform: 'none',
-            fontSize: `${typography.fontSize.label.large}px`,
-            lineHeight: `${typography.lineHeight.label.large}px`,
+            fontSize: `${typography.fontSize.label[metrics.label]}px`,
+            lineHeight: `${typography.lineHeight.label[metrics.label]}px`,
             fontWeight: typography.fontWeight.medium,
             fontFamily: typography.fontFamily.ui,
           },

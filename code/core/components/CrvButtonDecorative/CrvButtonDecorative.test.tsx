@@ -54,6 +54,17 @@ describe('CrvButtonDecorative', () => {
     );
   });
 
+  it.each([
+    ['small', '12px', '16px'],
+    ['medium', '14px', '20px'],
+    ['large', '16px', '24px'],
+  ] as const)('uses the %s label style (%s / %s)', (size, fontSize, lineHeight) => {
+    render(<CrvButtonDecorative size={size}>Label</CrvButtonDecorative>);
+    const style = getComputedStyle(screen.getByRole('button', { name: 'Label' }));
+    expect(style.fontSize).toBe(fontSize);
+    expect(style.lineHeight).toBe(lineHeight);
+  });
+
   it('fires onClick', async () => {
     const onClick = vi.fn();
     render(<CrvButtonDecorative onClick={onClick}>AI</CrvButtonDecorative>);

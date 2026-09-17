@@ -10,6 +10,17 @@ const setup = (props = {}) =>
   );
 
 describe('CrvButtonSplit', () => {
+  it.each([
+    ['small', '12px', '16px'],
+    ['medium', '14px', '20px'],
+    ['large', '16px', '24px'],
+  ] as const)('uses the %s label style on the action (%s / %s)', (size, fontSize, lineHeight) => {
+    setup({ size });
+    const style = getComputedStyle(screen.getByRole('button', { name: 'บันทึก' }));
+    expect(style.fontSize).toBe(fontSize);
+    expect(style.lineHeight).toBe(lineHeight);
+  });
+
   it('renders both halves', () => {
     setup();
     expect(screen.getByRole('button', { name: 'บันทึก' })).toBeInTheDocument();

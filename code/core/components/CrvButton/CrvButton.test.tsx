@@ -52,6 +52,29 @@ describe('CrvButton', () => {
     );
   });
 
+  // Figma binds typography/label/{small|medium|large} to the label per size.
+  it.each([
+    ['small', '12px', '16px'],
+    ['medium', '14px', '20px'],
+    ['large', '16px', '24px'],
+  ] as const)('uses the %s label style (%s / %s)', (size, fontSize, lineHeight) => {
+    render(<CrvButton size={size}>Label</CrvButton>);
+    const style = getComputedStyle(screen.getByRole('button', { name: 'Label' }));
+    expect(style.fontSize).toBe(fontSize);
+    expect(style.lineHeight).toBe(lineHeight);
+  });
+
+  // Figma's outlined stroke takes no layout space; the CSS border's 1px comes out of the padding.
+  it.each([
+    ['contained', '16px'],
+    ['outlined', '15px'],
+  ] as const)('keeps a medium %s button as wide as Figma (padding %s)', (variant, padding) => {
+    render(<CrvButton variant={variant} size="medium">Label</CrvButton>);
+    const style = getComputedStyle(screen.getByRole('button', { name: 'Label' }));
+    expect(style.paddingLeft).toBe(padding);
+    expect(style.paddingRight).toBe(padding);
+  });
+
   it('calls onClick when clicked', () => {
     const onClick = vi.fn();
     render(<CrvButton onClick={onClick}>Go</CrvButton>);

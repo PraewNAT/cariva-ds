@@ -2,6 +2,18 @@
 
 ---
 
+## v1.3.4 — 2026-09-17
+
+### 🐛 ปุ่มกว้างไม่เท่า Figma — ขนาดตัวอักษร label ไม่ตาม size
+
+- Figma ผูก label ของปุ่มกับ `typography/label/small|medium|large` ตาม size (12/16 · 14/20 · 16/24) ทุกแบบ — standard, decorative, split, loading
+- code เดิม: `CrvButton` ใช้ 16/24 ทุก size · `CrvButtonDecorative` กับ `CrvButtonSplit` ใช้ 14/20 ทุก size → ปุ่มที่ hug เนื้อหากว้างเกินหรือแคบเกิน เช่น Restart (medium) ใน Mira กว้าง 116.7 แทน 108
+- เพิ่ม `label` ใน `buttonSizing` แล้วให้ทั้งสามตัวอ่านจากที่เดียว
+- `CrvButton variant="outlined"`: stroke ใน Figma อยู่นอก frame ไม่กินพื้นที่ แต่ CSS border กิน 1px ต่อข้าง → หักออกจาก padding ข้าง (16 → 15 บน medium) ให้ความกว้างรวมเท่า Figma
+- วัดใน browser (Mira › Voice Recorder): ลบ 36 · Restart 107.9 · Transcribe 133.1 เทียบ Figma 36 · 108 · 133
+
+---
+
 ## v1.3.3 — 2026-09-17
 
 ### 🐛 `CrvButton` / `CrvButtonDecorative` — icon ห่างจาก label มากกว่า Figma
