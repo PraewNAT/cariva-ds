@@ -26,6 +26,34 @@ describe('CrvButtonDecorative', () => {
     expect(HEIGHT_BY_SIZE[size]).toBeGreaterThan(0);
   });
 
+
+  // Figma gap between icon and label: 4 / 8 / 12, carried by `gap` alone. MUI's icon-slot
+  // margins must be overridden; jsdom ignores selector specificity, so check the emitted rule
+  // (a real browser applies it — measured in the Mira prototype).
+  it.each([
+    ['small', '4px', 16],
+    ['medium', '8px', 20],
+    ['large', '12px', 24],
+  ] as const)('spaces a %s icon from its label by gap only (%s)', (size, gap, icon) => {
+    render(
+      <CrvButtonDecorative size={size} startIcon={<span data-testid="lead" />}>
+        Label
+      </CrvButtonDecorative>,
+    );
+    const button = screen.getByRole('button', { name: 'Label' });
+    expect(getComputedStyle(button).gap).toBe(gap);
+    const css = Array.from(document.querySelectorAll('style'))
+      .map((el) => el.textContent ?? '')
+      .join('');
+    const scope = Array.from(button.classList).find((c) => c.startsWith('css-'))!;
+    expect(css).toContain(
+      `.${scope} .MuiButton-startIcon.MuiButton-startIcon,.${scope} .MuiButton-endIcon.MuiButton-endIcon{margin:0px;}`,
+    );
+    expect(css).toMatch(
+      new RegExp(`\\.${scope} \\.MuiButton-startIcon\\.MuiButton-startIcon>\\*:nth-of-type\\(1\\)[^{]*\\{font-size:${icon}px;`),
+    );
+  });
+
   it('fires onClick', async () => {
     const onClick = vi.fn();
     render(<CrvButtonDecorative onClick={onClick}>AI</CrvButtonDecorative>);

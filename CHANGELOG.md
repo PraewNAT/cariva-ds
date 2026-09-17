@@ -2,6 +2,16 @@
 
 ---
 
+## v1.3.3 — 2026-09-17
+
+### 🐛 `CrvButton` / `CrvButtonDecorative` — icon ห่างจาก label มากกว่า Figma
+
+- Figma เว้นระหว่าง icon กับ label **4 / 8 / 12px** (small / medium / large) ทุกแบบ (standard, decorative, action ของ split) และ code ตั้ง `gap` ถูกแล้ว แต่ MUI แถม margin ให้ช่อง icon อีกชั้น (`margin-right: 8px`, `margin-left: -2px/-4px`) → ของจริงห่าง **12 / 16 / 20px** และ padding ฝั่ง icon เหลือ 10 แทน 12 · size=small ยังโดน MUI บังคับ icon เป็น 18px แทน 16
+- ล้าง margin ของ `.MuiButton-startIcon` / `.MuiButton-endIcon` และคุมขนาด icon ให้เป็นของ `buttonSizing` → วัดใน browser แล้ว: gap 4 / 8, icon 16 / 20, padding 12 ตรง Figma
+- `CrvButtonSplit` ไม่โดน (จัด layout เอง ไม่ใช้ slot ของ MUI)
+
+---
+
 ## v1.3.2 — 2026-09-17
 
 ### 🐛 `crv-avatar` content=icon — icon ใน badge=true ใหญ่กว่า badge=false

@@ -54,6 +54,13 @@ export const CrvButton = forwardRef<HTMLButtonElement, CrvButtonProps>(
             paddingRight: `${metrics.paddingX}px`,
             gap: `${metrics.gap}px`,
             '& .MuiSvgIcon-root': { fontSize: metrics.iconSize },
+            // MUI puts its own margins on the icon slots (and an 18px icon on size=small);
+            // `gap` above is the only icon↔label spacing Figma has.
+            // Doubled class: MUI's slot styles load after ours at equal specificity.
+            '& .MuiButton-startIcon.MuiButton-startIcon, & .MuiButton-endIcon.MuiButton-endIcon': { margin: 0 },
+            '& .MuiButton-startIcon.MuiButton-startIcon > *:nth-of-type(1), & .MuiButton-endIcon.MuiButton-endIcon > *:nth-of-type(1)': {
+              fontSize: metrics.iconSize,
+            },
             borderRadius: `${productStyle[defaultProductStyle].interactive}px`,
             textTransform: 'none',
             fontSize: `${typography.fontSize.label.large}px`,
