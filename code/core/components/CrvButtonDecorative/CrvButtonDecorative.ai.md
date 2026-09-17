@@ -22,7 +22,7 @@ Gradient button for AI actions.
 
 - Surface: `color/brand/decorative/gradient/from` + radial wash through `via` → `to`
 - Label/icon: `color/content/on-brand`, hover/pressed `color/content/inverse`
-- Hover glow: `glow/primary` · radius `radius/full` · label `typography/label/medium`
+- Hover glow: `glow/primary` · radius `radius/full` · label `typography/label/small|medium|large` (ตาม size)
 - Disabled: `color/on-surface/action/disabled` + `color/content/disabled`, no gradient
 
 ## AI Implementation Rules

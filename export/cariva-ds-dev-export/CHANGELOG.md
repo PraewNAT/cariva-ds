@@ -18,6 +18,12 @@
 
 ### Fixed
 
+- **Button label size follows the button size.** Figma uses label small / medium /
+  large (12/16 · 14/20 · 16/24) for small / medium / large buttons. `CrvButton`
+  used 16/24 and `CrvButtonDecorative` / `CrvButtonSplit` used 14/20 at every
+  size, so content-hugging buttons came out the wrong width. Outlined
+  `CrvButton` also takes its 1px border out of the side padding, since Figma's
+  stroke doesn't take layout space.
 - **`CrvButton` / `CrvButtonDecorative` icon spacing.** MUI's own icon-slot margins
   stacked on top of the button's `gap`, so the icon sat 12 / 16 / 20px from the
   label instead of Figma's 4 / 8 / 12, and small buttons got an 18px icon. The
