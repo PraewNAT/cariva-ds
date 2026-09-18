@@ -1,5 +1,14 @@
 # Changelog — cariva-ds-dev-export
 
+## 2026-09-18
+
+### Changed
+
+- **`CrvButtonDecorative` aurora is faster, and the label glows.** The two aurora
+  layers now loop at 3s / 4.25s (was 6s / 8.5s). The label and icon glow in
+  `brand/decorative/gradient/to`, brighter on hover. `animated={false}` and
+  `disabled` have no glow, so the static button still matches Figma.
+
 ## 2026-09-17
 
 ### Added

@@ -2,6 +2,17 @@
 
 ---
 
+## v1.3.5 — 2026-09-18
+
+### ✨ `CrvButtonDecorative` — aurora เร็วขึ้น + label/icon เรืองแสง
+
+- aurora ไหลเร็วขึ้นเท่าตัว: เลเยอร์ 2 ชั้นจาก 6s / 8.5s → **3s / 4.25s** (อัตราส่วนเท่าเดิม จังหวะยังไม่ซ้ำรอบให้เห็น)
+- label กับ icon เรืองแสงสี `brand/decorative/gradient/to` — ปกติ glow นุ่ม (text 6px · icon 3px, 70%) · hover เพิ่มชั้น glow แน่นเต็มสี (text 3px + 10px · icon 2px + 5px) ค่อยๆ fade เข้า
+- มีเฉพาะตอน animate — `animated={false}`, `disabled` ไม่มี glow · เฟรมหยุดนิ่งยังตรง Figma
+- ไม่มีสีใหม่ ใช้ token decorative เดิม
+
+---
+
 ## v1.3.4 — 2026-09-17
 
 ### 🐛 ปุ่มกว้างไม่เท่า Figma — ขนาดตัวอักษร label ไม่ตาม size
