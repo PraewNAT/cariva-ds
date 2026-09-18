@@ -2,6 +2,17 @@
 
 ---
 
+## v1.3.6 — 2026-09-18
+
+### 🐛 `crv-chip-action` size=small — avatar ใหญ่เท่าตัว chip
+
+- chip small สูง 24px padding 4px แต่ thumbnail ใช้ avatar `size=small` 24px เท่ากับ chip medium → avatar เต็มความสูงและล้น padding
+- **Figma** — สลับ `crv-avatar` ใน variant `size=small` ทั้ง 20 ตัวเป็น `size=xSmall` (18px) · chip ยังสูง 24px
+- **Code** — `CrvChipAction` เลือกขนาด avatar ตาม size: small → `xSmall` (18px, icon slot 12px) · medium → `small` (24px) เหมือนเดิม
+- อัปเดต doc: `rules/components/crv-chip-action.md`, `CrvChipAction.ai.md`
+
+---
+
 ## v1.3.5 — 2026-09-18
 
 ### ✨ `CrvButtonDecorative` — aurora เร็วขึ้น + label/icon เรืองแสง

@@ -2,6 +2,14 @@
 
 ## 2026-09-18
 
+### Fixed
+
+- **Small `CrvChipAction` uses an xSmall thumbnail.** The thumbnail avatar was
+  24px on both sizes, as tall as a small chip. A small chip now renders an
+  xSmall avatar (18px, 12px icon slot); medium is unchanged. If you pass a
+  custom `thumbnailIcon` sized by hand, size it with `getIconSize('xSmall')` on
+  small chips.
+
 ### Changed
 
 - **`CrvButtonDecorative` aurora is faster, and the label glows.** The two aurora

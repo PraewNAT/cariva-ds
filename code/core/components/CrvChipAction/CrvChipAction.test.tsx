@@ -41,6 +41,19 @@ describe('CrvChipAction', () => {
     expect(screen.queryByText('GP')).not.toBeInTheDocument();
   });
 
+  it.each([
+    ['small', 18],
+    ['medium', 24],
+  ] as const)('sizes the thumbnail avatar for a %s chip at %ipx', (size, px) => {
+    render(<CrvChipAction label="Chip" size={size} thumbnailVisible thumbnailInitials="GP" />);
+    // jsdom ignores specificity, so check the rule emotion emitted for the avatar slot.
+    const css = Array.from(document.querySelectorAll('style'))
+      .map((el) => el.textContent ?? '')
+      .join('');
+    const avatarRules = css.match(/\.MuiChip-avatar\{[^}]*\}/g) ?? [];
+    expect(avatarRules.some((rule) => rule.includes(`width:${px}px`) && rule.includes(`height:${px}px`))).toBe(true);
+  });
+
   it('calls onClick when clickable', () => {
     const onClick = vi.fn();
     render(<CrvChipAction label="Chip" onClick={onClick} />);
