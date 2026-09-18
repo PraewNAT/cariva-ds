@@ -28,5 +28,5 @@ See `rules/components/crv-chip-action.md` for the full spec.
 
 - `state=hover/pressed/focusVisible` are CSS-only — not props.
 - `deleteVisible=true` requires `onDelete`.
-- `thumbnailVisible=true` renders `CrvAvatar` size `small` (24px) — `content=icon` with `thumbnailIcon` when given, otherwise `content=text` with `thumbnailInitials`.
+- `thumbnailVisible=true` renders `CrvAvatar` size `xSmall` (18px) on a small chip and `small` (24px) on a medium chip — `content=icon` with `thumbnailIcon` when given, otherwise `content=text` with `thumbnailInitials`.
 - Do not use for non-interactive labels — use `crv-tag` instead.

@@ -4,7 +4,7 @@ import { forwardRef } from 'react';
 import Chip from '@mui/material/Chip';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { CrvAvatar } from '../CrvAvatar';
-import { getChipActionSx } from './crvChipActionStyles';
+import { CHIP_AVATAR_SIZE, getChipActionSx } from './crvChipActionStyles';
 import type { CrvChipActionProps } from './CrvChipAction.types';
 
 // Ground truth from Figma (crv-chip-action, node 4459:62796)
@@ -36,9 +36,9 @@ export const CrvChipAction = forwardRef<HTMLDivElement, CrvChipActionProps>(
         avatar={
           thumbnailVisible ? (
             thumbnailIcon != null ? (
-              <CrvAvatar size="small" content="icon" icon={thumbnailIcon} />
+              <CrvAvatar size={CHIP_AVATAR_SIZE[size]} content="icon" icon={thumbnailIcon} />
             ) : (
-              <CrvAvatar size="small" content="text" initials={thumbnailInitials} />
+              <CrvAvatar size={CHIP_AVATAR_SIZE[size]} content="text" initials={thumbnailInitials} />
             )
           ) : undefined
         }

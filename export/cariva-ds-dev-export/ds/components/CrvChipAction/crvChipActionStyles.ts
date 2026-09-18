@@ -1,4 +1,6 @@
 import { colors, productStyle, defaultProductStyle, spacing, typography } from '../../tokens';
+import type { CrvAvatarSize } from '../CrvAvatar/CrvAvatar.types';
+import { AVATAR_SIZE_PX } from '../../theme/components/crvAvatar';
 import type {
   CrvChipActionColor,
   CrvChipActionSize,
@@ -12,6 +14,12 @@ export const CHIP_MIN_WIDTH = 40;
 export const CHIP_HEIGHT: Record<CrvChipActionSize, number> = {
   small:  24,
   medium: 32,
+};
+
+/** The thumbnail avatar steps down with the chip: small chip → xSmall (18px). */
+export const CHIP_AVATAR_SIZE: Record<CrvChipActionSize, CrvAvatarSize> = {
+  small:  'xSmall',
+  medium: 'small',
 };
 
 export const CHIP_DELETE_ICON: Record<CrvChipActionSize, number> = {
@@ -171,8 +179,8 @@ export function getChipActionSx(
     },
     '& .MuiChip-avatar': {
       margin: 0,
-      width: 24,
-      height: 24,
+      width: AVATAR_SIZE_PX[CHIP_AVATAR_SIZE[size]],
+      height: AVATAR_SIZE_PX[CHIP_AVATAR_SIZE[size]],
     },
     '& .MuiChip-deleteIcon': {
       margin: 0,

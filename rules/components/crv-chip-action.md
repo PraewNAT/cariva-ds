@@ -34,7 +34,7 @@
 
 ## Anatomy
 
-- `crv-avatar` — thumbnail instance (แสดงเมื่อ `thumbnailVisible=true`)
+- `crv-avatar` — thumbnail instance (แสดงเมื่อ `thumbnailVisible=true`) · chip `small` ใช้ avatar `size=xSmall` (18px) · chip `medium` ใช้ `size=small` (24px)
 - `Typography` — frame ครอบ text label
   - `Chip` — TEXT node, `typography/label/small`
 - `CancelFilled` — icon instance สำหรับ delete (แสดงเมื่อ `deleteVisible=true`)
