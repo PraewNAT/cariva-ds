@@ -55,7 +55,7 @@ export const AllStates: Story = {
 
 /**
  * The aurora drifts continuously behind the label — two blurred layers moving
- * against each other at 6s and 8.5s, so the pattern never visibly loops. Watch
+ * against each other at 3s and 4.25s, so the pattern never visibly loops. Watch
  * for a few seconds; hover brings the light forward.
  */
 export const Animated: Story = {

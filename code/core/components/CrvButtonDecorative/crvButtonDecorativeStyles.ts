@@ -87,6 +87,24 @@ export const AURORA_KEYFRAMES = {
   },
 };
 
+/**
+ * The label and icon glow in the aurora's brightest colour, so they read as lit
+ * by it. `text-shadow` for the text; the icon is an SVG, so it takes the same
+ * glow as a `drop-shadow` filter.
+ *
+ * Hover adds a tight, fully opaque layer under the soft one. Widening the blur
+ * alone spreads the same light thinner and reads as dimmer, not brighter.
+ */
+const GLOW = colors.brand.decorative.gradient.to;
+const LABEL_GLOW_REST = {
+  textShadow: `0 0 6px ${GLOW}B3`,
+  '& .MuiSvgIcon-root': { filter: `drop-shadow(0 0 3px ${GLOW}B3)` },
+};
+const LABEL_GLOW_HOVER = {
+  textShadow: `0 0 3px ${GLOW}, 0 0 10px ${GLOW}CC`,
+  '& .MuiSvgIcon-root': { filter: `drop-shadow(0 0 2px ${GLOW}) drop-shadow(0 0 5px ${GLOW}CC)` },
+};
+
 /** Layered on top of `getDecorativeSx` when the button is animated. */
 export function getDecorativeAuroraSx(): SxProps<Theme> {
   return {
@@ -97,12 +115,21 @@ export function getDecorativeAuroraSx(): SxProps<Theme> {
     ...AURORA_KEYFRAMES,
     '&::before': auroraLayer(
       AURORA_LAYER_A,
-      'crvDecorativeDriftA 6s ease-in-out infinite',
+      'crvDecorativeDriftA 3s ease-in-out infinite',
     ),
     '&::after': auroraLayer(
       AURORA_LAYER_B,
-      'crvDecorativeDriftB 8.5s ease-in-out infinite',
+      'crvDecorativeDriftB 4.25s ease-in-out infinite',
     ),
+    ...LABEL_GLOW_REST,
+    '&:hover': LABEL_GLOW_HOVER,
+    // Keep MUI's own transitions and add the glow to them.
+    transition: (theme: Theme) =>
+      theme.transitions.create(['background-color', 'box-shadow', 'border-color', 'color', 'text-shadow'], {
+        duration: theme.transitions.duration.short,
+      }),
+    '& .MuiSvgIcon-root': { ...LABEL_GLOW_REST['& .MuiSvgIcon-root'], transition: 'filter 200ms ease' },
+    '&.Mui-disabled': { textShadow: 'none', '& .MuiSvgIcon-root': { filter: 'none' } },
     // Hover pulls the light forward rather than speeding it up — a faster drift
     // on hover reads as a glitch on a button this small.
     '&:hover::before, &:hover::after': { opacity: 0.6 },
