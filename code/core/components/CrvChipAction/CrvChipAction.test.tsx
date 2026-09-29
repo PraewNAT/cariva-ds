@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CrvChipAction } from './CrvChipAction';
 import { MedicalCrossCircle } from '../../icons';
+import { colors } from '../../tokens';
 
 describe('CrvChipAction', () => {
   it('renders label', () => {
@@ -42,7 +43,7 @@ describe('CrvChipAction', () => {
   });
 
   it.each([
-    ['small', 18],
+    ['small', 20],
     ['medium', 24],
   ] as const)('sizes the thumbnail avatar for a %s chip at %ipx', (size, px) => {
     render(<CrvChipAction label="Chip" size={size} thumbnailVisible thumbnailInitials="GP" />);
@@ -81,5 +82,23 @@ describe('CrvChipAction', () => {
     const ref = { current: null as HTMLDivElement | null };
     render(<CrvChipAction label="Chip" ref={ref} />);
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  });
+
+  it('paints the surface variant white with no border', () => {
+    render(<CrvChipAction label="Chip" variant="surface" />);
+    const css = Array.from(document.querySelectorAll('style'))
+      .map((el) => el.textContent ?? '')
+      .join('');
+    // jsdom ignores specificity, so read the rule emotion emitted.
+    expect(css).toContain(`background-color:${colors.onSurface.default}`);
+    expect(css).toContain('border:none');
+  });
+
+  it('keeps a primary surface chip\'s label blue, not white', () => {
+    render(<CrvChipAction label="Chip" variant="surface" color="primary" />);
+    const css = Array.from(document.querySelectorAll('style'))
+      .map((el) => el.textContent ?? '')
+      .join('');
+    expect(css).toContain(`color:${colors.brand.primary.content.default}`);
   });
 });

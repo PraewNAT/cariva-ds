@@ -13,13 +13,12 @@ describe('CrvCheckbox', () => {
     expect(screen.getByText('Privacy policy applies.')).toBeInTheDocument();
   });
 
-  it('hides description for groupItem type', () => {
+  it('hides the description when descriptionVisible is false', () => {
     render(
       <CrvCheckbox
-        type="groupItem"
         label="Label"
         description="Hidden"
-        descriptionVisible
+        descriptionVisible={false}
       />,
     );
     expect(screen.getByText('Label')).toBeInTheDocument();

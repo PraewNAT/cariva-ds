@@ -29,12 +29,14 @@
 ## Sizes
 <!-- updated 2026-09-17 -->
 
-| Size | Dimensions | Icon (content=icon) | Icon padding |
-|---|---|---|---|
-| `large` | 40×40px | 24px — `icon/size/6` | 8px |
-| `medium` | 32×32px | 20px — `icon/size/5` | 6px |
-| `small` | 24×24px | 16px — `icon/size/4` | 4px |
-| `xSmall` | 18×18px | 12px — `icon/size/3` | 3px |
+<!-- updated 2026-09-28 -->
+
+| Size | Dimensions | Icon (content=icon) | Icon padding | Initials | Text padding |
+|---|---|---|---|---|---|
+| `large` | 40×40px | 24px — `icon/size/6` | 8px | label/medium 14/20 | 8px |
+| `medium` | 32×32px | 20px — `icon/size/5` | 6px | label/small 12/16 | 4px |
+| `small` | 24×24px | 16px — `icon/size/4` | 4px | label/xsmall 10/16 | 4px |
+| `xSmall` | 20×20px | 12px — `icon/size/3` | 4px | label/xsmall 10/16 | 2px |
 
 `content=icon` ใช้ขนาด icon และ padding **เดียวกันทั้ง `badge=false` และ `badge=true`** — badge แค่ซ้อนทับที่มุมขวาล่าง ไม่ทำให้ icon ใหญ่ขึ้น
 
@@ -105,7 +107,7 @@
 | `size=large` | `sx={{ width: 40, height: 40 }}` |
 | `size=medium` | `sx={{ width: 32, height: 32 }}` |
 | `size=small` | `sx={{ width: 24, height: 24 }}` |
-| `size=xSmall` | `sx={{ width: 18, height: 18 }}` |
+| `size=xSmall` | `sx={{ width: 20, height: 20 }}` |
 
 ## ควรทำ / ไม่ควรทำ
 

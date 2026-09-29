@@ -15,6 +15,7 @@ export * from './components/CrvButtonSplit';
 export * from './components/CrvCard';
 export * from './components/CrvCheckbox';
 export * from './components/CrvCheckboxBase';
+export * from './components/CrvCheckboxCard';
 export * from './components/CrvCheckboxGroup';
 export * from './components/CrvChipAction';
 export * from './components/CrvCircularProgress';

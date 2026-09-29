@@ -8,10 +8,6 @@ figma.connect(
   'https://www.figma.com/design/XgxprkSY5mGbzIIwlmscCt/Cariva-Core-Design-System?node-id=3815-5291',
   {
     props: {
-      type: figma.enum('type', {
-        default:   'default',
-        groupItem: 'groupItem',
-      }),
       disabled: figma.boolean('disabled'),
       color: figma.enum('color', {
         primary: 'primary',
@@ -27,7 +23,6 @@ figma.connect(
       descriptionVisible: figma.boolean('descriptionVisible'),
     },
     example: ({
-      type,
       disabled,
       color,
       labelPlacement,
@@ -37,7 +32,6 @@ figma.connect(
       descriptionVisible,
     }) => (
       <CrvCheckbox
-        type={type}
         disabled={disabled}
         color={color}
         labelPlacement={labelPlacement}

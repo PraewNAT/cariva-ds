@@ -13,9 +13,9 @@ export interface CrvTableHeadProps extends Omit<TableCellProps, 'size'> {
   label?: ReactNode;
   /** Figma `checkBoxVisible` — render a leading checkbox slot. */
   checkbox?: ReactNode;
-  /** Figma `leftSortVisible` — sort icon before the label. */
+  /** Figma `leftSortVisible` — sort icon before the label. Ignored when `compact`. */
   leftSort?: boolean;
-  /** Figma `rightSortVisible` — sort icon after the label. */
+  /** Figma `rightSortVisible` — sort icon after the label. Ignored when `compact`. */
   rightSort?: boolean;
   /** Sort click handler (applies to either sort icon). */
   onSort?: () => void;

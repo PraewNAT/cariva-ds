@@ -38,6 +38,13 @@ describe('CrvTableHead', () => {
     expect(screen.queryByText('Name')).not.toBeInTheDocument();
   });
 
+  it('drops the sort icons when compact', () => {
+    const { container } = render(
+      wrapHead(<CrvTableHead compact label="Name" leftSort rightSort />),
+    );
+    expect(container.querySelectorAll('.crv-table-head__sort')).toHaveLength(0);
+  });
+
   it('calls onSort', () => {
     const onSort = vi.fn();
     render(wrapHead(<CrvTableHead label="Name" rightSort onSort={onSort} />));

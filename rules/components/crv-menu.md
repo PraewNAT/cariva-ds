@@ -6,7 +6,7 @@
 
 - Component type: Menu
 - Component set (item): `crv-menu-item`
-- Component (container): `crv-menu` (single component, ไม่มี variant set)
+- Component set (container): `crv-menu` — variant `scrollable=false|true`
 - Naming pattern: `variant=default|checkbox, state=default|hover, selected=false|true, disabled=false|true`
 
 ## Variants
@@ -22,7 +22,13 @@
 
 ### crv-menu
 
-ไม่มี variant — เป็น single COMPONENT ที่ใช้ `crv-menu-item` เป็น children
+| Property | Values |
+|---|---|
+| `scrollable` | `false`, `true` |
+
+- `scrollable=false`: สูงตามจำนวน item (hug)
+- `scrollable=true`: สูงสุด **6 item** (6 × 40 + padding 8 บน/ล่าง = 256px) เกินจากนั้นเลื่อนดู — scrollbar กว้าง 6px, radius เต็ม, สี `color/border/strong`, เว้นจากขอบขวา 4px และหัวท้าย 8px ให้ตรงกับ padding ของ list · track โปร่งใส
+- ใช้ `crv-menu-item` เป็น children ทั้งสอง variant
 
 ## Sizes
 

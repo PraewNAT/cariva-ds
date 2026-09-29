@@ -30,14 +30,17 @@ describe('CrvCheckboxGroup', () => {
     expect(onChange).toHaveBeenCalledWith(['a']);
   });
 
-  it('shows error message in error color mode', () => {
+  it('renders every option as a plain checkbox row', () => {
     render(
       <CrvCheckboxGroup
         color="error"
-        errorMessage="Selection required"
-        options={[{ value: 'a', label: 'Option A' }]}
+        options={[
+          { value: 'a', label: 'Option A' },
+          { value: 'b', label: 'Option B' },
+        ]}
       />,
     );
-    expect(screen.getByText('Selection required')).toBeInTheDocument();
+    expect(screen.getAllByRole('checkbox')).toHaveLength(2);
+    expect(screen.getByText('Option A')).toBeInTheDocument();
   });
 });

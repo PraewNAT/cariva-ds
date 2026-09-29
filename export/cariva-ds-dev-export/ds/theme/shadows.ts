@@ -23,6 +23,22 @@ export const shadows = {
 
 export type CarivaShadow = keyof typeof shadows;
 
+/**
+ * glow/* — the Figma effect styles used on hover for surfaces that are already
+ * selected: a 4px halo at 36% of the surface's own colour, painted behind the
+ * node so it reads as light coming off the card rather than a drop shadow.
+ */
+export const GLOW_ALPHA = 0.36;
+
+export function glow(color: string): string {
+  return `0 0 4px 0 ${rgba(color, GLOW_ALPHA)}`;
+}
+
+function rgba(color: string, alpha: number): string {
+  const int = parseInt(color.replace('#', ''), 16);
+  return `rgba(${(int >> 16) & 255}, ${(int >> 8) & 255}, ${int & 255}, ${alpha})`;
+}
+
 /** shadow/status/* — three soft layers tinted with the status colour. */
 export function statusShadow(color: string): string {
   const value = color.replace('#', '');

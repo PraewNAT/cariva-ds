@@ -23,8 +23,6 @@ export function CrvCheckboxGroup({
   labelVisible = true,
   description = 'Select the items you want to display in the sidebar.',
   descriptionVisible = true,
-  errorMessage = 'Your one-time password must be 6 characters.',
-  errorMessageVisible = true,
   options = DEFAULT_CHECKBOX_GROUP_OPTIONS,
   value: valueProp,
   defaultValue = [],
@@ -42,8 +40,6 @@ export function CrvCheckboxGroup({
     ? colors.content.disabled
     : colors.content.secondary;
   const visibleOptions = options.filter((option) => option.visible !== false);
-  const showErrorMessage =
-    color === 'error' && errorMessageVisible && Boolean(errorMessage);
 
   const handleChange = (optionValue: string, checked: boolean) => {
     const nextValue = toggleValue(value, optionValue, checked);
@@ -115,7 +111,6 @@ export function CrvCheckboxGroup({
         {visibleOptions.map((option) => (
           <CrvCheckbox
             key={option.value}
-            type="groupItem"
             color={color}
             label={option.label}
             labelVisible
@@ -131,20 +126,6 @@ export function CrvCheckboxGroup({
         ))}
       </Box>
 
-      {showErrorMessage && (
-        <FormHelperText
-          sx={{
-            margin:     0,
-            fontFamily: typography.fontFamily.sans,
-            fontSize:   `${typography.fontSize.body.medium}px`,
-            lineHeight: `${typography.lineHeight.body.medium}px`,
-            fontWeight: typography.fontWeight.regular,
-            color:      colors.status.error.content.default,
-          }}
-        >
-          {errorMessage}
-        </FormHelperText>
-      )}
     </Box>
   );
 }

@@ -30,7 +30,9 @@ export const CrvChipAction = forwardRef<HTMLDivElement, CrvChipActionProps>(
       <Chip
         ref={ref}
         label={label}
-        variant={variant}
+        // MUI only knows filled and outlined; `surface` rides on filled so MUI
+        // adds no border of its own, and getChipActionSx paints the white.
+        variant={variant === 'outlined' ? 'outlined' : 'filled'}
         size={size}
         disabled={disabled}
         avatar={

@@ -17,18 +17,18 @@ See `rules/components/crv-avatar.md` for the full spec.
 
 ## Layout (Figma 4315:10055)
 
-| Size | Dimensions | Icon slot (content=icon) | Icon padding |
-|---|---|---|---|
-| `large` | 40×40 | 24 (`icon/size/6`) | 8 |
-| `medium` | 32×32 | 20 (`icon/size/5`) | 6 |
-| `small` | 24×24 | 16 (`icon/size/4`) | 4 |
-| `xSmall` | 18×18 | 12 (`icon/size/3`) | 3 |
+| Size | Dimensions | Icon slot (content=icon) | Icon padding | Initials | Text padding |
+|---|---|---|---|---|---|
+| `large` | 40×40 | 24 (`icon/size/6`) | 8 | label/medium 14/20 | 8 |
+| `medium` | 32×32 | 20 (`icon/size/5`) | 6 | label/small 12/16 | 4 |
+| `small` | 24×24 | 16 (`icon/size/4`) | 4 | label/xsmall 10/16 | 4 |
+| `xSmall` | 20×20 | 12 (`icon/size/3`) | 4 | label/xsmall 10/16 | 2 |
 
 Icon size and padding are identical for `badge=false` and `badge=true`.
 
 | Part | Spec |
 |---|---|
-| Initials | body/small 12/18 medium, content/primary |
+| Initials | label scale per size (ตารางด้านบน), weight medium, content/primary |
 | Background (text/icon) | on-surface/sunken |
 | Online badge | `CrvBadge` dot + success, 8×8 + 2px subtle ring, bottom-right |
 | Shape | radius/full |

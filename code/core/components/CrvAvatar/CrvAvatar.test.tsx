@@ -1,4 +1,6 @@
 import { render, screen } from '@testing-library/react';
+import { carivaTheme } from '../../theme';
+import { AVATAR_SIZE_PX, getAvatarSx } from '../../theme/components/crvAvatar';
 import { CrvAvatar } from './CrvAvatar';
 
 describe('CrvAvatar', () => {
@@ -31,6 +33,31 @@ describe('CrvAvatar', () => {
   it.each([false, true])('keeps the same icon size with badge=%s', (badge) => {
     const { container } = render(<CrvAvatar content="icon" size="small" badge={badge} />);
     expect(getComputedStyle(container.querySelector('svg')!).fontSize).toBe('16px');
+  });
+
+  it.each([
+    ['large', 14, 8],
+    ['medium', 12, 4],
+    ['small', 10, 4],
+    ['xSmall', 10, 2],
+  ] as const)(
+    'uses the Figma label size and padding for %s initials (%ipx / %ipx)',
+    (size, fontSize, padding) => {
+      const style = (getAvatarSx(size, 'text') as (t: typeof carivaTheme) => Record<string, unknown>)(
+        carivaTheme,
+      );
+      expect(style.fontSize).toBe(fontSize);
+      expect(style.padding).toBe(`${padding}px`);
+    },
+  );
+
+  it.each([
+    ['large', 40],
+    ['medium', 32],
+    ['small', 24],
+    ['xSmall', 20],
+  ] as const)('sizes the %s avatar to %ipx', (size, px) => {
+    expect(AVATAR_SIZE_PX[size]).toBe(px);
   });
 
   it('renders online badge when badge is true', () => {

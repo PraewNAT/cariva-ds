@@ -37,7 +37,6 @@ const descriptionSx = {
 export const CrvCheckbox = forwardRef<HTMLButtonElement, CrvCheckboxProps>(
   function CrvCheckbox(
     {
-      type = 'default',
       color = 'primary',
       labelPlacement = 'end',
       label = 'Accept terms and conditions',
@@ -53,19 +52,17 @@ export const CrvCheckbox = forwardRef<HTMLButtonElement, CrvCheckboxProps>(
   ) {
     const generatedId = useId();
     const inputId = idProp ?? generatedId;
-    const showDescription = type !== 'groupItem' && descriptionVisible;
     const labelColor = getLabelColor(color, Boolean(disabled));
-    const isGroupItem = type === 'groupItem';
 
     return (
       <Box
         sx={{
-          ...getStandardRootSx(type),
+          ...getStandardRootSx(),
           flexDirection: labelPlacement === 'start' ? 'row-reverse' : 'row',
           ...sx,
         }}
       >
-        <Box sx={getControlSlotSx(type)}>
+        <Box sx={getControlSlotSx()}>
           <CrvCheckboxBase
             ref={ref}
             id={inputId}
@@ -76,14 +73,14 @@ export const CrvCheckbox = forwardRef<HTMLButtonElement, CrvCheckboxProps>(
           />
         </Box>
 
-        {(labelVisible || showDescription) && (
+        {(labelVisible || descriptionVisible) && (
           <Box
             component="label"
             htmlFor={inputId}
             sx={{
               display:       'flex',
               flexDirection: 'column',
-              gap:           isGroupItem ? 0 : `${spacing.sm}px`,
+              gap:           `${spacing.sm}px`,
               flex:          1,
               minWidth:      0,
               cursor:        disabled ? 'not-allowed' : 'pointer',
@@ -92,17 +89,13 @@ export const CrvCheckbox = forwardRef<HTMLButtonElement, CrvCheckboxProps>(
             {labelVisible && (
               <Typography
                 component="span"
-                sx={{
-                  ...labelSx,
-                  color: labelColor,
-                  ...(!isGroupItem && { pt: '1px' }),
-                }}
+                sx={{ ...labelSx, color: labelColor }}
               >
                 {label}
               </Typography>
             )}
 
-            {showDescription && (
+            {descriptionVisible && (
               <Typography
                 component="span"
                 sx={{

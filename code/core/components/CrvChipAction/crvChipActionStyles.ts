@@ -73,14 +73,29 @@ function outlinedBackground(color: CrvChipActionColor, state: ChipState): string
   return 'transparent';
 }
 
+/**
+ * Figma `variant=surface` — a plain white chip for coloured or photographic
+ * backgrounds: the surface colour, no border and no shadow. Hover and pressed
+ * borrow the same action tints the other variants use, so the chip still
+ * responds under the pointer.
+ */
+function surfaceBackground(color: CrvChipActionColor, state: ChipState): string {
+  if (state === 'default') return colors.onSurface.default;
+  if (color === 'primary') return colors.brand.primary.onSurface.subtle;
+  if (state === 'hover') return colors.onSurface.action.hover;
+  if (state === 'pressed') return colors.onSurface.action.pressed;
+  if (state === 'focusVisible') return colors.brand.primary.onSurface.subtle;
+  return colors.onSurface.default;
+}
+
 function background(
   variant: CrvChipActionVariant,
   color: CrvChipActionColor,
   state: ChipState,
 ): string {
-  return variant === 'filled'
-    ? filledBackground(color, state)
-    : outlinedBackground(color, state);
+  if (variant === 'filled') return filledBackground(color, state);
+  if (variant === 'surface') return surfaceBackground(color, state);
+  return outlinedBackground(color, state);
 }
 
 function labelColor(
@@ -89,7 +104,7 @@ function labelColor(
   disabled: boolean,
 ): string {
   if (disabled) return colors.content.disabled;
-  if (variant === 'outlined' && color === 'primary') {
+  if (variant !== 'filled' && color === 'primary') {
     return colors.brand.primary.content.default;
   }
   if (variant === 'filled' && color === 'primary') {

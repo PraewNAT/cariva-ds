@@ -74,6 +74,29 @@
 
 - แสดงทุก state × size บน canvas ใน section เดียวกับ button
 
+<!-- updated 2026-09-29 -->
+## เลือกใช้ปุ่มตัวไหน
+
+| สถานการณ์ | ใช้ |
+|---|---|
+| action ทั่วไปที่มีข้อความ — เริ่มจากตัวนี้เสมอ | `crv-button-standard` |
+| พื้นที่แคบและความหมายชัดจากไอคอน เช่น toolbar, แถวตาราง | `crv-button-icon` |
+| พาไปที่อื่น หรือ action ที่ไม่เปลี่ยนข้อมูล | `crv-link` |
+| ระหว่างรอผลของ action | `crv-button-standard` prop `loading` |
+| action หลักของฟีเจอร์ AI — หน้าละปุ่มเดียว | `crv-button-decorative` |
+| เลือกอุปกรณ์เสียง (ไม่ใช่ปุ่มอัด) | `crv-button-mic` |
+| action หลักหนึ่งอันที่มีวิธีทำอื่นซ่อนหลัง chevron | `crv-button-split` |
+| หลายตัวเลือกที่ไม่มีตัวหลัก | ❌ ใช้ `crv-menu` หรือ `crv-dropdown` |
+| เปิด/ปิดที่มีผลทันที | ❌ ใช้ `crv-switch` |
+
+### กฎร่วมทุกปุ่ม
+
+- 1 action group มี `contained/primary` ได้ปุ่มเดียว
+- ลำดับความสำคัญด้วย variant: `contained` > `elevated` > `outlined` > `text`
+- ข้อความปุ่มเป็นคำกริยาที่บอกผลลัพธ์ ไม่ใช่ "OK" / "ยืนยัน"
+- size ตามความหนาแน่นของพื้นที่: `large` หน้าหลัก · `medium` ทั่วไป · `small` ในตาราง
+- `color=error` เฉพาะ action ที่ย้อนกลับยาก ไม่ใช่เพื่อเรียกร้องความสนใจ
+
 ## ควรทำ / ไม่ควรทำ
 
 ### ควรทำ
