@@ -14,7 +14,7 @@ See `rules/components/crv-chip-action.md` for the full spec.
 | `deleteVisible` | `boolean` | `false` |
 | `size` | `small`, `medium` | `medium` |
 | `color` | `default`, `primary` | `default` |
-| `variant` | `filled`, `outlined` | `filled` |
+| `variant` | `filled`, `outlined`, `surface` | `filled` |
 | `disabled` | `boolean` | `false` |
 
 ## Sizes

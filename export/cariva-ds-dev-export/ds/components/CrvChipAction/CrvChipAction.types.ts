@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 export type CrvChipActionSize = 'small' | 'medium';
 export type CrvChipActionColor = 'default' | 'primary';
-export type CrvChipActionVariant = 'filled' | 'outlined';
+export type CrvChipActionVariant = 'filled' | 'outlined' | 'surface';
 
 export interface CrvChipActionProps
   extends Omit<

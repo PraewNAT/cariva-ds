@@ -18,10 +18,10 @@ export const CrvCheckboxBase = forwardRef<HTMLButtonElement, CrvCheckboxBaseProp
         disabled={disabled}
         disableRipple
         icon={uncheckedIcon(disabled, color)}
-        checkedIcon={checkedIcon(disabled)}
-        indeterminateIcon={indeterminateIcon(disabled)}
+        checkedIcon={checkedIcon(disabled, color)}
+        indeterminateIcon={indeterminateIcon(disabled, color)}
         sx={{
-          ...getCheckboxRootSx(),
+          ...getCheckboxRootSx(color),
           ...sx,
         }}
         {...rest}

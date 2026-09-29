@@ -47,11 +47,16 @@ export const CrvTableHead = forwardRef<HTMLTableCellElement, CrvTableHeadProps>(
       >
         <Box className="crv-table-head__inner">
           {checkbox}
-          {leftSort ? sortIcon : null}
+          {/*
+            Figma's compact variants (4582:11202) hold nothing but the checkbox
+            slot — no sort icon, no label — so compact wins over both sort props
+            instead of rendering a square cell with an arrow crammed into it.
+          */}
+          {!compact && leftSort ? sortIcon : null}
           {!compact && label != null ? (
             <span className="crv-table-head__label">{label}</span>
           ) : null}
-          {rightSort ? sortIcon : null}
+          {!compact && rightSort ? sortIcon : null}
         </Box>
       </TableCell>
     );

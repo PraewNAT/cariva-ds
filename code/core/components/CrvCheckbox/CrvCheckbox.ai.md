@@ -7,7 +7,6 @@ See `rules/components/crv-checkbox-standard.md` for the full spec.
 
 | Prop | Values | Default |
 |---|---|---|
-| `type` | `default`, `groupItem` | `default` |
 | `color` | `primary`, `error` | `primary` |
 | `labelPlacement` | `end`, `start` | `end` |
 | `label` | `string` | Accept terms and conditions |
@@ -24,11 +23,14 @@ See `rules/components/crv-checkbox-standard.md` for the full spec.
 |---|---|
 | Checkbox → content gap | spacing/md (12px) |
 | Label → description gap | spacing/sm (8px) |
-| `default` align | control top-aligned with content |
-| `groupItem` align | control vertically centered with label |
-| Label optical offset | +1px top on default |
+| Checkbox line box | 20px (label/medium line-height) — จัด control ตรงบรรทัดแรกของ label |
+| Align | `flex-start` ทุก variant |
 
 ## Notes
 
-- `color=error` styles the label text; checkbox base stays primary.
+- เลือกใช้ตัวไหน: standard = คำถามเดียวตอบใช่/ไม่ใช่ · group = 2–6 ตัวเลือกจากคำถามเดียวกัน · card = ตัวเลือกที่ต้องอ่านก่อนเลือก (แถวใน group ไม่มี description)
+
+- `color=error` styles the label **and** the checkbox box (base `color=error`).
+- `disabled` overrides `color` — Figma has no disabled + error variant.
+- No `type` prop: a compact row is `descriptionVisible={false}`.
 - Base control spec: `rules/components/crv-checkbox-base.md`.

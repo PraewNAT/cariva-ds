@@ -1,5 +1,17 @@
 # Changelog — cariva-ds-dev-export
 
+## 2026-09-21
+
+### Added
+
+- **`CrvChipAction variant="surface"`.** A white chip with no border and no
+  shadow, for coloured or photographic backgrounds. A primary surface chip keeps
+  a blue label rather than a white one.
+
+- **Menus scroll after six items.** `crvMenuPaperSx` now caps the list at six
+  items (256px) and scrolls past that, with the 6px rounded scrollbar Figma
+  specifies. `CrvDropdown` and `CrvAutocomplete` pick this up automatically.
+
 ## 2026-09-18
 
 ### Fixed

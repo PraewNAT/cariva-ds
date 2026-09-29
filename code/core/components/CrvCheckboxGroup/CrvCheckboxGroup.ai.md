@@ -13,8 +13,6 @@ See `rules/components/crv-checkbox-group.md` for the full spec.
 | `labelVisible` | `boolean` | `true` |
 | `description` | `string` | Sidebar helper copy |
 | `descriptionVisible` | `boolean` | `true` |
-| `errorMessage` | `string` | OTP validation copy |
-| `errorMessageVisible` | `boolean` | `true` |
 | `options` | `CrvCheckboxGroupOption[]` | 6 default sidebar items |
 | `value` | `string[]` | — |
 | `defaultValue` | `string[]` | `[]` |
@@ -26,5 +24,7 @@ Recents, Home, Applications, Desktop, Downloads, Documents
 
 ## Notes
 
-- Items render as `CrvCheckbox` with `type="groupItem"`.
-- Error message shows when `color="error"` and `errorMessageVisible`.
+- เลือกใช้ตัวไหน: standard = คำถามเดียวตอบใช่/ไม่ใช่ · group = 2–6 ตัวเลือกจากคำถามเดียวกัน · card = ตัวเลือกที่ต้องอ่านก่อนเลือก (แถวใน group ไม่มี description)
+
+- Items render as `CrvCheckbox` with `descriptionVisible={false}`.
+- No error message slot — Figma dropped `errorMessage` from the set, so validation copy goes below the group in the form.

@@ -3,11 +3,7 @@
 import { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { CrvCheckbox } from './CrvCheckbox';
-import type {
-  CrvCheckboxColor,
-  CrvCheckboxProps,
-  CrvCheckboxType,
-} from './CrvCheckbox.types';
+import type { CrvCheckboxColor, CrvCheckboxProps } from './CrvCheckbox.types';
 
 function InteractiveCheckbox(props: CrvCheckboxProps) {
   const [checked, setChecked] = useState(props.checked ?? props.defaultChecked ?? false);
@@ -30,7 +26,6 @@ function InteractiveCheckbox(props: CrvCheckboxProps) {
   );
 }
 
-const TYPES: CrvCheckboxType[] = ['default', 'groupItem'];
 const COLORS: CrvCheckboxColor[] = ['primary', 'error'];
 
 const meta: Meta<typeof CrvCheckbox> = {
@@ -45,7 +40,6 @@ const meta: Meta<typeof CrvCheckbox> = {
     },
     controls: {
       include: [
-        'type',
         'color',
         'labelPlacement',
         'label',
@@ -58,7 +52,6 @@ const meta: Meta<typeof CrvCheckbox> = {
     },
   },
   argTypes: {
-    type: { control: 'select', options: TYPES },
     color: { control: 'select', options: COLORS },
     labelPlacement: { control: 'select', options: ['end', 'start'] },
     label: { control: 'text' },
@@ -72,7 +65,6 @@ const meta: Meta<typeof CrvCheckbox> = {
     ref: { table: { disable: true } },
   },
   args: {
-    type: 'default',
     color: 'primary',
     labelPlacement: 'end',
     label: 'Accept terms and conditions',
@@ -94,9 +86,8 @@ export const Unchecked: Story = {
   args: { checked: false },
 };
 
-export const GroupItem: Story = {
+export const LabelOnly: Story = {
   args: {
-    type: 'groupItem',
     label: 'Label',
     descriptionVisible: false,
   },
@@ -120,45 +111,38 @@ export const Disabled: Story = {
   args: { disabled: true },
 };
 
-export const AllTypes: Story = {
+export const AllColors: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Showcase grid — default / groupItem × primary / error / disabled',
+        story: 'Showcase grid — primary / error / disabled, with and without a description',
       },
     },
   },
   render: () => (
     <div style={{ display: 'grid', gap: 32, maxWidth: 420 }}>
-      {(['default', 'groupItem'] as const).map((type) => (
-        <div key={type} style={{ display: 'grid', gap: 16 }}>
-          <p style={{ fontSize: 12, color: '#64748b', margin: 0 }}>{type}</p>
+      {([true, false] as const).map((withDescription) => (
+        <div key={String(withDescription)} style={{ display: 'grid', gap: 16 }}>
+          {COLORS.map((color) => (
+            <CrvCheckbox
+              key={color}
+              color={color}
+              defaultChecked
+              label={withDescription ? undefined : 'Label'}
+              descriptionVisible={withDescription}
+            />
+          ))}
           <CrvCheckbox
-            type={type}
-            defaultChecked
-            label={type === 'groupItem' ? 'Label' : undefined}
-            descriptionVisible={type !== 'groupItem'}
-          />
-          <CrvCheckbox
-            type={type}
-            color="error"
-            defaultChecked
-            label={type === 'groupItem' ? 'Label' : undefined}
-            descriptionVisible={type !== 'groupItem'}
-          />
-          <CrvCheckbox
-            type={type}
             disabled
-            label={type === 'groupItem' ? 'Label' : undefined}
-            descriptionVisible={type !== 'groupItem'}
+            label={withDescription ? undefined : 'Label'}
+            descriptionVisible={withDescription}
           />
           <CrvCheckbox
-            type={type}
             defaultChecked
             disabled
-            label={type === 'groupItem' ? 'Label' : undefined}
-            descriptionVisible={type !== 'groupItem'}
+            label={withDescription ? undefined : 'Label'}
+            descriptionVisible={withDescription}
           />
         </div>
       ))}

@@ -6,13 +6,13 @@
 
 - Component type: Chip (interactive)
 - Component set: `crv-chip-action`
-- Naming pattern: `size=small|medium, color=default|primary, state=default|hover|pressed|focusVisible|disabled, variant=filled|outlined`
+- Naming pattern: `size=small|medium, color=default|primary, state=default|hover|pressed|disabled, variant=filled|outlined|surface`
 
 ## Variants
 
 | Property | Values |
 |---|---|
-| `variant` | `filled`, `outlined` |
+| `variant` | `filled`, `outlined`, `surface` |
 | `color` | `default`, `primary` |
 | `size` | `small`, `medium` |
 | `state` | `default`, `hover`, `pressed`, `focusVisible`, `disabled` |
@@ -91,3 +91,5 @@
 ## Needs designer review
 
 - `variant=outlined` stroke token ไม่พบ fill/stroke binding ที่ชัดเจนในระดับ variant frame — ควรตรวจสอบว่าขอบมาจาก mechanism ใด
+
+- `variant=surface`: พื้นขาว (`color/on-surface/default`) ไม่มีเส้นขอบ ไม่มีเงา — ใช้เมื่อชิปวางบนพื้นสีหรือรูปภาพ · hover/pressed ใช้สีเดียวกับ variant อื่น · `color=primary` ตัวอักษรเป็นสีน้ำเงิน ไม่ใช่ขาว

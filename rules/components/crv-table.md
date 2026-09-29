@@ -56,6 +56,8 @@ Table ใช้แสดงข้อมูลแบบตาราง (data tabl
 - Direction: horizontal · gap `spacing/sm (8)` · counter-align center
 - `compact=false` → primary-align start (label ชิดซ้าย)
 - `compact=true` → primary-align center, **ซ่อน label**, **fixed square** (width = height, `primaryAxisSizingMode = FIXED`, `layoutGrow = 0`) สำหรับ icon-only / checkbox-only (เช่น select-all column, action header)
+<!-- updated 2026-09-28 -->
+  - variant `compact=true` มีเลเยอร์เดียวคือ checkbox slot ที่ผูกกับ `checkBoxVisible` — **ไม่มี sort icon และไม่มี label** ฝั่งโค้ด `CrvTableHead` จึงเมิน `leftSort` / `rightSort` / `label` เมื่อ `compact` เป็น true
   - small → `36×36` · default → `54×54` — ทั้ง **preview ในตัว set และ instance เป็น square**
   - หมายเหตุ: เดิม compact variant ถูก GRID layout ยืดเป็น 120 ใน preview — แก้แล้วด้วยการตั้ง `layoutGrow = 0` + fixed size
 
@@ -191,7 +193,7 @@ Table Container          (radius border-radius/container md = 16, clip, ไม�
 | Zebra striping (สลับสีแถว) | `crv-table-cell` | `alternate=true` ทุก cell ของแถวที่ต้องการ → bg `on-surface/subtle` |
 | Row hover / disabled | `crv-table-cell` | `state=hover` / `state=disabled` |
 | Sort indicator | `crv-table-head` | `leftSortVisible` / `rightSortVisible` (แสดง/ซ่อนไอคอน) |
-| Icon-only / checkbox-only header | `crv-table-head` | `compact=true` + checkbox/sort → square |
+| Icon-only / checkbox-only header | `crv-table-head` | `compact=true` + checkbox → square (sort ใช้ไม่ได้) |
 | Fixed / pinned column | container + `crv-table-scroll-shadow` | opaque bg + scroll-shadow ที่ freeze line · sticky = code |
 | Row divider | container | `divider-horizontal` component คั่น (ไม่ใช้ border) |
 | Pagination | `crv-table-footer` | วางท้ายตาราง |

@@ -86,15 +86,16 @@ function markColor(disabled: boolean) {
   return disabled ? colors.content.disabled : colors.content.onBrand;
 }
 
-function checkedFillColor(disabled: boolean) {
-  return disabled
-    ? colors.onSurface.action.disabled
-    : colors.brand.primary.onSurface.default;
+function checkedFillColor(disabled: boolean, color: CrvCheckboxColor) {
+  if (disabled) return colors.onSurface.action.disabled;
+  if (color === 'error') return colors.status.error.onSurface.default;
+  return colors.brand.primary.onSurface.default;
 }
 
 function uncheckedBorderColor(disabled: boolean, color: CrvCheckboxColor) {
+  // Figma keeps disabled colour-blind: there is no state=disabled + color=error.
   if (disabled) return colors.border.disabled;
-  if (color === 'error') return colors.border.error;
+  if (color === 'error') return colors.status.error.border.strong;
   return colors.border.default;
 }
 
@@ -133,7 +134,7 @@ function renderCheckboxVisual(
               ? `inset 0 0 0 1px ${colors.border.disabled}`
               : 'none',
           backgroundColor: isCheckedVisual
-            ? checkedFillColor(disabled)
+            ? checkedFillColor(disabled, color)
             : disabled
               ? colors.onSurface.action.disabled
               : 'transparent',
@@ -165,10 +166,10 @@ export function uncheckedIcon(disabled = false, color: CrvCheckboxColor = 'prima
   return renderCheckboxVisual(false, false, disabled, color);
 }
 
-export function checkedIcon(disabled = false) {
-  return renderCheckboxVisual(true, false, disabled, 'primary');
+export function checkedIcon(disabled = false, color: CrvCheckboxColor = 'primary') {
+  return renderCheckboxVisual(true, false, disabled, color);
 }
 
-export function indeterminateIcon(disabled = false) {
-  return renderCheckboxVisual(false, true, disabled, 'primary');
+export function indeterminateIcon(disabled = false, color: CrvCheckboxColor = 'primary') {
+  return renderCheckboxVisual(false, true, disabled, color);
 }

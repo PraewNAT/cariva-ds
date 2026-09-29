@@ -27,3 +27,12 @@ See `rules/components/crv-menu-item.md` for the full spec.
   กรุงเทพมหานคร
 </CrvMenuItem>
 ```
+
+## Menu container
+
+`crvMenuPaperSx` is the shared paper style for `CrvDropdown`, `CrvAutocomplete`
+and any menu built from `CrvMenuItem`. It caps the list at six items
+(`MENU_VISIBLE_ITEMS × MENU_ITEM_HEIGHT` + 8px padding top and bottom) and
+scrolls past that, matching Figma `crv-menu` variant `scrollable=true`. The
+scrollbar is a 6px thumb in `color/border/strong`, fully rounded, over an empty
+track.

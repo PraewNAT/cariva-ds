@@ -234,6 +234,29 @@ resetLabel.characters = 'Reset Password';
 - แสดงทุก combination ของ variant × color × state × size บน canvas
 - มี `crv-button-loading` แสดง loading state แยก section
 
+<!-- updated 2026-09-29 -->
+## เลือกใช้ปุ่มตัวไหน
+
+| สถานการณ์ | ใช้ |
+|---|---|
+| action ทั่วไปที่มีข้อความ — เริ่มจากตัวนี้เสมอ | `crv-button-standard` |
+| พื้นที่แคบและความหมายชัดจากไอคอน เช่น toolbar, แถวตาราง | `crv-button-icon` |
+| พาไปที่อื่น หรือ action ที่ไม่เปลี่ยนข้อมูล | `crv-link` |
+| ระหว่างรอผลของ action | `crv-button-standard` prop `loading` |
+| action หลักของฟีเจอร์ AI — หน้าละปุ่มเดียว | `crv-button-decorative` |
+| เลือกอุปกรณ์เสียง (ไม่ใช่ปุ่มอัด) | `crv-button-mic` |
+| action หลักหนึ่งอันที่มีวิธีทำอื่นซ่อนหลัง chevron | `crv-button-split` |
+| หลายตัวเลือกที่ไม่มีตัวหลัก | ❌ ใช้ `crv-menu` หรือ `crv-dropdown` |
+| เปิด/ปิดที่มีผลทันที | ❌ ใช้ `crv-switch` |
+
+### กฎร่วมทุกปุ่ม
+
+- 1 action group มี `contained/primary` ได้ปุ่มเดียว
+- ลำดับความสำคัญด้วย variant: `contained` > `elevated` > `outlined` > `text`
+- ข้อความปุ่มเป็นคำกริยาที่บอกผลลัพธ์ ไม่ใช่ "OK" / "ยืนยัน"
+- size ตามความหนาแน่นของพื้นที่: `large` หน้าหลัก · `medium` ทั่วไป · `small` ในตาราง
+- `color=error` เฉพาะ action ที่ย้อนกลับยาก ไม่ใช่เพื่อเรียกร้องความสนใจ
+
 ## ควรทำ / ไม่ควรทำ
 
 ### ควรทำ
@@ -258,6 +281,26 @@ resetLabel.characters = 'Reset Password';
 - ไม่ควรใช้ `crv-button-loading` โดยที่ยังสามารถกดซ้ำได้
 - ไม่ควรสร้างสี ขนาด style หรือ state ใหม่เองนอกเหนือจาก Design System
 - ไม่ควรใช้ข้อความบนปุ่มยาวจนขึ้นหลายบรรทัด
+
+<!-- updated 2026-09-29 -->
+### `crv-button-loading` — prop `loading`
+
+ใน Figma เป็น component set แยก (`crv-button-loading`) แต่ในโค้ดคือ prop `loading` ของ `CrvButton` ตัวเดิม
+
+**ควรทำ**
+
+- สลับจากปุ่มเดิมโดยคง `variant` และ `size` เท่าเดิม ปุ่มจะได้ไม่ขยับ
+- ล็อกปุ่มไม่ให้กดซ้ำตลอดช่วงที่ loading
+- ใช้เมื่องานใช้เวลานานกว่าราวครึ่งวินาที สั้นกว่านั้นให้ผลลัพธ์ไปเลย
+- บอกผลเมื่อเสร็จด้วย toast หรือข้อความ ไม่ใช่แค่ปุ่มกลับเป็นปกติเงียบๆ
+
+**ไม่ควรทำ**
+
+- ไม่ใช้กับ action ที่เห็นผลทันที
+- ไม่เปลี่ยน `size` หรือ `variant` ตอนสลับเป็น loading — ปุ่มจะกระตุก
+- ไม่ปล่อย loading ค้างโดยไม่มีทางออกเมื่อ request ล้มเหลว
+- ไม่ขึ้น loading พร้อมกันหลายปุ่มใน action group เดียว
+- ไม่คาดหวัง loading สีแดง — Figma set นี้ไม่มี `color` prop ใช้ token เดียวกับ primary ทุก color
 
 ## Needs designer review
 

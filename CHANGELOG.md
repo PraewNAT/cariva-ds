@@ -2,6 +2,73 @@
 
 ---
 
+## v1.3.9 — 2026-09-28
+
+### ✨ `crv-checkbox-card` — component ใหม่ แยกออกจาก checkbox แบบ outlined
+
+- เดิม checkbox แบบการ์ดเป็น `type=outlined` ใน `crv-checkbox-standard` ซึ่งใช้ `labelPlacement` ไม่ได้จริงและทำสีต่างจาก state อื่นลำบาก
+- **Figma** — `crv-checkbox-card` (node 6697:362) 10 variants: `checked × state(default|hover|disabled) × color` · padding `spacing/lg` radius `radius/16` gap `spacing/md` · ทั้งใบเป็น hit target
+- **Hover** — เปลี่ยนที่ effect ไม่ใช่สี: ยังไม่ติ๊กใช้ `shadow/sm` (ลอยขึ้น) · ติ๊กแล้วใช้ `glow/primary` / `glow/error` (`0 0 4px` 36% สีของตัวเอง วาดหลัง node) · `disabled` ไม่มี hover
+- **Code** — `CrvCheckboxCard` ใหม่พร้อม story/test · เพิ่ม helper `glow()` ใน `theme/shadows.ts` mirror ของ effect style `glow/*` · `crv-checkbox-card.md` + `CrvCheckboxCard.ai.md`
+
+### ✨ `crv-checkbox-base` — เพิ่ม `color=error`
+
+- เดิม `color=error` เปลี่ยนแค่สี label ส่วนกล่อง checkbox ยังเป็นเทาปกติ ทั้งที่ `crv-checkbox-card` ใช้กรอบแดงอยู่แล้ว
+- **Figma** — base เป็น 15 variants (เพิ่ม `color=primary|error`): unchecked `status/error/border/strong` · focus `border/error` · checked/indeterminate `status/error/on-surface/default` → focus `.../pressed`
+- **Code** — `CrvCheckboxBase` ส่ง `color` ต่อให้ icon และ focus/hover style ครบทุก state · `CrvCheckbox` `color=error` จึงแดงทั้งกล่องและ label
+- 🐛 แถมแก้ focus ring ของ primary ที่ผิดมาแต่เดิม — ใช้ `brand/primary/on-surface/default` (#1789fa) ทั้งที่ Figma เป็น `color/border/system` (#2563eb)
+- ✨ **focusVisible / hover มี halo** — `glow/primary` · `glow/error` (`0 0 4px` 36% ของสีตัวเอง) วางบน root ของ control ตาม effect style ที่ Figma ใส่ไว้ทั้ง 6 variant · จำเป็นมากกับ `color=error` เพราะลำพังขอบ #ef4444 → #dc2626 มองแทบไม่ออก
+- ✨ **hover ใช้หน้าตาเดียวกับ `state=focusVisible`** — base ไม่มี variant `hover` แยกใน Figma (15 variants) แทนที่จะประดิษฐ์สีใหม่ (ของเดิมโค้ดใช้ `border/strong` ที่ไม่มีใน Figma) ตอนนี้ `:hover` กับ `:focus-visible` แชร์กฎเดียวกัน: ยังไม่ติ๊ก → ขอบ `border/system` / `border/error` บนพื้นขาว · ติ๊กแล้ว → พื้น `.../on-surface/pressed` · `disabled` ไม่มี hover
+
+### 🐛 checkbox — จัด control ให้ตรงบรรทัดแรกของ label
+
+- เดิมใช้ `alignSelf` ต่างกันระหว่าง `default` / `groupItem` แล้วชด 1px ที่ label ซึ่งเพี้ยนเมื่อ label ขึ้น 2 บรรทัด
+- **Figma** — ทุก variant ของ standard และ card ครอบ control ด้วย line box สูง 20px (`typography/lineHeight/label/medium`)
+- **Code** — `getControlSlotSx()` เป็น 16×20 จัดกึ่งกลางแนวตั้ง · ตัด `pt: 1px` และเงื่อนไข `type` ทิ้ง
+
+### 🧹 checkbox — ตัด variant ที่ซ้ำและ prop ที่ไม่ได้ใช้
+
+- **`disabled` กลบ `color`** ทั้งตระกูล — ลบ `disabled=true + color=error` ออกจาก standard (เหลือ 6), group (เหลือ 3), base (เหลือ 15) และ card (เหลือ 10) เพราะ token เหมือน primary ทุกจุด
+- `crv-checkbox-standard` ตัด variant `type` ออก — แถว compact คือ `descriptionVisible=false` ไม่ใช่ variant แยก · **ฝั่งโค้ดถอด prop `type` / `CrvCheckboxType` ออกด้วย** (`CrvCheckboxGroup` เปลี่ยนไปส่ง `descriptionVisible={false}`) ⚠️ breaking
+- `crv-checkbox-group` ถอด `errorMessage` / `errorMessageVisible` ที่ประกาศไว้แต่ไม่เคยผูกกับเลเยอร์ไหน **ทั้งใน Figma และในโค้ด** (⚠️ breaking — ข้อความ validation ให้วางใต้กลุ่มเองในฟอร์ม) และเพิ่ม `checkBoxSlot` สำหรับแถวที่ 7 ขึ้นไป
+- `crv-checkbox-card` variant `state=disabled` — label/description เปลี่ยนเป็น `content/disabled` (เดิมตัวหนังสือยังเข้มปกติทั้งที่กล่องเทา)
+
+### 🐛 `crv-avatar` size=xSmall — 18px → 20px
+
+- ค่าใน code ไม่ตรงกับ Figma มาตั้งแต่ต้น (Figma เป็น 20×20 ทั้ง 6 variant)
+- **Code** — `AVATAR_SIZE_PX.xSmall` เป็น 20 · icon padding จึงกลายเป็น 4px ตาม Figma · initials ใช้ label scale ตาม size (large 14/20 · medium 12/16 · small 10/16 · xSmall 10/16) พร้อม padding 8/4/4/2 เดิมใช้ `body/small` ค่าเดียวทุกขนาด
+- `crv-chip-action` size=small thumbnail จึงเป็น 20px ตรงกับ Figma
+
+### 🐛 `crv-table-head` `compact=true` — เมิน sort icon และ label
+
+- variant `compact=true` ใน Figma มีเลเยอร์เดียวคือ checkbox slot แต่โค้ดยังวาด sort icon ได้ถ้าส่ง `leftSort` / `rightSort` มา
+- **Code** — `compact` ชนะทั้ง `leftSort`, `rightSort` และ `label`
+
+---
+
+## v1.3.8 — 2026-09-21
+
+### ✨ `crv-chip-action` — เพิ่ม variant พื้นขาว
+
+- ชิปวางบนพื้นสีหรือรูปภาพไม่ได้ เพราะ `filled` เป็นเทา/น้ำเงิน ส่วน `outlined` พื้นใส สีพื้นข้างหลังทะลุขึ้นมา
+- เพิ่ม `variant=surface` — พื้น `color/on-surface/default` ไม่มีเส้นขอบ ไม่มีเงา (16 variant ใหม่ใน Figma รวมเป็น 48)
+- hover/pressed ใช้สีเดียวกับ variant อื่น · `color=primary` ตัวอักษรเป็นสีน้ำเงิน ไม่ใช่ขาว
+- อัปเดต doc: `rules/components/crv-chip-action.md`, `CrvChipAction.ai.md`
+
+---
+
+## v1.3.7 — 2026-09-21
+
+### ✨ `crv-menu` — เพิ่ม variant ที่มี scrollbar
+
+- เมนูที่มี item เยอะไม่มีสเปกว่าสูงได้แค่ไหน และไม่มีหน้าตา scrollbar ให้ dev ทำตาม
+- **Figma** — `crv-menu` เปลี่ยนจาก single component เป็น component set: `scrollable=false` (สูงตาม item เหมือนเดิม) · `scrollable=true` สูงสุด 6 item = 256px แล้วเลื่อนดู
+- **Scrollbar** — thumb กว้าง 6px radius เต็ม สี `color/border/strong` เว้นขอบขวา 4px หัวท้าย 8px ให้ตรง padding ของ list · track โปร่งใส
+- **Code** — `crvMenuPaperSx` ใส่ `maxHeight` + `overflowY` + สไตล์ scrollbar (รองรับทั้ง WebKit และ Firefox ผ่าน `scrollbar-color`) → `CrvDropdown` กับ `CrvAutocomplete` ได้ผลนี้อัตโนมัติ ไม่ต้องแก้ที่เรียกใช้
+- อัปเดต doc: `rules/components/crv-menu.md`, `CrvMenuItem.ai.md`
+
+---
+
 ## v1.3.6 — 2026-09-18
 
 ### 🐛 `crv-chip-action` size=small — avatar ใหญ่เท่าตัว chip

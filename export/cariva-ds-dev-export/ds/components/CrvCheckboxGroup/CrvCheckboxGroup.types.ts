@@ -21,10 +21,6 @@ export interface CrvCheckboxGroupProps {
   description?: string;
   /** Figma `descriptionVisible` */
   descriptionVisible?: boolean;
-  /** Figma `errorMessage` */
-  errorMessage?: string;
-  /** Figma `errorMessageVisible` */
-  errorMessageVisible?: boolean;
   /** Checkbox options — maps to Checkbox 01–06 in Figma */
   options?: CrvCheckboxGroupOption[];
   /** Selected option values */

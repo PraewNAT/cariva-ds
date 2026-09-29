@@ -21,12 +21,17 @@ figma.connect(
         default:  false,
         focusVisible: false,
       }),
+      color: figma.enum('color', {
+        primary: 'primary',
+        error:   'error',
+      }),
     },
-    example: ({ checked, indeterminate, disabled }) => (
+    example: ({ checked, indeterminate, disabled, color }) => (
       <CrvCheckboxBase
         checked={checked}
         indeterminate={indeterminate}
         disabled={disabled}
+        color={color}
         aria-label="Checkbox"
       />
     ),

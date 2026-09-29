@@ -18,8 +18,6 @@ figma.connect(
       labelVisible: figma.boolean('labelVisible'),
       description: figma.string('description'),
       descriptionVisible: figma.boolean('descriptionVisible'),
-      errorMessage: figma.string('errorMessage'),
-      errorMessageVisible: figma.boolean('errorMessageVisible'),
       checkbox01Visible: figma.boolean('checkbox01Visible'),
       checkbox02Visible: figma.boolean('checkbox02Visible'),
       checkbox03Visible: figma.boolean('checkbox03Visible'),
@@ -34,8 +32,6 @@ figma.connect(
       labelVisible,
       description,
       descriptionVisible,
-      errorMessage,
-      errorMessageVisible,
       checkbox01Visible,
       checkbox02Visible,
       checkbox03Visible,
@@ -60,8 +56,6 @@ figma.connect(
           labelVisible={labelVisible}
           description={description}
           descriptionVisible={descriptionVisible}
-          errorMessage={errorMessage}
-          errorMessageVisible={errorMessageVisible}
           options={DEFAULT_CHECKBOX_GROUP_OPTIONS.map((option, index) => ({
             ...option,
             visible: visibility[index] ?? true,
