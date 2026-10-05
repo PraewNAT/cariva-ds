@@ -89,10 +89,10 @@ export function getToastTokens(
     return {
       backgroundColor: status.onSurface.default,
       borderWidth: 0,
-      iconColor: colors.content.inverse,
-      closeColor: colors.content.inverse,
-      titleColor: colors.content.inverse,
-      descriptionColor: colors.content.inverse,
+      iconColor: status.content.onFill,
+      closeColor: status.content.onFill,
+      titleColor: status.content.onFill,
+      descriptionColor: status.content.onFill,
     };
   }
 

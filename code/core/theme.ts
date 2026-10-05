@@ -59,37 +59,39 @@ export function buildMuiPalette() {
       main: colors.brand.primary.onSurface.default,
       dark: colors.brand.primary.onSurface.hover,
       light: colors.brand.primary.onSurface.subtle,
-      contrastText: colors.content.onBrand,
+      contrastText: colors.brand.primary.content.onFill,
     },
     secondary: {
       main: colors.brand.secondary.onSurface.default,
       dark: colors.brand.secondary.onSurface.hover,
       light: colors.brand.secondary.onSurface.subtle,
-      contrastText: colors.content.onBrand,
+      contrastText: colors.brand.secondary.content.onFill,
     },
     error: {
       main: colors.status.error.onSurface.default,
       dark: colors.status.error.onSurface.hover,
       light: colors.status.error.onSurface.subtle,
-      contrastText: colors.content.inverse,
+      contrastText: colors.status.error.content.onFill,
     },
     warning: {
       main: colors.status.warning.onSurface.default,
       dark: colors.status.warning.onSurface.hover,
       light: colors.status.warning.onSurface.subtle,
+      // Intentionally dark, unlike status.warning.content.onFill (white today).
+      // White on warning/on-surface/default is 3.19:1 — fails AA. Pending the contrast decision.
       contrastText: colors.content.primary,
     },
     success: {
       main: colors.status.success.onSurface.default,
       dark: colors.status.success.onSurface.hover,
       light: colors.status.success.onSurface.subtle,
-      contrastText: colors.content.inverse,
+      contrastText: colors.status.success.content.onFill,
     },
     info: {
       main: colors.status.info.onSurface.default,
       dark: colors.status.info.onSurface.hover,
       light: colors.status.info.onSurface.subtle,
-      contrastText: colors.content.inverse,
+      contrastText: colors.status.info.content.onFill,
     },
     text: {
       primary: colors.content.primary,

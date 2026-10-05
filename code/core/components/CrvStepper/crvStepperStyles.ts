@@ -29,27 +29,27 @@ export function getStepIconColors(state: CrvStepState | CrvStepperMarkerStatus) 
     case 'done':
       return {
         backgroundColor: colors.brand.primary.onSurface.default,
-        color:           colors.content.onBrand,
+        color:           colors.brand.primary.content.onFill,
       };
     case 'error':
       return {
         backgroundColor: colors.status.error.onSurface.default,
-        color:           colors.content.onBrand,
+        color:           colors.status.error.content.onFill,
       };
     case 'warning':
       return {
         backgroundColor: colors.status.warning.onSurface.default,
-        color:           colors.content.onBrand,
+        color:           colors.status.warning.content.onFill,
       };
     case 'info':
       return {
         backgroundColor: colors.status.info.onSurface.default,
-        color:           colors.content.onBrand,
+        color:           colors.status.info.content.onFill,
       };
     case 'success':
       return {
         backgroundColor: colors.status.success.onSurface.default,
-        color:           colors.content.onBrand,
+        color:           colors.status.success.content.onFill,
       };
     case 'inactive':
     case 'default':
