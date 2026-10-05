@@ -406,7 +406,8 @@ export const defaultProductStyle: ProductStyleName = 'carivaApp';
 export const typography = {
   fontFamily: productStyle[defaultProductStyle].fontFamily,
   // Desktop mode of the Figma "Typography" collection. Verified against live
-  // Figma variables 2026-09-07.
+  // Figma variables 2026-09-29. body/* now matches the 4px grid (and the Mobile mode);
+  // prose/* keeps the looser 22/18 for long-form reading.
   fontSize: {
     display:  { large: 60, medium: 48, small: 36 },
     heading:  { large: 24, medium: 20, small: 16 },
@@ -418,7 +419,7 @@ export const typography = {
   lineHeight: {
     display:  { large: 72, medium: 56, small: 48 },
     heading:  { large: 32, medium: 28, small: 24 },
-    body:     { large: 24, medium: 22, small: 18 },
+    body:     { large: 24, medium: 20, small: 16 },
     prose:    { large: 24, medium: 22, small: 18 },
     label:    { large: 24, medium: 20, small: 16, xsmall: 16 },
     caption:  { caption: 16 },

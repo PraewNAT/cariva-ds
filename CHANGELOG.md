@@ -2,6 +2,19 @@
 
 ---
 
+## v1.4.0 — 2026-09-29
+
+### ✨ `body/medium` และ `body/small` — line-height ลงกริด 4px
+
+- **ปัญหา** — Desktop ใช้ 22 / 18 ซึ่งไม่อยู่บนกริด 4px ทุกครั้งที่วาง body ปนกับ control หรือไอคอนในแถวเดียวกันจะเหลื่อม 2px แล้วต้องไปชดที่อื่น (เจอกับตัวเองตอนแก้ checkbox: label ต้องมี line box 20px ขณะที่ description เป็น 22) และความสูงคอมโพเนนต์ยังไม่เท่ากันข้าม breakpoint เพราะ Mobile ใช้ 20 / 16 อยู่แล้ว
+- **Figma** — `typography/body/medium/line-height` และ `typography/body/small/line-height` โหมด Desktop เป็น **20 / 16** เท่ากับ Mobile · `label/*` ไม่ถูกแตะ (alias ไป `font/leading/*` ตามเดิม)
+- **Code** — `typography.lineHeight.body` เป็น `{ large: 24, medium: 20, small: 16 }`
+- **`prose/*` คงไว้ที่ 22 / 18 บน Desktop** — เดิม prose กับ body ต่างกันแค่ typeface ตอนนี้ต่างที่ line-height ด้วย: body สำหรับข้อความสั้นใน UI (field, cell, description, helper — ที่ใช้จริงทั้ง 33 ไฟล์เป็นแบบนี้หมด) · prose สำหรับย่อหน้ายาว
+- ผลที่ตามมา: description ใน `crv-checkbox-standard` / `-card` / `-group`, `crv-card`, `crv-modal` และ cell ใน `crv-table` เตี้ยลง 2px ต่อบรรทัด · ปุ่มและ field ไม่ขยับเพราะความสูงมาจาก token ของตัวเอง
+- อัปเดต doc: `rules/DESIGN.md` (ตาราง typography + หัวข้อ Prose)
+
+---
+
 ## v1.3.9 — 2026-09-28
 
 ### ✨ `crv-checkbox-card` — component ใหม่ แยกออกจาก checkbox แบบ outlined

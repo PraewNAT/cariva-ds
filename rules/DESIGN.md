@@ -316,12 +316,20 @@ Typography uses a structured, readable approach — weight and size create hiera
 | Style | Desktop Size / LH | Mobile Size / LH | Weight | Use for |
 |---|---|---|---|---|
 | `typography/body/large` | 16px / 24px | 16px / 24px | Regular 400 | Long-form readable content |
-| `typography/body/medium` | 14px / 22px | 14px / 20px | Regular 400 | Default UI text — forms, tables, descriptions |
-| `typography/body/small` | 12px / 18px | 12px / 16px | Regular 400 | Compact text, helper detail |
+| `typography/body/medium` | 14px / 20px | 14px / 20px | Regular 400 | Default UI text — forms, tables, descriptions |
+| `typography/body/small` | 12px / 16px | 12px / 16px | Regular 400 | Compact text, helper detail |
 
 #### Prose — Long-form Reading
 
-Added 2026-08-31. Sizes and line-heights are **identical to `body/*`** — the only difference is the typeface: prose styles use `font-family/prose`, body styles use `font-family/ui`.
+Added 2026-08-31. เดิมค่าเหมือน `body/*` ทุกช่อง ต่างกันแค่ typeface (`font-family/prose` vs `font-family/ui`)
+
+<!-- updated 2026-09-29 -->
+ตั้งแต่ 2026-09-29 ต่างกันอีกจุดคือ **line-height**: `body/*` ย่อลงมาอยู่บนกริด 4px (20 / 16) เพราะถูกใช้กับข้อความสั้นในคอมโพเนนต์เกือบทั้งหมด ส่วน `prose/*` คงไว้ที่ 22 / 18 บน Desktop สำหรับย่อหน้ายาวที่ต้องอ่านต่อเนื่อง
+
+| | Desktop | Mobile | ใช้กับ |
+|---|---|---|---|
+| `body/medium` · `body/small` | 20 / 16 | 20 / 16 | ข้อความใน UI — field, cell, description, helper |
+| `prose/medium` · `prose/small` | 22 / 18 | 20 / 16 | ย่อหน้ายาว บทความ เอกสาร |
 
 | Style | Desktop Size / LH | Mobile Size / LH | Weight | Use for |
 |---|---|---|---|---|
@@ -540,7 +548,7 @@ Typography variables switch to "Mobile" mode for screens < 640px. All font sizes
 Key shifts:
 - `display/large`: 64px → 40px
 - `display/medium`: 48px → 36px
-- `body/medium`: 14px / 22px → 14px / 20px (tighter line-height on small screens)
+- `body/medium` และ `body/small` เท่ากันทั้งสองโหมดแล้ว (20 / 16) — ความสูงคอมโพเนนต์จึงไม่ขยับข้าม breakpoint · `prose/*` ยังต่างกันอยู่ (22/18 → 20/16)
 
 ### Touch Targets
 
