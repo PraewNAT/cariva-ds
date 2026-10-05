@@ -159,7 +159,7 @@ export function getDecorativeSx(size: CrvButtonDecorativeSize): SxProps<Theme> {
     fontSize: `${typography.fontSize.label[metrics.label]}px`,
     lineHeight: `${typography.lineHeight.label[metrics.label]}px`,
     fontWeight: typography.fontWeight.medium,
-    color: colors.content.onBrand,
+    color: colors.brand.primary.content.onFill,
     backgroundColor: colors.brand.decorative.gradient.from,
     backgroundImage: DECORATIVE_GRADIENT,
     boxShadow: 'none',
@@ -174,14 +174,14 @@ export function getDecorativeSx(size: CrvButtonDecorativeSize): SxProps<Theme> {
     '&:hover': {
       backgroundImage: DECORATIVE_GRADIENT,
       boxShadow: GLOW_PRIMARY,
-      color: colors.content.inverse,
+      color: colors.brand.primary.content.onFill,
     },
     '&:active': {
       backgroundImage: DECORATIVE_GRADIENT,
       boxShadow: 'none',
       // Figma dims the whole pressed variant rather than recolouring it.
       opacity: 0.85,
-      color: colors.content.inverse,
+      color: colors.brand.primary.content.onFill,
     },
     '&.Mui-disabled, &:disabled': {
       backgroundImage: 'none',

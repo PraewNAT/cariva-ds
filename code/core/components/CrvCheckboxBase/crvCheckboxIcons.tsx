@@ -82,8 +82,11 @@ const CheckboxIconShell = forwardRef<
   );
 });
 
-function markColor(disabled: boolean) {
-  return disabled ? colors.content.disabled : colors.content.onBrand;
+function markColor(disabled: boolean, color: CrvCheckboxColor) {
+  if (disabled) return colors.content.disabled;
+  return color === 'error'
+    ? colors.status.error.content.onFill
+    : colors.brand.primary.content.onFill;
 }
 
 function checkedFillColor(disabled: boolean, color: CrvCheckboxColor) {
@@ -138,7 +141,7 @@ function renderCheckboxVisual(
             : disabled
               ? colors.onSurface.action.disabled
               : 'transparent',
-          color: isCheckedVisual ? markColor(disabled) : undefined,
+          color: isCheckedVisual ? markColor(disabled, color) : undefined,
         }}
       >
         <Box

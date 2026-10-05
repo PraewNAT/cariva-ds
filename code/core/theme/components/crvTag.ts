@@ -42,7 +42,7 @@ function filledColorTokens(theme: Theme): Record<CrvTagColor, { backgroundColor:
   return {
     default: {
       backgroundColor: c.brand.primary.onSurface.default,
-      color: c.content.onBrand,
+      color: c.brand.primary.content.onFill,
     },
     secondary: {
       backgroundColor: c.onSurface.sunken,
@@ -50,15 +50,15 @@ function filledColorTokens(theme: Theme): Record<CrvTagColor, { backgroundColor:
     },
     error: {
       backgroundColor: c.status.error.onSurface.default,
-      color: c.content.onBrand,
+      color: c.status.error.content.onFill,
     },
     success: {
       backgroundColor: c.status.success.onSurface.default,
-      color: c.content.onBrand,
+      color: c.status.success.content.onFill,
     },
     warning: {
       backgroundColor: c.status.warning.onSurface.default,
-      color: c.content.onBrand,
+      color: c.status.warning.content.onFill,
     },
   };
 }
