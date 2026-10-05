@@ -108,7 +108,7 @@ export function getPillsTabSx(tabVariant: CrvTabsPillsVariant): SxProps<Theme> {
       color: c.content.secondary,
       transition: 'color 150ms ease',
       '& .MuiSvgIcon-root': { color: 'inherit', fontSize: 24 },
-      '&.Mui-selected': { color: c.content.inverse },
+      '&.Mui-selected': { color: c.brand.primary.content.onFill },
       '&.Mui-disabled': { color: c.content.disabled },
     };
   };

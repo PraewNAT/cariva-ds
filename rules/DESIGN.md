@@ -96,8 +96,24 @@ Readable text and icons. Use content tokens for both text and icon layers.
 > `secondary` and `placeholder` share `#64748b` on purpose — Figma moved `secondary` from slate/600 to slate/500 on 2026-08-31 and the Design System Owner confirmed the match is intended. Keep them as two tokens so they can diverge later.
 
 | `color/content/disabled` | `#94a3b8` (slate/400) | Disabled text / icon |
-| `color/content/inverse` | `#ffffff` (white) | Text/icon on neutral dark or inverse surfaces |
-| `color/content/on-brand` | `#ffffff` (alias → inverse) | Text/icon on filled brand surface |
+| `color/content/inverse` | `#ffffff` (white) | Text/icon on neutral dark or inverse surfaces (tooltip, `color/bg/inverse`) |
+| `color/content/on-brand` | `#ffffff` | **Retired 2026-10-05** — superseded by the `content/on-fill` family below. Do not bind new nodes to it. |
+
+#### `content/on-fill` — content on a filled surface
+
+One token per colour family, so each can take the value its own contrast requires. **Label and icon always share the same token — an icon never gets its own colour.**
+
+| Token | Value | Contrast on its own fill |
+|---|---|---|
+| `color/brand/primary/content/on-fill` | `#ffffff` | 3.50:1 |
+| `color/brand/secondary/content/on-fill` | `#ffffff` | 3.74:1 — unused today |
+| `color/status/error/content/on-fill` | `#ffffff` | 4.83:1 ✅ |
+| `color/status/success/content/on-fill` | `#ffffff` | 5.48:1 ✅ |
+| `color/status/info/content/on-fill` | `#ffffff` | 4.10:1 |
+| `color/status/warning/content/on-fill` | `#ffffff` | 3.19:1 — see the warning exception below |
+| `color/status/active/content/on-fill` | `#ffffff` | 1.74:1 — see the warning exception below |
+
+> All seven are white **today** so the migration off `on-brand`/`inverse` changed nothing visually. `warning`, `active` and `secondary` are marked PENDING CONTRAST FIX in their Figma variable descriptions: white fails AA on those three fills, and flipping them to `color/slate/900` is a separate, deliberate decision.
 | `color/content/link/default` | `#2563eb` (blue/600) | Link default |
 | `color/content/link/hover` | `#1d4ed8` (blue/700) | Link hover |
 | `color/content/link/pressed` | `#1e40af` (blue/800) | Link pressed |
@@ -213,7 +229,7 @@ Status borders follow the same steps as every other border family (brand primary
 | `border/default` | `#e0f2fe` (sky/100) |
 | `border/strong` | `#0ea5e9` (sky/500) |
 
-**Warning exception**: On a filled warning background, use `color/content/primary` (dark text), not `color/content/inverse` (white) — amber is too light for white text to meet WCAG AA.
+**Warning exception**: On a filled warning background, use `color/content/primary` (dark text), not white — amber is too light for white text to meet WCAG AA (3.19:1). The MUI palette's `warning.contrastText` already follows this; `color/status/warning/content/on-fill` does not yet and is marked PENDING CONTRAST FIX.
 
 ### Overlay Colors — `color/overlay`
 
@@ -239,11 +255,12 @@ Choose the content token by contrast and meaning:
 
 | Surface | Content token | Rule |
 |---|---|---|
-| Brand primary filled | `color/content/on-brand` | Use on-brand alias on filled dodger-blue |
-| Brand secondary filled | `color/content/on-brand` | Use on-brand alias on filled teal |
-| Status/error filled | `color/content/inverse` | Destructive/error filled surfaces |
-| Status/warning filled | `color/content/primary` | Amber is light; use dark text |
-| Status/success or info filled | `color/content/inverse` | White/inverse passes on emerald/sky |
+| Brand primary filled | `color/brand/primary/content/on-fill` | Filled dodger-blue |
+| Brand secondary filled | `color/brand/secondary/content/on-fill` | Filled teal |
+| Status/error filled | `color/status/error/content/on-fill` | Destructive/error filled surfaces |
+| Status/warning filled | `color/content/primary` in code | Amber is light; use dark text. The `warning/content/on-fill` token is still white — see the warning exception |
+| Status/success filled | `color/status/success/content/on-fill` | White passes on emerald |
+| Status/info filled | `color/status/info/content/on-fill` | White on sky |
 | Subtle tinted status surface | matching status `content/default` | Use status content token, not raw primitive |
 | Tooltip/toast inverse | `color/content/inverse` | Text on `color/bg/inverse` |
 
@@ -439,7 +456,7 @@ Tag sizes: 20px (label/small), 24px (label/small), 32px (label/medium). Radius: 
 
 Panel surface: `color/on-surface/elevated`, `cornerRadius=8`, `shadow-md`
 
-Selected day cell: `color/brand/primary/on-surface/default` fill + `color/content/on-brand` text
+Selected day cell: `color/brand/primary/on-surface/default` fill + `color/brand/primary/content/on-fill` text
 
 Action row: Cancel uses `color/content/secondary`, OK uses `color/brand/primary/content/default`
 
@@ -632,7 +649,7 @@ Product DS คือ component ที่ extend จาก DS กลาง สำ
 | Secondary text | `color/content/secondary` | `#64748b` |
 | Placeholder | `color/content/placeholder` | `#64748b` |
 | Disabled text | `color/content/disabled` | `#94a3b8` |
-| Text on filled brand | `color/content/on-brand` | `#ffffff` |
+| Text on filled brand | `color/brand/primary/content/on-fill` | `#ffffff` |
 | Default border | `color/border/default` | `#cbd5e1` |
 | Focus border | `color/border/system` | `#2563eb` |
 | Primary action | `color/brand/primary/on-surface/default` | `#1789fa` |

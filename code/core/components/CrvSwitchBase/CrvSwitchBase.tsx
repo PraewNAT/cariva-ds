@@ -32,7 +32,7 @@ function getThumbSx(size: CrvSwitchBaseSize, checked: boolean) {
     width:           thumb,
     height:          thumb,
     borderRadius:    '50%',
-    backgroundColor: colors.content.onBrand,
+    backgroundColor: colors.bg.white,
     boxShadow:       SWITCH_THUMB_SHADOW,
     transition:      'left 120ms ease',
     pointerEvents:   'none' as const,
