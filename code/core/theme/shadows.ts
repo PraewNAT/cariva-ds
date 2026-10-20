@@ -13,12 +13,21 @@ const BASE = 'rgba(30, 58, 138, 0.25)';
 
 export const shadows = {
   sm: `0 1px 2px 0 ${BASE}`,
-  default: `0 1px 3px 0 ${BASE}, 0 1px 2px -1px ${BASE}`,
   md: `0 4px 6px -1px ${BASE}, 0 2px 4px -2px ${BASE}`,
   lg: `0 10px 15px -3px ${BASE}, 0 4px 6px -4px ${BASE}`,
-  xl: `0 20px 25px -5px ${BASE}, 0 8px 10px -6px ${BASE}`,
-  '2xl': `0 25px 50px -12px ${BASE}`,
-  inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)',
+  // Hover lift for elevated buttons / FAB — tighter and softer than lg, so it is
+  // three low-alpha layers rather than the Tailwind two-layer ramp.
+  xl: [
+    `0 5px 6px -3px ${rgba(SHADOW_BASE_COLOR, 0.2)}`,
+    `0 9px 12px 1px ${rgba(SHADOW_BASE_COLOR, 0.14)}`,
+    `0 3px 16px 2px ${rgba(SHADOW_BASE_COLOR, 0.12)}`,
+  ].join(', '),
+  // Overlay surfaces: modal, tabs folder, FAB resting.
+  '2xl': `0 20px 25px -5px ${BASE}, 0 8px 10px -6px ${BASE}`,
+  inner: [
+    `inset 0 2px 12px 0 ${rgba(SHADOW_BASE_COLOR, 0.12)}`,
+    `inset 0 0 4px 0 ${rgba(SHADOW_BASE_COLOR, 0.2)}`,
+  ].join(', '),
 } as const;
 
 export type CarivaShadow = keyof typeof shadows;

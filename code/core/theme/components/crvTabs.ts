@@ -1,7 +1,8 @@
 import type { SxProps, Theme } from '@mui/material/styles';
+import { shadows } from '../shadows';
 import { getCarivaColors, getCarivaRadius, getCarivaSpacing, getCarivaTypography } from '../carivaTokens';
 
-export const TABS_FOLDER_SHADOW = '0 25px 50px -12px rgba(30, 58, 138, 0.25)';
+export const TABS_FOLDER_SHADOW = shadows['2xl'];
 
 function labelSx(theme: Theme, scale: 'small' | 'medium') {
   const ty = getCarivaTypography(theme);
