@@ -9,7 +9,7 @@ See `rules/components/crv-input-horizontal.md` for the full spec (variants, size
 |---|---|---|
 | `size` | `small` \| `medium` | `medium` |
 | `label` | `string` | required |
-| `labelWidth` | `number` (px) | auto (max-content) |
+| `labelWidth` | `number` (px) | **80** (Figma label column) |
 | `helperTextVisible` | `boolean` | `false` |
 | `startAdornment` | `ReactNode` | — (none) |
 | `startAdornmentVisible` | `boolean` | infer จาก `startAdornment` |
@@ -20,7 +20,7 @@ See `rules/components/crv-input-horizontal.md` for the full spec (variants, size
 
 - Label ซ้าย + field ขวา — label อยู่กึ่งกลางแนวตั้งของ field เสมอ
 - Helper/error text อยู่ใต้ field column (ไม่ใต้ label)
-- ใช้ `labelWidth` เดียวกันใน form group
+- ใช้ `labelWidth` เดียวกันใน form group — default 80 ตรงกับคอลัมน์ label ใน Figma · label ที่ยาวกว่านั้นจะตัดบรรทัดในคอลัมน์ตัวเอง ไม่ดัน field
 
 ## Rules
 

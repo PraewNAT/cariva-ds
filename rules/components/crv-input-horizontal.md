@@ -59,6 +59,19 @@
 - Field: H:fixed, V:hug
 - Border radius: `radius/full` (pill / 9999px)
 
+<!-- updated 2026-10-01 -->
+## Layout
+
+| ส่วน | ขนาด |
+|---|---|
+| คอลัมน์ label | **80px** (`labelWidth` default) — label จัดกึ่งกลางกับ field |
+| gap label → field | `spacing/lg` (16) |
+| field | **320px** เท่ากับ `crv-input-standard`, `crv-dropdown`, `crv-autocomplete` |
+| ความกว้างรวม | 80 + 16 + 320 = **416** |
+| helper / error | อยู่ใต้ field ในคอลัมน์ขวา กว้างเท่า field |
+
+> โครงเป็น horizontal auto-layout 2 คอลัมน์ — เดิม label ถูกวางแบบ absolute ที่ `x = -47` ยื่นออกนอกกรอบ component ทำให้ระยะเพี้ยนเวลาเอาไปวางในหน้าจริง และ label ยาวจะทับ field
+
 ## Token usage
 
 ### Color

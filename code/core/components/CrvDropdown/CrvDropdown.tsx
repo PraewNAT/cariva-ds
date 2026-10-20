@@ -93,7 +93,7 @@ export const CrvDropdown = forwardRef<HTMLDivElement, CrvDropdownProps>(
         fullWidth
         disabled={disabled}
         error={error}
-        sx={{ gap: `${spacing.md}px`, ...sx }}
+        sx={{ gap: `${spacing.xs}px`, ...sx }}
       >
         {labelVisible && label && (
           <Typography
