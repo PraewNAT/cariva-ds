@@ -1,6 +1,7 @@
 import type { SxProps, Theme } from '@mui/material/styles';
 import type { CrvModalBreakpoint, CrvModalType } from '../../components/CrvModal/CrvModal.types';
 import { defaultProductStyle, productStyle } from '../../tokens';
+import { shadows } from '../shadows';
 import { getCarivaColors, getCarivaSpacing, getCarivaTypography } from '../carivaTokens';
 
 export const MODAL_WIDTH: Record<CrvModalBreakpoint, number> = {
@@ -8,7 +9,7 @@ export const MODAL_WIDTH: Record<CrvModalBreakpoint, number> = {
   'md+': 400,
 };
 
-export const MODAL_SHADOW = '0 25px 50px -12px rgba(15, 23, 42, 0.25)';
+export const MODAL_SHADOW = shadows['2xl'];
 
 export function getModalPaperSx(breakpoint: CrvModalBreakpoint): SxProps<Theme> {
   return (theme) => {

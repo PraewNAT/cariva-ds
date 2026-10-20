@@ -18,6 +18,7 @@ import {
   typography,
 } from './tokens';
 import type { CarivaColors } from './tokens';
+import { shadows } from './theme/shadows';
 
 // ─── Token helpers ───────────────────────────────────────────────────────────
 
@@ -352,7 +353,7 @@ export function buildMuiComponentOverrides(): Components<Omit<Theme, 'components
       styleOverrides: {
         root: { backgroundImage: 'none' },
         elevation1: {
-          boxShadow: '0 1px 3px 0 rgba(0,0,0,0.10), 0 1px 2px -1px rgba(0,0,0,0.10)',
+          boxShadow: shadows.sm,
         },
         elevation2: {
           boxShadow: '0 4px 6px -1px rgba(0,0,0,0.10), 0 2px 4px -2px rgba(0,0,0,0.10)',

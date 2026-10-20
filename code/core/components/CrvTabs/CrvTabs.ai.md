@@ -57,7 +57,7 @@ Shared API: `items: CrvTabItem[]`, controlled `value` + `onChange(value, event)`
 | Unselected label | `color/content/secondary` |
 | Icon (selected) | `color/brand/primary/content/default` |
 | Top radius | `radius/16` (top corners only) |
-| Shadow | shadow/2xl = `0 25px 50px -12px rgba(30,58,138,0.25)` |
+| Shadow | shadow/2xl = `0 20px 25px -5px, 0 8px 10px -6px` @ navy 25% (`shadows['2xl']`) |
 | Padding | 16 / 24 (`spacing/lg` / `xl`), gap `spacing/sm`, height 56 |
 | Tag | `CrvTag` (number) — selected blue, unselected `secondary` |
 

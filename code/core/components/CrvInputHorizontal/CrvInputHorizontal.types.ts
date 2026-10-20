@@ -9,7 +9,7 @@ export interface CrvInputHorizontalProps
   size?: CrvInputHorizontalSize;
   /** Label text on the left — fixed-width column in horizontal layout */
   label: string;
-  /** Fixed label column width (px) — keep consistent within a form group */
+  /** Fixed label column width (px), default 80 — keep consistent within a form group */
   labelWidth?: number;
   /** Helper text below the field (aligned with field column) */
   helperText?: string;

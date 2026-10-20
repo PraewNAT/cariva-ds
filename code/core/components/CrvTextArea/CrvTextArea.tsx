@@ -100,7 +100,7 @@ export const CrvTextArea = forwardRef<HTMLTextAreaElement, CrvTextAreaProps>(
         fullWidth
         disabled={disabled}
         error={error}
-        sx={{ gap: `${spacing.md}px` }}
+        sx={{ gap: `${spacing.xs}px` }}
       >
         {label && (
           <Box

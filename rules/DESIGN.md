@@ -534,15 +534,23 @@ Cariva uses a **background-contrast elevation model** — cards and containers s
 - Input / select / combobox: `1px solid color/border/default` — form field affordance
 - Table row dividers: `1px solid color/border/default` at very low contrast — internal row separation only, not card outline
 
-**Tailwind shadow reference used in Cariva:**
-- `shadow-sm`: `0 1px 2px rgba(0,0,0,0.05)`
-- `shadow-md`: `0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05)`
-- `shadow-lg`: `0 10px 15px -3px rgba(0,0,0,0.07), 0 4px 6px -4px rgba(0,0,0,0.05)`
+**Shadow scale** — Figma effect styles `shadow/*`, code `shadows` in `code/core/theme/shadows.ts`. Colour is navy `#1e3a8a`, not neutral black, so elevation reads cool.
+
+| Token | Value | Used by |
+|---|---|---|
+| `shadow-sm` | `0 1px 2px` @ 25% | Raised — hover on cards, elevated button rest, MUI Paper elevation 1 |
+| `shadow-md` | `0 4px 6px -1px`, `0 2px 4px -2px` @ 25% | Floating — dropdowns, tooltips, date picker panels, elevated button pressed |
+| `shadow-lg` | `0 10px 15px -3px`, `0 4px 6px -4px` @ 25% | Overlay on lighter surfaces |
+| `shadow-xl` | `0 5px 6px -3px` @ 20%, `0 9px 12px 1px` @ 14%, `0 3px 16px 2px` @ 12% | Hover lift — elevated button, FAB. Soft and tight; deliberately not a bigger `lg` |
+| `shadow-2xl` | `0 20px 25px -5px`, `0 8px 10px -6px` @ 25% | Modal, tabs folder, FAB rest |
+| `shadow-inner` | `inset 0 2px 12px` @ 12%, `inset 0 0 4px` @ 20% | Reserved — not used by any component yet |
+
+`shadow/default` was retired: it was within 1px of `shadow-sm` and no component used it. Status elevations (`shadow/status/*`) and `glow/*` are documented in the Toast and Checkbox card specs.
 
 **What to avoid:**
 - `border` on cards, stat blocks, or container panels
 - `shadow-sm` or any shadow on static card surfaces
-- `shadow-xl` or `shadow-2xl` on regular UI components
+- `shadow-xl` / `shadow-2xl` on static surfaces (cards, panels, inputs) — `xl` is hover lift for elevated buttons/FAB only, `2xl` is for overlays (modal, tabs folder, FAB)
 - Mixing visible border + shadow on the same element
 
 ---
