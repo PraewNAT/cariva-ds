@@ -581,7 +581,7 @@ Cariva uses a **background-contrast elevation model** — cards and containers s
 Typography variables switch to "Mobile" mode for screens < 640px. All font sizes and line-heights adjust automatically — do not create duplicate mobile text styles.
 
 Key shifts:
-- `display/large`: 64px → 40px
+- `display/large`: 60px → 48px
 - `display/medium`: 48px → 36px
 - `body/medium` และ `body/small` เท่ากันทั้งสองโหมดแล้ว (20 / 16) — ความสูงคอมโพเนนต์จึงไม่ขยับข้าม breakpoint · `prose/*` ยังต่างกันอยู่ (22/18 → 20/16)
 
