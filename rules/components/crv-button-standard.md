@@ -125,7 +125,7 @@ resetLabel.characters = 'Reset Password';
 
 - **container** — frame หลัก auto-layout horizontal, มี border radius `Product Style / radius/interactive`
 - **icon/leading** — icon ด้านซ้าย (optional, ควบคุมด้วย `startIconVisible`)
-- **label** — ข้อความ button, ใช้ text style `typography/label/large` (16/24) ทุกขนาด
+- **label** — ข้อความ button, ใช้ text style ตามขนาดปุ่ม: small → `typography/label/small` (12/16), medium → `typography/label/medium` (14/20), large → `typography/label/large` (16/24)
 - **icon/trailing** — icon ด้านขวา (optional, ควบคุมด้วย `endIconVisible`)
 - **spinner** — แทน icon ใน loading state (มีเฉพาะใน `crv-button-loading`)
 
@@ -216,7 +216,9 @@ resetLabel.characters = 'Reset Password';
 | Label + Icon disabled | `color/content/disabled` |
 
 ### Typography
-- `typography/label/large` (16px / 24px line-height) — ทุก size (small / medium / large)
+- small → `typography/label/small` (12px / 16px line-height)
+- medium → `typography/label/medium` (14px / 20px line-height)
+- large → `typography/label/large` (16px / 24px line-height)
 
 ### Spacing
 - Padding H: `spacing/lg` (small/medium), `spacing/xl` (large)
