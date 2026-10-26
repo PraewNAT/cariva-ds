@@ -42,9 +42,17 @@ export function getSplitRootSx(
   };
 }
 
+/** The label/icon colour that sits on the filled split-button surface. */
+function onFillFor(color: CrvButtonSplitColor): string {
+  return color === 'error'
+    ? colors.status.error.content.onFill
+    : colors.brand.primary.content.onFill;
+}
+
 export function getSplitActionSx(
   size: CrvButtonSplitSize,
   disabled: boolean,
+  color: CrvButtonSplitColor = 'primary',
 ): SxProps<Theme> {
   const metrics = buttonSizing[size];
 
@@ -54,7 +62,7 @@ export function getSplitActionSx(
     gap: `${metrics.gap}px`,
     px: `${metrics.paddingX}px`,
     py: `${metrics.paddingY}px`,
-    color: disabled ? colors.content.disabled : colors.content.onBrand,
+    color: disabled ? colors.content.disabled : onFillFor(color),
     fontFamily: typography.fontFamily.ui,
     fontSize: `${typography.fontSize.label[metrics.label]}px`,
     lineHeight: `${typography.lineHeight.label[metrics.label]}px`,
@@ -82,6 +90,7 @@ export function getSplitDividerSx(
 export function getSplitTriggerSx(
   size: CrvButtonSplitSize,
   disabled: boolean,
+  color: CrvButtonSplitColor = 'primary',
 ): SxProps<Theme> {
   const metrics = buttonSizing[size];
 
@@ -91,7 +100,7 @@ export function getSplitTriggerSx(
     justifyContent: 'center',
     // The trigger is square like an icon-only button: Figma pads it 8 / 8 / 12.
     px: `${metrics.squarePadding}px`,
-    color: disabled ? colors.content.disabled : colors.content.onBrand,
+    color: disabled ? colors.content.disabled : onFillFor(color),
     '& .MuiSvgIcon-root': { fontSize: metrics.iconSize },
   };
 }

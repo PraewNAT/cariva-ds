@@ -77,7 +77,7 @@ export function paginationItemSx(
     fontSize:       `${typography.fontSize.label.medium}px`,
     lineHeight:     `${typography.lineHeight.label.medium}px`,
     fontWeight:     typography.fontWeight.medium,
-    color:          selected ? colors.content.inverse : colors.content.primary,
+    color:          selected ? colors.brand.primary.content.onFill : colors.content.primary,
     backgroundColor: selected ? colors.brand.primary.onSurface.default : 'transparent',
     transition:     'background-color 120ms ease, color 120ms ease',
     '&:hover': disabled
@@ -120,7 +120,7 @@ export function paginationControllerSx(
     p:               0,
     borderRadius:    `${radius.full}px`,
     border:          disabled ? `1px solid ${colors.border.disabled}` : 0,
-    color:           disabled ? colors.content.disabled : colors.content.inverse,
+    color:           disabled ? colors.content.disabled : colors.brand.primary.content.onFill,
     backgroundColor: disabled ? 'transparent' : colors.brand.primary.onSurface.default,
     transition:      'background-color 120ms ease, border-color 120ms ease',
     '&:hover': disabled

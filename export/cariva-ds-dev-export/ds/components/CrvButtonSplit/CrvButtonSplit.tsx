@@ -34,7 +34,7 @@ export const CrvButtonSplit = forwardRef<HTMLDivElement, CrvButtonSplitProps>(
   ) {
     return (
       <Box ref={ref} className={className} sx={getSplitRootSx(color, size, disabled)}>
-        <ButtonBase disabled={disabled} onClick={onClick} sx={getSplitActionSx(size, disabled)}>
+        <ButtonBase disabled={disabled} onClick={onClick} sx={getSplitActionSx(size, disabled, color)}>
           {startIcon}
           {children}
         </ButtonBase>
@@ -44,7 +44,7 @@ export const CrvButtonSplit = forwardRef<HTMLDivElement, CrvButtonSplitProps>(
           onClick={onTriggerClick}
           aria-label={triggerLabel}
           aria-haspopup="menu"
-          sx={getSplitTriggerSx(size, disabled)}
+          sx={getSplitTriggerSx(size, disabled, color)}
         >
           {triggerIcon ?? <ExpandMoreRoundedIcon />}
         </ButtonBase>

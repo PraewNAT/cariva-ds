@@ -100,7 +100,7 @@ export const CrvTextArea = forwardRef<HTMLTextAreaElement, CrvTextAreaProps>(
         fullWidth
         disabled={disabled}
         error={error}
-        sx={{ gap: `${spacing.md}px` }}
+        sx={{ gap: `${spacing.xs}px` }}
       >
         {label && (
           <Box
@@ -191,6 +191,13 @@ export const CrvTextArea = forwardRef<HTMLTextAreaElement, CrvTextAreaProps>(
               padding:  0,
               resize:   maxRows ? 'none' : 'vertical',
               overflow: maxRows ? 'auto' : undefined,
+            },
+            // Keep the drag handle from shrinking the textarea below minRows —
+            // otherwise the handle floats up inside the (still min-height) frame.
+            // Skip MUI's hidden measuring textarea: its min-height would corrupt
+            // the single-row measurement that autosize relies on.
+            '& textarea:not([aria-hidden])': {
+              minHeight: `${resolvedMinRows * INPUT_LINE_HEIGHT[size]}px`,
             },
             '& textarea::placeholder': {
               color:   colors.content.placeholder,

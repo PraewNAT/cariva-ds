@@ -14,23 +14,23 @@ export function getBadgeColorTokens(theme?: Theme): Record<
   return {
     primary: {
       backgroundColor: c.brand.primary.onSurface.default,
-      color: c.content.inverse,
+      color: c.brand.primary.content.onFill,
     },
     error: {
       backgroundColor: c.status.error.onSurface.default,
-      color: c.content.inverse,
+      color: c.status.error.content.onFill,
     },
     success: {
       backgroundColor: c.status.success.onSurface.default,
-      color: c.content.inverse,
+      color: c.status.success.content.onFill,
     },
     warning: {
       backgroundColor: c.status.warning.onSurface.default,
-      color: c.content.inverse,
+      color: c.status.warning.content.onFill,
     },
     info: {
       backgroundColor: c.status.info.onSurface.default,
-      color: c.content.inverse,
+      color: c.status.info.content.onFill,
     },
     default: {
       backgroundColor: c.onSurface.sunken,

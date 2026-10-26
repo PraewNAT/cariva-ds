@@ -16,7 +16,7 @@ import type {
 // Ground truth from Figma (crv-input-horizontal, node 3760:6895)
 const FIELD_MIN_HEIGHT: Record<CrvInputHorizontalSize, number> = {
   medium: 48,
-  small:  38,
+  small:  36,
 };
 
 const FIELD_PADDING_V: Record<CrvInputHorizontalSize, number> = {
@@ -56,12 +56,20 @@ const HELPER_LINE_HEIGHT: Record<CrvInputHorizontalSize, number> = {
 
 const FIELD_RADIUS = productStyle[defaultProductStyle].inputMd;
 
+/**
+ * Figma crv-input-horizontal gives the label its own 80px column so a long label
+ * wraps inside that column instead of pushing the field. Pass `labelWidth` to
+ * widen it when a form group needs more room — all rows in the group should use
+ * the same value.
+ */
+const LABEL_COLUMN_WIDTH = 80;
+
 export const CrvInputHorizontal = forwardRef<HTMLInputElement, CrvInputHorizontalProps>(
   function CrvInputHorizontal(
     {
       size = 'medium',
       label,
-      labelWidth,
+      labelWidth = LABEL_COLUMN_WIDTH,
       helperText,
       helperTextVisible = false,
       error = false,
@@ -85,7 +93,7 @@ export const CrvInputHorizontal = forwardRef<HTMLInputElement, CrvInputHorizonta
     const showStartAdornment =
       startAdornmentVisible ?? Boolean(startAdornment);
 
-    const labelColumn = labelWidth ? `${labelWidth}px` : 'max-content';
+    const labelColumn = `${labelWidth}px`;
 
     const fieldSx = {
       minHeight:       FIELD_MIN_HEIGHT[size],
@@ -144,8 +152,8 @@ export const CrvInputHorizontal = forwardRef<HTMLInputElement, CrvInputHorizonta
           sx={{
             display:             'grid',
             gridTemplateColumns: `${labelColumn} minmax(0, 1fr)`,
-            columnGap:           `${spacing.md}px`,
-            rowGap:              `${spacing.md}px`,
+            columnGap:           `${spacing.lg}px`,
+            rowGap:              `${spacing.xs}px`,
             alignItems:          'center',
           }}
         >

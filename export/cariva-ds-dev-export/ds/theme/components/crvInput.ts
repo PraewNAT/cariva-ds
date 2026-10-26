@@ -5,7 +5,7 @@ import { getCarivaColors, getCarivaSpacing, getCarivaTypography } from '../cariv
 
 export const FIELD_MIN_HEIGHT: Record<CrvInputSize, number> = {
   medium: 48,
-  small: 38,
+  small: 36,
 };
 
 function fieldPaddingV(size: CrvInputSize, theme: Theme) {
