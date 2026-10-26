@@ -1,5 +1,20 @@
 # Changelog — cariva-ds-dev-export
 
+## 2026-10-26
+
+### Fixed
+
+- **`CrvTextArea` can't be dragged shorter than `minRows`.** The textarea had no
+  `min-height` of its own, so pulling the resize handle up shrank it below
+  `minRows` while the frame stayed 120px tall, leaving the handle floating mid-box.
+  The textarea now holds `minRows` lines (4 by default).
+
+### Changed
+
+- This rebuild also picks up files that had drifted from `code/core` since the
+  last export (`crvInput`, `CrvDropdown`, shadow tokens, button, checkbox, tag and
+  others) — no hand edits.
+
 ## 2026-09-21
 
 ### Added

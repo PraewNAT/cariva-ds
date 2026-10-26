@@ -36,7 +36,7 @@ function bgFor(color: CrvFabColor, state: State): string {
 
 function iconColorFor(color: CrvFabColor, disabled: boolean): string {
   if (disabled) return colors.content.disabled;
-  return color === 'primary' ? colors.content.onBrand : colors.content.primary;
+  return color === 'primary' ? colors.brand.primary.content.onFill : colors.content.primary;
 }
 
 function borderFor(color: CrvFabColor, state: State, disabled: boolean): string {

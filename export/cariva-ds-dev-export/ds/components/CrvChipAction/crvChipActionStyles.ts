@@ -108,7 +108,7 @@ function labelColor(
     return colors.brand.primary.content.default;
   }
   if (variant === 'filled' && color === 'primary') {
-    return colors.content.onBrand;
+    return colors.brand.primary.content.onFill;
   }
   return colors.content.primary;
 }
@@ -119,7 +119,7 @@ function deleteColor(
   disabled: boolean,
 ): string {
   if (disabled) return colors.content.disabled;
-  if (variant === 'filled' && color === 'primary') return colors.content.onBrand;
+  if (variant === 'filled' && color === 'primary') return colors.brand.primary.content.onFill;
   return colors.content.secondary;
 }
 

@@ -69,7 +69,9 @@ function iconColorFor(
 
   // A contained neutral button is a light grey chip, so its icon stays dark.
   if (variant === 'contained') {
-    return color === 'neutral' ? colors.neutral.content.default : colors.content.onBrand;
+    if (color === 'neutral') return colors.neutral.content.default;
+    if (color === 'error') return colors.status.error.content.onFill;
+    return colors.brand.primary.content.onFill;
   }
 
   if (variant === 'outlined') {

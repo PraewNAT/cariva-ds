@@ -20,6 +20,7 @@ export const colors = {
       content: {
         default: '#1789fa',
         strong: '#0f70e6',
+        onFill: '#ffffff',
       },
       border: {
         default: '#8bd8ff',
@@ -37,6 +38,7 @@ export const colors = {
       content: {
         default: '#0d9488',
         strong: '#0f766e',
+        onFill: '#ffffff',
       },
       border: {
         default: '#5eead4',
@@ -123,6 +125,7 @@ export const colors = {
       content: {
         default: '#047857',
         strong: '#065f46',
+        onFill: '#ffffff',
       },
       border: {
         default: '#d1fae5',
@@ -136,6 +139,7 @@ export const colors = {
       },
       content: {
         default: '#22c55e',
+        onFill: '#ffffff',
       },
     },
     warning: {
@@ -149,6 +153,7 @@ export const colors = {
       content: {
         default: '#d97706',
         strong: '#b45309',
+        onFill: '#ffffff',
       },
       border: {
         default: '#fef3c7',
@@ -166,6 +171,7 @@ export const colors = {
       content: {
         default: '#dc2626',
         strong: '#b91c1c',
+        onFill: '#ffffff',
       },
       border: {
         default: '#fee2e2',
@@ -183,6 +189,7 @@ export const colors = {
       content: {
         default: '#0284c7',
         strong: '#0369a1',
+        onFill: '#ffffff',
       },
       border: {
         default: '#e0f2fe',

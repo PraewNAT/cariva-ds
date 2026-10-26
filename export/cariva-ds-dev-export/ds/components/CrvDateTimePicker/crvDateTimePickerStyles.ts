@@ -168,7 +168,7 @@ export const crvPickerPopupSx: SxProps<Theme> = {
     },
     '&.Mui-selected': {
       backgroundColor: `${colors.brand.primary.onSurface.default} !important`,
-      color: `${colors.content.onBrand} !important`,
+      color: `${colors.brand.primary.content.onFill} !important`,
       '&:hover': {
         backgroundColor: `${colors.brand.primary.onSurface.hover} !important`,
       },
@@ -188,7 +188,7 @@ export const crvPickerPopupSx: SxProps<Theme> = {
     },
     '&.Mui-selected': {
       backgroundColor: `${colors.brand.primary.onSurface.default} !important`,
-      color: `${colors.content.onBrand} !important`,
+      color: `${colors.brand.primary.content.onFill} !important`,
     },
   },
   '& .MuiButton-textPrimary': {

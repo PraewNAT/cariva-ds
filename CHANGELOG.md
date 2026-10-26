@@ -2,6 +2,17 @@
 
 ---
 
+## v1.4.1 — 2026-10-26
+
+### 🐛 `CrvTextArea` — ลากตัวชี้หดต่ำกว่า `minRows` ไม่ได้อีกต่อไป
+
+- **ปัญหา** — กรอบ (`OutlinedInput`) มี `minHeight` 120/104 แต่ `<textarea>` ข้างในไม่มี เวลาลากตัวชี้มุมล่างขวาขึ้นบน textarea หดเหลือ ~16px ขณะที่กรอบยังสูงเท่าเดิม ตัวชี้จึงลอยไปอยู่กลางกรอบ
+- **Code** — ตั้ง `min-height` ของ textarea = `minRows × line-height` (medium 24px, small 20px; ค่าเริ่มต้น 4 บรรทัด) ใน `CrvTextArea.tsx` · ไม่แตะ textarea ที่ MUI ซ่อนไว้วัดความสูง (`aria-hidden`) และไม่กระทบ `sx` ของ consumer
+- เพิ่ม test ยืนยัน style (jsdom ไม่มี layout จึงทดสอบการลากจริงไม่ได้)
+- ตรวจแล้ว: ไม่มี component อื่นใน `code/core` ที่ตั้ง `resize` เอง (`CrvInput` multiline ไม่มี drag handle)
+
+---
+
 ## v1.4.0 — 2026-09-29
 
 ### ✨ `body/medium` และ `body/small` — line-height ลงกริด 4px

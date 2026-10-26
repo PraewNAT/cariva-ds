@@ -59,4 +59,18 @@ describe('CrvTextArea', () => {
     render(<CrvTextArea ref={ref} label="หมายเหตุ" />);
     expect(ref.current).toBeInstanceOf(HTMLTextAreaElement);
   });
+
+  // jsdom has no layout, so this asserts the style that stops the drag handle
+  // shrinking the textarea below minRows — not the dragging itself.
+  it.each([
+    ['medium', undefined, '96px'],
+    ['small', undefined, '80px'],
+    ['medium', 6, '144px'],
+  ] as const)(
+    'keeps textarea min-height at minRows (%s, minRows=%s -> %s)',
+    (size, minRows, expected) => {
+      render(<CrvTextArea size={size} minRows={minRows} label="Label" />);
+      expect(screen.getByRole('textbox')).toHaveStyle({ minHeight: expected });
+    },
+  );
 });
