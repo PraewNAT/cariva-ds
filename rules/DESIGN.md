@@ -390,7 +390,7 @@ Added 2026-08-31. เดิมค่าเหมือน `body/*` ทุกช�
 
 | Size | Height | Padding V/H | Label style |
 |---|---|---|---|
-| Small | 36px | 8px / 16px | `typography/label/medium` |
+| Small | 36px | 8px / 16px | `typography/label/small` |
 | Medium | 48px | 12px / 16px | `typography/label/medium` |
 | Large | 56px | 16px / 16px | `typography/label/large` |
 
@@ -418,6 +418,16 @@ Label ≠ Placeholder — this rule is absolute:
 | `label` | Field name — always visible | "ชื่อ-นามสกุล" |
 | `placeholder` | Hint or example inside field | "กรอกตามบัตรประชาชน" |
 | `value` | Current entered value | "สมชาย ใจดี" |
+
+Input text styles by size (`crv-input-standard`, `crv-input-horizontal`, `crv-text-area-standard`):
+
+| Layer | `size=medium` | `size=small` |
+|---|---|---|
+| label | `typography/label/medium` | `typography/label/small` |
+| value + placeholder | `typography/body/large` (16/24) | `typography/body/medium` (14/20) |
+| helper text | `typography/body/small` | `typography/body/small` |
+
+ค่าที่พิมพ์และ placeholder ใช้ขนาดใหญ่กว่า label หนึ่งขั้นโดยตั้งใจ และ helper text คงที่ที่ `body/small` ทุก size
 
 Input states use semantic tokens:
 - Default border: `color/border/default`
@@ -571,7 +581,7 @@ Cariva uses a **background-contrast elevation model** — cards and containers s
 Typography variables switch to "Mobile" mode for screens < 640px. All font sizes and line-heights adjust automatically — do not create duplicate mobile text styles.
 
 Key shifts:
-- `display/large`: 64px → 40px
+- `display/large`: 60px → 48px
 - `display/medium`: 48px → 36px
 - `body/medium` และ `body/small` เท่ากันทั้งสองโหมดแล้ว (20 / 16) — ความสูงคอมโพเนนต์จึงไม่ขยับข้าม breakpoint · `prose/*` ยังต่างกันอยู่ (22/18 → 20/16)
 
@@ -675,7 +685,7 @@ Product DS คือ component ที่ extend จาก DS กลาง สำ
 "Create a primary button: background `#1789fa`, white label, `typography/label/medium` (14px/500), 8px border-radius, 12px vertical 16px horizontal padding (medium size). Hover: `#0f70e6`. Disabled: `#e2e8f0` background, `#94a3b8` label, no pointer events."
 
 **Form Input:**
-"Create an input field: white background (`#ffffff`), `1px solid #cbd5e1` border, 8px border-radius, `typography/body/medium` (14px/400) for value, `typography/label/medium` (14px/500) for label above the field. On focus: border becomes `2px solid #2563eb`. On error: border `#dc2626`, error message below in `#dc2626` text using `typography/body/small`."
+"Create an input field: white background (`#ffffff`), `1px solid #cbd5e1` border, 8px border-radius, `typography/body/large` (16px/400) for value in the medium size (`typography/body/medium` 14px/400 in the small size), `typography/label/medium` (14px/500) for label above the field. On focus: border becomes `2px solid #2563eb`. On error: border `#dc2626`, error message below in `#dc2626` text using `typography/body/small`."
 
 **Card:**
 "Create a card: white background (`#ffffff`), no border, no shadow, 12px border-radius, 24px internal padding. Place on `#f1f5f9` shell background — contrast provides separation. Title: `typography/heading/medium` (20px/600, `#0f172a`). Body: `typography/body/medium` (14px/400, `#334155`)."
