@@ -390,9 +390,9 @@ Added 2026-08-31. เดิมค่าเหมือน `body/*` ทุกช�
 
 | Size | Height | Padding V/H | Label style |
 |---|---|---|---|
-| Small | 36px | 8px / 16px | `typography/label/small` |
-| Medium | 48px | 12px / 16px | `typography/label/medium` |
-| Large | 56px | 16px / 16px | `typography/label/large` |
+| Small | 32px | 8px / 12px | `typography/label/small` |
+| Medium | 36px | 8px / 16px | `typography/label/medium` |
+| Large | 48px | 12px / 24px | `typography/label/large` |
 
 **Variant rules:**
 - `variant=contained color=primary` — filled dodger-blue `#1789fa`, white label, radius 8px. Hover: `#0f70e6`. Pressed: `#135aba`. — **1 per action group max**
@@ -588,7 +588,7 @@ Key shifts:
 ### Touch Targets
 
 - Minimum touch target: 44×44px on mobile
-- Button minimum height: 36px (small), 48px (medium), 56px (large)
+- Button height: 32px (small), 36px (medium), 48px (large) — height = 2 × vertical padding + label line-height; all three are below the 44px target, so the hit area must still be extended on mobile
 - All interactive elements must meet minimum target regardless of visual size
 
 ### Collapsing Strategy
