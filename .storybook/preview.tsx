@@ -16,6 +16,10 @@ const preview: Preview = {
         { name: 'app', value: '#f1f5f9' },
       ],
     },
+    docs: {
+      // Show the "Code" panel (story source) beside Controls/Actions.
+      codePanel: true,
+    },
     controls: {
       matchers: { color: /(background|color)$/i, date: /Date$/i },
     },
